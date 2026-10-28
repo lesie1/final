@@ -1,0 +1,30 @@
+# Local credentials and editor/runtime state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Real data, sessions and trained artifacts belong outside this source repository.
+/data/
+/datasets/
+/workspace/
+/sessions/
+/cache/
+/cache_test/
+/outputs/
+/runs/
+*.parquet
+*.feather
+*.npy
+*.npz
+*.ubj
+*.sqlite
+*.sqlite-journal
+*.log
+*.zip
