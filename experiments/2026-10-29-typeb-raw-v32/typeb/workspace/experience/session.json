@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "session": "session",
+  "domain": "memory",
+  "dataset": "ad107803ffe26442876f723acebe4d07f968875cfdc4a024c8d69597af450fd5",
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.8819863796234131,
+    "TP": 3,
+    "FP": 3,
+    "FN": 7,
+    "precision": 0.5,
+    "recall": 0.3,
+    "f1": 0.375,
+    "eligible_devices": 7136,
+    "eligible_fault_devices": 10,
+    "alarmed_devices": 6,
+    "no_history_devices": 5626,
+    "no_history_fault_devices": 0,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 0,
+    "unknown_devices": 0,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 0,
+    "excluded_preexisting_fault_devices": 39,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "gain_from_own_baseline": 0.0,
+  "semantics": "TypeB precomputed baseline features, 66 inputs from 15-minute and 1-hour historical windows, 7175 device files. Device ID from filename. No TypeA observations or labels mixed in. New active cache additionally contains 69 causal raw CE descriptors; the cache manifest documents definitions and raw source identity.",
+  "feature_notes": [
+    "针对 H1：FN 与 TN 对比显示 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 在召回方向上 AUC 区间可信。对数化长尾计数使模型更易利用高 CE 负担；7 日滚动均值平滑并保留持续读 CE 模式；近期列足迹/寿命列足迹比率捕捉累积结构中近期的加速扩展。缺失保持 NaN，不填充为零。",
+    "针对 H2 的近期空间足迹扩张假设与 recall 目标。FN/TN 漏报证据显示 raw_life_new_cols_7d 和 raw_life_new_patterns_7d 在漏报设备上明显高于正常设备，但部分漏报样本 raw_7d_events 较低，说明单一事件总量不足以捕捉空间扩张。构造近 7 天新增列/位型相对 CE 事件量、以及新增列相对新增行、新增位型相对新增列的 log1p 比值，能在不重复原始计数的情况下突出足迹扩展结构，帮助提升低分漏报行排序。若这些比值在 FN/TN device-cluster bootstrap AUC 区间仍跨 0.5 或 OOF 召回未改善，则近期空间扩张比例表示不成立。",
+    "These features test H9: short-horizon temporal clustering and burstiness. `fe_short_term_read_ce_share` and `fe_short_term_burst_share` capture whether the current 15m contains a large share of the last hour's read-CE or burst activity, flagging acute short storms; `fe_6h_to_24h_event_ratio` measures a recent 6h surge relative to daily history; `fe_1h_storm_density` measures how clustered 1h CEs are into storms. They target the 19 low-score FNs where missed_fault_contrast showed elevated read_ce_count_1h and raw_24h_events but the main model ranked below threshold, complementing cumulative burden with short-term temporal shape. If these ratios do not separate FN from TN or fail to improve CV recall/F1 without large added FP, the short-term clustering benefit is not supported.",
+    "检验 H2 的近期扩展假设：FN 对比显示 raw_life_new_cols_7d / raw_7d_distinct_cols 升高，而 TP/FP 对比显示 TP 的 raw_life_events 总量较低但 FP 更高。对数比值将近期列扩展除以生命周期累计事件或累计列足迹，使 TP 虽生命周期总量较低但近期扩展相对更高，从而在 TP/FP 上获得正 AUC；同时保留对 FN/TN 的召回信号。若 H2 成立，这些比值应为 higher_in_failing。",
+    "H2：近期空间扩展相对生命周期 CE 负担的比值应能分离高分区 TP 与 FP。fe_recent_cols_per_life_event 直接检验 log1p(raw_life_new_cols_7d)-log1p(raw_life_events)；FP 可能有高生命周期事件总量但缺少近期新列扩展。同时加入 rows/patterns 以及 7 天列数相对生命周期总列数的对数比，捕获同一机制的不同空间扩展侧面。若这些特征在高分区 TP 的中位数不高于 FP，或 bootstrap AUC 区间包含 0.5，则表明该组合无法在精确率方向减少高分区误报。",
+    "服务于 trial_001 high_score_contrast 的 TP/FP 区分。fault_mode_cell_1h 在 TP 中较低、FP 中较高，而 bank/device 模式可能相反；log-ratio 表达 cell 相对 bank+device 的局部/广泛程度，避免除零与无穷。diff 和 interaction 分别捕捉线性差异与 cell/broad 共现，sum 保留总模式规模。用于检验 H10，在 precision 目标下帮助降低高分误报而不损失召回。"
+  ],
+  "transfer_policy": "Candidate hyperparameters and semantic ideas only; never copy trees, thresholds or labels."
+}

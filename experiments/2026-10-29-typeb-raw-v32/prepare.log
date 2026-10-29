@@ -1,0 +1,6 @@
+/root/autodl-tmp/typea_three_agent_20261026/.venv/bin/python: can't open file '/root/autodl-tmp/typeb_raw_v32_20261029/prepare.py': [Errno 2] No such file or directory
+2026-10-29T09:39:16Z preparation_started {"maximum_trials": 13}
+PART_READY part-00001.parquet rows 207020 raw_devices 1316
+PART_READY part-00000.parquet rows 200910 raw_devices 1748
+PART_READY part-00002.parquet rows 75777 raw_devices 671
+2026-10-29T09:42:17Z preparation_complete {"features": 135, "old_sessions_unchanged": true}

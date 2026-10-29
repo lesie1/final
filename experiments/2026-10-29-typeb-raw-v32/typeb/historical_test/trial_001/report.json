@@ -1,0 +1,70 @@
+{
+  "trial": "trial_001",
+  "operating_point": {
+    "source": "cv_oof",
+    "model": "model_full.ubj",
+    "model_sha256": "70cb67e128d2437acfaa2221992feab53aa8fd917894ba210cba0c5be2b5b769",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "oof_sha256": "c32a08f42d0d70e2eddc56ea92c8a3f8120a68290fc16b67ecc0b8922484b0ed",
+    "fault_units": 34,
+    "note": "Threshold and step from pooled out-of-fold CV; applied to the full-TRAIN model at that step."
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.9396138787269592,
+    "TP": 0,
+    "FP": 2,
+    "FN": 12,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "eligible_devices": 7119,
+    "eligible_fault_devices": 12,
+    "alarmed_devices": 2,
+    "no_history_devices": 4949,
+    "no_history_fault_devices": 0,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 1,
+    "unknown_devices": 0,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 0,
+    "excluded_preexisting_fault_devices": 56,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "lead_summary": {
+    "count": 0,
+    "median": null,
+    "p25": null,
+    "p75": null,
+    "minimum": null,
+    "maximum": null,
+    "buckets": {
+      "15_minutes_to_under_1_day": 0,
+      "1_to_under_7_days": 0,
+      "7_through_15_days": 0,
+      "over_15_days": 0
+    }
+  },
+  "prediction_stats": {
+    "score_sha256": "82c1fbd631ded11457da49acda37c55ee8b76e69abef38eeec32d792fb8249e7",
+    "val_period_unweighted_bce": 0.11494400378487583,
+    "scored_rows": 78320
+  },
+  "test_window": [
+    1714544640,
+    1717171200
+  ],
+  "independent_blind_test": false,
+  "threshold_reselected": false
+}

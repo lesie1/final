@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "missed_fault_contrast",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，漏报(FN)与正常(TN)在哪些因果特征上呈现可信分离？特别关注 19 个已有及时分数但低于阈值的低分故障行与正常行相比，在近期扩展、突发、多 bit/DQ、fault_mode 等特征上是否存在可解释的差异，以便提出召回导向特征。",
+  "reason": "已有 high_score_contrast 只比较了 trial_004 高分区的 TP/FP，未覆盖 best 的漏报人群。parallel 分支仅将 CV F1 从 0.3158 提升到 0.3582，概率 0.823 未达采纳标准，且新增 7 个误报。当前 FN 中 19/25 属于有分但低于阈值，说明需要定位低分故障行与正常行的特征差异。"
+}

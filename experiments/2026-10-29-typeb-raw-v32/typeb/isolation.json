@@ -1,0 +1,17 @@
+{
+  "forbidden_reads": [
+    "/root/autodl-tmp/typeb_raw_v32_20261029/raw",
+    "/root/autodl-tmp/raw_upload/stage1_csv.zip",
+    "/root/autodl-tmp/final_v31_20261028/typeb/input",
+    "/root/autodl-tmp/final_v31_20261028/final_test_20261029",
+    "/root/autodl-tmp/final_v32_20261029/typeb/historical_test",
+    "/root/autodl-tmp/final_v32_20261029/typeb/supplemental_trial013",
+    "/root/autodl-tmp/final_v32_20261029/controlled"
+  ],
+  "readonly_roots": [
+    "/root/autodl-tmp/final_v31_20261028",
+    "/root/autodl-tmp/final_v32_20261029",
+    "/root/autodl-tmp/typeb_raw_v32_20261029/raw_cache",
+    "/root/autodl-tmp/typeb_raw_v32_20261029/runtime"
+  ]
+}

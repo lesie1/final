@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 TRAIN 设备分组 OOF 中，raw_life_days_since_first 较短（首次 CE 后迅速恶化）能否区分真故障(TP)与高分误报(FP)，以及漏报(FN)与正常(TN)？具体测试该字段及其对数/倒数等因果派生特征，目标是同时提高低分故障行排序并降低慢性噪声误报。",
+  "reason": "Feature-job budget exhausted，无法继续特征实验。为在剩余 2 次试验中做出有效决策，需要更完整的错误分解和特征对比证据，以判断是否应调整参数或采用重排序策略。"
+}

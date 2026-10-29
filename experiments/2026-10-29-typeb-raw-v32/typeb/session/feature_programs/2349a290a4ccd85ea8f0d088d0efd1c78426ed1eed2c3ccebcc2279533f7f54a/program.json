@@ -1,0 +1,67 @@
+{
+  "id": "2349a290a4ccd85ea8f0d088d0efd1c78426ed1eed2c3ccebcc2279533f7f54a",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    read_ce_7d = frame['read_ce_count_1h'].rolling('7D', min_periods=1).mean()\n    log_life_cells = np.log1p(frame['raw_life_distinct_cells'])\n    recent_col_ratio = (frame['raw_24h_distinct_cols'] + 1) / (frame['raw_life_distinct_cols'] + 1)\n    log_7d_cols = np.log1p(frame['raw_7d_distinct_cols'])\n    return pd.DataFrame({'fe_read_ce_7d_mean': read_ce_7d,\n                         'fe_log_life_cells': log_life_cells,\n                         'fe_recent_col_ratio': recent_col_ratio,\n                         'fe_log_7d_cols': log_7d_cols}, index=frame.index)",
+    "features": [
+      "fe_read_ce_7d_mean",
+      "fe_log_life_cells",
+      "fe_recent_col_ratio",
+      "fe_log_7d_cols"
+    ]
+  },
+  "reason": "针对 H1：FN 与 TN 对比显示 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 在召回方向上 AUC 区间可信。对数化长尾计数使模型更易利用高 CE 负担；7 日滚动均值平滑并保留持续读 CE 模式；近期列足迹/寿命列足迹比率捕捉累积结构中近期的加速扩展。缺失保持 NaN，不填充为零。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 636,
+      "finite_values": 2544
+    },
+    {
+      "rows": 5,
+      "finite_values": 20
+    }
+  ],
+  "sample_validation_seconds": 0.12366076558828354,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

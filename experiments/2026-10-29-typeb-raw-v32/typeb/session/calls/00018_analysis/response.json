@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 trial_001 的 TRAIN OOF 中，(1) 漏报 FN 与正常 TN 之间，哪些原始 causal CE 特征或已有数值特征在故障前窗口内具有可信的 AUC 分离；(2) 真故障 TP 与误报 FP 之间，哪些特征具有可信的 AUC 分离；以及 FN 的“无及时分数/有分数低于阈值/无及时预测时刻”原因分布。用于选择下一组可验证的特征假设，而不是继续调参。",
+  "reason": "trial_001 的 CV 错误结构为 TP=9、FP=14、FN=25，其中 19 个 FN 已有及时分数但低于阈值，6 个无及时分数。trial_004 parallel 分支新增 3 个命中但也新增 7 个误报，说明现有特征对低分故障样本与正常/误报样本的区分不足。需要 error_atlas 同时提供 FN/TN 与 TP/FP 的双向错例特征快照，以定位可区分的 causal 特征并据此提出下一轮 features。"
+}

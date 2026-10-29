@@ -1,0 +1,20 @@
+{
+  "archive_sha256": "43f182770b95c64003a10fbeed05938f0325de71c59b2c0c63104660315fd1a5",
+  "verified_files": 766,
+  "verified_events": {
+    "events.jsonl": 55,
+    "typeb/historical_test/events.jsonl": 7,
+    "typeb/session/events.jsonl": 170
+  },
+  "credential_scan_passed": true,
+  "excluded_files": 6055,
+  "exclusion_reasons": {
+    "raw_or_regenerable_cache": 5914,
+    "transient": 3,
+    "cv_fold_model": 55,
+    "large_arrays_or_archive": 11,
+    "per_row_scores": 72
+  },
+  "old_sessions_unchanged": true,
+  "complete_resume_checkpoint": false
+}

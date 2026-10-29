@@ -1,0 +1,285 @@
+{
+  "kind": "feature_prescreen",
+  "prescreen_passed": true,
+  "passed_features": [
+    "fe_log_new_cols_per_ce_7d",
+    "fe_log_new_cols_per_new_row_7d",
+    "fe_log_new_patterns_per_ce_7d",
+    "fe_log_new_patterns_per_new_col_7d"
+  ],
+  "high_score": {
+    "kind": "high_score_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 9,
+    "fp_units": 14,
+    "group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "sampled_group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "features": [
+      {
+        "feature": "fe_log_new_cols_per_ce_7d",
+        "auc_tp_vs_fp": 0.8293650793650794,
+        "auc_positive_vs_negative": 0.8293650793650794,
+        "separation": 0.3293650793650794,
+        "positive_median": 0.4653632640838623,
+        "negative_median": 0.21868636459112167,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.6455303030303031,
+          1.0
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_log_new_patterns_per_new_col_7d",
+        "auc_tp_vs_fp": 0.23015873015873015,
+        "auc_positive_vs_negative": 0.23015873015873015,
+        "separation": 0.2698412698412699,
+        "positive_median": 0.5260931253433228,
+        "negative_median": 1.144427478313446,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.05826388888888889,
+          0.42073863636363645
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_log_new_patterns_per_ce_7d",
+        "auc_tp_vs_fp": 0.3253968253968254,
+        "auc_positive_vs_negative": 0.3253968253968254,
+        "separation": 0.1746031746031746,
+        "positive_median": 0.40546512603759766,
+        "negative_median": 0.6045363545417786,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10267857142857144,
+          0.5239495798319328
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_log_new_cols_per_new_row_7d",
+        "auc_tp_vs_fp": 0.4444444444444444,
+        "auc_positive_vs_negative": 0.4444444444444444,
+        "separation": 0.05555555555555558,
+        "positive_median": 0.9162907600402832,
+        "negative_median": 1.0315525531768799,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.19133928571428574,
+          0.6374941643323997
+        ],
+        "credible": false
+      }
+    ],
+    "credible_features": [
+      "fe_log_new_cols_per_ce_7d",
+      "fe_log_new_patterns_per_new_col_7d"
+    ],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "missed_faults": {
+    "kind": "missed_fault_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 0,
+    "fp_units": 0,
+    "group_counts": {
+      "FN": 25,
+      "TN": 35736
+    },
+    "sampled_group_counts": {
+      "FN": 25,
+      "TN": 1000
+    },
+    "features": [
+      {
+        "feature": "fe_log_new_patterns_per_new_col_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.762331081081081,
+        "separation": 0.26233108108108105,
+        "positive_median": 0.4581453800201416,
+        "negative_median": 0.0,
+        "positive_missing": 0.36,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.6139687912850965,
+          0.8844142909356726
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_log_new_cols_per_new_row_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7182741116751269,
+        "separation": 0.2182741116751269,
+        "positive_median": 0.5596157908439636,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6062559970517288,
+          0.8341838077949556
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_log_new_patterns_per_ce_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6856418918918918,
+        "separation": 0.18564189189189184,
+        "positive_median": 0.13664666935801506,
+        "negative_median": 0.0,
+        "positive_missing": 0.36,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.5417820945945946,
+          0.8166929041353383
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_log_new_cols_per_ce_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6584290675928399,
+        "separation": 0.15842906759283992,
+        "positive_median": 0.09097177535295486,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.5532657261326861,
+          0.7520111718751031
+        ],
+        "credible": true
+      }
+    ],
+    "credible_features": [
+      "fe_log_new_patterns_per_new_col_7d",
+      "fe_log_new_cols_per_new_row_7d",
+      "fe_log_new_patterns_per_ce_7d",
+      "fe_log_new_cols_per_ce_7d"
+    ],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "tp_units": 9,
+  "fp_units": 14,
+  "features": [
+    {
+      "feature": "fe_log_new_cols_per_ce_7d",
+      "auc_tp_vs_fp": 0.8293650793650794,
+      "auc_positive_vs_negative": 0.8293650793650794,
+      "separation": 0.3293650793650794,
+      "positive_median": 0.4653632640838623,
+      "negative_median": 0.21868636459112167,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.6455303030303031,
+        1.0
+      ],
+      "credible": true
+    },
+    {
+      "feature": "fe_log_new_patterns_per_new_col_7d",
+      "auc_tp_vs_fp": 0.23015873015873015,
+      "auc_positive_vs_negative": 0.23015873015873015,
+      "separation": 0.2698412698412699,
+      "positive_median": 0.5260931253433228,
+      "negative_median": 1.144427478313446,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.05826388888888889,
+        0.42073863636363645
+      ],
+      "credible": true
+    },
+    {
+      "feature": "fe_log_new_patterns_per_ce_7d",
+      "auc_tp_vs_fp": 0.3253968253968254,
+      "auc_positive_vs_negative": 0.3253968253968254,
+      "separation": 0.1746031746031746,
+      "positive_median": 0.40546512603759766,
+      "negative_median": 0.6045363545417786,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.10267857142857144,
+        0.5239495798319328
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fe_log_new_cols_per_new_row_7d",
+      "auc_tp_vs_fp": 0.4444444444444444,
+      "auc_positive_vs_negative": 0.4444444444444444,
+      "separation": 0.05555555555555558,
+      "positive_median": 0.9162907600402832,
+      "negative_median": 1.0315525531768799,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.19133928571428574,
+        0.6374941643323997
+      ],
+      "credible": false
+    }
+  ],
+  "note": "A pass permits training; it does not establish model improvement."
+}

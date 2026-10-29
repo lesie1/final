@@ -1,0 +1,5 @@
+{
+  "source": "def transform(frame):\n    cell = frame['fault_mode_cell_1h']\n    bank = frame['fault_mode_bank_1h']\n    device = frame['fault_mode_device_1h']\n    broad = bank + device\n    log_cell = np.log1p(cell)\n    log_broad = np.log1p(broad)\n    fe_cell_broad_log_ratio = log_cell - log_broad\n    fe_cell_broad_diff = cell - broad\n    fe_cell_broad_sum = cell + broad\n    fe_cell_broad_interaction = cell * broad\n    return pd.DataFrame({'fe_cell_broad_log_ratio': fe_cell_broad_log_ratio, 'fe_cell_broad_diff': fe_cell_broad_diff, 'fe_cell_broad_sum': fe_cell_broad_sum, 'fe_cell_broad_interaction': fe_cell_broad_interaction}, index=frame.index)",
+  "features": ["fe_cell_broad_log_ratio", "fe_cell_broad_diff", "fe_cell_broad_sum", "fe_cell_broad_interaction"],
+  "reason": "服务于 trial_001 high_score_contrast 的 TP/FP 区分。fault_mode_cell_1h 在 TP 中较低、FP 中较高，而 bank/device 模式可能相反；log-ratio 表达 cell 相对 bank+device 的局部/广泛程度，避免除零与无穷。diff 和 interaction 分别捕捉线性差异与 cell/broad 共现，sum 保留总模式规模。用于检验 H10，在 precision 目标下帮助降低高分误报而不损失召回。"
+}

@@ -1,0 +1,879 @@
+{
+  "kind": "error_atlas",
+  "error_counts": {
+    "TP": 9,
+    "FP": 14,
+    "FN": 25,
+    "TN": 35736,
+    "fn_no_timely_clock": 0,
+    "fn_no_timely_score": 6,
+    "fn_scored_below_threshold": 19,
+    "fn_with_outside_window_alarm": 0,
+    "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+  },
+  "precision": {
+    "kind": "high_score_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 9,
+    "fp_units": 14,
+    "group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "sampled_group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "features": [
+      {
+        "feature": "raw_life_max_cols_per_row",
+        "auc_tp_vs_fp": 0.20238095238095238,
+        "auc_positive_vs_negative": 0.20238095238095238,
+        "separation": 0.2976190476190476,
+        "positive_median": 4.0,
+        "negative_median": 8.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.02297348484848485,
+          0.4308258928571429
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_7d_bit_observed_events",
+        "auc_tp_vs_fp": 0.2261904761904762,
+        "auc_positive_vs_negative": 0.2261904761904762,
+        "separation": 0.27380952380952384,
+        "positive_median": 29.0,
+        "negative_median": 63.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.07466346153846154,
+          0.43670634920634926
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_7d_events",
+        "auc_tp_vs_fp": 0.23015873015873015,
+        "auc_positive_vs_negative": 0.23015873015873015,
+        "separation": 0.2698412698412699,
+        "positive_median": 46.0,
+        "negative_median": 72.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.07673076923076924,
+          0.4412581699346405
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_24h_bit_observed_events",
+        "auc_tp_vs_fp": 0.23412698412698413,
+        "auc_positive_vs_negative": 0.23412698412698413,
+        "separation": 0.26587301587301587,
+        "positive_median": 29.0,
+        "negative_median": 62.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.07445075757575759,
+          0.4923660714285715
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_bit_observed_events",
+        "auc_tp_vs_fp": 0.23809523809523808,
+        "auc_positive_vs_negative": 0.23809523809523808,
+        "separation": 0.2619047619047619,
+        "positive_median": 29.0,
+        "negative_median": 66.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.04529857397504457,
+          0.4409722222222223
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_bit_observed_events",
+        "auc_tp_vs_fp": 0.25,
+        "auc_positive_vs_negative": 0.25,
+        "separation": 0.25,
+        "positive_median": 20.0,
+        "negative_median": 48.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.07479166666666667,
+          0.5078030303030303
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_24h_events",
+        "auc_tp_vs_fp": 0.2619047619047619,
+        "auc_positive_vs_negative": 0.2619047619047619,
+        "separation": 0.23809523809523808,
+        "positive_median": 37.0,
+        "negative_median": 62.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.09832535885167464,
+          0.5238888888888891
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_life_events",
+        "auc_tp_vs_fp": 0.2619047619047619,
+        "auc_positive_vs_negative": 0.2619047619047619,
+        "separation": 0.23809523809523808,
+        "positive_median": 46.0,
+        "negative_median": 78.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.08030899859943978,
+          0.46940476190476194
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_events",
+        "auc_tp_vs_fp": 0.2777777777777778,
+        "auc_positive_vs_negative": 0.2777777777777778,
+        "separation": 0.2222222222222222,
+        "positive_median": 29.0,
+        "negative_median": 48.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.09164772727272727,
+          0.5715178571428571
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_6h_adjacent_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 24.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_6h_multi_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_24h_adjacent_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 24.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_24h_multi_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_7d_adjacent_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 24.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_7d_multi_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_life_adjacent_dq_events",
+        "auc_tp_vs_fp": 0.30158730158730157,
+        "auc_positive_vs_negative": 0.30158730158730157,
+        "separation": 0.19841269841269843,
+        "positive_median": 0.0,
+        "negative_median": 24.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.10573752228163993,
+          0.5241517857142858
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_life_new_patterns_7d",
+        "auc_tp_vs_fp": 0.30952380952380953,
+        "auc_positive_vs_negative": 0.30952380952380953,
+        "separation": 0.19047619047619047,
+        "positive_median": 9.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.11361408199643494,
+          0.5395510835913313
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_6h_risky_events",
+        "auc_tp_vs_fp": 0.31746031746031744,
+        "auc_positive_vs_negative": 0.31746031746031744,
+        "separation": 0.18253968253968256,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.11598827030812325,
+          0.5459054834054835
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_24h_risky_events",
+        "auc_tp_vs_fp": 0.31746031746031744,
+        "auc_positive_vs_negative": 0.31746031746031744,
+        "separation": 0.18253968253968256,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.11598827030812325,
+          0.5459054834054835
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_7d_risky_events",
+        "auc_tp_vs_fp": 0.31746031746031744,
+        "auc_positive_vs_negative": 0.31746031746031744,
+        "separation": 0.18253968253968256,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.11598827030812325,
+          0.5459054834054835
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_life_risky_events",
+        "auc_tp_vs_fp": 0.31746031746031744,
+        "auc_positive_vs_negative": 0.31746031746031744,
+        "separation": 0.18253968253968256,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.11598827030812325,
+          0.5459054834054835
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_6h_multi_beat_events",
+        "auc_tp_vs_fp": 0.32142857142857145,
+        "auc_positive_vs_negative": 0.32142857142857145,
+        "separation": 0.17857142857142855,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.13076923076923078,
+          0.5476562500000001
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_24h_multi_beat_events",
+        "auc_tp_vs_fp": 0.32142857142857145,
+        "auc_positive_vs_negative": 0.32142857142857145,
+        "separation": 0.17857142857142855,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.13076923076923078,
+          0.5476562500000001
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_7d_multi_beat_events",
+        "auc_tp_vs_fp": 0.32142857142857145,
+        "auc_positive_vs_negative": 0.32142857142857145,
+        "separation": 0.17857142857142855,
+        "positive_median": 0.0,
+        "negative_median": 25.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.13076923076923078,
+          0.5476562500000001
+        ],
+        "credible": false
+      },
+      {
+        "feature": "raw_life_max_rows_per_col",
+        "auc_tp_vs_fp": 0.3333333333333333,
+        "auc_positive_vs_negative": 0.3333333333333333,
+        "separation": 0.16666666666666669,
+        "positive_median": 2.0,
+        "negative_median": 4.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.125,
+          0.5686825980392157
+        ],
+        "credible": false
+      }
+    ],
+    "credible_features": [
+      "raw_life_max_cols_per_row",
+      "raw_7d_bit_observed_events",
+      "raw_7d_events",
+      "raw_24h_bit_observed_events",
+      "raw_life_bit_observed_events",
+      "raw_life_events"
+    ],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "recall": {
+    "kind": "missed_fault_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 0,
+    "fp_units": 0,
+    "group_counts": {
+      "FN": 25,
+      "TN": 35736
+    },
+    "sampled_group_counts": {
+      "FN": 25,
+      "TN": 1000
+    },
+    "features": [
+      {
+        "feature": "raw_24h_distinct_cols",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8216671119422922,
+        "separation": 0.32166711194229225,
+        "positive_median": 4.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.7260519073966221,
+          0.9070201012110751
+        ],
+        "credible": true
+      },
+      {
+        "feature": "read_ce_count_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8197969543147208,
+        "separation": 0.31979695431472077,
+        "positive_median": 7.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6948992366889365,
+          0.9115283555729985
+        ],
+        "credible": true
+      },
+      {
+        "feature": "read_ce_log_num_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8196633716270372,
+        "separation": 0.3196633716270372,
+        "positive_median": 3.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6923387222742893,
+          0.9155387084702971
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_7d_distinct_cols",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8160566390595779,
+        "separation": 0.3160566390595779,
+        "positive_median": 6.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.7170658422459893,
+          0.9034235649174674
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_events",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.81432006411969,
+        "separation": 0.31432006411969005,
+        "positive_median": 18.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6958863793133943,
+          0.9173132455131413
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_24h_distinct_cells",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8113812449906492,
+        "separation": 0.31138124499064923,
+        "positive_median": 4.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.7145508286647992,
+          0.8973290877185349
+        ],
+        "credible": true
+      },
+      {
+        "feature": "read_ce_log_num_15m",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8111140796152818,
+        "separation": 0.3111140796152818,
+        "positive_median": 2.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6901871229260935,
+          0.9092786628706506
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_distinct_cols",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8101790008014961,
+        "separation": 0.3101790008014961,
+        "positive_median": 4.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6979307514866675,
+          0.9054228373965217
+        ],
+        "credible": true
+      },
+      {
+        "feature": "read_ce_count_15m",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8067058509217205,
+        "separation": 0.30670585092172054,
+        "positive_median": 3.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6944318181818182,
+          0.902154184490614
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_7d_distinct_cells",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8048356932941491,
+        "separation": 0.30483569329414906,
+        "positive_median": 7.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.7047661541889483,
+          0.900892063210865
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_distinct_cells",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.804434945231098,
+        "separation": 0.30443494523109804,
+        "positive_median": 4.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6931685923361965,
+          0.9055083001793528
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_distinct_cols",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8002938819129041,
+        "separation": 0.30029388191290407,
+        "positive_median": 8.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6969956462339335,
+          0.8917413243937635
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_distinct_cells",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7854662035800161,
+        "separation": 0.28546620358001606,
+        "positive_median": 8.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6826956937367011,
+          0.8815349347613256
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_new_patterns_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7804054054054054,
+        "separation": 0.2804054054054054,
+        "positive_median": 2.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.36,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.628665062814809,
+          0.8866962498212498
+        ],
+        "credible": true
+      },
+      {
+        "feature": "all_ce_count_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7775848250066791,
+        "separation": 0.27758482500667914,
+        "positive_median": 11.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6513407060028409,
+          0.8768024634096063
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_24h_events",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7745124231899546,
+        "separation": 0.2745124231899546,
+        "positive_median": 19.0,
+        "negative_median": 2.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6424949546348363,
+          0.888025877330001
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_new_cols_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7727758482500668,
+        "separation": 0.27277584825006684,
+        "positive_median": 3.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6453976826802836,
+          0.8732879640361892
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_max_cols_per_row",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7563451776649747,
+        "separation": 0.25634517766497467,
+        "positive_median": 5.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6519104704685722,
+          0.8517031233976825
+        ],
+        "credible": true
+      },
+      {
+        "feature": "all_ce_log_num_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7511354528453112,
+        "separation": 0.25113545284531125,
+        "positive_median": 3.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.6237255387975346,
+          0.8571684511367998
+        ],
+        "credible": true
+      },
+      {
+        "feature": "log_happen_frequency_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.24886454715468875,
+        "separation": 0.25113545284531125,
+        "positive_median": 1200.0,
+        "negative_median": 3600.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.1428315488632001,
+          0.37627446120246544
+        ],
+        "credible": true
+      },
+      {
+        "feature": "all_ce_count_15m",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7468608068394336,
+        "separation": 0.24686080683943357,
+        "positive_median": 7.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.633276241732124,
+          0.8676530493728463
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_life_top_cell_share",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.25541009885118887,
+        "separation": 0.24458990114881113,
+        "positive_median": 0.40423718094825745,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.16382490921826476,
+          0.35967334012813046
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fault_mode_cell_1h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.2594175794816992,
+        "separation": 0.2405824205183008,
+        "positive_median": 0.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.16630100403105405,
+          0.3766278954963166
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_24h_distinct_rows",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7317659631311783,
+        "separation": 0.23176596313117825,
+        "positive_median": 2.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.600793455262583,
+          0.8362083175445244
+        ],
+        "credible": true
+      },
+      {
+        "feature": "raw_6h_distinct_rows",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7273577344376169,
+        "separation": 0.22735773443761687,
+        "positive_median": 2.0,
+        "negative_median": 1.0,
+        "positive_missing": 0.24,
+        "negative_missing": 0.803,
+        "auc_interval_95": [
+          0.5906159807690172,
+          0.8421114526462464
+        ],
+        "credible": true
+      }
+    ],
+    "credible_features": [
+      "raw_24h_distinct_cols",
+      "read_ce_count_1h",
+      "read_ce_log_num_1h",
+      "raw_7d_distinct_cols",
+      "raw_6h_events",
+      "raw_24h_distinct_cells",
+      "read_ce_log_num_15m",
+      "raw_6h_distinct_cols",
+      "read_ce_count_15m",
+      "raw_7d_distinct_cells",
+      "raw_6h_distinct_cells",
+      "raw_life_distinct_cols",
+      "raw_life_distinct_cells",
+      "raw_life_new_patterns_7d",
+      "all_ce_count_1h",
+      "raw_24h_events",
+      "raw_life_new_cols_7d",
+      "raw_life_max_cols_per_row",
+      "all_ce_log_num_1h",
+      "log_happen_frequency_1h",
+      "all_ce_count_15m",
+      "raw_life_top_cell_share",
+      "fault_mode_cell_1h",
+      "raw_24h_distinct_rows",
+      "raw_6h_distinct_rows"
+    ],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  }
+}

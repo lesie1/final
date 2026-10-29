@@ -1,0 +1,8 @@
+{
+  "source": "/root/autodl-tmp/final_v32_20261029/typeb/session",
+  "model_weights_imported": false,
+  "base_rows_unchanged": true,
+  "old_session_kind": "precomputed_66_features",
+  "new_session_kind": "precomputed_66_plus_raw69",
+  "test_previously_exposed": true
+}

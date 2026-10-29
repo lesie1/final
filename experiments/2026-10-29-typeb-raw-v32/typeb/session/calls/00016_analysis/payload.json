@@ -1,0 +1,1062 @@
+{
+  "task": "analysis",
+  "current": {
+    "id": "trial_004",
+    "status": "complete",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "parent": "trial_001",
+    "reason": "当前 best trial_001 的 TRAIN 设备分组 OOF 中，25 个漏报里有 19 个已有及时分数但低于阈值（fn_scored_below_threshold=19），说明主模型对这部分低分故障行排序不足。parallel 分支会在全部 TRAIN 行上训练独立浅层 XGBoost，并与主模型逐行 max 融合，可能对低分行给出互补高分，从而在不大幅增加误报的前提下恢复命中。保持父模型和其余参数不变，仅增加 parallel 重排序。",
+    "metrics": {
+      "protocol": "memory_15m_7d_device_f1_v2",
+      "threshold": 0.8819863796234131,
+      "TP": 3,
+      "FP": 3,
+      "FN": 7,
+      "precision": 0.5,
+      "recall": 0.3,
+      "f1": 0.375,
+      "eligible_devices": 7136,
+      "eligible_fault_devices": 10,
+      "alarmed_devices": 6,
+      "no_history_devices": 5626,
+      "no_history_fault_devices": 0,
+      "fault_without_timely_scheduled_opportunity": 0,
+      "positive_without_scored_positive_day": 0,
+      "unknown_devices": 0,
+      "unknown_alarm_devices": 0,
+      "excluded_late_entry_devices": 0,
+      "excluded_preexisting_fault_devices": 39,
+      "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+    },
+    "model_reused_from": null,
+    "comparison": {
+      "reference": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session/trials/trial_001/attempt_01",
+      "changed_factors": [
+        "rerank"
+      ],
+      "delta": {
+        "f1": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "TP": 0,
+        "FP": 0,
+        "FN": 0
+      },
+      "new_hits": 0,
+      "lost_hits": 0,
+      "new_false_alarms": 0,
+      "removed_false_alarms": 0,
+      "model_identical": false,
+      "same_training_samples": true,
+      "conditional_paired_f1_interval_95": [
+        0.0,
+        0.0
+      ],
+      "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+    },
+    "cv": {
+      "best_step": 400,
+      "metrics": {
+        "step": 400,
+        "f1": 0.3582089552238806,
+        "TP": 12,
+        "FP": 21,
+        "FN": 22,
+        "precision": 0.36363636363636365,
+        "recall": 0.35294117647058826,
+        "threshold": 0.9284823536872864
+      },
+      "fault_units": 34,
+      "error_counts": {
+        "TP": 12,
+        "FP": 21,
+        "FN": 22,
+        "TN": 35729,
+        "fn_no_timely_clock": 0,
+        "fn_no_timely_score": 6,
+        "fn_scored_below_threshold": 16,
+        "fn_with_outside_window_alarm": 0,
+        "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+      }
+    },
+    "acceptance": {
+      "accepted": false,
+      "rule": "cv_paired",
+      "test": "probability",
+      "reference": "trial_001",
+      "selection_f1_gap": 0.0,
+      "cv_delta_f1": 0.04241948153967007,
+      "cv_interval_95": [
+        -0.03742265231020852,
+        0.14432616732021622
+      ],
+      "probability_better": 0.823,
+      "new_hits": 3,
+      "lost_hits": 0,
+      "new_false_alarms": 7,
+      "removed_false_alarms": 0,
+      "fault_units": 34
+    }
+  },
+  "best": {
+    "id": "trial_001",
+    "status": "complete",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "parent": null,
+    "reason": "baseline",
+    "metrics": {
+      "protocol": "memory_15m_7d_device_f1_v2",
+      "threshold": 0.8819863796234131,
+      "TP": 3,
+      "FP": 3,
+      "FN": 7,
+      "precision": 0.5,
+      "recall": 0.3,
+      "f1": 0.375,
+      "eligible_devices": 7136,
+      "eligible_fault_devices": 10,
+      "alarmed_devices": 6,
+      "no_history_devices": 5626,
+      "no_history_fault_devices": 0,
+      "fault_without_timely_scheduled_opportunity": 0,
+      "positive_without_scored_positive_day": 0,
+      "unknown_devices": 0,
+      "unknown_alarm_devices": 0,
+      "excluded_late_entry_devices": 0,
+      "excluded_preexisting_fault_devices": 39,
+      "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+    },
+    "model_reused_from": null,
+    "cv": {
+      "best_step": 250,
+      "metrics": {
+        "step": 250,
+        "f1": 0.3157894736842105,
+        "TP": 9,
+        "FP": 14,
+        "FN": 25,
+        "precision": 0.391304347826087,
+        "recall": 0.2647058823529412,
+        "threshold": 0.9396138787269592
+      },
+      "fault_units": 34,
+      "error_counts": {
+        "TP": 9,
+        "FP": 14,
+        "FN": 25,
+        "TN": 35736,
+        "fn_no_timely_clock": 0,
+        "fn_no_timely_score": 6,
+        "fn_scored_below_threshold": 19,
+        "fn_with_outside_window_alarm": 0,
+        "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+      }
+    },
+    "acceptance": {
+      "accepted": true,
+      "rule": "baseline",
+      "cv": {
+        "best_step": 250,
+        "metrics": {
+          "step": 250,
+          "f1": 0.3157894736842105,
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "precision": 0.391304347826087,
+          "recall": 0.2647058823529412,
+          "threshold": 0.9396138787269592
+        },
+        "fault_units": 34,
+        "error_counts": {
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "TN": 35736,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 19,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      }
+    }
+  },
+  "history": [
+    {
+      "id": "trial_001",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": null,
+      "reason": "baseline",
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.8819863796234131,
+        "TP": 3,
+        "FP": 3,
+        "FN": 7,
+        "precision": 0.5,
+        "recall": 0.3,
+        "f1": 0.375,
+        "eligible_devices": 7136,
+        "eligible_fault_devices": 10,
+        "alarmed_devices": 6,
+        "no_history_devices": 5626,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 0,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 39,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "cv": {
+        "best_step": 250,
+        "metrics": {
+          "step": 250,
+          "f1": 0.3157894736842105,
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "precision": 0.391304347826087,
+          "recall": 0.2647058823529412,
+          "threshold": 0.9396138787269592
+        },
+        "fault_units": 34,
+        "error_counts": {
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "TN": 35736,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 19,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": true,
+        "rule": "baseline",
+        "cv": {
+          "best_step": 250,
+          "metrics": {
+            "step": 250,
+            "f1": 0.3157894736842105,
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "precision": 0.391304347826087,
+            "recall": 0.2647058823529412,
+            "threshold": 0.9396138787269592
+          },
+          "fault_units": 34,
+          "error_counts": {
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "TN": 35736,
+            "fn_no_timely_clock": 0,
+            "fn_no_timely_score": 6,
+            "fn_scored_below_threshold": 19,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          }
+        }
+      }
+    },
+    {
+      "id": "trial_002",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 1.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "CV 中 19/25 个漏报有分数但低于阈值，说明模型可能欠拟合；当前 min_child_weight=50 限制叶子节点样本量，降低该参数可允许更复杂的局部边界，可能提高这些漏报样本的得分。",
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.8991993069648743,
+        "TP": 3,
+        "FP": 3,
+        "FN": 7,
+        "precision": 0.5,
+        "recall": 0.3,
+        "f1": 0.375,
+        "eligible_devices": 7136,
+        "eligible_fault_devices": 10,
+        "alarmed_devices": 6,
+        "no_history_devices": 5626,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 0,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 39,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "params.min_child_weight"
+        ],
+        "delta": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "TP": 0,
+          "FP": 0,
+          "FN": 0
+        },
+        "new_hits": 0,
+        "lost_hits": 0,
+        "new_false_alarms": 1,
+        "removed_false_alarms": 1,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.05560897435897438,
+          0.07162698412698414
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 150,
+        "metrics": {
+          "step": 150,
+          "f1": 0.2857142857142857,
+          "TP": 7,
+          "FP": 8,
+          "FN": 27,
+          "precision": 0.4666666666666667,
+          "recall": 0.20588235294117646,
+          "threshold": 0.9393754005432129
+        },
+        "fault_units": 34,
+        "error_counts": {
+          "TP": 7,
+          "FP": 8,
+          "FN": 27,
+          "TN": 35742,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 21,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "test": "probability",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.0,
+        "cv_delta_f1": -0.03007518796992481,
+        "cv_interval_95": [
+          -0.13782171201814059,
+          0.0440279765777489
+        ],
+        "probability_better": 0.258,
+        "new_hits": 0,
+        "lost_hits": 2,
+        "new_false_alarms": 0,
+        "removed_false_alarms": 6,
+        "fault_units": 34
+      }
+    },
+    {
+      "id": "trial_003",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "2349a290a4ccd85ea8f0d088d0efd1c78426ed1eed2c3ccebcc2279533f7f54a",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 TRAIN OOF 的漏报(FN)与正常(TN)对比中，能否用累积 CE 负担相关字段（如 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 等）构造因果特征，使 FN 与 TN 的 AUC 在召回方向上可信分离，并提升 CV 召回？",
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.9395022392272949,
+        "TP": 2,
+        "FP": 0,
+        "FN": 8,
+        "precision": 1.0,
+        "recall": 0.2,
+        "f1": 0.3333333333333333,
+        "eligible_devices": 7136,
+        "eligible_fault_devices": 10,
+        "alarmed_devices": 2,
+        "no_history_devices": 5626,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 0,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 39,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": -0.041666666666666685,
+          "precision": 0.5,
+          "recall": -0.09999999999999998,
+          "TP": -1,
+          "FP": -3,
+          "FN": 1
+        },
+        "new_hits": 0,
+        "lost_hits": 1,
+        "new_false_alarms": 0,
+        "removed_false_alarms": 3,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.3079545454545455,
+          0.13664596273291924
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "screened_out",
+        "selection_f1_gap": -0.041666666666666685,
+        "note": "Selection-window F1 clearly below best; CV not run"
+      }
+    },
+    {
+      "id": "trial_004",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "parallel",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "当前 best trial_001 的 TRAIN 设备分组 OOF 中，25 个漏报里有 19 个已有及时分数但低于阈值（fn_scored_below_threshold=19），说明主模型对这部分低分故障行排序不足。parallel 分支会在全部 TRAIN 行上训练独立浅层 XGBoost，并与主模型逐行 max 融合，可能对低分行给出互补高分，从而在不大幅增加误报的前提下恢复命中。保持父模型和其余参数不变，仅增加 parallel 重排序。",
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.8819863796234131,
+        "TP": 3,
+        "FP": 3,
+        "FN": 7,
+        "precision": 0.5,
+        "recall": 0.3,
+        "f1": 0.375,
+        "eligible_devices": 7136,
+        "eligible_fault_devices": 10,
+        "alarmed_devices": 6,
+        "no_history_devices": 5626,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 0,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 39,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "rerank"
+        ],
+        "delta": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "TP": 0,
+          "FP": 0,
+          "FN": 0
+        },
+        "new_hits": 0,
+        "lost_hits": 0,
+        "new_false_alarms": 0,
+        "removed_false_alarms": 0,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          0.0,
+          0.0
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.3582089552238806,
+          "TP": 12,
+          "FP": 21,
+          "FN": 22,
+          "precision": 0.36363636363636365,
+          "recall": 0.35294117647058826,
+          "threshold": 0.9284823536872864
+        },
+        "fault_units": 34,
+        "error_counts": {
+          "TP": 12,
+          "FP": 21,
+          "FN": 22,
+          "TN": 35729,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 16,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "test": "probability",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.0,
+        "cv_delta_f1": 0.04241948153967007,
+        "cv_interval_95": [
+          -0.03742265231020852,
+          0.14432616732021622
+        ],
+        "probability_better": 0.823,
+        "new_hits": 3,
+        "lost_hits": 0,
+        "new_false_alarms": 7,
+        "removed_false_alarms": 0,
+        "fault_units": 34
+      }
+    }
+  ],
+  "scope": {
+    "level": 2,
+    "allowed_changes": [
+      "params.max_depth",
+      "params.min_child_weight",
+      "params.learning_rate",
+      "params.reg_lambda",
+      "params.reg_alpha",
+      "params.gamma",
+      "params.max_bin",
+      "params.colsample_bytree",
+      "params.max_delta_step",
+      "seed",
+      "rerank",
+      "rerank_gate",
+      "base_weight"
+    ],
+    "features_allowed": true,
+    "controls_without_best_gain": 0,
+    "parallel": {
+      "allowed": true,
+      "mode": "parallel",
+      "gate": 0.5,
+      "note": "Independent shallow device-balanced branch trains on ALL TRAIN rows, including low-score rows. Fuses row scores by max; same scorer, no unconditional acceptance. Not the M2-MFP rule tree."
+    },
+    "feature_screen": {
+      "mode": "balanced",
+      "exploration_budget": 2,
+      "exploration_used": 0
+    },
+    "rerank": {
+      "allowed": false
+    },
+    "explanation": "Use evidence to choose parameter, causal-feature, permitted device-weight, or composite controls. Labels, sampling, feature_set, schedule and scorer remain fixed."
+  },
+  "evidence": [],
+  "last_failure": null,
+  "policy": {
+    "evaluation_protocol": "memory_15m_7d_device_f1_v2",
+    "minimum_lead_seconds": 900,
+    "maximum_lead_seconds": 605700
+  },
+  "feature_requests_used": 1,
+  "diagnostic_kinds_used": [],
+  "diagnostic_budget": 3,
+  "allowed_factor_values": {
+    "feature_set": [
+      "base",
+      "history",
+      "recent"
+    ],
+    "sample_unit": [
+      "event",
+      "device_day"
+    ],
+    "base_weight": [
+      "sample",
+      "device"
+    ],
+    "label_horizon_days": [
+      7
+    ],
+    "weight_policy": [
+      "ratio",
+      "sqrt_ratio",
+      "unit"
+    ],
+    "prediction_interval_hours": [
+      1,
+      24
+    ],
+    "score_aggregation": [
+      "latest",
+      "window_max",
+      "window_mean",
+      "window_second",
+      "all_history_max"
+    ],
+    "seed": [
+      42,
+      43,
+      44
+    ],
+    "rerank": [
+      "none",
+      "gated",
+      "parallel"
+    ],
+    "rerank_gate": [
+      0.5,
+      0.7,
+      0.8,
+      0.85,
+      0.9
+    ]
+  },
+  "hyperparameter_bounds": {
+    "max_depth": [
+      2,
+      10
+    ],
+    "min_child_weight": [
+      0.01,
+      1000
+    ],
+    "learning_rate": [
+      0.005,
+      0.3
+    ],
+    "reg_lambda": [
+      0,
+      1000
+    ],
+    "reg_alpha": [
+      0,
+      1000
+    ],
+    "gamma": [
+      0,
+      100
+    ],
+    "max_bin": [
+      16,
+      256
+    ],
+    "colsample_bytree": [
+      0.3,
+      1
+    ],
+    "max_delta_step": [
+      0,
+      10
+    ]
+  },
+  "remaining_trials": 9,
+  "diagnostic_kinds": [
+    "errors",
+    "coverage",
+    "score_distribution",
+    "feature_profiles",
+    "loss_curve",
+    "paired_devices",
+    "high_score_contrast",
+    "missed_fault_contrast",
+    "error_atlas"
+  ],
+  "feature_api": {
+    "version": "causal_features_v2",
+    "signature": "def transform(frame)",
+    "input": "One device, chronological numeric rows. No labels, device IDs or future rows. Select literal column names from profile.feature_names.",
+    "output": "pd.DataFrame of declared unique fe_ columns; preserve rows and index. Original columns are retained automatically.",
+    "series_methods": [
+      "abs",
+      "astype",
+      "clip",
+      "count",
+      "cummax",
+      "cummin",
+      "cumprod",
+      "cumsum",
+      "diff",
+      "ewm",
+      "expanding",
+      "ffill",
+      "fillna",
+      "isna",
+      "mask",
+      "max",
+      "mean",
+      "median",
+      "min",
+      "notna",
+      "quantile",
+      "replace",
+      "rolling",
+      "shift",
+      "std",
+      "sum",
+      "var",
+      "where"
+    ],
+    "numpy_functions": [
+      "abs",
+      "clip",
+      "exp",
+      "isfinite",
+      "isnan",
+      "log",
+      "log1p",
+      "maximum",
+      "minimum",
+      "sign",
+      "sqrt",
+      "where"
+    ],
+    "pandas_functions": [
+      "DataFrame"
+    ],
+    "past_helpers": {
+      "past.gap_seconds(frame)": "Series: current minus previous observation time in seconds; first value NaN.",
+      "past.observation_count(frame)": "Series: causal count 1,2,...,n; no measured-value missingness dependence."
+    },
+    "rules": [
+      "Only assignments to new local names and a final return. No loops, comprehensions, imports or arbitrary functions.",
+      "frame.index is permitted ONLY as index=frame.index in pd.DataFrame. For time gaps use past.gap_seconds(frame).",
+      "No frame.columns, to_series, dt, iloc, loc, values, pd.Series, pd.to_numeric or apply. Inputs are already numeric.",
+      "Use arithmetic operators / + - * instead of .div/.add/.sub/.mul. Use literal column names; never discover columns dynamically.",
+      "Reductions must directly follow rolling/expanding/ewm. Use trailing real-time rolling windows; center=True and negative shifts are forbidden.",
+      "Missing measurements stay unknown unless the hypothesis explicitly justifies a constant or forward fill. No infinities.",
+      "Zero finite values in a bounded sample is a coverage limitation, not evidence that the entire dataset is empty."
+    ],
+    "examples": [
+      {
+        "features": [
+          "fe_change"
+        ],
+        "source": "def transform(frame):\n    change = frame['metric'].diff(1)\n    return pd.DataFrame({'fe_change': change}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_gap",
+          "fe_count"
+        ],
+        "source": "def transform(frame):\n    gap = past.gap_seconds(frame)\n    count = past.observation_count(frame)\n    return pd.DataFrame({'fe_gap': gap, 'fe_count': count}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_mean"
+        ],
+        "source": "def transform(frame):\n    avg = frame['metric'].rolling('7D', min_periods=1).mean()\n    return pd.DataFrame({'fe_mean': avg}, index=frame.index)"
+      }
+    ]
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Cumulative correctable-error burden: repeated CEs mark marginal cells/wordlines, so higher past CE volume and larger physical footprint predict impending uncorrectable fault.",
+      "basis": "DRAM field studies often observe CE storms before UE; repeated errors indicate weak cells.",
+      "fields": [
+        "raw_life_events",
+        "raw_life_distinct_cells",
+        "raw_24h_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing and healthy devices show overlapping distributions for raw_life_events, raw_life_distinct_cells and raw_24h_events; no positive association."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Recent expansion of fault footprint: new rows, columns, and error-bit patterns in the last 7 days indicate accelerating degradation rather than a stable single-cell defect.",
+      "basis": "Spatially spreading faults suggest growing row/column or bank damage.",
+      "fields": [
+        "raw_life_new_rows_7d",
+        "raw_life_new_cols_7d",
+        "raw_life_new_patterns_7d",
+        "raw_7d_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show elevated recent new rows/columns/patterns or 7-day CE activity compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Multi-bit error severity: CEs with more error bits consume more ECC correction margin and signal stronger cell interference or partial wordline failure.",
+      "basis": "Higher bit multiplicity reduces ECC margin and reflects broader electrical damage.",
+      "fields": [
+        "raw_24h_max_err_bits",
+        "raw_life_max_err_bits",
+        "raw_6h_max_err_bits"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "No positive difference in maximum error bits per CE between failing and healthy devices."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Multi-DQ/symbol extent: CEs spanning multiple DQ lanes indicate I/O or datapath damage, with more DQ lanes per event reflecting a wider electrical fault.",
+      "basis": "DRAM I/O and datapath failures often produce correlated errors across multiple DQ lanes.",
+      "fields": [
+        "raw_24h_multi_dq_events",
+        "raw_24h_max_dq_count",
+        "raw_life_max_dq_count"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-DQ event counts and max DQ counts are not elevated in failing devices."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Risky bitmap shape: error bitmaps not confined to one half of the 8x4 array are harder to correct and may indicate multiple adjacent cells or row/column defects.",
+      "basis": "Bitmaps crossing the coarse correctability region imply more complex failure geometry.",
+      "fields": [
+        "raw_24h_risky_events",
+        "raw_life_risky_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Risky bitmap event counts do not separate failing from healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Adjacent-DQ and multi-beat coupling: fatal faults may show either tight adjacency in DQ lanes or broad beat involvement, reflecting crosstalk or timing marginality.",
+      "basis": "I/O crosstalk and rank/bank timing marginality can create correlated symbol and beat errors.",
+      "fields": [
+        "raw_24h_adjacent_dq_events",
+        "raw_24h_min_dq_interval",
+        "raw_24h_multi_beat_events",
+        "raw_24h_max_beat_count"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "No joint difference in adjacent-DQ, minimum DQ interval, multi-beat or max-beat statistics between failing and healthy groups."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Hot-cell concentration versus broad dispersion: a dominant hot cell may repeat without progressing, while broad row/column spread indicates systemic degradation.",
+      "basis": "Different DRAM failure modes produce either concentrated single-cell signatures or widespread row/column damage.",
+      "fields": [
+        "raw_life_top_cell_share",
+        "raw_life_max_cols_per_row",
+        "raw_life_max_rows_per_col"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "These concentration/dispersion summaries show no separation between failing and healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Patrol scrub detection share: a higher share of CEs found by patrol scrub indicates latent defects not triggered only by demand traffic.",
+      "basis": "Background scrub reads can reveal weak cells before demand accesses encounter them.",
+      "fields": [
+        "raw_life_scrub_share"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Patrol scrub share is not elevated in failing devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Short-horizon burstiness and temporal clustering: bursts within one hour and high event frequency indicate unstable cells or transient voltage/temperature margin loss.",
+      "basis": "CE bursts often reflect repeated accesses to marginal cells or unstable operating conditions.",
+      "fields": [
+        "ce_storm_count_1h",
+        "error_burst_count_1h",
+        "max_burst_interval_1h",
+        "log_happen_frequency_1h"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "No temporal clustering signal in 1-hour storm/burst/interval/frequency metrics differs between failing and healthy devices."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Fault mode localization at bank/device level: high counts of bank- or device-level fault modes represent broader control/address damage than isolated cell faults.",
+      "basis": "Bank and device fault modes imply larger physical or logical units are affected.",
+      "fields": [
+        "fault_mode_bank_1h",
+        "fault_mode_device_1h"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Bank- or device-level fault mode counts are not higher in failing devices."
+    },
+    {
+      "id": "H11",
+      "mechanism": "Rapid onset from first CE: devices that fail shortly after their first observed CE have acute defects, while long stable histories with old CEs are less dangerous.",
+      "basis": "Short time from first CE to failure suggests rapid progression of an acute fault.",
+      "fields": [
+        "raw_life_days_since_first"
+      ],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices do not show shorter days since first CE than healthy devices."
+    }
+  ],
+  "acceptance_rule": {
+    "rule": "cv_paired",
+    "test": "probability",
+    "probability": 0.9,
+    "lower_bound": 0.0,
+    "screen_margin": 0.02,
+    "explanation": "best changes only when paired CV bootstrap P(better) >= 0.9 and CV F1 gain > lower_bound"
+  },
+  "task_context": {
+    "variant": null,
+    "instructions": "TypeB only. New raw-data representation: retain the original 66 precomputed features and add 69 causal raw-CE descriptors including bitmap observability. Raw descriptors are available to feature hypotheses, diagnostics and transform programs. Use their definitions in raw_feature_descriptions. Missing bitmaps/chips/files are unknown, not healthy zero. Keep source samples, labels, weights and v3.2 scoring unchanged for baseline. Do not infer healthy labels beyond May 2024. Historical TEST has been seen previously; never use it for search or thresholds.",
+    "label_days": 7,
+    "maximum_lead_seconds": 605700,
+    "sampling_fixed": false,
+    "selection_period": [
+      1711918080,
+      1713231360
+    ],
+    "later_validation_hidden": true,
+    "test_opened": false
+  },
+  "repair": {
+    "error": "Extra data: line 9 column 1 (char 437)",
+    "previous_response": {
+      "action": "diagnose",
+      "parent": "trial_001",
+      "kind": "missed_fault_contrast",
+      "question": "在 trial_001 的 TRAIN 设备分组 OOF 中，25 个漏报（其中 19 个已有及时分数但低于阈值，6 个无及时分数）与 TN 在哪些因果特征快照上可信分离？漏报是否缺乏近期 CE 负担、错误严重性或扩展足迹类特征？哪些可构造特征最可能在不引入大量误报的前提下恢复这些低分故障行？",
+      "reason": "trial_004 的 parallel 分支新增 3 个命中但同时带来 7 个误报，CV 配对提升概率 0.823 未达到 0.9，说明简单 max 融合互补性不足，需要先定位漏报与正常样本的差异。当前已无任何诊断结果，且后续优先应通过特征研究改善漏报，而不是继续调参。该诊断可为下一步 features 请求提供因果特征和方向依据。"
+    },
+    "instruction": "Repair this response only; do not change parent, question, or accepted plan."
+  }
+}

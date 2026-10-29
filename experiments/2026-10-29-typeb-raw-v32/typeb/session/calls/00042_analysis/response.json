@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 上，分别获取高分 TP/FP 和 FN/TN 的因果特征对比，并分解 FN 中及时分数低于阈值的比例；重点关注哪些原始 CE 字段或已有特征能在不增加 FP 的情况下提升低分故障行排序。",
+  "reason": "已尝试多种特征和参数，CV F1 仍低于 baseline；trial_004 parallel 提高召回但增加 FP，需要更系统的错例证据来定位可分离特征。诊断预算未使用，且剩余试验只有 2 次，先用 error_atlas 一次性获取充分证据。"
+}

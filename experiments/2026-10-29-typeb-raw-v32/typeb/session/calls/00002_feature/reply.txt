@@ -1,0 +1,92 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Cumulative correctable-error burden: repeated CEs mark marginal cells/wordlines, so higher past CE volume and larger physical footprint predict impending uncorrectable fault.",
+      "basis": "DRAM field studies often observe CE storms before UE; repeated errors indicate weak cells.",
+      "fields": ["raw_life_events", "raw_life_distinct_cells", "raw_24h_events"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing and healthy devices show overlapping distributions for raw_life_events, raw_life_distinct_cells and raw_24h_events; no positive association."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Recent expansion of fault footprint: new rows, columns, and error-bit patterns in the last 7 days indicate accelerating degradation rather than a stable single-cell defect.",
+      "basis": "Spatially spreading faults suggest growing row/column or bank damage.",
+      "fields": ["raw_life_new_rows_7d", "raw_life_new_cols_7d", "raw_life_new_patterns_7d", "raw_7d_events"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show elevated recent new rows/columns/patterns or 7-day CE activity compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Multi-bit error severity: CEs with more error bits consume more ECC correction margin and signal stronger cell interference or partial wordline failure.",
+      "basis": "Higher bit multiplicity reduces ECC margin and reflects broader electrical damage.",
+      "fields": ["raw_24h_max_err_bits", "raw_life_max_err_bits", "raw_6h_max_err_bits"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "No positive difference in maximum error bits per CE between failing and healthy devices."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Multi-DQ/symbol extent: CEs spanning multiple DQ lanes indicate I/O or datapath damage, with more DQ lanes per event reflecting a wider electrical fault.",
+      "basis": "DRAM I/O and datapath failures often produce correlated errors across multiple DQ lanes.",
+      "fields": ["raw_24h_multi_dq_events", "raw_24h_max_dq_count", "raw_life_max_dq_count"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-DQ event counts and max DQ counts are not elevated in failing devices."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Risky bitmap shape: error bitmaps not confined to one half of the 8x4 array are harder to correct and may indicate multiple adjacent cells or row/column defects.",
+      "basis": "Bitmaps crossing the coarse correctability region imply more complex failure geometry.",
+      "fields": ["raw_24h_risky_events", "raw_life_risky_events"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Risky bitmap event counts do not separate failing from healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Adjacent-DQ and multi-beat coupling: fatal faults may show either tight adjacency in DQ lanes or broad beat involvement, reflecting crosstalk or timing marginality.",
+      "basis": "I/O crosstalk and rank/bank timing marginality can create correlated symbol and beat errors.",
+      "fields": ["raw_24h_adjacent_dq_events", "raw_24h_min_dq_interval", "raw_24h_multi_beat_events", "raw_24h_max_beat_count"],
+      "expected_direction": "pattern",
+      "falsified_if": "No joint difference in adjacent-DQ, minimum DQ interval, multi-beat or max-beat statistics between failing and healthy groups."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Hot-cell concentration versus broad dispersion: a dominant hot cell may repeat without progressing, while broad row/column spread indicates systemic degradation.",
+      "basis": "Different DRAM failure modes produce either concentrated single-cell signatures or widespread row/column damage.",
+      "fields": ["raw_life_top_cell_share", "raw_life_max_cols_per_row", "raw_life_max_rows_per_col"],
+      "expected_direction": "pattern",
+      "falsified_if": "These concentration/dispersion summaries show no separation between failing and healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Patrol scrub detection share: a higher share of CEs found by patrol scrub indicates latent defects not triggered only by demand traffic.",
+      "basis": "Background scrub reads can reveal weak cells before demand accesses encounter them.",
+      "fields": ["raw_life_scrub_share"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Patrol scrub share is not elevated in failing devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Short-horizon burstiness and temporal clustering: bursts within one hour and high event frequency indicate unstable cells or transient voltage/temperature margin loss.",
+      "basis": "CE bursts often reflect repeated accesses to marginal cells or unstable operating conditions.",
+      "fields": ["ce_storm_count_1h", "error_burst_count_1h", "max_burst_interval_1h", "log_happen_frequency_1h"],
+      "expected_direction": "pattern",
+      "falsified_if": "No temporal clustering signal in 1-hour storm/burst/interval/frequency metrics differs between failing and healthy devices."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Fault mode localization at bank/device level: high counts of bank- or device-level fault modes represent broader control/address damage than isolated cell faults.",
+      "basis": "Bank and device fault modes imply larger physical or logical units are affected.",
+      "fields": ["fault_mode_bank_1h", "fault_mode_device_1h"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Bank- or device-level fault mode counts are not higher in failing devices."
+    },
+    {
+      "id": "H11",
+      "mechanism": "Rapid onset from first CE: devices that fail shortly after their first observed CE have acute defects, while long stable histories with old CEs are less dangerous.",
+      "basis": "Short time from first CE to failure suggests rapid progression of an acute fault.",
+      "fields": ["raw_life_days_since_first"],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices do not show shorter days since first CE than healthy devices."
+    }
+  ]
+}

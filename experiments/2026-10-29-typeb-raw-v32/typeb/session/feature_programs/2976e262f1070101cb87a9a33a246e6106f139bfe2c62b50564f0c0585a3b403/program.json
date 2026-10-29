@@ -1,0 +1,67 @@
+{
+  "id": "2976e262f1070101cb87a9a33a246e6106f139bfe2c62b50564f0c0585a3b403",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    recent_new_cols = frame['raw_life_new_cols_7d']\n    recent_7d_cols = frame['raw_7d_distinct_cols']\n    life_events = frame['raw_life_events']\n    life_cols = frame['raw_life_distinct_cols']\n    fe_log_recent_new_cols_vs_life_events = np.log1p(recent_new_cols) - np.log1p(life_events)\n    fe_log_recent_7d_cols_vs_life_events = np.log1p(recent_7d_cols) - np.log1p(life_events)\n    fe_log_recent_new_cols_vs_life_cols = np.log1p(recent_new_cols) - np.log1p(life_cols)\n    fe_log_recent_7d_cols_vs_life_cols = np.log1p(recent_7d_cols) - np.log1p(life_cols)\n    out = pd.DataFrame({\n        'fe_log_recent_new_cols_vs_life_events': fe_log_recent_new_cols_vs_life_events,\n        'fe_log_recent_7d_cols_vs_life_events': fe_log_recent_7d_cols_vs_life_events,\n        'fe_log_recent_new_cols_vs_life_cols': fe_log_recent_new_cols_vs_life_cols,\n        'fe_log_recent_7d_cols_vs_life_cols': fe_log_recent_7d_cols_vs_life_cols\n    }, index=frame.index)\n    return out",
+    "features": [
+      "fe_log_recent_new_cols_vs_life_events",
+      "fe_log_recent_7d_cols_vs_life_events",
+      "fe_log_recent_new_cols_vs_life_cols",
+      "fe_log_recent_7d_cols_vs_life_cols"
+    ]
+  },
+  "reason": "检验 H2 的近期扩展假设：FN 对比显示 raw_life_new_cols_7d / raw_7d_distinct_cols 升高，而 TP/FP 对比显示 TP 的 raw_life_events 总量较低但 FP 更高。对数比值将近期列扩展除以生命周期累计事件或累计列足迹，使 TP 虽生命周期总量较低但近期扩展相对更高，从而在 TP/FP 上获得正 AUC；同时保留对 FN/TN 的召回信号。若 H2 成立，这些比值应为 higher_in_failing。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 636,
+      "finite_values": 2544
+    },
+    {
+      "rows": 5,
+      "finite_values": 20
+    }
+  ],
+  "sample_validation_seconds": 0.14218202978372574,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

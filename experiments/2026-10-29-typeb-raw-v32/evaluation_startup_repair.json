@@ -1,0 +1,15 @@
+{
+  "reason": "Prediction uses spawn; unguarded top-level evaluator recursively started scoring workers",
+  "old_script_sha256": "c75f360009b826c854019c4e9b260db2b72302fac7d939e63bb4642f54f7d6c9",
+  "new_script_sha256": "63c9478162b261490abd62546fc25e8a31525fe04ca8b274b96cf8e2f062b0e8",
+  "modification": "Wrap existing evaluation statements in main(); execute only under __main__",
+  "unchanged_artifacts": {
+    "typeb/historical_test/frozen.json": "2bb799ef837526a9cb1c7e266f8f6dad65a902573c132ab05da58a1f5ff2630e",
+    "typeb/session/state.json": "52fd11129ee091bd657848c7bec76b6f1185f741ebd2edcc70ff7d98d1e49348"
+  },
+  "import_guard_test_passed": true,
+  "retraining": false,
+  "threshold_reselection": false,
+  "original_failed_log": "historical_test.log",
+  "at": 1793270843.9000516
+}

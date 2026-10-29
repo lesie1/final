@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "be52d4ee363720385c0cded80dc9cf4d8903de76489d4d4a281141a0cb1fa8d4",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'be52d4ee363720385c0cded80dc9cf4d8903de76489d4d4a281141a0cb1fa8d4', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 best trial_001 的 TRAIN 设备分组 OOF 高分区域，fault_mode_cell_1h 与 fault_mode_bank_1h/fault_mode_device_1h 的比值或交互能否区分真故障(TP)与误报(FP)，从而在不损失召回的情况下降低 FP？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 best trial_001 的 TRAIN 设备分组 OOF 高分区域，fault_mode_cell_1h 与 fault_mode_bank_1h/fault_mode_device_1h 的比值或交互能否区分真故障(TP)与误报(FP)，从而在不损失召回的情况下降低 FP？",
+    "reason": "已有 high_score_contrast 显示 fault_mode_cell_1h 在 trial_004 高分区域 TP/FP 的可信 AUC=0.404（区间[0.333,0.475]，不含0.5），方向为 TP 低于 FP，说明真故障中 cell 级故障模式较少；而 fault_mode_bank_1h 与 fault_mode_device_1h 的 AUC 分别为 0.339 和 0.595，方向相反但不 credible。这种 cell 与 bank/device 模式的反向差异可能反映误报来自局部可纠正事件、真故障来自更广泛退化。当前 base 特征模型未利用该交互，导致 trial_004 parallel 新增 7 个 FP，使 CV F1 提升概率仅 0.823 未达采纳标准。请求构造因果特征以在高分区域区分 TP 与 FP。",
+    "expected": "生成的因果特征（如 fault_mode_cell_1h 与 fault_mode_bank_1h/fault_mode_device_1h 的归一化比值）能在 TRAIN OOF 高分区域获得 TP/FP 的 bootstrap AUC 可信分离（区间不含0.5），并在后续模型中使用后降低误报，且召回损失很小，从而提高 CV F1。",
+    "falsification": "若该交互特征在 TRAIN OOF 高分区域 TP/FP 的 AUC 区间含 0.5，或特征实验的 CV F1 相对 trial_001 的提升概率低于 0.9 且点估计增益不超过 lower_bound，则证伪该假设。",
+    "hypothesis_id": "H10",
+    "target": "precision",
+    "job": "job_006"
+  }
+}

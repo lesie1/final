@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "params.min_child_weight": 1.0
+  },
+  "reason": "CV 中 19/25 个漏报有分数但低于阈值，说明模型可能欠拟合；当前 min_child_weight=50 限制叶子节点样本量，降低该参数可允许更复杂的局部边界，可能提高这些漏报样本的得分。",
+  "hypothesis": "降低 min_child_weight 可以减少树的复杂惩罚，使模型在少数故障设备上形成更精细的决策边界，从而提高漏报样本的得分，改善召回和 F1。",
+  "expected": "CV 中 FN 减少、TP 增加，F1 提升。",
+  "falsification": "若 CV 中 FN 未明显减少或 FP 大幅增加导致 F1 下降，则说明当前欠拟合并非主要矛盾。"
+}

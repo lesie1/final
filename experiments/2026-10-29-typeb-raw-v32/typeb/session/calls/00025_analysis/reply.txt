@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，哪些因果数值/raw特征能区分高分真故障(TP)与误报(FP)，以及漏报(FN)与正常(TN)？FN 中已及时打分但低于阈值的样本与无及时分数的样本在特征快照上有何差异？",
+  "reason": "trial_001 CV 目前 TP=9, FP=14, FN=25；其中 fn_scored_below_threshold=19，fn_no_timely_score=6。trial_003/trial_007 两次特征程序均未改善 CV，参数与 parallel/weight 对照也未达到采纳。需要 error_atlas 同时给出高分 TP/FP 与 FN/TN 的探索性单变量 AUC 证据和漏报原因分解，以定位下一步 features 请求，而不是继续盲试参数。"
+}

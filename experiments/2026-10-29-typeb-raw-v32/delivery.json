@@ -1,0 +1,47 @@
+{
+  "archive": "/root/autodl-tmp/typeb_raw_v32_20261029/publication/snapshot.zip",
+  "sha256": "43f182770b95c64003a10fbeed05938f0325de71c59b2c0c63104660315fd1a5",
+  "bytes": 5983814,
+  "files": 766,
+  "events": {
+    "events.jsonl": {
+      "lines": 55,
+      "counts": {
+        "preparation_started": 1,
+        "preparation_complete": 1,
+        "raw_typeb_search_started": 1,
+        "worker_finished": 48,
+        "batch_failed": 1,
+        "evaluation_infrastructure_repair": 1,
+        "raw_typeb_complete": 1,
+        "report_infrastructure_repair": 1
+      },
+      "sha256": "91e6f7f1d0d9d46bdb2e9902ce9cc3e6b194e6dcf8fcba115bc3e7e9282fc456"
+    },
+    "typeb/historical_test/events.jsonl": {
+      "lines": 7,
+      "counts": {
+        "test_models_frozen": 6,
+        "historical_test_scored": 1
+      },
+      "sha256": "116f5bed085240f07f18f1aacc20431db2efff190714acff22d43a478a9c8001"
+    },
+    "typeb/session/events.jsonl": {
+      "lines": 170,
+      "counts": {
+        "scheduler_step_complete": 45,
+        "agent_call": 47,
+        "training_started": 12,
+        "cross_validation_started": 11,
+        "experiment_complete": 12,
+        "hypotheses_recorded": 1,
+        "decision_accepted": 16,
+        "diagnostic_complete": 4,
+        "response_repair": 14,
+        "feature_prescreen": 6,
+        "controller_fallback": 2
+      },
+      "sha256": "cd3df4a310b0ba499dbbe6eb0dbdeb045db341152f439c62d88432e484fb6b77"
+    }
+  }
+}

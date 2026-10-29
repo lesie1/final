@@ -1,0 +1,55 @@
+{"at": "2026-10-29T09:39:16Z", "event": "preparation_started", "maximum_trials": 13}
+{"at": "2026-10-29T09:42:17Z", "event": "preparation_complete", "features": 135, "old_sessions_unchanged": true}
+{"at": "2026-10-29T09:43:54Z", "event": "raw_typeb_search_started", "max_trials": 13, "raw_features": 69, "base_features": 66, "historical_test_previously_exposed": true}
+{"at": "2026-10-29T09:44:04Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:45:14Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:47:25Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:47:35Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:50:15Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:50:25Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:51:35Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:52:55Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:53:05Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:53:45Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:55:35Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:56:35Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:58:15Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:58:25Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T09:59:36Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:00:46Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:00:56Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:02:36Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:04:36Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:04:46Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:05:56Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:08:26Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:10:26Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:11:56Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:14:17Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:16:37Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:17:57Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:18:57Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:19:07Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:20:07Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:21:27Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:22:47Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:25:07Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:26:28Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:27:58Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:29:08Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:29:18Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:31:38Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:33:08Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:34:28Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:37:18Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:37:28Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:38:39Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:40:09Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:40:19Z", "event": "worker_finished", "phase": "search", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:40:29Z", "event": "worker_finished", "phase": "confirmation", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:46:49Z", "event": "worker_finished", "phase": "historical_test", "exit_code": -15, "error": null}
+{"at": "2026-10-29T10:46:49Z", "event": "batch_failed", "error": "Worker failed; inspect historical_test.log"}
+{"at": "2026-10-29T10:47:23Z", "event": "evaluation_infrastructure_repair", "retraining": false, "threshold_reselection": false, "import_guard_test_passed": true}
+{"at": "2026-10-29T10:47:33Z", "event": "worker_finished", "phase": "historical_test_resumed", "exit_code": 0, "error": null}
+{"at": "2026-10-29T10:47:33Z", "event": "raw_typeb_complete", "old_sessions_unchanged": true, "publication_pending": true}
+{"at": "2026-10-29T10:49:07Z", "event": "report_infrastructure_repair", "training_and_test_unchanged": true}

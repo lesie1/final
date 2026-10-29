@@ -1,0 +1,77 @@
+{
+  "source": "C:\\Users\\38104\\Downloads\\stage1_csv.zip",
+  "sha256": "85c67e8d6466238ada5f19eadaa3f3693593f02bb214a8d8f21d4a6b875b52f5",
+  "bytes": 4015711644,
+  "typeb_files": 5821,
+  "typeb_uncompressed_bytes": 2491844609,
+  "rows": 15893056,
+  "time_range": [
+    1704038402,
+    1722441597
+  ],
+  "time_range_utc": [
+    "2023-12-31T16:00:02+00:00",
+    "2024-07-31T15:59:57+00:00"
+  ],
+  "schemas": [
+    {
+      "columns": [
+        "BankId",
+        "BankgroupId",
+        "Capacity",
+        "ChannelId",
+        "ColumnId",
+        "CpuId",
+        "DimmId",
+        "FrequencyMHz",
+        "LogTime",
+        "Manufacturer",
+        "MaxSpeedMHz",
+        "McaBank",
+        "MciAddr",
+        "Model",
+        "PN",
+        "RankId",
+        "RetryRdErrLog",
+        "RetryRdErrLogParity",
+        "RowId",
+        "burst_info",
+        "deviceID",
+        "error_type_full_name",
+        "memory_type",
+        "region"
+      ],
+      "rows": 15893056
+    }
+  ],
+  "null_counts": {
+    "BankId": 0,
+    "BankgroupId": 0,
+    "Capacity": 0,
+    "ChannelId": 0,
+    "ColumnId": 0,
+    "CpuId": 0,
+    "DimmId": 0,
+    "FrequencyMHz": 14280449,
+    "LogTime": 0,
+    "Manufacturer": 0,
+    "MaxSpeedMHz": 163948,
+    "McaBank": 0,
+    "MciAddr": 0,
+    "Model": 0,
+    "PN": 0,
+    "RankId": 0,
+    "RetryRdErrLog": 0,
+    "RetryRdErrLogParity": 0,
+    "RowId": 0,
+    "burst_info": 3918555,
+    "deviceID": 3918555,
+    "error_type_full_name": 0,
+    "memory_type": 0,
+    "region": 0
+  },
+  "raw_ticket_count": 68,
+  "raw_ticket_devices_present": 68,
+  "raw_ticket_devices_missing": [],
+  "purpose": "Input audit only; no model selection or TEST label feedback"
+}

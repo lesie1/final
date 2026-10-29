@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "high_score_contrast",
+  "question": "在 trial_004 的 TRAIN 设备分组 OOF 中，超过阈值的高分单元里，真故障(TP)与误报(FP)在哪些因果特征上存在可信 AUC 分离？特别关注误报是否由近期短时 CE 活动高但生命周期总量低或位图/多 DQ 模式不典型引起，以及是否存在可降低 FP 的交互特征。",
+  "reason": "trial_004 使用 parallel 后 CV F1=0.3582，较 best trial_001 提升 0.0424，但 P(better)=0.823 未达 0.9，新增 FP 7 个。需要在高分区域定位区分 TP 与 FP 的特征；若找到可信分离，可据此提出特征降低误报，使 parallel 变体或后续实验达到采纳标准。当前尚未使用诊断预算。"
+}

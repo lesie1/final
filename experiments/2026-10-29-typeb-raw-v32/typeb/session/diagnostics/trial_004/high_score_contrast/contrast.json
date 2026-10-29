@@ -1,0 +1,418 @@
+{
+  "kind": "high_score_contrast",
+  "step": 400,
+  "threshold": 0.9284823536872864,
+  "cv_metrics": {
+    "step": 400,
+    "f1": 0.3582089552238806,
+    "TP": 12,
+    "FP": 21,
+    "FN": 22,
+    "precision": 0.36363636363636365,
+    "recall": 0.35294117647058826,
+    "threshold": 0.9284823536872864
+  },
+  "tp_units": 12,
+  "fp_units": 21,
+  "group_counts": {
+    "TP": 12,
+    "FP": 21
+  },
+  "sampled_group_counts": {
+    "TP": 12,
+    "FP": 21
+  },
+  "features": [
+    {
+      "feature": "fault_mode_bank_1h",
+      "auc_tp_vs_fp": 0.3392857142857143,
+      "auc_positive_vs_negative": 0.3392857142857143,
+      "separation": 0.1607142857142857,
+      "positive_median": 0.0,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.18631238859180035,
+        0.5021823274764452
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_mode_others_1h",
+      "auc_tp_vs_fp": 0.6607142857142857,
+      "auc_positive_vs_negative": 0.6607142857142857,
+      "separation": 0.1607142857142857,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4851133241758242,
+        0.8014068429791271
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_life_max_cols_per_row",
+      "auc_tp_vs_fp": 0.3412698412698413,
+      "auc_positive_vs_negative": 0.3412698412698413,
+      "separation": 0.15873015873015872,
+      "positive_median": 4.0,
+      "negative_median": 7.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.17754067665289255,
+        0.5805113636363638
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_6h_distinct_chips",
+      "auc_tp_vs_fp": 0.6547619047619048,
+      "auc_positive_vs_negative": 0.6547619047619048,
+      "separation": 0.15476190476190477,
+      "positive_median": 1.5,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4665883458646617,
+        0.8004545454545456
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_24h_distinct_chips",
+      "auc_tp_vs_fp": 0.6547619047619048,
+      "auc_positive_vs_negative": 0.6547619047619048,
+      "separation": 0.15476190476190477,
+      "positive_median": 1.5,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4665883458646617,
+        0.8004545454545456
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_row_num_15m",
+      "auc_tp_vs_fp": 0.36706349206349204,
+      "auc_positive_vs_negative": 0.36706349206349204,
+      "separation": 0.13293650793650796,
+      "positive_median": 0.0,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.1519518849206349,
+        0.5589723743748513
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_7d_distinct_chips",
+      "auc_tp_vs_fp": 0.6309523809523809,
+      "auc_positive_vs_negative": 0.6309523809523809,
+      "separation": 0.13095238095238093,
+      "positive_median": 1.5,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4380728088336784,
+        0.8004545454545456
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_life_distinct_chips",
+      "auc_tp_vs_fp": 0.6309523809523809,
+      "auc_positive_vs_negative": 0.6309523809523809,
+      "separation": 0.13095238095238093,
+      "positive_median": 1.5,
+      "negative_median": 1.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4380728088336784,
+        0.8004545454545456
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_7d_events",
+      "auc_tp_vs_fp": 0.37103174603174605,
+      "auc_positive_vs_negative": 0.37103174603174605,
+      "separation": 0.12896825396825395,
+      "positive_median": 48.0,
+      "negative_median": 57.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.17974544394998943,
+        0.5670562770562771
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_mode_others_15m",
+      "auc_tp_vs_fp": 0.6190476190476191,
+      "auc_positive_vs_negative": 0.6190476190476191,
+      "separation": 0.11904761904761907,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.46751083768965956,
+        0.7725144230769231
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_mode_bank_15m",
+      "auc_tp_vs_fp": 0.3869047619047619,
+      "auc_positive_vs_negative": 0.3869047619047619,
+      "separation": 0.11309523809523808,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.22156862745098038,
+        0.5533872377622377
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_life_events",
+      "auc_tp_vs_fp": 0.3869047619047619,
+      "auc_positive_vs_negative": 0.3869047619047619,
+      "separation": 0.11309523809523808,
+      "positive_median": 48.0,
+      "negative_median": 57.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.18780329518965885,
+        0.5949097222222223
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_7d_bit_observed_events",
+      "auc_tp_vs_fp": 0.3869047619047619,
+      "auc_positive_vs_negative": 0.3869047619047619,
+      "separation": 0.11309523809523808,
+      "positive_median": 32.5,
+      "negative_median": 39.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.21000494071146245,
+        0.5925811157796453
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_life_bit_observed_events",
+      "auc_tp_vs_fp": 0.39285714285714285,
+      "auc_positive_vs_negative": 0.39285714285714285,
+      "separation": 0.10714285714285715,
+      "positive_median": 32.5,
+      "negative_median": 39.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.2103131469979296,
+        0.6041591775599129
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_life_scrub_share",
+      "auc_tp_vs_fp": 0.6031746031746031,
+      "auc_positive_vs_negative": 0.6031746031746031,
+      "separation": 0.10317460317460314,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.45375362318840584,
+        0.75
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_mode_cell_1h",
+      "auc_tp_vs_fp": 0.40476190476190477,
+      "auc_positive_vs_negative": 0.40476190476190477,
+      "separation": 0.09523809523809523,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.3333333333333333,
+        0.475
+      ],
+      "credible": true
+    },
+    {
+      "feature": "fault_mode_device_15m",
+      "auc_tp_vs_fp": 0.5952380952380952,
+      "auc_positive_vs_negative": 0.5952380952380952,
+      "separation": 0.09523809523809523,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4263236763236763,
+        0.7680283032185207
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_mode_device_1h",
+      "auc_tp_vs_fp": 0.5952380952380952,
+      "auc_positive_vs_negative": 0.5952380952380952,
+      "separation": 0.09523809523809523,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.4263236763236763,
+        0.7680283032185207
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fault_row_num_1h",
+      "auc_tp_vs_fp": 0.40476190476190477,
+      "auc_positive_vs_negative": 0.40476190476190477,
+      "separation": 0.09523809523809523,
+      "positive_median": 1.0,
+      "negative_median": 2.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.15611359126984128,
+        0.6014075413223141
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_6h_multi_dq_events",
+      "auc_tp_vs_fp": 0.4083333333333333,
+      "auc_positive_vs_negative": 0.4083333333333333,
+      "separation": 0.09166666666666667,
+      "positive_median": 0.0,
+      "negative_median": 5.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.047619047619047616,
+      "auc_interval_95": [
+        0.23808035714285714,
+        0.6035810680547523
+      ],
+      "credible": false
+    },
+    {
+      "feature": "burst_count_8_15m",
+      "auc_tp_vs_fp": 0.5873015873015873,
+      "auc_positive_vs_negative": 0.5873015873015873,
+      "separation": 0.08730158730158732,
+      "positive_median": 0.0,
+      "negative_median": 0.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.41663602941176475,
+        0.7593489240228372
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_6h_max_dq_count",
+      "auc_tp_vs_fp": 0.41458333333333336,
+      "auc_positive_vs_negative": 0.41458333333333336,
+      "separation": 0.08541666666666664,
+      "positive_median": 1.0,
+      "negative_median": 3.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.047619047619047616,
+      "auc_interval_95": [
+        0.23998015873015874,
+        0.6095647773279353
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_6h_max_beat_interval",
+      "auc_tp_vs_fp": 0.41458333333333336,
+      "auc_positive_vs_negative": 0.41458333333333336,
+      "separation": 0.08541666666666664,
+      "positive_median": 0.0,
+      "negative_median": 2.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.047619047619047616,
+      "auc_interval_95": [
+        0.22488726551226554,
+        0.6195202850877193
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_6h_events",
+      "auc_tp_vs_fp": 0.4146825396825397,
+      "auc_positive_vs_negative": 0.4146825396825397,
+      "separation": 0.08531746031746029,
+      "positive_median": 37.5,
+      "negative_median": 30.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.2453598484848485,
+        0.5996428571428573
+      ],
+      "credible": false
+    },
+    {
+      "feature": "raw_24h_events",
+      "auc_tp_vs_fp": 0.41865079365079366,
+      "auc_positive_vs_negative": 0.41865079365079366,
+      "separation": 0.08134920634920634,
+      "positive_median": 41.5,
+      "negative_median": 32.0,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.23780048076923077,
+        0.6009920634920636
+      ],
+      "credible": false
+    }
+  ],
+  "credible_features": [
+    "fault_mode_cell_1h"
+  ],
+  "eligible_units": 35784,
+  "error_counts": {
+    "TP": 12,
+    "FP": 21,
+    "FN": 22,
+    "TN": 35729,
+    "fn_no_timely_clock": 0,
+    "fn_no_timely_score": 6,
+    "fn_scored_below_threshold": 16,
+    "fn_with_outside_window_alarm": 0,
+    "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+  },
+  "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+}

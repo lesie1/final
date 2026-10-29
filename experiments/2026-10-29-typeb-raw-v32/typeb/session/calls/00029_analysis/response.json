@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，高于阈值 0.9396138787269592 的高分单元里，真故障 TP=9 与误报 FP=14 在哪些特征上差异最大？哪些特征有助于在不损失真故障命中的前提下降低高分误报？",
+  "reason": "best trial_001 的 CV F1 仅 0.3158，其中高分误报 FP=14、高分真故障 TP=9。trial_004 parallel 虽增加 3 个命中，但新增 7 个误报，概率 0.823 未达 0.9；trial_003/007/008 的召回向特征未能改善 F1。当前应先定位高分 TP/FP 的可区分特征，为下一次以 precision 为目标的特征提出提供证据，而不是继续盲目调参或增加召回特征。"
+}
