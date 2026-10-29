@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "missed_fault_contrast",
-  "question": "在最佳模型 trial_001 的 TRAIN 交叉验证漏报单元中，哪些候选特征快照能把“已有及时分数但低于阈值”的 FN 与健康 TN 区分开？特别是 21 个已打分但不足阈值的故障单元相对正常单元，在 CE 计数、突发次数、log 频率、fault mode/row/column 等特征上是否有可识别的方向性差异？",
-  "reason": "最佳模型 trial_001 的 CV 中有 27 个 FN，其中 21 个已有及时分数但低于阈值，6 个无及时分数；已尝试 min_child_weight、learning_rate、device 权重、parallel 分支以及两个特征程序均未改善。应优先从漏报侧寻找可分离特征，而不是继续调参。该诊断将直接指导下一轮 features 动作。"
-}

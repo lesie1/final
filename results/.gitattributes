@@ -1,0 +1,2 @@
+# Keep result files byte-identical so the SHA-256 receipts in complete.json stay valid
+* -text

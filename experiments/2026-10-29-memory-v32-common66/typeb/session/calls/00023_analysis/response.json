@@ -1,9 +1,0 @@
-{
-  "action": "diagnose",
-  "diagnose": {
-    "parent": "trial_001",
-    "kind": "error_atlas",
-    "question": "在 TRAIN 设备分组的交叉验证 OOF 单元中，哪些因果特征能够分别区分高分误报 FP 与高分真故障 TP，以及漏报 FN 与健康 TN？FN 中有多少属于无及时预测时刻、有预测时刻但无及时分数、有分数但低于阈值？",
-    "reason": "FP高且FN多，需定位漏报原因和高分误报可分离特征。"
-  }
-}

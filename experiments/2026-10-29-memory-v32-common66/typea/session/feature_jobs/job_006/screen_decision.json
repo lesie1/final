@@ -1,5 +1,0 @@
-{
-  "train": true,
-  "route": "evidence",
-  "reason": "Univariate diagnostic signal; verify in a model control"
-}

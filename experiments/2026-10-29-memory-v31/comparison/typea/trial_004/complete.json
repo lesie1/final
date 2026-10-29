@@ -1,9 +1,0 @@
-{
-  "files": {
-    "devices_test.csv": "ce6686c75b06a868a3c9155977b6d17ddcd94b2f275c91e20607e2590cbb1343",
-    "report_test.json": "32e52133e8abc3133b12716ad8811a6852acddd5dff4abb49cb8f9f22191d150",
-    "input_audit.json": "ae24080a93852b090b976754c97c568b1f6f5102c42254d71f1c906edd7daaa5"
-  },
-  "source_search_preserved": true,
-  "release_code_unchanged": true
-}

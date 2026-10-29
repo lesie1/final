@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "high_score_contrast",
-  "question": "在 TRAIN CV 中超过阈值的高分单元里，真故障（TP）与误报（FP）在哪些 CE 计数、burst/DQ 计数、时间间隔或滚动变化特征上存在 AUC 显著偏离 0.5 的差异，以解释高事件量健康设备为何被给予高分？",
-  "reason": "best trial_001 的 CV FP=17、precision=0.2917；trial_010 以及多个参数、权重、parallel 对照均未能在 CV 配对检验下提升，且误报多而参数对照无效。需要 high_score_contrast 定位高分 TP 与 FP 的可分特征，为下一步特征或实验提供证据。"
-}

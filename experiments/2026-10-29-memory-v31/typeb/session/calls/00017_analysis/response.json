@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "在 baseline trial_001 的 TRAIN OOF 中，FN=27（其中 fn_scored_below_threshold=21、fn_no_timely_score=6），FP=17。请同时返回高分 TP/FP 与 FN/TN 的因果特征单变量 AUC，重点看 H1（CE计数）、H6（burst/DQ间隔）、H7（CE风暴）和 H2（单DQ）相关量，以确定下一个 feature 请求应针对漏报还是误报，以及哪个假设有探索性证据。",
-  "reason": "parallel 分支未改变 CV 结果，设备权重对照失败；需要从错例证据中选择下一组特征，避免继续盲目调参。已有误差计数显示主要漏报是低分而非缺失分数，但缺少 FN 与 TN、TP 与 FP 的特征分隔证据。error_atlas 一次返回两组对比，符合当前诊断预算。"
-}

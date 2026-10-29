@@ -1,0 +1,337 @@
+{
+  "session": "typea_v3.2/session",
+  "domain": "memory",
+  "status": "trial_budget_complete",
+  "wall_clock_hours": 5.097777777777778,
+  "policy": {
+    "acceptance": "cv_paired",
+    "accept_test": "probability",
+    "accept_probability": 0.9,
+    "accept_require_net_hits": false,
+    "operating_point": "cv_oof",
+    "max_trials": 13,
+    "cv_folds": 5
+  },
+  "trials": [
+    {
+      "trial": "trial_001",
+      "status": "complete",
+      "parent": null,
+      "reason": "baseline",
+      "accepted": true,
+      "rule": "baseline",
+      "probability_better": null,
+      "cv_delta_f1": null,
+      "selection_f1": 0.10101010101010101,
+      "cv_f1": 0.14123006833712984,
+      "cv_TP": 62,
+      "cv_FP": 544,
+      "cv_FN": 210
+    },
+    {
+      "trial": "trial_002",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "基线 max_depth=4，CV 中 197 个 FN 属于已有分数但低于阈值，missed_fault_contrast 显示地址集中度等特征有强分离，但当前浅树难以捕捉交互。单因素提高深度以增强对漏报特征的非线性利用。",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.095,
+      "cv_delta_f1": -0.018563401670463178,
+      "selection_f1": 0.12121212121212122,
+      "cv_f1": 0.12266666666666666,
+      "cv_TP": 46,
+      "cv_FP": 432,
+      "cv_FN": 226
+    },
+    {
+      "trial": "trial_003",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 TRAIN 交叉验证中，漏报 FN 与正常 TN 在 raw_life_distinct_cols/cells、raw_life_max_cols_per_row 等 H4 字段上存在强分离（AUC 约 0.79-0.80），但当前模型仍将 197 个及时有分数的故障单",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.249,
+      "cv_delta_f1": -0.005998751611151182,
+      "selection_f1": 0.12173913043478261,
+      "cv_f1": 0.13523131672597866,
+      "cv_TP": 57,
+      "cv_FP": 514,
+      "cv_FN": 215
+    },
+    {
+      "trial": "trial_004",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "当前最佳仍为基线 trial_001，CV 中 FP=544、FN=210；trial_003 针对 FN/TN 分离的特征对照未提升 CV F1（P(better)=0.249），trial_002 调大 max_depth 也无效。基线使用 sample 权重，事件丰富的设备会在训练损失中占更高比例，而评估 pro",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.776,
+      "cv_delta_f1": 0.01376248009804154,
+      "selection_f1": 0.18633540372670807,
+      "cv_f1": 0.15499254843517138,
+      "cv_TP": 52,
+      "cv_FP": 347,
+      "cv_FN": 220
+    },
+    {
+      "trial": "trial_005",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "当前最佳仍为 trial_001，其 CV 中 FP=544、FN=210；trial_004 仅改 base_weight=device 未达采纳标准（P(better)=0.776，CV F1 增益 0.0138）。FN 中 197/210 属于已有及时分数但低于阈值，trial_002 增深未能提升。scope.",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.62,
+      "cv_delta_f1": 0.0019517498446883497,
+      "selection_f1": 0.1188118811881188,
+      "cv_f1": 0.1431818181818182,
+      "cv_TP": 63,
+      "cv_FP": 545,
+      "cv_FN": 209
+    },
+    {
+      "trial": "trial_006",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 故障设备在故障前窗口是否表现出突发风暴的近期加速（如 burst_count_*_1h、ce_storm_count_15m/1h 相对前 7 天均值的增量或比值），而误报设备只有历史突发但近期已减弱或平稳？用这些特征能否区分高分真故障与高分误报。",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.209,
+      "cv_delta_f1": -0.010674512781574275,
+      "selection_f1": 0.10256410256410256,
+      "cv_f1": 0.13055555555555556,
+      "cv_TP": 47,
+      "cv_FP": 401,
+      "cv_FN": 225
+    },
+    {
+      "trial": "trial_007",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "trial_004 仅将 base_weight 改为 device 后，CV F1 从最佳 trial_001 的 0.1412 提升到 0.1550，选择窗口 F1 从 0.1010 提升到 0.1863，但 P(better)=0.776 未达 0.9；其 CV 混淆矩阵为 TP=52/FP=347/FN=220",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.776,
+      "cv_delta_f1": 0.01376248009804154,
+      "selection_f1": 0.18633540372670807,
+      "cv_f1": 0.15499254843517138,
+      "cv_TP": 52,
+      "cv_FP": 347,
+      "cv_FN": 220
+    },
+    {
+      "trial": "trial_008",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: 在 trial_007 的 TRAIN 交叉验证中，FN=220，其中 207 个单元已有及时分数但低于阈值。missed_fault_contrast 显示 FN 与 TN 相比，raw_7d_distinct_cols、raw_7d_distinct_cells、raw",
+      "accepted": true,
+      "rule": "cv_paired",
+      "probability_better": 0.932,
+      "cv_delta_f1": 0.020992153885092374,
+      "selection_f1": 0.1834862385321101,
+      "cv_f1": 0.1622222222222222,
+      "cv_TP": 73,
+      "cv_FP": 555,
+      "cv_FN": 199
+    },
+    {
+      "trial": "trial_009",
+      "status": "complete",
+      "parent": "trial_008",
+      "reason": "Feature-only contrast: 在高分 TP 与 FP 之间，能否用“近期新增模式速率 × 短时突发/risky 事件强度”识别真故障：真故障是否有更高的近期新增模式速率，且同时伴随更明显的近期 burst/risky 事件，而误报则主要是历史事件总量高但近期新异性和突发强度较低？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.82,
+      "cv_delta_f1": 0.010085470085470088,
+      "selection_f1": 0.19736842105263158,
+      "cv_f1": 0.1723076923076923,
+      "cv_TP": 56,
+      "cv_FP": 322,
+      "cv_FN": 216
+    },
+    {
+      "trial": "trial_010",
+      "status": "complete",
+      "parent": "trial_009",
+      "reason": "Feature-only contrast: 能否构造因果特征，同时利用“近期新增模式速率/新列占比”与“地址/列扩散强度”，并用生命周期事件总量进行归一化或交互，来区分高分真故障与历史事件总量驱动的误报，同时提高对已有及时分数但低于阈值的分散扩散故障的召回？例如：fe_recent_new_pattern_rate ",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.345,
+      "cv_delta_f1": -0.004484126984126979,
+      "selection_f1": 0.1875,
+      "cv_f1": 0.15773809523809523,
+      "cv_TP": 53,
+      "cv_FP": 347,
+      "cv_FN": 219
+    },
+    {
+      "trial": "trial_011",
+      "status": "complete",
+      "parent": "trial_009",
+      "reason": "trial_009 单阶段 CV F1=0.1723，高于 best trial_008 的 0.1622，但 P(better)=0.82 未达 0.9；其混淆矩阵为 TP=56/FP=322/FN=216，FN 中 203 个属于已有及时分数但低于阈值。trial_010 继续叠加归一化交互特征后 CV F1 降至",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.82,
+      "cv_delta_f1": 0.010085470085470088,
+      "selection_f1": 0.19736842105263158,
+      "cv_f1": 0.1723076923076923,
+      "cv_TP": 56,
+      "cv_FP": 322,
+      "cv_FN": 216
+    },
+    {
+      "trial": "trial_012",
+      "status": "complete",
+      "parent": "trial_009",
+      "reason": "trial_009 的 TRAIN OOF 中 FN=216，其中 203 个单元已有及时分数但低于阈值；当前 min_child_weight=50 可能限制了模型对少数故障设备的细粒度分裂，导致分散扩散/近期新增模式故障得分不足。单因素降低 min_child_weight 到 10，尝试提高这类少数故障的召回，同",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.461,
+      "cv_delta_f1": -0.0014182021217196972,
+      "selection_f1": 0.19047619047619047,
+      "cv_f1": 0.16080402010050251,
+      "cv_TP": 64,
+      "cv_FP": 460,
+      "cv_FN": 208
+    },
+    {
+      "trial": "trial_013",
+      "status": "complete",
+      "parent": "trial_009",
+      "reason": "Feature-only contrast: 在已有及时分数但低于阈值的漏报样本中，近期相邻 DQ 事件、多 beat 事件以及 DQ/beat 间隔是否与分散扩散特征互补，区分漏报故障与正常设备？具体地，故障前是否出现相邻 DQ/多 beat 事件在近期窗口的上升，同时伴随 fe_spread_error_inten",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.788,
+      "cv_delta_f1": 0.007712418300653612,
+      "selection_f1": 0.19736842105263158,
+      "cv_f1": 0.16993464052287582,
+      "cv_TP": 78,
+      "cv_FP": 568,
+      "cv_FN": 194
+    }
+  ],
+  "completed": 13,
+  "accepted": [
+    "trial_008"
+  ],
+  "baseline": "trial_001",
+  "best": "trial_008",
+  "agent": {
+    "calls": 45,
+    "calls_by_role": {
+      "code": 13,
+      "feature": 7,
+      "analysis": 25
+    },
+    "total_tokens": 888852,
+    "prompt_tokens": 757573,
+    "completion_tokens": 131279
+  },
+  "autonomy": {
+    "event_counts": {
+      "v32_session_initialized": 1,
+      "scheduler_step_complete": 55,
+      "agent_call": 45,
+      "training_started": 13,
+      "cross_validation_started": 13,
+      "experiment_complete": 13,
+      "hypotheses_recorded": 1,
+      "decision_accepted": 20,
+      "diagnostic_complete": 8,
+      "response_repair": 5,
+      "feature_prescreen": 6
+    },
+    "manual_interventions": 0,
+    "agent_decisions": 20,
+    "controller_fallbacks": 0,
+    "response_repairs": 5,
+    "agent_decision_share": 1.0,
+    "note": "manual_interventions counts recorded limit changes only; session setup and restarts outside the loop are not logged as events."
+  },
+  "target": null,
+  "models": {
+    "trial_001": {
+      "trial": "trial_001",
+      "operating_point": {
+        "source": "cv_oof",
+        "step": 250,
+        "threshold": 0.9146937727928162
+      },
+      "model_file": "model_full.ubj",
+      "model_file_bytes": 685015,
+      "complexity": {
+        "trees": 250,
+        "nodes": 7742,
+        "leaves": 3996,
+        "split_nodes": 3746,
+        "max_depth": 4,
+        "input_features": 164
+      },
+      "model_only_latency": {
+        "batch_1": {
+          "median_ms": 0.11235350393690169,
+          "per_row_us": 112.35350393690169
+        },
+        "batch_1000": {
+          "median_ms": 2.5400825034012087,
+          "per_row_us": 2.5400825034012087
+        },
+        "batch_10000": {
+          "median_ms": 25.79746900300961,
+          "per_row_us": 2.579746900300961
+        }
+      },
+      "recorded_training_timings_seconds": {
+        "data_verification": 2.294945865869522,
+        "feature_and_matrix_seconds": 43.706889890134335,
+        "boost_updates_seconds": 2.1379558742046356,
+        "validation_prediction_seconds": 237.60945811867714,
+        "total_seconds": 287.81181559711695
+      }
+    },
+    "trial_008": {
+      "trial": "trial_008",
+      "operating_point": {
+        "source": "cv_oof",
+        "step": 250,
+        "threshold": 0.9307740926742554
+      },
+      "model_file": "model_full.ubj",
+      "model_file_bytes": 672825,
+      "complexity": {
+        "trees": 250,
+        "nodes": 5480,
+        "leaves": 2865,
+        "split_nodes": 2615,
+        "max_depth": 4,
+        "input_features": 168
+      },
+      "model_only_latency": {
+        "batch_1": {
+          "median_ms": 0.12350700126262382,
+          "per_row_us": 123.50700126262382
+        },
+        "batch_1000": {
+          "median_ms": 2.6844604944926687,
+          "per_row_us": 2.6844604944926687
+        },
+        "batch_10000": {
+          "median_ms": 25.630328003899194,
+          "per_row_us": 2.5630328003899194
+        }
+      },
+      "recorded_training_timings_seconds": {
+        "data_verification": 4.236795142292976,
+        "feature_and_matrix_seconds": 43.26667755097151,
+        "boost_updates_seconds": 2.6479209885001183,
+        "validation_prediction_seconds": 430.57577934861183,
+        "total_seconds": 483.45511144399643
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpus": 1
+  }
+}

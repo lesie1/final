@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_010",
-  "kind": "missed_fault_contrast",
-  "question": "在 trial_010 的 TRAIN 设备分组交叉验证留出设备上，哪些因果特征能稳定区分已有及时分数但低于阈值的漏报单元（FN）与健康单元（TN）？特别关注低分漏报设备是否在 raw_life_*、burst/dq 结构或近期新增模式上存在可组合但单变量不强的差异。",
-  "reason": "trial_010 的 CV 漏报为 203，其中 190 属于已有分数但低于阈值；当前仅有 high_score_contrast，只能解释高分 TP/FP，不能说明低分漏报与健康设备的差异。若不加此诊断就提特征，将缺少 FN/TN 方向证据。诊断用于定位下一次特征或组合分支，不改变模型输入。"
-}

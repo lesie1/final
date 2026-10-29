@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "在 trial_001 的 TRAIN 交叉验证留出设备上：高分 TP 与 FP 之间，以及 fn_scored_below_threshold 与 TN 之间，哪些特征具有可区分方向？同时复核 6 个 fn_no_timely_score 的覆盖缺口。",
-  "reason": "当前 best CV 中 TP=7、FP=17、FN=27；FN 中 21 个已有分数但低于阈值、6 个无及时分数。后续只剩 3 个 trial，且已有 4 个特征请求未见稳定 CV 提升，需要错误对比证据来定位是优先降 FP 还是找回漏报，避免盲目试参或再试低效特征。"
-}

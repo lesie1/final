@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "在 best baseline trial_001 的 TRAIN 分组交叉验证 out-of-fold 上：(1) 高分 TP 与误报 FP 在哪些已有特征上可区分？(2) 21 个有分数但低于阈值的 FN 与正常 TN 在哪些特征上可区分？(3) 6 个无及时分数的 FN 与可调度样本在覆盖或观测间隔上有何差异？",
-  "reason": "best baseline 的 CV F1 仅 0.241：27 个 FN 中 21 个已有分数但低于 0.9905 阈值，6 个无及时分数，同时有 17 个 FP。trial_002 降低 min_child_weight 未改善，trial_003 读路径 CE 特征被选择窗口筛除。当前尚无可用的诊断证据。先通过 error_atlas 得到高分区 TP/FP 与 FN/TN 的错例对比以及 FN 原因分解，定位下一步应优先处理高分区误报、低分漏报还是覆盖问题，再据此提出对应特征或参数/权重实验，避免继续盲目尝试。"
-}
