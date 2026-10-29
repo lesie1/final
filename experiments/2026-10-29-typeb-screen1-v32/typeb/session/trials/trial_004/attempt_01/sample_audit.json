@@ -1,0 +1,48 @@
+{
+  "sampling": {},
+  "training_samples": 317553,
+  "positive_samples": 2461,
+  "sample_membership_sha256": "137896c61842dcb53128990f0845a9959ee14efbad7b5b882cb66f6a61c6fa1f",
+  "training_devices": 2825,
+  "positive_devices": 38,
+  "candidate_samples_in_train_interval": 347757,
+  "eligible_no_history_samples": 0,
+  "excluded_maturity_or_lead_samples": 30204,
+  "weighted_class_ratio": 128.03413246647705,
+  "positive_weight": 128.03413246647705,
+  "estimated_matrix_ram_gib": 0.5812335908412933,
+  "base_weight_audit": {},
+  "weight_definition": "each sample = 1",
+  "parallel": {
+    "primary_model_sha256": "98411447bedfe6fa67cf433351b15311e283b1cd63b90d4f0220216705d8bd16",
+    "fusion": "max",
+    "branch_recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "sqrt_ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 2,
+        "min_child_weight": 1.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "all_training_rows": true,
+    "device_weight_total": 1.0,
+    "feature_importance": "auxiliary only",
+    "note": "Generic shallow branch, not raw-event rule-tree reproduction"
+  }
+}

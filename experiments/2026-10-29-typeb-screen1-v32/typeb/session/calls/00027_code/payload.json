@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "e287a189af64b55a00ca569d85a4fe51cb1b68f1afcc4869d4b686141db518d4",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'e287a189af64b55a00ca569d85a4fe51cb1b68f1afcc4869d4b686141db518d4', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 trial_001 的 missed_fault_contrast 中，漏报故障单元（FN，尤其已有及时分数但低于阈值）与正常单元相比，raw_24h_distinct_cols、raw_7d_distinct_cols、raw_6h_distinct_cols 等列多样性指标是否更高？能否通过构造这些指标的因果特征（如与事件量的比值、近期变化）来提升模型对低分故障样本的召回？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 trial_001 的 missed_fault_contrast 中，漏报故障单元（FN，尤其已有及时分数但低于阈值）与正常单元相比，raw_24h_distinct_cols、raw_7d_distinct_cols、raw_6h_distinct_cols 等列多样性指标是否更高？能否通过构造这些指标的因果特征（如与事件量的比值、近期变化）来提升模型对低分故障样本的召回？",
+    "reason": "已有 missed_fault_contrast 证据显示：raw_24h_distinct_cols 的 AUC 为 0.822（FN 中位数 4 vs TN 1），raw_7d_distinct_cols AUC 0.816（FN 6 vs TN 1），raw_6h_distinct_cols AUC 0.810（FN 4 vs TN 1），区间均不含 0.5。这些特征在漏报故障中明显更高，可能反映行/列相关故障模式，但当前 base 模型未显式利用这些 raw 描述符。本特征请求针对该可区分行为，目标提高召回。",
+    "expected": "加入列多样性相关因果特征后，模型能更有效地提高低分故障设备的得分，在 TRAIN OOF 上召回率提升，CV F1 改善。",
+    "falsification": "若加入特征后 CV 上漏报故障单元的得分无明显提升，或误报大幅增加导致 F1 不升反降，则该方向无效。",
+    "hypothesis_id": "H3",
+    "target": "recall",
+    "job": "job_005"
+  }
+}

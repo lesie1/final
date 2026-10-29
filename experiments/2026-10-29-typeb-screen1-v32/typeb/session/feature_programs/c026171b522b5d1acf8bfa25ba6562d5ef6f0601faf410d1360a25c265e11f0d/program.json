@@ -1,0 +1,67 @@
+{
+  "id": "c026171b522b5d1acf8bfa25ba6562d5ef6f0601faf410d1360a25c265e11f0d",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    new_col_share = frame['raw_life_new_cols_7d'] / (frame['raw_life_distinct_cols'] + 1)\n    new_row_share = frame['raw_life_new_rows_7d'] / (frame['raw_life_distinct_rows'] + 1)\n    pattern_per_7d_event = frame['raw_life_new_patterns_7d'] / (frame['raw_7d_events'] + 1)\n    pattern_vs_life_event = frame['raw_life_new_patterns_7d'] / (frame['raw_life_events'] + 1)\n    return pd.DataFrame({'fe_new_col_share_7d': new_col_share, 'fe_new_row_share_7d': new_row_share, 'fe_pattern_per_7d_event': pattern_per_7d_event, 'fe_pattern_vs_life_event': pattern_vs_life_event}, index=frame.index)",
+    "features": [
+      "fe_new_col_share_7d",
+      "fe_new_row_share_7d",
+      "fe_pattern_per_7d_event",
+      "fe_pattern_vs_life_event"
+    ]
+  },
+  "reason": "H7 假设 7 天内新增行/列/模式反映活跃缺陷扩展。原始 raw_life_new_cols_7d、raw_life_new_rows_7d、raw_life_new_patterns_7d 已存在，但低分漏报中可能被设备总规模或事件量掩盖。这里构造份额和密度特征：新列数/历史总列数、新行数/历史总行数、新模式数/近 7 天事件数、新模式数/全生命周期事件数，旨在更稳定地捕捉当前新位置的活跃扩展。若这些特征能提高低分故障设备得分并在 CV 中减少 FN，则支持 H7；反之若与误报同升或无分离，则否定该特征表达。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32756
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 21,
+      "finite_values": 42
+    },
+    {
+      "rows": 537,
+      "finite_values": 1074
+    }
+  ],
+  "sample_validation_seconds": 0.12965036183595657,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

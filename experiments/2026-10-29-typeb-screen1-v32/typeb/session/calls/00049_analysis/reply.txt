@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_001 的 TRAIN 设备分组 OOF 中，已获得及时分数但低于阈值的 19 个 FN 单元与 TN 正常单元相比，哪些因果特征（特别是错误空间分布、错误量、突发性和新出现模式相关特征）能够区分这两组？",
+  "reason": "当前 best=trial_001 的 CV 指标为 FN=25，其中 19 个属于 scored_below_threshold，6 个属于 no_timely_score。已有的 high_score_contrast 仅描述高分区 TP 与 FP 的差异，无法覆盖低分漏报群体。需要 missed_fault_contrast 来定位能提高这些低分故障样本得分的可用特征，为最后一个实验提供依据。"
+}

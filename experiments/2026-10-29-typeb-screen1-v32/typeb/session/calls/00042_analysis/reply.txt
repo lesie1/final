@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "漏报故障设备在故障前窗口内是否表现出 CE 事件量或不同列/单元数量的加速增长，而不仅是绝对值偏高？例如 raw_7d_events 的短期增量、raw_24h_distinct_cols 与 raw_7d_distinct_cols 的比值、raw_6h_events 与 raw_24h_events 的比值，能否更好地区分已有及时分数但低于阈值的 FN 与正常 TN？",
+  "reason": "trial_011 的 missed_fault_contrast 显示，漏报故障设备与正常设备相比，raw_6h_events、raw_24h_events、raw_7d_events、raw_6h_distinct_cols、raw_24h_distinct_cols、raw_7d_distinct_cols 等特征的 AUC 均大于 0.8，且置信区间不含 0.5，表明这些量有单变量可分证据。但之前直接使用原始计数（trial_005、trial_008）未有效提升 CV F1，可能因为模型难以利用饱和的绝对计数。请求构造反映近期速度/相对变化的新特征，以增强对低分漏报故障单元的召回，同时尽量不增加高分区误报。",
+  "expected": "新特征应提高漏报故障设备的预测分数，使 CV 中 fn_scored_below_threshold 减少，同时新增误报数量可控，整体 CV F1 相对 trial_001 提升并可能通过概率接受检验。",
+  "falsification": "如果新特征在 missed_fault_contrast 中 AUC 区间仍含 0.5，或特征对照实验的 CV F1 未超过 trial_001 且概率不满足采纳条件，则本次特征假设被证伪。",
+  "hypothesis_id": "H1",
+  "target": "balanced"
+}

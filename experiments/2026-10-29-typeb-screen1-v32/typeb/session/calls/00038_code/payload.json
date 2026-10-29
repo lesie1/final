@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.05,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'parallel', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.05, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "依据已有试验记录：trial_004 从 trial_001 增加 parallel 分支，CV F1 从 0.3158 升至 0.3582（+0.0424），新增3个命中但也增加7个误报，paired bootstrap P(better)=0.823，接近但未达0.9。trial_010 使用 learning_rate=0.05，CV F1=0.3214，FP=13（比 trial_001 少1），TP=9 相同；其低学习率主分支可能产生不同分数分布。在 trial_010 单阶段父模型上仅添加 parallel 分支，分支仍在全部训练行上训练独立浅层设备均衡XGBoost并与父模型max融合，评估是否能进一步提高低分漏报召回并超过 best。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_010",
+    "changes": {
+      "rerank": "parallel"
+    },
+    "reason": "依据已有试验记录：trial_004 从 trial_001 增加 parallel 分支，CV F1 从 0.3158 升至 0.3582（+0.0424），新增3个命中但也增加7个误报，paired bootstrap P(better)=0.823，接近但未达0.9。trial_010 使用 learning_rate=0.05，CV F1=0.3214，FP=13（比 trial_001 少1），TP=9 相同；其低学习率主分支可能产生不同分数分布。在 trial_010 单阶段父模型上仅添加 parallel 分支，分支仍在全部训练行上训练独立浅层设备均衡XGBoost并与父模型max融合，评估是否能进一步提高低分漏报召回并超过 best。",
+    "hypothesis": "trial_010 的主分支与独立设备均衡 parallel 分支对低分故障样本具有互补性，能够提高设备分组 CV F1，并使相对 best trial_001 的 paired bootstrap P(better) 达到 0.9 以上。",
+    "expected": "CV F1 可能超过 trial_010 的 0.3214，并有机会达到或超过 trial_004 的 0.3582；paired bootstrap vs trial_001 的 P(better) 提升，新增命中增加且新增误报相对可控。",
+    "falsification": "若 CV F1 相对 best trial_001 没有超过 0，或 paired bootstrap P(better)<0.9，或新增误报过多导致 CV F1 下降，则该实验不能被接受。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.05,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN OOF 中，超过阈值的高分单元里，真故障(TP)与误报(FP)在哪些可用的 raw_* / burst / DQ / spatial 特征上存在可信的 AUC 区分？特别关注 H5 的 adjacent_dq/multi_dq 与 H6 的 burst/storm 字段是否能识别健康设备的高分误报。",
+  "reason": "当前 best=trial_001 在 CV 上有 TP9、FP14、FN25；多个针对低分漏报的特征对照（trial_005、006、007、008）均未提升 CV F1，且 trial_008 增加了 6 个新误报。需要转向高分区误报：若某些特征能区分 TP 与 FP，可据此提出 precision/balanced 特征程序，减少 FP 而不损失 TP。使用尚未使用的高分对比诊断，避免继续在低分漏报方向上消耗预算。"
+}

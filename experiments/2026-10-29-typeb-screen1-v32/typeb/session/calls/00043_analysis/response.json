@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_011",
+  "changes": {
+    "params.max_depth": 6
+  },
+  "reason": "trial_011 的 missed_fault_contrast 显示，FN 与 TN 在 raw_6h_distinct_cols、raw_24h_distinct_cols、raw_6h_events、raw_24h_events、raw_7d_events 等特征上 AUC 均大于 0.8 且置信区间不含 0.5，说明漏报故障设备存在未被当前模型充分利用的信号。当前主分支 max_depth=4 可能不足以捕捉这些特征之间以及时间窗口之间的非线性交互，而 trial_011 的 parallel 分支仍为浅层模型，主分支深度增加属于单因素调整。提高主分支复杂度有望提升对低分故障样本的召回，同时 parallel 分支继续提供设备均衡的低分补充。",
+  "hypothesis": "增加主分支 max_depth 到 6 能够更好地拟合 FN 与 TN 之间已有的高 AUC 特征交互，提高故障设备得分，减少 fn_scored_below_threshold，同时新增误报数量可控，最终使 CV F1 相对 trial_001 提升并达到 P(better) >= 0.9。",
+  "expected": "CV 中 TP 增加、FN 减少，FP 略有增加或不增加，CV F1 相对 trial_011 进一步提高，paired bootstrap P(better) 相对 best=trial_001 达到 0.9 以上。",
+  "falsification": "如果 CV F1 相对 trial_011 没有提升，或 FP 大幅增加导致 F1 下降，或 P(better) < 0.9，则假设被证伪。"
+}

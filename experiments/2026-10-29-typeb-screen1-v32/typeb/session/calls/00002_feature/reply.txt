@@ -1,0 +1,92 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Higher recent and lifetime correctable error volume indicates active DRAM cell/array wearout or latent defect growth before uncorrectable failure.",
+      "basis": "Field fault-prediction studies and DRAM error logs: CE rate commonly rises prior to UE or module failure.",
+      "fields": ["raw_24h_events", "raw_7d_events", "raw_life_events", "all_ce_count_15m", "all_ce_count_1h"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show higher recent or lifetime CE event counts than healthy devices over equivalently observed periods."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Strong spatial concentration of errors at a single cell reveals a weak cell likely to become a permanent fault.",
+      "basis": "DRAM cell reliability: repeated errors at the same address indicate localized defect growth rather than random soft errors.",
+      "fields": ["raw_life_top_cell_share"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Top-cell concentration is not higher in pre-fault periods than in healthy devices, or distributed errors are equally predictive."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Row/column correlated error signatures expose wordline, bitline, or column decoder faults spanning multiple cells.",
+      "basis": "DRAM array organization: row and column faults produce multiple errors along the same row or column.",
+      "fields": ["fault_row_num_15m", "fault_row_num_1h", "fault_column_num_15m", "fault_column_num_1h", "raw_life_max_cols_per_row", "raw_life_max_rows_per_col"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices show no increase in row/column correlated errors or per-row/per-column spread relative to healthy devices."
+    },
+    {
+      "id": "H4",
+      "mechanism": "More error bits per CE indicates a more severe multi-bit defect less likely to remain correctable.",
+      "basis": "ECC correctability limits: multi-bit CEs reflect larger physical damage and are closer to uncorrectable errors.",
+      "fields": ["error_bit_count_15m", "error_bit_count_1h", "raw_6h_max_err_bits", "raw_24h_max_err_bits", "raw_7d_max_err_bits", "raw_life_max_err_bits"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Maximum error bits per CE is not elevated in failing devices or does not discriminate from healthy transient CEs."
+    },
+    {
+      "id": "H5",
+      "mechanism": "CEs spanning multiple DQ lanes or adjacent lanes indicate data-bus, I/O, or on-die interconnect damage rather than isolated cell failure.",
+      "basis": "DRAM data path: DQ lane and adjacent-lane errors suggest physical damage beyond a single storage cell.",
+      "fields": ["raw_6h_adjacent_dq_events", "raw_24h_adjacent_dq_events", "raw_7d_adjacent_dq_events", "raw_life_adjacent_dq_events", "raw_24h_multi_dq_events", "raw_life_max_dq_count"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-DQ or adjacent-DQ event frequency is not higher in failing devices than healthy devices with observed bitmaps."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Bursty error clustering and CE storms suggest intermittent weak-cell or disturbance-related instability.",
+      "basis": "Operational experience: repeated temporal clustering of correctable errors often precedes a permanent fault.",
+      "fields": ["burst_count_1_1h", "burst_count_2_1h", "burst_count_3_1h", "ce_storm_count_15m", "ce_storm_count_1h"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Burst counts and CE storm frequency do not increase before failure relative to healthy observation windows."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Appearance of new error rows, columns, or bit patterns in the last 7 days reflects active defect progression.",
+      "basis": "DRAM degradation: newly affected locations indicate continuing physical damage rather than stable, long-standing weak cells.",
+      "fields": ["raw_life_new_rows_7d", "raw_life_new_cols_7d", "raw_life_new_patterns_7d"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show more new rows, columns, or decoded error patterns than healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "A higher share of errors found by patrol scrub reveals latent background defects not triggered by workload reads.",
+      "basis": "Patrol scrub actively probes memory; high scrub share can reveal hidden array damage before demand reads hit the location.",
+      "fields": ["raw_life_scrub_share"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Scrub-share of CEs is not higher in failing devices, or no association with later faults is observed."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Recent first correctable error onset indicates a newly destabilized device at higher imminent risk.",
+      "basis": "Reliability degradation models: sudden CE onset after a long quiet period can mark a new physical defect.",
+      "fields": ["raw_life_days_since_first"],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices are not more likely to have a shorter time since their first observed CE than healthy devices."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Errors spread across multiple ranks, banks, or chips suggest systemic device-level faults, while narrow spread suggests localized damage.",
+      "basis": "DRAM hierarchy: multi-rank/bank/chip involvement indicates broader electrical or packaging failure.",
+      "fields": ["raw_life_distinct_ranks", "raw_life_distinct_banks", "raw_life_distinct_chips", "raw_life_distinct_rows"],
+      "expected_direction": "pattern",
+      "falsified_if": "The distribution of distinct ranks, banks, chips, or rows is indistinguishable between pre-fault and healthy devices."
+    },
+    {
+      "id": "H11",
+      "mechanism": "Device-level or bank-level fault modes carry higher failure risk than isolated cell-level faults.",
+      "basis": "Field diagnostics: failure modes affecting a whole device or bank often reflect serious address/control defects rather than a single weak cell.",
+      "fields": ["fault_mode_device_15m", "fault_mode_device_1h", "fault_mode_bank_15m", "fault_mode_bank_1h", "fault_mode_cell_15m", "fault_mode_cell_1h", "fault_mode_others_15m", "fault_mode_others_1h"],
+      "expected_direction": "pattern",
+      "falsified_if": "Fault-mode distributions do not differ between failing and healthy devices, or isolated cell mode is equally predictive."
+    }
+  ]
+}

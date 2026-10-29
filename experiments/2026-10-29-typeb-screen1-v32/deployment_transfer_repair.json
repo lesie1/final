@@ -1,0 +1,37 @@
+{
+  "at": 1793279051.2666106,
+  "reason": "Earlier multi-file SCP left duplicate Windows-style filenames; ZipFile normalized these names differently from manifest. Relocated duplicate deployment scripts to safe relative archive names without deleting them.",
+  "files": [
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\initialize.py",
+      "new_path": "deployment_transfer_artifacts/initialize.py",
+      "sha256": "6551b69eef0ac97da459fc9f965e0a96dfe98af051638d4ac9ac3059a1bd465a"
+    },
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\check_screening.py",
+      "new_path": "deployment_transfer_artifacts/check_screening.py",
+      "sha256": "3df0aed326a35772b2beeca08e04f309310c971aa730ee6fde3646dcd8b2b3e6"
+    },
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\supervisor.py",
+      "new_path": "deployment_transfer_artifacts/supervisor.py",
+      "sha256": "81567388fe149e92cada058d6b3080e21f5df7bd94847b740ac9cc81e07b9a4c"
+    },
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\evaluate.py",
+      "new_path": "deployment_transfer_artifacts/evaluate.py",
+      "sha256": "987406c3f43504e80b393156f74a81d88047b7011214e8082b311b73340dd241"
+    },
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\report_export.py",
+      "new_path": "deployment_transfer_artifacts/report_export.py",
+      "sha256": "d0badd698663dd1cb25f77e5cadd476557504afed769e48cad0bd2b88c25e1d7"
+    },
+    {
+      "original_name": "C:\\Users\\38104\\Documents\\Codex\\2026-10-28\\sh\\work\\typeb_screen1_20261029\\launch.py",
+      "new_path": "deployment_transfer_artifacts/launch.py",
+      "sha256": "4d43c60cd16140c43a8fd16e421b932dd5724a44ef73be0bf6c2e50509ecc074"
+    }
+  ],
+  "training_and_test_unchanged": true
+}

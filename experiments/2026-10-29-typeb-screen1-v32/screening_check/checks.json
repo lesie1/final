@@ -1,0 +1,9 @@
+{
+  "original_screen_blocks": true,
+  "screen1_runs_cv_at_gap_minus1": true,
+  "acceptance_probability_unchanged": true,
+  "test_cache_read_blocked": true,
+  "trainval_read_allowed": true,
+  "evaluation_import_has_no_side_effect": true,
+  "synthetic_cv_evidence_only": true
+}

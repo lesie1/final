@@ -1,0 +1,31 @@
+{
+  "changes": {
+    "active_cache": {
+      "previous": "/root/autodl-tmp/typeb_raw_v32_20261029/raw_cache",
+      "current": "/root/autodl-tmp/typeb_raw_screen1_v32_20261029/raw_cache"
+    },
+    "workspace": {
+      "previous": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/workspace",
+      "current": "/root/autodl-tmp/typeb_raw_screen1_v32_20261029/typeb/workspace"
+    },
+    "output_root": {
+      "previous": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session",
+      "current": "/root/autodl-tmp/typeb_raw_screen1_v32_20261029/typeb/session"
+    },
+    "screen_margin": {
+      "previous": 0.02,
+      "current": 1.0
+    }
+  },
+  "experimental_changes": [
+    "screen_margin"
+  ],
+  "infrastructure_changes": [
+    "output_root",
+    "workspace",
+    "active_cache"
+  ],
+  "test_previously_exposed": true,
+  "test_must_not_inform_search": true,
+  "note": "Fresh bounded adaptive search. Later proposals can differ because feedback differs; this is not a paired replay of identical candidates."
+}

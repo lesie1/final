@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_010",
+  "question": "在 trial_010 的 TRAIN OOF 高分区中，真故障设备与误报设备相比，raw_life_top_cell_share 是否更高，即错误是否更集中于单一热点单元；该热点集中度与近期 CE 量的组合能否将高 CE 但错误分散的健康误报与真故障区分开？",
+  "reason": "trial_011 parallel 将 TP 从 9 提升到 10，但 FP 仍为 13；当前主要瓶颈是高分区的健康误报。H2 假设错误集中在单一弱单元是故障前兆，而许多健康设备可能只是 CE 噪声较高但分布分散。H2 相关的特征尚未在已完成的 6 次 feature 实验中提出，且 H5/H1/H6/H7/H4 均未能有效降低 FP 或造成命中损失。本次使用剩余探索预算，验证热点集中度与 CE 量的交互能否减少误报。",
+  "expected": "若真故障设备在高分区具有更高的 raw_life_top_cell_share，添加该特征及其与 raw_24h_events、raw_7d_events 的比值或交互，可提高 TP 与 FP 的排序分离度，在保持或提高召回的同时减少误报，提升 CV F1。",
+  "falsification": "若对应的单变量 AUC 区间包含 0.5，或特征对照实验的 CV F1 未超过 trial_010 且新增/丢失命中与误报变化不具互补性，则 H2 在当前特征表示下不能解释高分区误报。",
+  "hypothesis_id": "H2",
+  "target": "precision",
+  "exploration_reason": "没有可用的 high_score_contrast；但已有 missed_fault_contrast 显示多个 raw 特征在漏报方向有信号，说明特征集本身有区分潜力。当前高 FP 与低 TP 并存，H2 是对误报机制的直接假设，且尚未使用。利用 exploration_budget 0/2 的最后一个 slot，尝试与已失败特征正交的热点集中度交互，避免继续盲目调参。"
+}

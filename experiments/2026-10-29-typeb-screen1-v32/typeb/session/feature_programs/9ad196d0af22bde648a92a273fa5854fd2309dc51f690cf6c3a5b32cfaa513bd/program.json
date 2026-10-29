@@ -1,0 +1,67 @@
+{
+  "id": "9ad196d0af22bde648a92a273fa5854fd2309dc51f690cf6c3a5b32cfaa513bd",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    adj24 = frame['raw_24h_adjacent_dq_events'] / frame['raw_24h_events']\n    mult24 = frame['raw_24h_multi_dq_events'] / frame['raw_24h_events']\n    adj7 = frame['raw_7d_adjacent_dq_events'] / frame['raw_7d_events']\n    mult7 = frame['raw_7d_multi_dq_events'] / frame['raw_7d_events']\n    return pd.DataFrame({'fe_adjacent_dq_share_24h': adj24, 'fe_multi_dq_share_24h': mult24, 'fe_adjacent_dq_share_7d': adj7, 'fe_multi_dq_share_7d': mult7}, index=frame.index)",
+    "features": [
+      "fe_adjacent_dq_share_24h",
+      "fe_multi_dq_share_24h",
+      "fe_adjacent_dq_share_7d",
+      "fe_multi_dq_share_7d"
+    ]
+  },
+  "reason": "服务高分区 TP/FP 误报对比；基于 trial_001 error_atlas 高分区 TP=9/FP=14 且 H5 原始计数方向不稳，将相邻/多 DQ 事件按同期事件总数归一，检验空间损伤占比是否在真故障中更高。若这些份额在 TP 中不高于 FP，或加入后 CV FP 未下降、精度未改善，则 H5 在该高分样本中被否定。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32744
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 21,
+      "finite_values": 0
+    },
+    {
+      "rows": 537,
+      "finite_values": 0
+    }
+  ],
+  "sample_validation_seconds": 0.11396097391843796,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "基线交叉验证中漏报设备有 25 个故障单元，其中 19 个已有及时分数但低于阈值；同时存在 14 个误报。哪些因果特征能区分漏报故障与正常设备，以及高分真故障与误报？",
+  "reason": "基线 CV F1 仅 0.3158，TP=9、FP=14、FN=25，说明错误集中在阈值取舍和特征判别不足。需要先通过 error_atlas 同时获取 high_score_contrast 与 missed_fault_contrast 的特征 AUC 证据，以便选择具体假设并提出特征，而不是继续盲目调参。"
+}

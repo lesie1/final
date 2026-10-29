@@ -1,0 +1,278 @@
+{
+  "kind": "feature_prescreen",
+  "prescreen_passed": true,
+  "passed_features": [
+    "fe_multi_dq_share_24h",
+    "fe_multi_dq_share_7d"
+  ],
+  "high_score": {
+    "kind": "high_score_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 9,
+    "fp_units": 14,
+    "group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "sampled_group_counts": {
+      "TP": 9,
+      "FP": 14
+    },
+    "features": [
+      {
+        "feature": "fe_multi_dq_share_24h",
+        "auc_tp_vs_fp": 0.25,
+        "auc_positive_vs_negative": 0.25,
+        "separation": 0.25,
+        "positive_median": 0.0,
+        "negative_median": 0.9324266016483307,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.0537640056022409,
+          0.4802579365079365
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_multi_dq_share_7d",
+        "auc_tp_vs_fp": 0.25,
+        "auc_positive_vs_negative": 0.25,
+        "separation": 0.25,
+        "positive_median": 0.0,
+        "negative_median": 0.9324266016483307,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.0537640056022409,
+          0.4802579365079365
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_adjacent_dq_share_24h",
+        "auc_tp_vs_fp": 0.2857142857142857,
+        "auc_positive_vs_negative": 0.2857142857142857,
+        "separation": 0.2142857142857143,
+        "positive_median": 0.0,
+        "negative_median": 0.7953488528728485,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.06339285714285714,
+          0.5042269736842105
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_adjacent_dq_share_7d",
+        "auc_tp_vs_fp": 0.2857142857142857,
+        "auc_positive_vs_negative": 0.2857142857142857,
+        "separation": 0.2142857142857143,
+        "positive_median": 0.0,
+        "negative_median": 0.7953488528728485,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.06339285714285714,
+          0.5042269736842105
+        ],
+        "credible": false
+      }
+    ],
+    "credible_features": [
+      "fe_multi_dq_share_24h",
+      "fe_multi_dq_share_7d"
+    ],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "missed_faults": {
+    "kind": "missed_fault_contrast",
+    "step": 250,
+    "threshold": 0.9396138787269592,
+    "cv_metrics": {
+      "step": 250,
+      "f1": 0.3157894736842105,
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "precision": 0.391304347826087,
+      "recall": 0.2647058823529412,
+      "threshold": 0.9396138787269592
+    },
+    "tp_units": 0,
+    "fp_units": 0,
+    "group_counts": {
+      "FN": 25,
+      "TN": 35736
+    },
+    "sampled_group_counts": {
+      "FN": 25,
+      "TN": 1000
+    },
+    "features": [
+      {
+        "feature": "fe_adjacent_dq_share_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6091216216216216,
+        "separation": 0.10912162162162165,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.36,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.48663678158008056,
+          0.7197906730259672
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_multi_dq_share_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6033783783783784,
+        "separation": 0.10337837837837838,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.36,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.4834660818479824,
+          0.7161320191158901
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_adjacent_dq_share_24h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.594954954954955,
+        "separation": 0.09495495495495498,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.4,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.46535406474001595,
+          0.6979518298796792
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_multi_dq_share_24h",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.5888288288288288,
+        "separation": 0.08882882882882881,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.4,
+        "negative_missing": 0.815,
+        "auc_interval_95": [
+          0.46262728979406076,
+          0.6931187658815945
+        ],
+        "credible": false
+      }
+    ],
+    "credible_features": [],
+    "eligible_units": 35784,
+    "error_counts": {
+      "TP": 9,
+      "FP": 14,
+      "FN": 25,
+      "TN": 35736,
+      "fn_no_timely_clock": 0,
+      "fn_no_timely_score": 6,
+      "fn_scored_below_threshold": 19,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "tp_units": 9,
+  "fp_units": 14,
+  "features": [
+    {
+      "feature": "fe_multi_dq_share_24h",
+      "auc_tp_vs_fp": 0.25,
+      "auc_positive_vs_negative": 0.25,
+      "separation": 0.25,
+      "positive_median": 0.0,
+      "negative_median": 0.9324266016483307,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.0537640056022409,
+        0.4802579365079365
+      ],
+      "credible": true
+    },
+    {
+      "feature": "fe_multi_dq_share_7d",
+      "auc_tp_vs_fp": 0.25,
+      "auc_positive_vs_negative": 0.25,
+      "separation": 0.25,
+      "positive_median": 0.0,
+      "negative_median": 0.9324266016483307,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.0537640056022409,
+        0.4802579365079365
+      ],
+      "credible": true
+    },
+    {
+      "feature": "fe_adjacent_dq_share_24h",
+      "auc_tp_vs_fp": 0.2857142857142857,
+      "auc_positive_vs_negative": 0.2857142857142857,
+      "separation": 0.2142857142857143,
+      "positive_median": 0.0,
+      "negative_median": 0.7953488528728485,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.06339285714285714,
+        0.5042269736842105
+      ],
+      "credible": false
+    },
+    {
+      "feature": "fe_adjacent_dq_share_7d",
+      "auc_tp_vs_fp": 0.2857142857142857,
+      "auc_positive_vs_negative": 0.2857142857142857,
+      "separation": 0.2142857142857143,
+      "positive_median": 0.0,
+      "negative_median": 0.7953488528728485,
+      "positive_missing": 0.0,
+      "negative_missing": 0.0,
+      "auc_interval_95": [
+        0.06339285714285714,
+        0.5042269736842105
+      ],
+      "credible": false
+    }
+  ],
+  "note": "A pass permits training; it does not establish model improvement."
+}

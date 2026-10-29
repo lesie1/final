@@ -1,0 +1,48 @@
+{
+  "archive": "/root/autodl-tmp/typeb_raw_screen1_v32_20261029/publication/snapshot.zip",
+  "sha256": "8a96698bf377f27e032925c91c906bb6524a6f12a710e773b25736f794e226b4",
+  "bytes": 6490938,
+  "files": 845,
+  "events": {
+    "events.jsonl": {
+      "lines": 62,
+      "counts": {
+        "screen_margin_ablation_preparation": 1,
+        "preparation_complete": 1,
+        "screen1_typeb_search_started": 1,
+        "worker_finished": 54,
+        "raw_typeb_complete": 1,
+        "publication_held_by_user": 1,
+        "private_export_path_repair": 1,
+        "publication_authorized_by_user": 1,
+        "report_display_repaired": 1
+      },
+      "sha256": "de8be7caa949322377327981ddec7eb866a8cc3cd5904f6d9b8bd280a91740ca"
+    },
+    "typeb/historical_test/events.jsonl": {
+      "lines": 2,
+      "counts": {
+        "test_models_frozen": 1,
+        "historical_test_scored": 1
+      },
+      "sha256": "4419ba2fb3bd4eac76ae64a0d556ffd95ce731f04546a34107f3978ba3ccb62c"
+    },
+    "typeb/session/events.jsonl": {
+      "lines": 191,
+      "counts": {
+        "scheduler_step_complete": 51,
+        "agent_call": 52,
+        "training_started": 13,
+        "cross_validation_started": 13,
+        "experiment_complete": 13,
+        "hypotheses_recorded": 1,
+        "decision_accepted": 18,
+        "diagnostic_complete": 6,
+        "feature_prescreen": 6,
+        "response_repair": 16,
+        "controller_fallback": 2
+      },
+      "sha256": "18dcc739f0e1cfd49d760038929da5614f72ee033462332d91e47428141855b7"
+    }
+  }
+}

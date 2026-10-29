@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "b4713a3c17f2e29f7d3d417968119fe072b3929b83d3723cb345f13adf6f537c",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'b4713a3c17f2e29f7d3d417968119fe072b3929b83d3723cb345f13adf6f537c', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在TRAIN设备分组OOF中，漏报故障单元（FN，尤其已有及时分数但低于阈值）与正常单元相比，error_bit_count_15m、error_bit_count_1h、raw_6h_max_err_bits、raw_24h_max_err_bits、raw_7d_max_err_bits、raw_life_max_err_bits 是否更高，从而改善漏报召回？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在TRAIN设备分组OOF中，漏报故障单元（FN，尤其已有及时分数但低于阈值）与正常单元相比，error_bit_count_15m、error_bit_count_1h、raw_6h_max_err_bits、raw_24h_max_err_bits、raw_7d_max_err_bits、raw_life_max_err_bits 是否更高，从而改善漏报召回？",
+    "reason": "现有 missed_fault_contrast 显示漏报故障单元有较高的 CE 活动（如 read_ce_count_1h AUC=0.8198），但诊断未覆盖错误位数字段。H4 机制认为多比特 CE 更接近不可纠正故障，可能提供额外的严重性信号。已尝试的 H1/H5/H6/H7 特征未能提升 CV F1，但错误位数维度未被测试。",
+    "expected": "加入这些错误位数字段或其简单变化率后，模型对低分故障单元的得分提高，CV F1 较 trial_001 提升，且新增命中多于新增误报。",
+    "falsification": "若特征对照后 CV 配对 bootstrap 优于 trial_001 的概率 < 0.9 或 CV F1 增益 ≤ 0，则 H4 在当前表示和样本量下未被支持。",
+    "hypothesis_id": "H4",
+    "exploration_reason": "H4 的字段未出现在现有 high_score_contrast 或 missed_fault_contrast 的可信特征列表中，但漏报故障单元已表现出较高的 CE 活动，错误位数可能是被遗漏的组合信号。当前 FN 仅 25 个，小样本下组合效应可能未被单变量证据捕获，故使用一次探索预算验证。",
+    "job": "job_006"
+  }
+}

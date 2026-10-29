@@ -1,0 +1,89 @@
+{
+  "task": "Fresh TypeB screen_margin=1.0 search and automatic frozen TEST; GitHub publication conditional on final adopted TEST F1 being greater than zero",
+  "authorization": "User requested TypeB screen_margin=1.0 rerun and explicitly said to enter testing directly after it finishes. Same previous maximum 13 trials and API budgets; no extra groups.",
+  "automation_id": "typeb-screen1",
+  "automation_interval_minutes": 30,
+  "remote_root": "/root/autodl-tmp/typeb_raw_screen1_v32_20261029",
+  "reference_root": "/root/autodl-tmp/typeb_raw_v32_20261029",
+  "reference_publication_commit": "fc0589845069fee6f3180004732c68d87aac55a1",
+  "runtime_commit": "8ebafc8d311e734d2089df9d1106c962e2026b66",
+  "runtime_modified": false,
+  "host": "root@connect.bjb1.seetacloud.com",
+  "port": 20447,
+  "key": "C:/Users/38104/.ssh/autodl_ed25519",
+  "remote_python": "/root/autodl-tmp/typea_three_agent_20261026/.venv/bin/python",
+  "local_python": "C:/Users/38104/miniconda3/python.exe",
+  "local_ssh": "C:/Users/38104/miniconda3/Library/usr/bin/ssh.exe",
+  "local_scp": "C:/Users/38104/miniconda3/Library/usr/bin/scp.exe",
+  "local_git": "C:/Users/38104/miniconda3/Library/mingw64/bin/git.exe",
+  "local_work": "C:/Users/38104/Documents/Codex/2026-10-28/sh/work/typeb_screen1_20261029",
+  "local_output": "C:/Users/38104/Documents/Codex/2026-10-28/sh/outputs/typeb_screen1_20261029",
+  "local_repository": "C:/Users/38104/Documents/Codex/2026-10-28/ni/outputs/final",
+  "publication_destination": "experiments/2026-10-29-typeb-screen1-v32",
+  "supervisor_pid_at_launch": 371533,
+  "started_utc": "2026-10-29T11:28:59Z",
+  "baseline_training_started_utc": "2026-10-29T11:29:18Z",
+  "status_at_handoff": "search_running_trial_001",
+  "budget": {
+    "max_trials": 13,
+    "max_agent_calls": 120,
+    "max_reported_tokens": 1500000
+  },
+  "experimental_change": {
+    "screen_margin": {
+      "previous": 0.02,
+      "current": 1.0
+    }
+  },
+  "unchanged": {
+    "features": "135: original 66 plus 69 validated causal raw-log descriptors",
+    "data": "Copied already verified raw_cache and raw_cache_test byte-for-byte; all manifest hashes checked; no preprocessing recomputation",
+    "labels_and_split": "Identical to reference",
+    "acceptance": "cv_paired, probability_better >= 0.9 and delta_f1 > 0; no net-hit veto",
+    "operating_point": "cv_oof",
+    "baseline_recipe": "Same prior initial plan, trained from scratch in a new session",
+    "agent_instructions": "Unchanged; no historical TEST scores or old search outcomes supplied"
+  },
+  "checks_passed": [
+    "Runtime code hashes exactly match the completed previous raw TypeB run",
+    "Config diff contains only screen_margin and new output_root/workspace/active_cache paths",
+    "Actual Loop.accept with stub evidence: old margin screens worst-case selection gap; margin 1.0 executes paired CV at gap=-1",
+    "Actual acceptance still rejects synthetic probability_better=0.89",
+    "Search isolation allows TRAIN/VAL cache but denies TEST cache",
+    "Importing the evaluation module does not start inference or create TEST outputs",
+    "Previous sessions, frozen TEST receipts and source seals unchanged"
+  ],
+  "workflow": [
+    "initialize.py clones sealed runtime, copies verified caches, creates a new empty session and config_diff.json; never rerun it to reset a live session.",
+    "supervisor.py iterates original search_step.py until stopped or trial_budget_complete; at most 13 trials, with bounded API use.",
+    "Supervisor then runs original confirm_search.py for later-VAL confirmation, evaluate.py to freeze baseline/adopted operating points and score historical TEST, and report_export.py.",
+    "evaluate.py already has multiprocessing main protection and reuses the verified TEST cache. It freezes entries before inference and checks previous session preservation; no threshold reselection or TEST feedback.",
+    "Supervisor writes final completion events after its initial export. Once supervisor has exited, rerun report_export.py so the download contains all final events.",
+    "Download publication/snapshot.zip and publication/delivery.json. Verify archive SHA256, every export manifest entry, event counts, source preservation, credentials scan and excluded files; export is a review snapshot, not a standalone resume checkpoint.",
+    "Before any publication, inspect final adopted historical TEST F1. If zero, write publication_hold.json with metrics, notify user, preserve private exports/backups, do not commit or push this run to GitHub/GitCode, and wait for explicit user authorization. Delete the completed monitor after notifying. If missing or ambiguous also hold upload. Upload verified artifacts to GitHub lesie1/final in the designated new experiments directory. Use a fresh isolated worktree based on latest remote main, preserve user edits, and do not change the runtime branch or force push.",
+    "Verify remote commit and report/events hashes, save local and remote upload receipts, notify concise results and URL, then delete automation typeb-screen1."
+  ],
+  "constraints": [
+    "LATEST USER OVERRIDE: if final adopted TypeB TEST F1 equals zero, notify first and do not upload this run. This is a publication gate only; never use it to retune or change the selected model. HDD follow-up is unchanged.",
+    "Retain typeb_raw_v32_20261029, final_v31_20261028 and final_v32_20261029 unchanged. Also do not touch the separately running HDD process or its budget.",
+    "This is a fresh adaptive-search rerun, not a fixed-candidate paired replay; changed feedback can change later Agent proposals. Report this distinction.",
+    "Historical TEST has already been inspected; report as retrospective evaluation, never a pristine independent blind test. Do not adjust models, rounds or thresholds using TEST results.",
+    "Only infrastructure/deployment fixes may be made with preserved logs and repair receipts. Experimental-factor or acceptance-policy changes require the user.",
+    "No keys in files, logs, commands, reports or Git. The authorized credential was transferred from the existing HDD supervisor through in-memory SSH pipes into this supervisor environment, never persisted. If unavailable after exit, request secure input.",
+    "Default quiet on ordinary progress. Notify only meaningful completion, actionable failure, or required input.",
+    "Neutral project identity; do not add competition organizer branding."
+  ],
+  "transfer_note": "Multi-file scp reported success without files appearing; deployment used an SSH stdin payload with per-file SHA256 verification. For downloads use SSH -4 and SCP -4 -O or an equivalent verified single-file transfer.",
+  "publication_policy": {
+    "updated_at": "2026-10-29T12:25:21.449629+00:00",
+    "source": "Explicit user instruction: if TypeB TEST is still zero, notify first and do not upload yet.",
+    "metric": "historical_TEST_F1_of_final_adopted_trial",
+    "trial_selector": "session.state.best",
+    "zero_action": "notify_and_hold_upload_until_explicit_user_authorization",
+    "positive_action": "continue_previously_authorized_verified_publication",
+    "missing_or_ambiguous_action": "hold_upload",
+    "private_export_and_backup_allowed": true,
+    "automatic_retraining_or_threshold_changes_allowed": false,
+    "applies_to": "typeb_screen1_only"
+  }
+}

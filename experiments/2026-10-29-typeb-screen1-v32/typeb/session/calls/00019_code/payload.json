@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "9d65153b26f38745243787e6f03293c4689d9a16f838baffc605e476b9bc9808",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '9d65153b26f38745243787e6f03293c4689d9a16f838baffc605e476b9bc9808', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 TRAIN 设备分组 OOF 中，低分漏报故障设备（已有及时分数但低于阈值）与正常设备相比，burst_count_1_1h、burst_count_2_1h、burst_count_3_1h、ce_storm_count_15m、ce_storm_count_1h 是否更高，从而能提高故障设备得分并改善召回？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 TRAIN 设备分组 OOF 中，低分漏报故障设备（已有及时分数但低于阈值）与正常设备相比，burst_count_1_1h、burst_count_2_1h、burst_count_3_1h、ce_storm_count_15m、ce_storm_count_1h 是否更高，从而能提高故障设备得分并改善召回？",
+    "reason": "trial_001 CV 显示 FN=25，其中 19 个已有及时分数但低于阈值；trial_005 只加入了 CE 事件总量，未利用突发聚集和风暴特征。H6 认为突发计数和 CE 风暴频率在故障前升高，可能提供额外故障信号。",
+    "expected": "加入这些突发/风暴特征后，低分故障样本（FN）得分提升，TRAIN 设备分组 CV 的 recall 和 F1 改善，且不会显著增加误报。",
+    "falsification": "如果这些特征在 FN 与 TN 之间没有可区分差异，或模型无法利用它们提升低分漏报的得分，则 CV F1 不会提高甚至下降。",
+    "hypothesis_id": "H6",
+    "target": "recall",
+    "exploration_reason": "当前无逐特征单变量诊断证据（诊断未返回），但 error_counts 表明 19/25 漏报有及时分数却低于阈值，说明存在未利用的信息。H6 的突发/风暴字段尚未被任何试验探索；小样本（fault_units=34）下单变量证据可能不足，但组合多个突发字段可能提供召回增益。",
+    "job": "job_003"
+  }
+}

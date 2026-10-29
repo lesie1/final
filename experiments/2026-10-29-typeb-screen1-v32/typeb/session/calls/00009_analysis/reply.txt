@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best=trial_001 的 TRAIN 分组交叉验证留出设备上，比较高分 TP vs FP 以及 FN vs TN 的因果特征快照；哪些特征在任一方向有可解释的分离，并且 FN 中“已有及时分数但低于阈值”的样本与 TN 有何区别？",
+  "reason": "trial_003 仅针对 H5 的相邻 DQ 特征，但 CV F1 下降到 0.2593 且 P(better)=0.074；当前 best 的 CV 有 14 个 FP、25 个 FN，其中 19 个是已有分数但低于阈值。需要先定位高分误报与低分漏报的特征差异，再提出下一特征或 parallel 试验。"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_001 的 TRAIN 设备分组 OOF 中，已有及时分数但低于阈值的 19 个漏报故障单元与正常单元相比，哪些 raw_* / 已生成因果特征在故障前快照上更高或更低？特别关注那些此前特征实验中未覆盖的 raw 描述符。",
+  "reason": "当前 best trial_001 的 CV 中 FN=25，其中 19 个属于 scored_below_threshold，6 个属于 no_timely_score；召回率仅 0.2647，是 F1 的主要瓶颈。已尝试的 CE 量、burst、新 rows/cols/patterns 等特征均未提升 CV，继续盲目试特征效率低。诊断预算尚未使用，先用 missed_fault_contrast 定位低分漏报故障与正常设备之间的特征差异，为下一个特征假设提供证据。"
+}

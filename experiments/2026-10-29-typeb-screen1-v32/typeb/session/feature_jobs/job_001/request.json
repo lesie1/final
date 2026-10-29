@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "hypothesis_id": "H5",
+  "target": "precision",
+  "question": "在TRAIN交叉验证留出设备的高分样本中，多DQ或相邻DQ事件频率（raw_6h_adjacent_dq_events、raw_24h_adjacent_dq_events、raw_7d_adjacent_dq_events、raw_life_adjacent_dq_events、raw_24h_multi_dq_events）是否在真故障(TP)上明显高于误报(FP)，从而可减少高分区的健康设备误报？",
+  "reason": "trial_002设备均衡权重虽提高召回但CV FP从14升至28，误报为主要瓶颈。H5假设DQ相邻/多通道错误是更严重物理损伤，可能比单一CE数量更能区分真故障与健康设备偶发错误；需要特征对照验证。",
+  "expected": "TP中相邻DQ/多DQ事件频率应高于FP；添加因果特性后CV精度上升，FP下降，召回损失有限。",
+  "falsification": "若高分TP/FP在这些DQ空间特征上的AUC可信区间含0.5，或加入特征后CV FP未下降、F1未通过采纳，则H5在当前表示下不能区分误报。",
+  "exploration_reason": "当前CV仅34个故障单元、10个合格故障设备，有效样本少，单变量AUC可能不稳定；trial_002 CV FP=28显示需要组合空间损伤模式而非仅单点CE量，值得在限定探索预算内训练。",
+  "job": "job_001"
+}

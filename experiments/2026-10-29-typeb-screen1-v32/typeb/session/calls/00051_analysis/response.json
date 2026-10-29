@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_011",
+  "changes": {
+    "params.min_child_weight": 100
+  },
+  "reason": "预算剩余1次；最佳仍为 trial_001，CV F1=0.3158。当前未接受中 trial_011 最接近：parallel + lr=0.05，CV F1=0.3509，TP=10，FP=13，P(better)=0.857。其相对 trial_001 已多1个命中且少1个误报，但概率未达0.9。提高 min_child_weight 是单因素正则化，预计减少小叶子对健康误报的过拟合，降低 FP。",
+  "hypothesis": "将 min_child_weight 从50提高到100，可减少由小样本叶节点捕获的噪声误报，在基本保持召回的同时降低 FP，使 CV F1 和 P(better) 达到采纳标准。",
+  "expected": "CV 中 FP 从13下降到约8-10，TP 仍接近10，CV F1 高于0.3509且较当前 best 提升，P(better) >= 0.9。",
+  "falsification": "若 FP 未明显下降，或 TP 随之下滑，导致 CV F1 未超过 best 或 P(better) < 0.9，则不能接受该超参调整。"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "针对 best=trial_001 的 TRAIN 设备分组 OOF 留出单元，哪些现有或 raw 因果特征能在高分 TP 与 FP 之间、以及 FN 与 TN 之间表现出可区分性？尤其关注 19 个“已有及时分数但低于阈值”的 FN 与正常样本的差异，以判断是否值得用特征工程救回这些漏报，同时不增加误报。",
+  "reason": "trial_004 的 parallel 分支相对 best 新增 3 个命中但新增 7 个误报，CV 采纳概率 0.823 未达 0.9；当前 best 的 CV 中 FN=25、FP=14，继续盲试参数或平行融合缺乏方向。error_atlas 可同时给出 TP/FP 与 FN/TN 的错例特征快照和漏报原因分解，为下一步 features 请求提供平衡证据，避免浪费剩余试验预算。"
+}

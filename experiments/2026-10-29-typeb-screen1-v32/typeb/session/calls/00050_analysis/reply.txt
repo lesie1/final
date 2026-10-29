@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 trial_001 的 TRAIN OOF 高分区中，raw_life_max_cols_per_row 和 fault_column_num_15m 对 TP/FP 的 AUC 区间不含 0.5，但方向为 TP 中位数低于 FP；能否构造组合特征（例如列数/行数、列数/CE 事件量或列数与突发性的交互）来识别高 CE 但错误分散的健康误报，并降低 FP？",
+  "reason": "trial_010 的 high_score_contrast 显示 credible features raw_life_max_cols_per_row 和 fault_column_num_15m 在高分区 TP/FP 有区分，但单变量方向反直觉，且之前单独加入原始特征未提升。需要探索组合特征是否存在交互效应。",
+  "expected": "如果组合特征能表征健康误报的分散错误模式，则训练后 CV 中 FP 应减少，precision 和 F1 提升。",
+  "falsification": "若加入组合特征后 CV F1 未超过 best 或 P(better)<0.9，且 FP 未减少，则说明这些交互不足以区分高分区误报。",
+  "hypothesis_id": "H3",
+  "target": "precision",
+  "exploration_reason": "高分区 TP/FP 的单个特征 AUC 虽可信但方向与预期相反，可能存在组合效应；直接加入原始列未奏效，尝试构造交互可能比单变量更有区分力。"
+}

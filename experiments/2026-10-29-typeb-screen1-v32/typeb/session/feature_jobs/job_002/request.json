@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 TRAIN 设备分组 OOF 中，低分漏报故障设备（已有及时分数但低于阈值）与正常设备相比，近期和生命周期 CE 事件量 raw_24h_events、raw_7d_events、raw_life_events 是否更高，从而提供足够强的故障信号来提高召回？",
+  "reason": "best=trial_001 的 CV 中 FN=25，其中 19 个已有分数但低于阈值；这些设备并非没有机会，而是当前特征未能使其越过阈值。H1 假设近期/生命周期 CE 量上升指示活跃故障，且这些 raw 描述符未被 base 覆盖。trial_003 的 H5 特征未改善，需换故障机制；诊断预算已耗尽，因此直接提出特征对照。",
+  "expected": "raw_24h_events、raw_7d_events、raw_life_events 在低分 FN 与 TN 中应表现为正向区分，加入后能够提升 recall，同时不明显增加健康设备误报。",
+  "falsification": "若这些特征在 FN vs TN 或 TP vs FP 的 AUC 置信区间包含 0.5，或特征对照试验的 CV F1 不优于 trial_001，则 H1 在该群体不成立。",
+  "hypothesis_id": "H1",
+  "target": "recall",
+  "exploration_reason": "当前故障单元仅 34 个，单变量诊断预算已耗尽；但 CV 错误分解显示多数漏报为低分故障，H1 的 CE 量机制在领域先验中较强，值得在剩余探索预算内训练验证。",
+  "job": "job_002"
+}

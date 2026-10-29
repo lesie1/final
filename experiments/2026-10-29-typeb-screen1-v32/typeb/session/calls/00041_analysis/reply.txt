@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_011",
+  "kind": "feature_profiles",
+  "question": "在高分区 TP 与 FP 中，fault_row_num_15m、fault_column_num_15m、raw_life_max_cols_per_row 等特征的分位数分布如何？是否少数高值 FP 设备拉高了 FP 中位数，导致高分区误报集中于异常事件量，从而提示需要特征变换或鲁棒化而不是单纯提高 min_child_weight？",
+  "reason": "不能从 parallel 父模型直接修改 primary 参数；应先诊断高分区误报的特征分布，判断是否由少数高值样本主导，以决定下一步是特征工程还是参数调整。"
+}

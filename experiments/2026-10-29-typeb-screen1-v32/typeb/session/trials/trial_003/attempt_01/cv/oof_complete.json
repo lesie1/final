@@ -1,0 +1,159 @@
+{
+  "key": "b82eb48fb9b2deb0ae31b17cb254e5525ab2a3d81388943d493f5b44eb344707",
+  "recipe": {
+    "feature_program": "9ad196d0af22bde648a92a273fa5854fd2309dc51f690cf6c3a5b32cfaa513bd",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "periods": [
+    [
+      1705351680,
+      1706664960
+    ],
+    [
+      1706664960,
+      1707978240
+    ],
+    [
+      1707978240,
+      1709291520
+    ],
+    [
+      1709291520,
+      1710604800
+    ],
+    [
+      1710604800,
+      1711918080
+    ]
+  ],
+  "folds": 5,
+  "rounds": 400,
+  "seconds": 19.614699244499207,
+  "oof_sha256": "215ccc56d461746d62474c5616d0ae8f1b18ef1105de05bcf728f84e35310702",
+  "best_step": 150,
+  "cv_metrics": {
+    "step": 150,
+    "f1": 0.25925925925925924,
+    "TP": 7,
+    "FP": 13,
+    "FN": 27,
+    "precision": 0.35,
+    "recall": 0.20588235294117646,
+    "threshold": 0.9363137483596802
+  },
+  "error_counts": {
+    "TP": 7,
+    "FP": 13,
+    "FN": 27,
+    "TN": 35737,
+    "fn_no_timely_clock": 0,
+    "fn_no_timely_score": 6,
+    "fn_scored_below_threshold": 21,
+    "fn_with_outside_window_alarm": 0,
+    "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+  },
+  "curve": [
+    {
+      "step": 50,
+      "f1": 0.20202020202020202,
+      "TP": 10,
+      "FP": 55,
+      "FN": 24,
+      "precision": 0.15384615384615385,
+      "recall": 0.29411764705882354,
+      "threshold": 0.7675067186355591
+    },
+    {
+      "step": 100,
+      "f1": 0.2413793103448276,
+      "TP": 7,
+      "FP": 17,
+      "FN": 27,
+      "precision": 0.2916666666666667,
+      "recall": 0.20588235294117646,
+      "threshold": 0.9176801443099976
+    },
+    {
+      "step": 150,
+      "f1": 0.25925925925925924,
+      "TP": 7,
+      "FP": 13,
+      "FN": 27,
+      "precision": 0.35,
+      "recall": 0.20588235294117646,
+      "threshold": 0.9363137483596802
+    },
+    {
+      "step": 200,
+      "f1": 0.24561403508771928,
+      "TP": 7,
+      "FP": 16,
+      "FN": 27,
+      "precision": 0.30434782608695654,
+      "recall": 0.20588235294117646,
+      "threshold": 0.9448504447937012
+    },
+    {
+      "step": 250,
+      "f1": 0.23880597014925373,
+      "TP": 8,
+      "FP": 25,
+      "FN": 26,
+      "precision": 0.24242424242424243,
+      "recall": 0.23529411764705882,
+      "threshold": 0.9151119589805603
+    },
+    {
+      "step": 300,
+      "f1": 0.25806451612903225,
+      "TP": 8,
+      "FP": 20,
+      "FN": 26,
+      "precision": 0.2857142857142857,
+      "recall": 0.23529411764705882,
+      "threshold": 0.9153390526771545
+    },
+    {
+      "step": 350,
+      "f1": 0.2545454545454545,
+      "TP": 7,
+      "FP": 14,
+      "FN": 27,
+      "precision": 0.3333333333333333,
+      "recall": 0.20588235294117646,
+      "threshold": 0.9505220651626587
+    },
+    {
+      "step": 400,
+      "f1": 0.25,
+      "TP": 7,
+      "FP": 15,
+      "FN": 27,
+      "precision": 0.3181818181818182,
+      "recall": 0.20588235294117646,
+      "threshold": 0.9448938369750977
+    }
+  ],
+  "fault_units": 34,
+  "eligible_units": 35784
+}

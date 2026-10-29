@@ -1,0 +1,11 @@
+{
+  "status": "ready",
+  "max_trials": 13,
+  "features": 135,
+  "raw_features": 69,
+  "screen_margin": 1.0,
+  "test_opened": false,
+  "cached_historical_test_previously_exposed": true,
+  "automatic_test_after_freeze": true,
+  "old_sessions_unchanged": true
+}

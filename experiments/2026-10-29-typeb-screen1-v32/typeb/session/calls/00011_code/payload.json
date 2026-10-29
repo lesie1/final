@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'parallel', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "best=trial_001 的 TRAIN 设备分组 CV 中，FN=25，其中 19 个属于“已有及时分数但低于阈值”，6 个属于“无及时分数”。这提示当前单阶段模型对大量低分故障样本利用不足，而非完全没有机会。parallel 分支在全部保留训练行上训练独立浅层设备均衡 XGBoost，并与父模型逐行 max 融合，父分支冻结；可能提升这部分低分故障的召回。该实验是预先声明的组合实验，不修改特征、标签、采样或父模型参数。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "rerank": "parallel"
+    },
+    "reason": "best=trial_001 的 TRAIN 设备分组 CV 中，FN=25，其中 19 个属于“已有及时分数但低于阈值”，6 个属于“无及时分数”。这提示当前单阶段模型对大量低分故障样本利用不足，而非完全没有机会。parallel 分支在全部保留训练行上训练独立浅层设备均衡 XGBoost，并与父模型逐行 max 融合，父分支冻结；可能提升这部分低分故障的召回。该实验是预先声明的组合实验，不修改特征、标签、采样或父模型参数。",
+    "hypothesis": "独立浅层设备均衡分支能学习主模型未利用的低分故障模式，尤其是在已有分数但低于阈值的 FN 群体中，max 融合后能提高召回而不完全牺牲精度，从而提升 CV F1。",
+    "expected": "相比 trial_001，CV 中 TP 增加、FN 减少；可能伴随 FP 增加，但只要接受检验满足 probability_better ≥ 0.9 且 CV F1 点估计增益 > 0，则可能成为新 best。",
+    "falsification": "如果 paired device-cluster bootstrap 的 P(better) < 0.9，或 CV F1 增益 ≤ 0，或新增误报抵消了召回收益，则拒绝该 parallel 分支。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

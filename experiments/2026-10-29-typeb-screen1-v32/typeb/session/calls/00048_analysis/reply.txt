@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_010",
+  "kind": "high_score_contrast",
+  "question": "在 trial_010 的 TRAIN OOF 高分区中，真故障设备与误报设备相比，raw_life_top_cell_share 是否更高，即错误是否更集中于单一热点单元；该热点集中度与近期 CE 量的组合能否将高 CE 但错误分散的健康误报与真故障区分开？",
+  "reason": "Feature-job budget exhausted，无法直接提交 H2 的特征实验。该问题应改为通过 high_score_contrast 诊断获取证据：比较 trial_010 高分阈值以上 TP 与 FP 在 raw_life_top_cell_share 及近期 CE 量相关特征上的 AUC 和 bootstrap 区间，判断 H2 是否有区分高分区误报与真故障的单变量证据。此诊断不消耗特征预算，使用剩余诊断预算，为最后一次 trial 或 stop 提供证据。"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN 设备分组 OOF 中，超过阈值的高分单元里，哪些 raw_*/spatial_* 特征能区分真故障（TP）与误报（FP）？",
+  "reason": "trial_001 的 CV 中 TP=9、FP=14，precision=0.391，高分区误报是限制 F1 的主要因素之一。已有特征试验 trial_003、trial_006、trial_009 未能改善，反而增加 FP；需要先定位高分 TP/FP 的可分特征，再提出针对性 features，避免继续盲目试特征。"
+}

@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_011",
+  "changes": {
+    "params.min_child_weight": 200
+  },
+  "reason": "trial_011 在 trial_010 基础上加入 parallel 分支后，CV F1 达到 0.3509，但仍未超过 best 的接受概率（P(better)=0.857）。诊断显示高分区 FP 在 fault_row_num_15m、fault_column_num_15m、raw_life_max_cols_per_row 等特征上数值高于 TP，提示高分区误报可能由少数高事件量样本导致。提高 primary 模型的 min_child_weight 可以增加叶节点所需的最小样本权重，减少对少量高值异常样本的过拟合，预期降低 FP；parallel 分支保持独立浅层设备均衡训练，仍可对低分故障提供一定召回补偿。这是单因素对照，只改变 primary 模型的 min_child_weight。",
+  "hypothesis": "增大 primary 模型的 min_child_weight 可以降低高分区误报，且不会显著降低召回，从而提升整体 CV F1。",
+  "expected": "CV F1 点估计高于 0.3509，且 paired bootstrap 中 P(better) 相对 best 提高，可能达到或超过 0.9。",
+  "falsification": "如果 CV F1 没有提高或 P(better) 下降，则假设不成立，需考虑其他方向。"
+}

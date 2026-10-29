@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在TRAIN设备分组OOF中，低分漏报故障设备（已有及时分数但低于阈值）与正常设备相比，raw_life_new_rows_7d、raw_life_new_cols_7d、raw_life_new_patterns_7d 是否更高，从而能提高故障设备得分并改善召回？",
+  "reason": "best=trial_001 的 CV 中 FN=25，其中 19 个属于已有及时分数但低于阈值；trial_005 的总 CE 事件量和 trial_006 的 burst/storm 特征均未在 CV 中改善召回。H7 关注 7 天内新增行/列/解码模式，反映活跃缺陷扩展，可能比总量更特异地区分低分故障设备和正常设备；当前故障设备少、特征覆盖有限，需探索训练。",
+  "expected": "新增特征后，故障设备在故障前窗口内 raw_life_new_rows_7d、raw_life_new_cols_7d、raw_life_new_patterns_7d 升高，模型能提高低分故障设备得分；CV 中 TP 增加、FN 减少，F1 较 trial_001 提升且新增误报不抵消收益。",
+  "falsification": "若高分 TP/FP 或漏报 FN/TN 对比中这些特征的 AUC bootstrap 区间包含 0.5，或训练后 CV F1 不优于 trial_001，或新增误报导致 F1 无增益，则 H7 在当前因果特征表示下不可用。",
+  "hypothesis_id": "H7",
+  "target": "recall",
+  "exploration_reason": "FN=25 中 19 个低于阈值；已尝试的 CE 总量和 burst/storm 特征未改善 CV 召回，H7 反映新位置/新模式的活跃进展，可能具有组合效应且当前设备样本少，使用剩余 exploration_budget=2 中的一次探索。",
+  "job": "job_004"
+}

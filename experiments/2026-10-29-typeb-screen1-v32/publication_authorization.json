@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-29T13:08:36.417307+00:00",
+  "source": "Explicit user instruction in this chat",
+  "instruction": "Upload this TypeB run now so I can review it",
+  "authorization": "Publish completed screen_margin=1.0 experiment despite TEST F1=0",
+  "supersedes": "Previous zero-F1 publication hold only",
+  "no_new_training_or_threshold_change": true
+}

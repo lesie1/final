@@ -1,0 +1,13 @@
+{
+  "updated_at": "2026-10-29T13:08:36.417307+00:00",
+  "source": "Explicit user instruction: if TypeB TEST is still zero, notify first and do not upload yet.",
+  "metric": "historical_TEST_F1_of_final_adopted_trial",
+  "trial_selector": "session.state.best",
+  "zero_action": "publish_authorized_by_latest_user_instruction",
+  "positive_action": "continue_previously_authorized_verified_publication",
+  "missing_or_ambiguous_action": "hold_upload",
+  "private_export_and_backup_allowed": true,
+  "automatic_retraining_or_threshold_changes_allowed": false,
+  "applies_to": "typeb_screen1_only",
+  "authorization": "publication_authorization.json"
+}

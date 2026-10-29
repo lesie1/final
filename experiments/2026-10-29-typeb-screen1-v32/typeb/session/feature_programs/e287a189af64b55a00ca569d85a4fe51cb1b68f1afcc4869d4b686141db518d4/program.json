@@ -1,0 +1,67 @@
+{
+  "id": "e287a189af64b55a00ca569d85a4fe51cb1b68f1afcc4869d4b686141db518d4",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    cols_per_cell_24h = frame['raw_24h_distinct_cols'] / (frame['raw_24h_distinct_cells'] + 1)\n    cols_per_cell_7d = frame['raw_7d_distinct_cols'] / (frame['raw_7d_distinct_cells'] + 1)\n    cols_recent_increase = frame['raw_24h_distinct_cols'] - frame['raw_6h_distinct_cols']\n    cols_event_log_ratio = np.log1p(frame['raw_24h_distinct_cols']) - np.log1p(frame['raw_24h_events'])\n    return pd.DataFrame({'fe_cols_per_cell_24h': cols_per_cell_24h, 'fe_cols_per_cell_7d': cols_per_cell_7d, 'fe_cols_recent_increase_24h_minus_6h': cols_recent_increase, 'fe_cols_event_log_ratio_24h': cols_event_log_ratio}, index=frame.index)",
+    "features": [
+      "fe_cols_per_cell_24h",
+      "fe_cols_per_cell_7d",
+      "fe_cols_recent_increase_24h_minus_6h",
+      "fe_cols_event_log_ratio_24h"
+    ]
+  },
+  "reason": "H3 row/column correlated errors. Missed-fault evidence shows raw_24h_distinct_cols AUC 0.822 and raw_6h/7d/life distinct-col variants also separate FN from TN. These causal features normalize column diversity by distinct-cell count (column spread), capture recent 6h-to-24h increase, and provide log-ratio to event volume, giving the model explicit interactions that may raise low-score fault recall. If the mechanism is not useful, TRAIN OOF recall/F1 will not improve and the associated separation intervals will cross 0.5.",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 636,
+      "finite_values": 2544
+    },
+    {
+      "rows": 5,
+      "finite_values": 20
+    }
+  ],
+  "sample_validation_seconds": 0.1231488436460495,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

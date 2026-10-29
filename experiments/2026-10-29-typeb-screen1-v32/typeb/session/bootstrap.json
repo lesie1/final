@@ -1,0 +1,12 @@
+{
+  "source": "/root/autodl-tmp/typeb_raw_v32_20261029/typeb/session",
+  "model_weights_imported": false,
+  "baseline_from_scratch": true,
+  "source_cache_reused": true,
+  "original_rows_and_labels_unchanged": true,
+  "modified_factor": "screen_margin",
+  "previous_value": 0.02,
+  "new_value": 1.0,
+  "old_test_previously_exposed": true,
+  "old_results_not_supplied_to_agent": true
+}

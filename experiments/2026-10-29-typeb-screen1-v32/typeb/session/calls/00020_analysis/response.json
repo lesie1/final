@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best 模型 trial_001 的 TRAIN 设备分组 OOF 中，19 个已有及时分数但低于阈值的 FN 与正常 TN 相比，哪些原始/因果特征（尤其 H7 新行/新列/新模式、H10 跨 rank/bank/chip/row 分布、H11 fault mode 模式）仍有可区分信号且未被当前模型利用？同时高分 TP 与 FP 对比中哪些特征可用于减少误报？",
+  "reason": "已尝试三个单特征对照（CE事件量、相邻DQ事件、burst/storm计数），均未通过 CV 接纳。为有效使用剩余探索预算和特征请求，需要先定位漏报与误报的具体特征差异，避免继续盲目添加特征。"
+}

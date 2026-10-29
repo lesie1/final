@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 trial_001 的 TRAIN 设备分组 OOF 中，高分 TP 与 FP、以及 FN 与 TN 在哪些基础或原始特征上具有可信区分度（特征 AUC 区间不含 0.5）？特别关注时序变化、比率和 burst/row/column 交互，以指导下一步特征工程在不增加大量误报的情况下提升漏报召回。",
+  "reason": "连续 6 个特征实验（trial_003,005-009）均未通过 CV 采纳，trial_009 的 error_bit_count 特征反而使验证 F1 下降 0.059 且 CV 概率 better 仅 0.024。best=trial_001 的 CV 中 FN=25，其中 19 个已有及时分数但低于阈值，6 个无及时分数，说明漏报主要不是调度缺失。为避免继续盲目尝试单变量特征，需要系统对比错例特征差异，定位同时能提升召回且控制误报的方向。"
+}

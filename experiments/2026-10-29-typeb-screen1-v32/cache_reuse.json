@@ -1,0 +1,14 @@
+{
+  "raw_cache": {
+    "source": "/root/autodl-tmp/typeb_raw_v32_20261029/raw_cache",
+    "manifest_sha256": "7b00d1f399bf9633f62c56e381c2cda8909f1fa9642d2d19376a1c56109cac5b",
+    "reused_without_rebuilding": true,
+    "features": 135
+  },
+  "raw_cache_test": {
+    "source": "/root/autodl-tmp/typeb_raw_v32_20261029/raw_cache_test",
+    "manifest_sha256": "bb01a283834f4ca9fb3aebaf22d973f5d87e62acba65cca588d2c6fe533f747d",
+    "reused_without_rebuilding": true,
+    "features": 135
+  }
+}

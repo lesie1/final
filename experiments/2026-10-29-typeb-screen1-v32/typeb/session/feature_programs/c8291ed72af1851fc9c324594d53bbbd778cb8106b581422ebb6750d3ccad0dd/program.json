@@ -1,0 +1,67 @@
+{
+  "id": "c8291ed72af1851fc9c324594d53bbbd778cb8106b581422ebb6750d3ccad0dd",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    denom_7d = frame['raw_7d_events'].clip(lower=1.0)\n    denom_life = frame['raw_life_events'].clip(lower=1.0)\n    fe_recent_24h_share = frame['raw_24h_events'] / denom_7d\n    fe_week_life_share = frame['raw_7d_events'] / denom_life\n    fe_log_24h_events = np.log1p(frame['raw_24h_events'])\n    fe_24h_vs_7d_daily = frame['raw_24h_events'] - frame['raw_7d_events'] / 7.0\n    return pd.DataFrame({'fe_recent_24h_share': fe_recent_24h_share, 'fe_week_life_share': fe_week_life_share, 'fe_log_24h_events': fe_log_24h_events, 'fe_24h_vs_7d_daily': fe_24h_vs_7d_daily}, index=frame.index)",
+    "features": [
+      "fe_recent_24h_share",
+      "fe_week_life_share",
+      "fe_log_24h_events",
+      "fe_24h_vs_7d_daily"
+    ]
+  },
+  "reason": "H1: low-score FN devices should show elevated recent/lifetime CE volume. These features complement raw counts with recent acceleration and normalized shares, targeting recall without relying on absolute scale alone. Falsified if OOF contrast shows no improvement in FN=19 scored-below-threshold group or added false alarms dominate.",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 636,
+      "finite_values": 2544
+    },
+    {
+      "rows": 5,
+      "finite_values": 20
+    }
+  ],
+  "sample_validation_seconds": 0.17199981957674026,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

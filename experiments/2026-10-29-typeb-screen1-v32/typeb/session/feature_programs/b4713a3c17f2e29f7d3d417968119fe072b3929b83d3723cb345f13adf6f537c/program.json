@@ -1,0 +1,67 @@
+{
+  "id": "b4713a3c17f2e29f7d3d417968119fe072b3929b83d3723cb345f13adf6f537c",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    den_15m = frame['all_ce_count_15m'].where(frame['all_ce_count_15m'] > 0)\n    fe_bits_per_event_15m = frame['error_bit_count_15m'] / den_15m\n    den_1h = frame['all_ce_count_1h'].where(frame['all_ce_count_1h'] > 0)\n    fe_bits_per_event_1h = frame['error_bit_count_1h'] / den_1h\n    life_den = frame['raw_life_max_err_bits'].where(frame['raw_life_max_err_bits'] > 0)\n    fe_recent_severity_ratio = frame['raw_7d_max_err_bits'] / life_den\n    fe_hourly_bits_24h_max = frame['error_bit_count_1h'].rolling('24h', min_periods=1).max()\n    return pd.DataFrame({'fe_bits_per_event_15m': fe_bits_per_event_15m, 'fe_bits_per_event_1h': fe_bits_per_event_1h, 'fe_recent_severity_ratio': fe_recent_severity_ratio, 'fe_hourly_bits_24h_max': fe_hourly_bits_24h_max}, index=frame.index)",
+    "features": [
+      "fe_bits_per_event_15m",
+      "fe_bits_per_event_1h",
+      "fe_recent_severity_ratio",
+      "fe_hourly_bits_24h_max"
+    ]
+  },
+  "reason": "检验H4：多比特CE比单纯CE计数更接近不可纠正故障。FN=19个低分漏报中已有read_ce_count_1h AUC=0.82等高活动信号，但错误位数字段未被诊断覆盖。fe_bits_per_event_15m/1h 消除事件量混淆，捕捉每CE平均错误位数；fe_recent_severity_ratio 用 raw_7d_max_err_bits / raw_life_max_err_bits 捕捉近期峰值恶化；fe_hourly_bits_24h_max 捕捉24h内小时级错误位总量突发。若这些特征在漏报组更高且CV F1相对trial_001提升、新增命中多于新增误报，则支持H4；无提升或不显著则否定该组合。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32762
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 21,
+      "finite_values": 63
+    },
+    {
+      "rows": 537,
+      "finite_values": 1611
+    }
+  ],
+  "sample_validation_seconds": 0.16962337493896484,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

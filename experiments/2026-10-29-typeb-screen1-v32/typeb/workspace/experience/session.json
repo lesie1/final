@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "session": "session",
+  "domain": "memory",
+  "dataset": "ad107803ffe26442876f723acebe4d07f968875cfdc4a024c8d69597af450fd5",
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.8819863796234131,
+    "TP": 3,
+    "FP": 3,
+    "FN": 7,
+    "precision": 0.5,
+    "recall": 0.3,
+    "f1": 0.375,
+    "eligible_devices": 7136,
+    "eligible_fault_devices": 10,
+    "alarmed_devices": 6,
+    "no_history_devices": 5626,
+    "no_history_fault_devices": 0,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 0,
+    "unknown_devices": 0,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 0,
+    "excluded_preexisting_fault_devices": 39,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "gain_from_own_baseline": 0.0,
+  "semantics": "TypeB precomputed baseline features, 66 inputs from 15-minute and 1-hour historical windows, 7175 device files. Device ID from filename. No TypeA observations or labels mixed in. New active cache additionally contains 69 causal raw CE descriptors; the cache manifest documents definitions and raw source identity.",
+  "feature_notes": [
+    "服务高分区 TP/FP 误报对比；基于 trial_001 error_atlas 高分区 TP=9/FP=14 且 H5 原始计数方向不稳，将相邻/多 DQ 事件按同期事件总数归一，检验空间损伤占比是否在真故障中更高。若这些份额在 TP 中不高于 FP，或加入后 CV FP 未下降、精度未改善，则 H5 在该高分样本中被否定。",
+    "H1: low-score FN devices should show elevated recent/lifetime CE volume. These features complement raw counts with recent acceleration and normalized shares, targeting recall without relying on absolute scale alone. Falsified if OOF contrast shows no improvement in FN=19 scored-below-threshold group or added false alarms dominate.",
+    "H6 预期突发聚集与 CE 风暴在故障前升高。burst share 消除总体 CE 量影响，专门刻画突发事件占比；24h rolling storm sums 捕获持续性风暴密度，避免单行低计数噪声。目标是提升低分漏报设备的召回；若 OOF 中这些特征不能提高 FN 得分，则否定 H6 的召回贡献。",
+    "H7 假设 7 天内新增行/列/模式反映活跃缺陷扩展。原始 raw_life_new_cols_7d、raw_life_new_rows_7d、raw_life_new_patterns_7d 已存在，但低分漏报中可能被设备总规模或事件量掩盖。这里构造份额和密度特征：新列数/历史总列数、新行数/历史总行数、新模式数/近 7 天事件数、新模式数/全生命周期事件数，旨在更稳定地捕捉当前新位置的活跃扩展。若这些特征能提高低分故障设备得分并在 CV 中减少 FN，则支持 H7；反之若与误报同升或无分离，则否定该特征表达。",
+    "H3 row/column correlated errors. Missed-fault evidence shows raw_24h_distinct_cols AUC 0.822 and raw_6h/7d/life distinct-col variants also separate FN from TN. These causal features normalize column diversity by distinct-cell count (column spread), capture recent 6h-to-24h increase, and provide log-ratio to event volume, giving the model explicit interactions that may raise low-score fault recall. If the mechanism is not useful, TRAIN OOF recall/F1 will not improve and the associated separation intervals will cross 0.5.",
+    "检验H4：多比特CE比单纯CE计数更接近不可纠正故障。FN=19个低分漏报中已有read_ce_count_1h AUC=0.82等高活动信号，但错误位数字段未被诊断覆盖。fe_bits_per_event_15m/1h 消除事件量混淆，捕捉每CE平均错误位数；fe_recent_severity_ratio 用 raw_7d_max_err_bits / raw_life_max_err_bits 捕捉近期峰值恶化；fe_hourly_bits_24h_max 捕捉24h内小时级错误位总量突发。若这些特征在漏报组更高且CV F1相对trial_001提升、新增命中多于新增误报，则支持H4；无提升或不显著则否定该组合。"
+  ],
+  "transfer_policy": "Candidate hyperparameters and semantic ideas only; never copy trees, thresholds or labels."
+}

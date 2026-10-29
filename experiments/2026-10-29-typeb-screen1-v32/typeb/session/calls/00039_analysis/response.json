@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_011",
+  "kind": "error_atlas",
+  "question": "在 trial_011 的 TRAIN 设备分组 OOF 中，高分 TP 与 FP、低分 FN 与 TN 分别在哪些 causal 特征上 AUC 偏离 0.5？FN 中 scored_below_threshold 与 no_timely_score 的具体计数和特征快照如何？",
+  "reason": "trial_011 未通过验收（P(better)=0.857<0.9），CV 中仍有 24 个 FN（6 无及时分数，18 低分）和 13 个 FP。需要同时定位高分误报和低分漏报的特征差异，以便在剩余两次试验中决定优先构造哪些特征或调整哪些参数。"
+}

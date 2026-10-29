@@ -1,0 +1,13 @@
+{
+  "prompt_tokens": 20200,
+  "completion_tokens": 6427,
+  "total_tokens": 26627,
+  "prompt_tokens_details": {
+    "cached_tokens": 19968
+  },
+  "completion_tokens_details": {
+    "reasoning_tokens": 6033
+  },
+  "prompt_cache_hit_tokens": 19968,
+  "prompt_cache_miss_tokens": 232
+}

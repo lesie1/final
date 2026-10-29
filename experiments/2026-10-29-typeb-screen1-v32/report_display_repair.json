@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-29T13:08:36.417307+00:00",
+  "old_sha256": "d0badd698663dd1cb25f77e5cadd476557504afed769e48cad0bd2b88c25e1d7",
+  "new_sha256": "65cca18da804d08a6b0e8bcfb971e2d38cb5e88ce1b736326b40d61228bae6b4",
+  "change": "Render trial-budget completion rather than empty stop_reason; display only",
+  "runtime_models_thresholds_scores_unchanged": true
+}

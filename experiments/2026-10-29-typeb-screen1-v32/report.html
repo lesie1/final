@@ -1,0 +1,118 @@
+<!doctype html><meta charset="utf-8"><title>TypeB 原始日志实验</title><style>body{font:16px/1.7 system-ui;max-width:1100px;margin:32px auto}pre{white-space:pre-wrap}td,th{padding:8px}</style><table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>trial</th>
+      <th>step</th>
+      <th>protocol</th>
+      <th>threshold</th>
+      <th>TP</th>
+      <th>FP</th>
+      <th>FN</th>
+      <th>precision</th>
+      <th>recall</th>
+      <th>f1</th>
+      <th>eligible_devices</th>
+      <th>eligible_fault_devices</th>
+      <th>alarmed_devices</th>
+      <th>no_history_devices</th>
+      <th>no_history_fault_devices</th>
+      <th>fault_without_timely_scheduled_opportunity</th>
+      <th>positive_without_scored_positive_day</th>
+      <th>unknown_devices</th>
+      <th>unknown_alarm_devices</th>
+      <th>excluded_late_entry_devices</th>
+      <th>excluded_preexisting_fault_devices</th>
+      <th>metric_scope</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>trial_001</td>
+      <td>250</td>
+      <td>memory_15m_7d_device_f1_v2</td>
+      <td>0.939614</td>
+      <td>0</td>
+      <td>2</td>
+      <td>12</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7119</td>
+      <td>12</td>
+      <td>2</td>
+      <td>4949</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>56</td>
+      <td>Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately.</td>
+    </tr>
+  </tbody>
+</table><pre># TypeB v3.2：screen_margin=1.0 重跑
+
+相对上一轮 135 特征原始日志实验，仅将 screen_margin 从 0.02 改为 1.0；因此合法候选不会因前段验证 F1 偏低而跳过交叉验证。最终 CV 配对采纳规则、数据、特征、标签和时间切分不变。
+
+本次是新的自适应搜索，模型从头训练；随着新证据出现，Agent 的候选序列可能不同，因此不是对完全相同候选逐一配对重放。
+
+历史 TEST 已经查看过；本次是回顾性实验，不是独立盲测。没有按 TEST 重选模型、轮数或阈值。
+
+搜索预算最多 13 组，实际记录 13 组，最终采纳 `trial_001`。
+
+结束原因：已达到最多13组的实验预算
+
+## 数据和控制条件
+
+保留原来的 66 个预处理特征、设备、观测时间、故障标签、随访和切分，增加 65 个原始日志衍生统计及 4 个位图可观测性计数，共 135 个基线输入。本轮直接复用上一轮已验证的 135 特征缓存，不重新解析或改变任何输入值。首组训练参数与上一轮原始日志基线一致；后续允许 Agent 在相同预算内提出对照。
+
+原始包 SHA256：`85c67e8d6466238ada5f19eadaa3f3693593f02bb214a8d8f21d4a6b875b52f5`；包含 5821 台 TypeB 设备、15,893,056 条日志。68 台故障设备均有原始文件。原特征库 7,175 台中的 1,354 台没有对应原始文件，仍保留在原队列中，新增字段为 NaN。
+
+约 25% 的原始日志缺解码后的 burst_info/deviceID。缺失位图不是健康零；未知芯片不计为一个物理芯片。可观测性字段记录有效位图数量。原始统计描述已观测日志，并不证明日志完整。
+
+复用缓存的原始构造通过 3735 次真实设备前缀一致性检查，逐行验证旧列和元数据不变。输入只使用当前时刻及之前的日志，TRAIN/VAL 构造不使用后续 TEST 记录；六月七月无完整故障标签，继续排除。
+
+控制器沿用提交 `8ebafc8d311e734d2089df9d1106c962e2026b66`，评分为 `memory_15m_7d_device_f1_v2`，采纳规则仍为 CV 配对改善概率 &gt;= 0.9 且点估计提高，部署工作点取训练期 CV 折外预测。
+
+特征 Agent 可使用新增数值字段及其语义、诊断证据，构造受因果约束的派生特征。它并不是直接读取任意原始 CSV 的通用代码代理；原始解析和数值化由已校验的适配器完成。
+
+## 冻结后的历史 TEST
+| 模型 | TP | FP | FN | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|---:|---:|
+| trial_001 | 0 | 2 | 12 | 0.00% | 0.00% | 0.00% |
+
+旧的预处理 66 特征 v3.2 基线在相同历史 TEST 的 CV 工作点为 TP=0、FP=4、FN=12，F1=0。请结合确认窗口、CV、误报数及实际故障样本数解释新结果，不能只凭一次回顾性 F1 宣称泛化改善。
+
+## 确认窗口与训练期 CV
+| 模型 | 确认 TP | 确认 FP | 确认 FN | 确认 F1 |
+|---|---:|---:|---:|---:|
+| trial_001 | 3 | 1 | 4 | 54.55% |
+
+确认窗口和 TEST 的样本不同，不能把确认分数当作测试成绩。历史确认窗口此前也有使用记录。
+| 组 | CV TP | CV FP | CV FN | CV F1 | 改善概率 | 本组采纳 |
+|---|---:|---:|---:|---:|---:|---|
+| trial_001 | 9 | 14 | 25 | 31.58% | None | True |
+| trial_002 | 10 | 28 | 24 | 27.78% | 0.292 | False |
+| trial_003 | 7 | 13 | 27 | 25.93% | 0.074 | False |
+| trial_004 | 12 | 21 | 22 | 35.82% | 0.823 | False |
+| trial_005 | 8 | 15 | 26 | 28.07% | 0.091 | False |
+| trial_006 | 9 | 19 | 25 | 29.03% | 0.0 | False |
+| trial_007 | 9 | 21 | 25 | 28.12% | 0.0 | False |
+| trial_008 | 8 | 20 | 26 | 25.81% | 0.0 | False |
+| trial_009 | 9 | 18 | 25 | 29.51% | 0.024 | False |
+| trial_010 | 9 | 13 | 25 | 32.14% | 0.581 | False |
+| trial_011 | 10 | 13 | 24 | 35.09% | 0.857 | False |
+| trial_012 | 8 | 16 | 26 | 27.59% | 0.037 | False |
+| trial_013 | 9 | 23 | 25 | 27.27% | 0.176 | False |
+
+## 控制检查
+
+config_diff.json 记录唯一实验配置变化为 screen_margin；其余差异仅为新目录。部署前验证 margin=1.0 允许最低可能的前段 F1 差距进入 CV，而改善概率 0.89 仍不采纳；TEST 缓存对搜索进程不可读，评价入口导入不会触发测试。旧会话及历史结果保留。
+
+## 导出内容
+
+包含新 session、events、Agent 调用记录、配置、主模型、诊断、确认和 TEST 结果，以及原始接入代码、来源与质量审计。旧会话哈希复核通过。
+
+`export_manifest.json` 列明文件哈希和大文件排除清单。原始 CSV、缓存、训练矩阵及 CV 折模型留在服务器。此导出是可审阅快照，不是独立可续跑备份；原始完成回执可能引用被排除的文件。
+</pre>

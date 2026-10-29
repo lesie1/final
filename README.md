@@ -9,7 +9,7 @@
 | 数据 | 状态 | 结果 |
 |---|---|---|
 | 内存 TypeA（SmartMem） | ✅ 完成 | 13 组全自动搜索，无人工干预。采纳 trial_008；历史 TEST 设备级 F1 由基线 13.16% 提高到 **20.22%**（TP 20→27，FP 183→139）。详见 [results/typea_v3.2](results/typea_v3.2/README.md) |
-| 内存 TypeB | ✅ 完成 | 接入原始日志后使用 135 个基础特征，完成 12 组后提前停止；最终模型历史 TEST F1=0（TP=0、FP=2、FN=12）。[报告与 session](experiments/2026-10-29-typeb-raw-v32/report.md) |
+| 内存 TypeB | ✅ 完成 | 135 特征，`screen_margin=1.0` 重跑 13 组并全部 CV；最终仍保留 trial_001，历史 TEST F1=0（TP=0、FP=2、FN=12）。[本轮报告与 events](experiments/2026-10-29-typeb-screen1-v32/README.md) · [上一轮](experiments/2026-10-29-typeb-raw-v32/report.md) |
 | 硬盘（Backblaze） | ⏳ 运行中 | – |
 
 历史 TEST 时间段在项目早期被查看过，因此以上测试成绩属于回顾性评估，不是全新的独立盲测。确认窗口的结果（搜索阶段没有用过的日期）一并保存在结果目录中。
@@ -63,6 +63,8 @@ python tools/session_report.py --session <会话> --md summary.md
 完整步骤（数据准备、Agent 接入、输出位置）见 **[复现指南](docs/reproduce.md)**；命令行与 Python 接口见 **[接口参考](docs/interfaces.md)**。
 
 ## 文档
+
+- [2026-10-29 TypeB screen_margin=1.0 重跑：13 组 CV、冻结 TEST 与完整 events](experiments/2026-10-29-typeb-screen1-v32/README.md)
 
 - [2026-10-29 TypeB 原始日志实验：session、events 与结果报告](experiments/2026-10-29-typeb-raw-v32/README.md)
 
