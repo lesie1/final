@@ -1,0 +1,16 @@
+{
+  "archive_sha256": "8b4ecfac597951cf34f2a578408134fda5a1a2576ff97968144cd7aa4d423468",
+  "verified_original_files": 60,
+  "original_event_sha256": "bf0f8d6581911080ffdc63157b8b2435fd2e62cd7000754e981c56af9b3cbf1b",
+  "original_event_count": 18,
+  "scan_rules": [
+    "api_key",
+    "github_token",
+    "private_key",
+    "url_credentials",
+    "authorization_token",
+    "excluded_brand"
+  ],
+  "scan_matches": 0,
+  "original_artifacts_preserved": true
+}

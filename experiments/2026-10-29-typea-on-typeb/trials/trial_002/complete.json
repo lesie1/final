@@ -1,0 +1,10 @@
+{
+  "files": {
+    "devices_test.csv": "3da6cae6fb9c83138c3bd1ed830a24e990c7f071ab4118a6cdfbd6bee8561fa8",
+    "fault_devices_test.csv": "cd149163af0da64d71a96dc828b0a16f048bbccb10bf89aef42d53bf8b486d59",
+    "report_test.json": "6591c5fdf23abea273a3f768ea395bd55f236821e6482f8f5b835e33149e3b42",
+    "input_audit.json": "dfaaf8aba2c163b846b9aeae4fa3dfa65065c828e2985d6f9a46b227b5d72100"
+  },
+  "source_model_unchanged": true,
+  "original_sessions_unchanged": true
+}

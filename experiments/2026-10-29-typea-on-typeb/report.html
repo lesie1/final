@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>TypeA → TypeB 冻结模型迁移测试</title><style>body{font-family:system-ui,sans-serif;margin:32px;max-width:1200px;color:#18202a}p,li{line-height:1.7}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:right}td:first-child,th:first-child{text-align:left}th{background:#eef3f7}code{background:#eee;padding:2px 4px}</style><h1>TypeA → TypeB 冻结模型迁移测试</h1>
+<p>按用户要求，取此前 TypeA 测试 F1 前五名：trial_011、trial_012、trial_002、trial_009、trial_010，并加入 TypeA 原基线 trial_001 作参照。名单在读取这些模型的 TypeB 测试结果前固定。没有重新训练，没有改变原模型、原阈值或 TypeB 评价设备队列，没有模型 API 调用。</p>
+<p><strong>输入限制：</strong>TypeA 基础输入有 164 列，而当前 TypeB 只有其中同名、同时间窗的 66 列。缺少的 98 列是 33 个 6 小时窗口特征和 65 个原始日志衍生特征；本次全部保留为 NaN。trial_012 的额外 4 列也依赖缺失的原始日志特征。没有把缺失填成 0，也没有将 15 分钟或 1 小时统计冒充 6 小时统计。</p>
+<p>TypeA 和 TypeB 设备标识无交集。TypeB 测试时间为北京时间 2024-05-01 14:24 至 2024-06-01 00:00（右端不含），可评估设备 7,119 台、故障设备 12 台；提前预警规则、随访和设备分母与此前 TypeB 测试一致。</p>
+<table><tr><th>TypeA 来源模型</th><th>原 TypeA 测试 F1</th><th>迁移后 TypeB F1</th><th>TP</th><th>FP</th><th>FN</th><th>冻结阈值</th><th>TypeB 最高评分</th><th>可用 / 总特征</th></tr>
+<tr><td>trial_011</td><td>24.47%</td><td>0.00%</td><td>0</td><td>0</td><td>12</td><td>0.903967</td><td>0.791821</td><td>66 / 164</td></tr>
+<tr><td>trial_012</td><td>21.85%</td><td>0.00%</td><td>0</td><td>0</td><td>12</td><td>0.896600</td><td>0.847572</td><td>66 / 168</td></tr>
+<tr><td>trial_002</td><td>21.29%</td><td>3.55%</td><td>10</td><td>542</td><td>2</td><td>0.897205</td><td>0.966587</td><td>66 / 164</td></tr>
+<tr><td>trial_009</td><td>21.29%</td><td>3.55%</td><td>10</td><td>542</td><td>2</td><td>0.897205</td><td>0.966587</td><td>66 / 164</td></tr>
+<tr><td>trial_010</td><td>20.31%</td><td>0.00%</td><td>0</td><td>0</td><td>12</td><td>0.875714</td><td>0.776637</td><td>66 / 164</td></tr>
+<tr><td>trial_001（基线参照）</td><td>16.27%</td><td>0.00%</td><td>0</td><td>0</td><td>12</td><td>0.829695</td><td>0.574065</td><td>66 / 164</td></tr>
+</table><h2>TypeB 原有模型参照</h2><table><tr><th>模型</th><th>F1</th><th>精确率</th><th>召回率</th><th>TP</th><th>FP</th><th>FN</th></tr>
+<tr><td>native_typeb_baseline</td><td>5.41%</td><td>4.00%</td><td>8.33%</td><td>1</td><td>24</td><td>11</td></tr>
+<tr><td>native_typeb_trial_013</td><td>5.56%</td><td>4.17%</td><td>8.33%</td><td>1</td><td>23</td><td>11</td></tr>
+<tr><td>historical_typeb_trial_015</td><td>7.41%</td><td>6.67%</td><td>8.33%</td><td>1</td><td>14</td><td>11</td></tr>
+</table><h2>可以与不能得出的结论</h2>
+<p>此次迁移最高 F1 为 trial_002 的 3.55%，TP / FP / FN 为 10 / 542 / 2。召回率 83.33%，精确率 1.81%。</p>
+<p><strong>第 2、9 组显著增加了此测试段的故障命中数：12 台命中 10 台；代价是 542 次误报，F1 仍低于 TypeB 原有模型。</strong>这提示高召回迁移候选值得进一步受控验证，但当前模型与阈值组合不适合直接替换。高召回也可能与缺失输入导致的评分变化有关，不能将本结果直接解释为已证明学到了可迁移故障机理。</p>
+<p>逐时评分哈希一致的模型组：trial_002 / trial_009。这些完全相同的预测不构成多次独立验证。</p>
+<p>这不是完整同特征条件下的迁移验证。结果同时受到缺失输入、硬件分布差异和原阈值校准的影响，不能据此证明 TypeB 样本少到学不会，也不能据此否定 A→B 迁移学习本身。下一项有区分力的实验是仅用两类共有的 66 个特征在 TypeA 训练，再固定规则去 TypeB 验证和测试；若需阈值适配，只能在 TypeB 验证集进行。本次没有启动该项新训练。</p>
+<p>核验：对齐缓存中的 642,104 行共享特征转换为模型输入后逐字节一致；逐设备输出重新计算的计数和指标与报告一致；模型、原阈值、原 session 及运行代码未修改。独立 events.jsonl 保存了此次测试全过程。</p>
+<p>TypeA 候选按已查看过的 TypeA TEST 选取，TypeB TEST 也曾用于历史测试。因此本结果是探索性迁移比较，不是新的独立盲测。原最终选模状态保持不变。</p></html>
