@@ -96,8 +96,8 @@ python raw_cache.py --source-cache <会话>/cache --raw /data/stage1_csv.zip --o
 python raw_cache.py --source-cache <会话>/cache --raw /data/stage1_csv.zip --out /ws/typea/raw_cache --workers 4
 
 # ④ 用带原始特征的缓存新建搜索会话（复用 ① 的映射和数据划分）
-python search_step.py --initialize-from <会话> --session /ws/typea/search --active-cache /ws/typea/raw_cache --arm arm_policy.json
-python agent.py limits --session /ws/typea/search --memory-limit-gb 80 --max-trials 13
+#    先复制 arm_policy.json 为 my_arm.json，在其中的 "config" 里加上 "max_trials": 13, "memory_limit_gb": 80（见下文"设置实验组数和预算"）
+python search_step.py --initialize-from <会话> --session /ws/typea/search --active-cache /ws/typea/raw_cache --arm my_arm.json
 
 # ⑤ 运行 Agent 闭环（建议放在后台）
 nohup python agent.py run --session /ws/typea/search > typea_run.log 2>&1 &
@@ -125,6 +125,29 @@ python tools/session_report.py --session /ws/typea/search --json summary.json --
 设置方法：在传给 `agent.py init --config` 的配置文件里加上 `"screen_margin": 1.0`。会话一旦建立，就不能再改这个值（配置变化需要新建会话）。
 
 **注意：** 用 `search_step.py --initialize-from` 复用旧缓存建会话时，`--arm` 配置目前**不接受** `screen_margin`，只能使用默认值 0.02。需要关闭初筛时，请用 `agent.py init --config` 建会话。
+
+#### 运行前设置实验组数和预算
+
+闭环搜索有三个预算，**哪一个先用完，搜索就先停下**：
+
+| 配置项 | 含义 | 默认值 | TypeA 本次使用 |
+|---|---|---|---|
+| `max_trials` | 最多做几组实验（包括基线） | 24 | 13 |
+| `max_agent_calls` | 最多调用几次大模型 | 160 | 120（实际用了 45 次） |
+| `max_reported_tokens` | 最多消耗多少 token | 1,500,000 | 1,500,000（实际用了 88.9 万） |
+
+**这是上限，不是固定组数。** 至少完成 3 组实验、做过 1 次特征实验之后，分析 Agent 就可以根据证据主动停止。例如 TypeB 的原始日志实验上限是 13 组，Agent 在第 12 组后停止。实验组数用完时，会话状态是 `trial_budget_complete`；Agent 主动停止时是 `stopped`；调用次数或 token 用完时，运行会报错停下，所有结果都会保留。
+
+**设置方法：最好在建会话时就设好**
+
+| 建会话的方式 | 怎么设置 |
+|---|---|
+| `agent.py init --config 配置文件` | 在配置文件里写，例如 `"max_trials": 13`、`"max_agent_calls": 120`、`"max_reported_tokens": 1500000` |
+| `search_step.py --initialize-from ... --arm my_arm.json` | 在 arm 文件的 `"config"` 里写 `"max_trials": 13`。这种方式默认是 14 组、120 次调用、300 万 token；调用次数和 token 上限不能在 arm 文件里修改 |
+
+会话建好之后，也可以用 `agent.py limits --session <会话> --max-trials 20`（以及 `--max-agent-calls`、`--max-reported-tokens`）修改。但**每次修改都会记录为 `limits_changed` 事件，在 `tools/session_report.py` 统计自动化程度时算作一次人工干预**，所以除非预算真的不够用，否则不要中途修改。会话冻结（`freeze`）之后不能再增加预算。
+
+**怎么估算时间：** TypeA（约 213 万训练行，单张 GPU）13 组实验用了 5.1 小时，平均每组约 24 分钟，其中包括训练、在选择窗口上评估和 5 折 CV。把 `screen_margin` 设为 1.0 时，每组实验都会跑 CV，时间会更长一些。数据量不同，时间也会差别很大，建议先用 `examples/runtime_small.json`（4 组）试跑一次再估算。
 
 ### 3.2 本次 TypeA 结果的实际执行链
 
