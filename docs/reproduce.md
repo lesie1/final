@@ -30,7 +30,7 @@ TypeA 的模型输入 = **官方给出的 99 个特征 + 官方原始日志**，
 
 **① 官方输入**
 
-来源：比赛通知为内存器件指定的数据，即 [SmartMem 内存故障预测挑战赛](https://hyxie2023.github.io/SmartMem.github.io)（WWW 2025，华为云举办，[Codabench 3586](https://www.codabench.org/competitions/3586/)）第一阶段的 TypeA 数据（代码中的原始日志包名为 `stage1_csv.zip`）。本赛事的数据说明在[赛事 GitCode 数据仓库](https://gitcode.com/dfx-contest-2026/data)（报名后授权访问）。
+来源：全部数据（99 个预处理特征、原始 CE 日志、故障工单）均从 [SmartMem 内存故障预测挑战赛](https://hyxie2023.github.io/SmartMem.github.io)（WWW 2025，华为云举办，[Codabench 3586](https://www.codabench.org/competitions/3586/)）下载，使用第一阶段的 TypeA 数据（原始日志包为 `stage1_csv.zip`）。这也是本赛事通知为内存器件指定的数据来源；本赛事的数据说明见[赛事 GitCode 数据仓库](https://gitcode.com/dfx-contest-2026/data)（报名后授权访问）。
 
 | 文件 | 内容 |
 |---|---|
