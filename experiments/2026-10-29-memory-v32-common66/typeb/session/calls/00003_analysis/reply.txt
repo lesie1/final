@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "哪些现有 base 特征在高分 TP 与 FP 之间、以及 FN 与 TN 之间表现出一致差异？特别关注 CE 计数、burst 计数和 log 频率，用于选择下一轮的 features 假设。",
-  "reason": "Baseline CV 显示 FP=17、FN=27，其中 21 个 FN 已有及时分数但低于阈值，说明模型未利用可分信号；需要错例对比证据而不是盲目调参。"
-}

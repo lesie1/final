@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "high_score_contrast",
-  "question": "在 TRAIN 出袋预测中，超过阈值的高分单元里，哪些基线数值特征（CE 计数、突发/地址/DQ 等）能以 AUC 区分真故障 TP 与误报 FP？",
-  "reason": "当前 best trial_001 的 CV 中 TP=7、FP=17、precision=0.2917，误报是主要瓶颈。trial_002 提高 max_depth 后 FP 升至 51，trial_004 base_weight=device 后 CV FP 升至 57，均未改善且未表明单纯参数或权重调整能抑制误报。需要先用高分 TP/FP 对比定位可区分的因果特征，再据此提出特征验证，避免继续无效调参。"
-}

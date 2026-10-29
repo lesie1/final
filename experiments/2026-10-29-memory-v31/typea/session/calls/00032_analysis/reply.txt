@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_002",
-  "kind": "high_score_contrast",
-  "question": "在 trial_002 的 TRAIN 设备分组交叉验证中，取超过阈值 0.9478608965873718 的高分单元，比较真故障 TP 与误报 FP 在各可用特征上的 AUC 及 bootstrap 区间；哪些特征在高分区能稳定区分真实故障与健康设备的误报？特别关注错误空间集中度、事件频率、突发模式等因果量。",
-  "reason": "trial_002 的设备加权已大幅降低 FP，但 TRAIN CV 中仍有 TP=52、FP=347，误报仍远多于真故障；样本加权基线同样存在大量误报。gated rerank 不在本轮 scope，且当前无高分 TP/FP 的错例对比证据。需要先定位高分误报与真故障的可分特征，才能据此提出下一步特征或参数对照。"
-}

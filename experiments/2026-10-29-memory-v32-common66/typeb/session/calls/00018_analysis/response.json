@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "high_score_contrast",
-  "question": "在 trial_001 的 TRAIN 交叉验证留出设备上，超过阈值的高分单元中，哪些 base 特征能区分真故障（TP）与误报（FP）？",
-  "reason": "trial_001 CV 中 TP=7、FP=17，误报是限制 F1 的主要因素之一；min_child_weight、parallel、base_weight 等对照均未提升，需要高分错例对比证据来提出因果特征，而不是继续调参。"
-}

@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "在 TRAIN 设备分组交叉验证的留出设备上，哪些特征在 FN 与 TN 以及 TP 与 FP 之间有可信的单变量区分？特别关注 fn_scored_below_threshold 的及时分数行与正常行之间是否存在可解释的字段水平或趋势差异；同时检查高分误报与真故障之间的差异，以决定下一次特征请求应优先验证哪条假设。",
-  "reason": "当前 best(trial_001) CV F1=0.2414，FN=27，其中 21 个已有分数但低于阈值、6 个无及时分数；多个单变量特征实验（trial_003、trial_006、trial_009）均未通过 CV 采纳，且伴随 FP 增加。需要一次性获取漏报原因计数和两组错例对比证据，避免继续盲目尝试特征。历史原因中曾非正式引用 missed_fault_contrast 的 read_ce/all_ce 高 AUC，但未形成可用诊断记录；本次正式请求 error_atlas 以定位可信区分方向，为下一次 hypothesis-linked features 提供依据。"
-}

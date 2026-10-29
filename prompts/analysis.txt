@@ -9,7 +9,7 @@ features 动作必须额外填写 hypothesis_id，指向 payload.hypotheses 中�
 features 可填 target=precision/recall/interaction/balanced。缺少单变量证据但有组合效应、低覆盖或小样本理由时，填写 exploration_reason，解释为何仍值得训练、引用具体证据和反例；控制器按剩余探索预算决定是否放行。无理由或预算不足会暂缓，不代表特征无用。strict_high 对照模式只允许高分证据，不放行探索。
 missed_fault_contrast 比较 FN 与 TN 的因果特征快照；error_atlas 同时返回两组对比和漏报原因计数。先区分无及时预测时刻、存在时刻但无及时分数、已有分数但低于阈值；窗口外告警是重叠计数，也可能同时贡献 FP/FN。诊断用于定位下一次实验，不能把事后诊断时间作为模型输入。
 特征 AUC 区间含0.5通常表示证据不足；不能由此断言没有信号、标签改动没有收益或数据已经到上限。组内设备过少、快照缺失、相关性和组合效应都可能影响诊断。
-采纳规则见 payload.acceptance_rule：best 只有在“TRAIN 设备分组交叉验证的配对 bootstrap 95% 区间下界 > lower_bound 且净命中未减少”时才更新；选择窗口 F1 只用于快速筛除明显更差的实验。trial 的 acceptance 字段记录了每次判定（cv_delta_f1、区间、新增/丢失命中、新增/消除误报）。区间跨过 0 表示“持平”，不是失败，可以据此判断方向是否值得继续。
+采纳规则见 payload.acceptance_rule：默认 test=probability：best 只有在“TRAIN 设备分组交叉验证的配对 bootstrap 中优于当前 best 的概率 ≥ probability，且 CV F1 点估计增益 > lower_bound”时才更新；新增/丢失命中只记录，不单独否决（F1 已同时计入误报和漏报）。test=interval_95 为旧规则（95% 区间下界 > lower_bound）。选择窗口 F1 只用于快速筛除明显更差的实验；最终部署的步数和阈值取自 CV 的 out-of-fold 结果，而不是选择窗口。trial 的 acceptance 字段记录了每次判定（cv_delta_f1、区间、优于概率、新增/丢失命中、新增/消除误报）。
 两阶段重排序（仅当 scope.rerank.allowed 为 true）：experiment 的 changes 同时写 {"rerank":"gated","rerank_gate":g}，parent 为要在其上构建的单阶段模型。第二阶段只在 TRAIN 内第一阶段 out-of-fold 分数 ≥ g 的行上训练，目标就是区分高分区的真故障与误报；它适合“高分区 TP/FP 有可信可分特征，但加特征后全局模型没有利用”的情形。门限越高，第二阶段样本越少：若报告样本不足，换更低的 g。已门控的实验上只能改 rerank_gate；特征实验必须以单阶段模型为 parent。
 stop：填写 reason，说明预算完成、真实阻塞或已有充分结果。
 实验失败不是预测效果差。资源错误不能通过重复相同代码修复。不同 dataset/evaluation_id 的 F1 不横比。训练标签期限可研究，固定评分窗口不可修改。

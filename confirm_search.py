@@ -10,6 +10,7 @@ from feature_programs import materialize
 from prediction import predict
 from evaluation import metrics
 from agent import receipt
+from operating_point import choose, load
 
 
 def confirm(session,out):
@@ -20,9 +21,13 @@ def confirm(session,out):
     require(state['best'] and state['trials'][0]['status']=='complete','Need complete baseline and winner')
     names=list(dict.fromkeys([state['trials'][0]['id'],state['best']]))
     entries=[]
+    mode=c.get('operating_point','selection_window')
     for name in names:
         folder=session/'trials'/name/'attempt_01';r=receipt(folder)
-        entries.append(dict(trial=name,model_sha256=r['model_sha256'],threshold=r['metrics']['threshold'],recipe=r['recipe']))
+        # The selection-window point is always scored too, so the two rules are compared on unseen dates.
+        points=dict(deployed=choose(folder,mode),selection_window=choose(folder,'selection_window'))
+        entries.append(dict(trial=name,model_sha256=r['model_sha256'],threshold=points['deployed']['threshold'],
+            recipe=r['recipe'],operating_points=points))
     out.mkdir(parents=True,exist_ok=True)
     if (out/'frozen.json').exists():require(read(out/'frozen.json')==entries,'Frozen entries changed')
     else:save(out/'frozen.json',entries)
@@ -32,13 +37,17 @@ def confirm(session,out):
         if (target/'report.json').exists():reports.append(read(target/'report.json'));continue
         base=checked_manifest(c);cc,m=materialize(c,e['recipe']['feature_program'],base)
         m=copy.deepcopy(m);m['windows']['val']=c['confirmation_window']
-        from rerank import load_model
-        model=load_model(session/'trials'/e['trial']/'attempt_01/model.ubj',2)
-        table,stats=predict(model,cc,e['recipe'],m,'val',e['threshold'])
-        result=dict(trial=e['trial'],model_sha256=e['model_sha256'],metrics=metrics(table,e['threshold']),
-            confirmation_window=c['confirmation_window'],threshold_reselected=False,test_opened=False,
+        folder=session/'trials'/e['trial']/'attempt_01';scored={};tables={}
+        for label,op in e['operating_points'].items():
+            key=(op['model'],op['step'])
+            if key not in tables:tables[key]=predict(load(folder,op,2),cc,e['recipe'],m,'val',op['threshold'])[0]
+            scored[label]=dict(source=op['source'],step=op['step'],threshold=op['threshold'],reason=op.get('reason'),
+                               metrics=metrics(tables[key],op['threshold']))
+            tables[key].to_csv(target/f'devices_{label}.csv',index=False)
+        result=dict(trial=e['trial'],model_sha256=e['model_sha256'],metrics=scored['deployed']['metrics'],
+            operating_points=scored,confirmation_window=c['confirmation_window'],threshold_reselected=False,test_opened=False,
             note='Later VAL was withheld from this search; earlier historical VAL use means it is not a fresh independent test.')
-        table.to_csv(target/'devices.csv',index=False);save(target/'report.json',result);reports.append(result)
+        save(target/'report.json',result);reports.append(result)
     save(out/'summary.json',dict(reports=reports,test_opened=False,agent_feedback=False))
 
 

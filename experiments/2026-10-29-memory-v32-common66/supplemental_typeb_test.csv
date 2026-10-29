@@ -1,5 +1,0 @@
-﻿task,role,trial,point,step,threshold,TP,FP,FN,precision,recall,f1,eligible_devices,eligible_fault_devices
-typeb,baseline_reference,trial_001,deployed,250,0.9905097484588623,0,4,12,0.0,0.0,0.0,7119,12
-typeb,baseline_reference,trial_001,selection_window,100,0.8635445237159729,1,24,11,0.04,0.08333333333333333,0.05405405405405406,7119,12
-typeb,user_requested_post_hoc,trial_013,deployed,350,0.9876717329025269,0,9,12,0.0,0.0,0.0,7119,12
-typeb,user_requested_post_hoc,trial_013,selection_window,50,0.8855158090591431,1,20,11,0.047619047619047616,0.08333333333333333,0.06060606060606061,7119,12

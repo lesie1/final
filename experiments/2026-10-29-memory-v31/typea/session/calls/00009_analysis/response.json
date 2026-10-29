@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_003",
-  "kind": "error_atlas",
-  "question": "在 trial_003 的 TRAIN 交叉验证中，漏报主要集中在已有分数但低于阈值（187/200），同时误报仍达 716；请给出 TP/FP 和 FN/TN 两组中具有稳定区分度的特征，并分解漏报原因，用于定位下一个应设计的 precision/recall 特征。",
-  "reason": "当前 trial_003 未通过采纳且 feature-only 已结束，CV 中 FP 716、FN 200，其中 187 个漏报属于已有分数但低于阈值。现有诊断预算未使用，先获取高分错例与漏报群的因果特征对比，避免继续盲目调参或提出无证据特征。"
-}

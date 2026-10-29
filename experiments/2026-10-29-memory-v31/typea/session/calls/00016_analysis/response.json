@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "high_score_contrast",
-  "question": "在 TRAIN 交叉验证留出设备上，超过 trial_001 选定阈值的高分单元中，真故障 TP 与误报 FP 在哪些现有数值特征上具有稳定且方向一致的单变量差异（AUC 的 bootstrap 区间不含 0.5）？重点比较 CE 总量/突发/风暴、多 DQ/multi-beat、地址新扩散和集中度特征。",
-  "reason": "best 仍为 trial_001，其 CV 中 FP=544、TP=62、precision=0.102，误报主导 F1；trial_003/trial_005 两个特征程序均未通过 CV 采纳，继续盲目特征或调参风险高。high_score_contrast 可直接定位高分区 TP/FP 的可分特征，为下一步特征请求或参数/权重对照提供证据。诊断预算尚未使用。"
-}

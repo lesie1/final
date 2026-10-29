@@ -1,3 +1,0 @@
-FEATURE_SAMPLE_AND_CAUSALITY_PASSED program=2e59a9bda0aa2e86148e2b5c34dd6c41e1236609cc7ed2acb0cf80d47145ccae
-FEATURE_VIEW_START program=2e59a9bda0aa2e86148e2b5c34dd6c41e1236609cc7ed2acb0cf80d47145ccae base cache preserved
-FEATURE_VIEW_PROGRESS devices=3075 rows=408133 elapsed_seconds=30

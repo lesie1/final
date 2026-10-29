@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_010",
-  "kind": "high_score_contrast",
-  "question": "在 trial_010 的 TRAIN 设备分组交叉验证留出设备上，超过阈值的高分单元中，哪些因果特征能可靠区分真故障（TP）与误报（FP）？特别关注 base 特征中与地址扩散、突发强度和近期新增模式相关的列。",
-  "reason": "trial_010 已将 CV F1 提升至 0.1627，但仍有 507 个 FP 与 69 个 TP；参数对照未通过采纳，说明继续调参收益有限。需要定位高分误报与真故障之间可分性较强的特征，为下一轮 features 实验提供证据。"
-}

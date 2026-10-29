@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_011",
-  "kind": "missed_fault_contrast",
-  "question": "在 trial_011 的 TRAIN OOF 漏报中，20 个已有分数但低于阈值的 FN 与 TN 在 CE 计数/log 频度、burst/DQ 间隔、bank/row/column 等因果特征上的快照有何可区分模式？另外 6 个 no_timely_score 是覆盖缺失还是仅无及时高分？",
-  "reason": "trial_011 与 trial_009 的 CV 中 FN=26，其中 20 个属于 scored_below_threshold，6 个 no_timely_score；高分区 TP/FP 的 high_score_contrast 未给出可信且可操作的单变量分离。需要先定位低分漏报群体的特征差异，才能判断下一特征请求或是否应停止调参。"
-}

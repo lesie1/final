@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "error_atlas",
-  "question": "基线 CV 中 27 个漏报里 scored below threshold 占 21、no timely score 占 6；同时 CV 的高分单元中 TP 仅 7、FP 为 17。请给出错误图集：漏报的三种原因计数、高分 TP 与 FP 在 CE/DQ/burst/row-column/bank 等可用特征上的 AUC 及 bootstrap 区间，以及 FN 与 TN 的特征快照。",
-  "reason": "trial_003 的近期 CE 突增特征在选择窗口未改善 F1 且未进入 CV；基线 CV 的漏报主要集中在有分数但低于阈值，误报也较多。需要先区分漏报与误报的特征证据，再决定下一步是针对低分漏报扩展特征，还是针对高分误报做特征或权重对照。"
-}

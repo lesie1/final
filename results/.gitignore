@@ -1,0 +1,3 @@
+# Saved models and run logs are part of the evidence; large arrays and caches stay out
+!*.log
+!*.ubj

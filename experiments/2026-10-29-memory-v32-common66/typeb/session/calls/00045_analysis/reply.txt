@@ -1,7 +1,0 @@
-{
-  "action": "diagnose",
-  "parent": "trial_001",
-  "kind": "high_score_contrast",
-  "question": "在 best (trial_001) 的 TRAIN OOF 中，超过阈值的高分单元里，哪些特征（尤其是 burst_count_*_15m、fault_row_num_15m、fault_column_num_15m、read_ce_count_15m、error_burst_count_15m 等）能够区分真故障（TP）与误报（FP）？",
-  "reason": "当前 best 在 CV 中 FP=17，selection FP=13；参数实验和多个特征实验未能有效减少 FP（trial_002 FP 增到 25，trial_005 设备权重在 CV FP 57，多个特征实验 FP 仍高）。需要定位高分区误报的因果特征，以便提出针对性特征或单因素对照，而不是继续盲目调参。"
-}
