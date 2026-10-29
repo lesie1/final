@@ -1,0 +1,23 @@
+{
+  "audit": {
+    "sampling": {
+      "cross_validation_devices": 5740,
+      "cross_validation_rows": 263902
+    },
+    "training_samples": 263902,
+    "positive_samples": 2206,
+    "sample_membership_sha256": "137896c61842dcb53128990f0845a9959ee14efbad7b5b882cb66f6a61c6fa1f",
+    "training_devices": 2261,
+    "positive_devices": 31,
+    "candidate_samples_in_train_interval": 347757,
+    "eligible_no_history_samples": 0,
+    "excluded_maturity_or_lead_samples": 30204,
+    "weighted_class_ratio": 118.62919310970082,
+    "positive_weight": 118.62919310970082,
+    "estimated_matrix_ram_gib": 0.5272698923945427,
+    "base_weight_audit": {},
+    "weight_definition": "each sample = 1"
+  },
+  "held_out_devices": 1435,
+  "scored_units": 7160
+}

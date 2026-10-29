@@ -1,0 +1,4 @@
+TRAIN_SAMPLE_VALIDATED devices=12 shards=3 labels_visible=False
+FEATURE_SAMPLE_AND_CAUSALITY_PASSED program=be52d4ee363720385c0cded80dc9cf4d8903de76489d4d4a281141a0cb1fa8d4
+FEATURE_VIEW_START program=be52d4ee363720385c0cded80dc9cf4d8903de76489d4d4a281141a0cb1fa8d4 base cache preserved
+FEATURE_VIEW_PROGRESS devices=3664 rows=476850 elapsed_seconds=30

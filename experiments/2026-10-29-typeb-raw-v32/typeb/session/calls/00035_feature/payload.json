@@ -1,0 +1,3893 @@
+{
+  "task": "features",
+  "question": "在 TRAIN 设备分组 OOF 中，当前 best trial_001 得分超过阈值的高分单元里，真故障(TP)与误报(FP)在哪些因果特征上存在可信 AUC 分离（bootstrap 区间不含 0.5）？特别关注 raw_life_events、raw_life_new_cols_7d、raw_7d_distinct_cols 等生命周期总量与近期扩展字段，以及它们之间的对数比值是否真的能区分 TP 与 FP。",
+  "reason": "trial_009 的近期扩展/生命周期总量特征未通过 CV 接受检验，且高分区 FP 增多。需要基于 H2 构造更直接反映“近期扩展相对生命周期”的因果特征，优先减少高分区误报；已有 trial_009 中 FN/TN 方向单变量证据，但高分区 TP/FP 样本少，组合效应更可能成立。",
+  "expected": "构造 log1p(raw_life_new_cols_7d) - log1p(raw_life_events) 或类似近期扩展/生命周期比值后，高分区 TP 的中位数高于 FP，且 bootstrap AUC 区间不含 0.5（精确率方向）。",
+  "parent": "base",
+  "max_features": 4,
+  "profile": {
+    "feature_program": "base",
+    "feature_names": [
+      "all_ce_count_15m",
+      "all_ce_count_1h",
+      "all_ce_log_num_15m",
+      "all_ce_log_num_1h",
+      "burst_count_1_15m",
+      "burst_count_1_1h",
+      "burst_count_2_15m",
+      "burst_count_2_1h",
+      "burst_count_3_15m",
+      "burst_count_3_1h",
+      "burst_count_4_15m",
+      "burst_count_4_1h",
+      "burst_count_5_15m",
+      "burst_count_5_1h",
+      "burst_count_6_15m",
+      "burst_count_6_1h",
+      "burst_count_7_15m",
+      "burst_count_7_1h",
+      "burst_count_8_15m",
+      "burst_count_8_1h",
+      "ce_storm_count_15m",
+      "ce_storm_count_1h",
+      "dq_count_1_15m",
+      "dq_count_1_1h",
+      "dq_count_2_15m",
+      "dq_count_2_1h",
+      "dq_count_3_15m",
+      "dq_count_3_1h",
+      "dq_count_4_15m",
+      "dq_count_4_1h",
+      "error_bit_count_15m",
+      "error_bit_count_1h",
+      "error_burst_count_15m",
+      "error_burst_count_1h",
+      "error_dq_count_15m",
+      "error_dq_count_1h",
+      "fault_column_num_15m",
+      "fault_column_num_1h",
+      "fault_mode_bank_15m",
+      "fault_mode_bank_1h",
+      "fault_mode_cell_15m",
+      "fault_mode_cell_1h",
+      "fault_mode_column_15m",
+      "fault_mode_column_1h",
+      "fault_mode_device_15m",
+      "fault_mode_device_1h",
+      "fault_mode_others_15m",
+      "fault_mode_others_1h",
+      "fault_mode_row_15m",
+      "fault_mode_row_1h",
+      "fault_row_num_15m",
+      "fault_row_num_1h",
+      "log_happen_frequency_15m",
+      "log_happen_frequency_1h",
+      "max_burst_interval_15m",
+      "max_burst_interval_1h",
+      "max_dq_interval_15m",
+      "max_dq_interval_1h",
+      "read_ce_count_15m",
+      "read_ce_count_1h",
+      "read_ce_log_num_15m",
+      "read_ce_log_num_1h",
+      "scrub_ce_count_15m",
+      "scrub_ce_count_1h",
+      "scrub_ce_log_num_15m",
+      "scrub_ce_log_num_1h",
+      "raw_6h_events",
+      "raw_6h_max_err_bits",
+      "raw_6h_max_dq_count",
+      "raw_6h_max_beat_count",
+      "raw_6h_min_dq_interval",
+      "raw_6h_max_beat_interval",
+      "raw_6h_adjacent_dq_events",
+      "raw_6h_multi_dq_events",
+      "raw_6h_multi_beat_events",
+      "raw_6h_risky_events",
+      "raw_6h_distinct_cells",
+      "raw_6h_distinct_rows",
+      "raw_6h_distinct_cols",
+      "raw_6h_distinct_banks",
+      "raw_6h_distinct_chips",
+      "raw_24h_events",
+      "raw_24h_max_err_bits",
+      "raw_24h_max_dq_count",
+      "raw_24h_max_beat_count",
+      "raw_24h_min_dq_interval",
+      "raw_24h_max_beat_interval",
+      "raw_24h_adjacent_dq_events",
+      "raw_24h_multi_dq_events",
+      "raw_24h_multi_beat_events",
+      "raw_24h_risky_events",
+      "raw_24h_distinct_cells",
+      "raw_24h_distinct_rows",
+      "raw_24h_distinct_cols",
+      "raw_24h_distinct_banks",
+      "raw_24h_distinct_chips",
+      "raw_7d_events",
+      "raw_7d_max_err_bits",
+      "raw_7d_max_dq_count",
+      "raw_7d_max_beat_count",
+      "raw_7d_min_dq_interval",
+      "raw_7d_max_beat_interval",
+      "raw_7d_adjacent_dq_events",
+      "raw_7d_multi_dq_events",
+      "raw_7d_multi_beat_events",
+      "raw_7d_risky_events",
+      "raw_7d_distinct_cells",
+      "raw_7d_distinct_rows",
+      "raw_7d_distinct_cols",
+      "raw_7d_distinct_banks",
+      "raw_7d_distinct_chips",
+      "raw_life_events",
+      "raw_life_distinct_cells",
+      "raw_life_distinct_rows",
+      "raw_life_distinct_cols",
+      "raw_life_distinct_banks",
+      "raw_life_distinct_chips",
+      "raw_life_distinct_ranks",
+      "raw_life_max_err_bits",
+      "raw_life_max_dq_count",
+      "raw_life_max_beat_count",
+      "raw_life_risky_events",
+      "raw_life_adjacent_dq_events",
+      "raw_life_top_cell_share",
+      "raw_life_max_cols_per_row",
+      "raw_life_max_rows_per_col",
+      "raw_life_days_since_first",
+      "raw_life_new_rows_7d",
+      "raw_life_new_cols_7d",
+      "raw_life_new_patterns_7d",
+      "raw_life_scrub_share",
+      "raw_6h_bit_observed_events",
+      "raw_24h_bit_observed_events",
+      "raw_7d_bit_observed_events",
+      "raw_life_bit_observed_events"
+    ],
+    "interface_version": "causal_features_v2",
+    "column_summary": {
+      "all_ce_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 301.0,
+        "mean": 70.151688,
+        "devices_with_values": 12
+      },
+      "all_ce_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 301.0,
+        "mean": 82.776543,
+        "devices_with_values": 12
+      },
+      "all_ce_log_num_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 72.0,
+        "mean": 4.503875,
+        "devices_with_values": 12
+      },
+      "all_ce_log_num_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 120.0,
+        "mean": 9.278708,
+        "devices_with_values": 12
+      },
+      "burst_count_1_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 72.0,
+        "mean": 4.199987,
+        "devices_with_values": 12
+      },
+      "burst_count_1_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 120.0,
+        "mean": 8.377187,
+        "devices_with_values": 12
+      },
+      "burst_count_2_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 18.0,
+        "mean": 0.137115,
+        "devices_with_values": 12
+      },
+      "burst_count_2_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 30.0,
+        "mean": 0.389876,
+        "devices_with_values": 12
+      },
+      "burst_count_3_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 21.0,
+        "mean": 0.03767,
+        "devices_with_values": 12
+      },
+      "burst_count_3_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 42.0,
+        "mean": 0.120936,
+        "devices_with_values": 12
+      },
+      "burst_count_4_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 8.0,
+        "mean": 0.018023,
+        "devices_with_values": 12
+      },
+      "burst_count_4_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 18.0,
+        "mean": 0.051478,
+        "devices_with_values": 12
+      },
+      "burst_count_5_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 13.0,
+        "mean": 0.031085,
+        "devices_with_values": 12
+      },
+      "burst_count_5_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 37.0,
+        "mean": 0.096283,
+        "devices_with_values": 12
+      },
+      "burst_count_6_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 17.0,
+        "mean": 0.022677,
+        "devices_with_values": 12
+      },
+      "burst_count_6_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 52.0,
+        "mean": 0.075055,
+        "devices_with_values": 12
+      },
+      "burst_count_7_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 11.0,
+        "mean": 0.023818,
+        "devices_with_values": 12
+      },
+      "burst_count_7_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 31.0,
+        "mean": 0.077953,
+        "devices_with_values": 12
+      },
+      "burst_count_8_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 20.0,
+        "mean": 0.015455,
+        "devices_with_values": 12
+      },
+      "burst_count_8_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 30.0,
+        "mean": 0.043356,
+        "devices_with_values": 12
+      },
+      "ce_storm_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.001603,
+        "devices_with_values": 12
+      },
+      "ce_storm_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.003359,
+        "devices_with_values": 12
+      },
+      "dq_count_1_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 72.0,
+        "mean": 1.538164,
+        "devices_with_values": 12
+      },
+      "dq_count_1_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 103.0,
+        "mean": 4.352249,
+        "devices_with_values": 12
+      },
+      "dq_count_2_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 61.0,
+        "mean": 1.294185,
+        "devices_with_values": 12
+      },
+      "dq_count_2_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 112.0,
+        "mean": 2.033873,
+        "devices_with_values": 12
+      },
+      "dq_count_3_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 61.0,
+        "mean": 1.550919,
+        "devices_with_values": 12
+      },
+      "dq_count_3_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 120.0,
+        "mean": 2.525125,
+        "devices_with_values": 12
+      },
+      "dq_count_4_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 21.0,
+        "mean": 0.102562,
+        "devices_with_values": 12
+      },
+      "dq_count_4_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 52.0,
+        "mean": 0.320879,
+        "devices_with_values": 12
+      },
+      "error_bit_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 300.0,
+        "mean": 9.895177,
+        "devices_with_values": 12
+      },
+      "error_bit_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 572.0,
+        "mean": 19.455492,
+        "devices_with_values": 12
+      },
+      "error_burst_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 160.0,
+        "mean": 5.241169,
+        "devices_with_values": 12
+      },
+      "error_burst_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 312.0,
+        "mean": 11.549931,
+        "devices_with_values": 12
+      },
+      "error_dq_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 184.0,
+        "mean": 9.189537,
+        "devices_with_values": 12
+      },
+      "error_dq_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 360.0,
+        "mean": 17.278885,
+        "devices_with_values": 12
+      },
+      "fault_column_num_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.201238,
+        "devices_with_values": 12
+      },
+      "fault_column_num_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 15.0,
+        "mean": 0.430663,
+        "devices_with_values": 12
+      },
+      "fault_mode_bank_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.086515,
+        "devices_with_values": 12
+      },
+      "fault_mode_bank_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.114767,
+        "devices_with_values": 12
+      },
+      "fault_mode_cell_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.651219,
+        "devices_with_values": 12
+      },
+      "fault_mode_cell_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.509143,
+        "devices_with_values": 12
+      },
+      "fault_mode_column_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.153052,
+        "devices_with_values": 12
+      },
+      "fault_mode_column_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.196562,
+        "devices_with_values": 12
+      },
+      "fault_mode_device_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.029043,
+        "devices_with_values": 12
+      },
+      "fault_mode_device_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.010471,
+        "devices_with_values": 12
+      },
+      "fault_mode_others_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.055013,
+        "devices_with_values": 12
+      },
+      "fault_mode_others_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.150638,
+        "devices_with_values": 12
+      },
+      "fault_mode_row_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.025158,
+        "devices_with_values": 12
+      },
+      "fault_mode_row_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.018418,
+        "devices_with_values": 12
+      },
+      "fault_row_num_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.092991,
+        "devices_with_values": 12
+      },
+      "fault_row_num_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 11.0,
+        "mean": 0.255175,
+        "devices_with_values": 12
+      },
+      "log_happen_frequency_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 12.5,
+        "maximum": 900.0,
+        "mean": 685.159729,
+        "devices_with_values": 12
+      },
+      "log_happen_frequency_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 30.0,
+        "maximum": 3600.0,
+        "mean": 2130.120117,
+        "devices_with_values": 12
+      },
+      "max_burst_interval_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.377933,
+        "devices_with_values": 12
+      },
+      "max_burst_interval_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.386209,
+        "devices_with_values": 12
+      },
+      "max_dq_interval_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 1.313174,
+        "devices_with_values": 12
+      },
+      "max_dq_interval_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 1.348781,
+        "devices_with_values": 12
+      },
+      "read_ce_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 278.0,
+        "mean": 17.001976,
+        "devices_with_values": 12
+      },
+      "read_ce_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 278.0,
+        "mean": 18.790047,
+        "devices_with_values": 12
+      },
+      "read_ce_log_num_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 21.0,
+        "mean": 1.012535,
+        "devices_with_values": 12
+      },
+      "read_ce_log_num_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 52.0,
+        "mean": 2.431958,
+        "devices_with_values": 12
+      },
+      "scrub_ce_count_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 301.0,
+        "mean": 31.145918,
+        "devices_with_values": 12
+      },
+      "scrub_ce_count_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 301.0,
+        "mean": 38.012886,
+        "devices_with_values": 12
+      },
+      "scrub_ce_log_num_15m": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 61.0,
+        "mean": 1.658047,
+        "devices_with_values": 12
+      },
+      "scrub_ce_log_num_1h": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 120.0,
+        "mean": 2.892806,
+        "devices_with_values": 12
+      },
+      "raw_6h_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 1781.0,
+        "mean": 473.362793,
+        "devices_with_values": 12
+      },
+      "raw_6h_max_err_bits": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 23.0,
+        "mean": 3.514702,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_dq_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.420291,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_beat_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 1.788043,
+        "devices_with_values": 10
+      },
+      "raw_6h_min_dq_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 39578,
+        "missing_fraction": 0.13117,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.087978,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_beat_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.655339,
+        "devices_with_values": 10
+      },
+      "raw_6h_adjacent_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 1781.0,
+        "mean": 427.434235,
+        "devices_with_values": 10
+      },
+      "raw_6h_multi_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 1781.0,
+        "mean": 430.4664,
+        "devices_with_values": 10
+      },
+      "raw_6h_multi_beat_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 1188.0,
+        "mean": 67.960907,
+        "devices_with_values": 10
+      },
+      "raw_6h_risky_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 206.0,
+        "mean": 3.784443,
+        "devices_with_values": 10
+      },
+      "raw_6h_distinct_cells": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 192.0,
+        "mean": 40.50539,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_rows": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 192.0,
+        "mean": 37.065464,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_cols": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 52.0,
+        "mean": 6.092354,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_banks": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 14.0,
+        "mean": 2.333787,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_chips": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.333926,
+        "devices_with_values": 10
+      },
+      "raw_24h_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 6999.0,
+        "mean": 1860.322021,
+        "devices_with_values": 12
+      },
+      "raw_24h_max_err_bits": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 23.0,
+        "mean": 3.896122,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_dq_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.648028,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_beat_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 1.893966,
+        "devices_with_values": 10
+      },
+      "raw_24h_min_dq_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 43045,
+        "missing_fraction": 0.05506,
+        "minimum": 1.0,
+        "maximum": 2.0,
+        "mean": 1.033686,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_beat_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.819558,
+        "devices_with_values": 10
+      },
+      "raw_24h_adjacent_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 6999.0,
+        "mean": 1684.30542,
+        "devices_with_values": 10
+      },
+      "raw_24h_multi_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 6999.0,
+        "mean": 1695.619507,
+        "devices_with_values": 10
+      },
+      "raw_24h_multi_beat_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 4258.0,
+        "mean": 256.758118,
+        "devices_with_values": 10
+      },
+      "raw_24h_risky_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 654.0,
+        "mean": 12.641649,
+        "devices_with_values": 10
+      },
+      "raw_24h_distinct_cells": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 462.0,
+        "mean": 149.614456,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_rows": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 460.0,
+        "mean": 140.462708,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_cols": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 100.0,
+        "mean": 14.471626,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_banks": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 14.0,
+        "mean": 2.861678,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_chips": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.337349,
+        "devices_with_values": 10
+      },
+      "raw_7d_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 48807.0,
+        "mean": 12178.275391,
+        "devices_with_values": 12
+      },
+      "raw_7d_max_err_bits": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 23.0,
+        "mean": 4.29241,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_dq_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.844649,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_beat_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 1.960196,
+        "devices_with_values": 10
+      },
+      "raw_7d_min_dq_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 43469,
+        "missing_fraction": 0.04575,
+        "minimum": 1.0,
+        "maximum": 2.0,
+        "mean": 1.001587,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_beat_interval": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 1.024958,
+        "devices_with_values": 10
+      },
+      "raw_7d_adjacent_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 48804.0,
+        "mean": 11077.464844,
+        "devices_with_values": 10
+      },
+      "raw_7d_multi_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 48805.0,
+        "mean": 11149.494141,
+        "devices_with_values": 10
+      },
+      "raw_7d_multi_beat_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 27139.0,
+        "mean": 1579.680054,
+        "devices_with_values": 10
+      },
+      "raw_7d_risky_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 2624.0,
+        "mean": 65.506546,
+        "devices_with_values": 10
+      },
+      "raw_7d_distinct_cells": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 2070.0,
+        "mean": 663.275024,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_rows": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 2065.0,
+        "mean": 626.824341,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_cols": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 176.0,
+        "mean": 27.77244,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_banks": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 15.0,
+        "mean": 3.124909,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_chips": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.337349,
+        "devices_with_values": 10
+      },
+      "raw_life_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 377962.0,
+        "mean": 60496.25,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_cells": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 7517.0,
+        "mean": 1437.975464,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_rows": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 7456.0,
+        "mean": 1362.139893,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_cols": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 263.0,
+        "mean": 40.395824,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_banks": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 15.0,
+        "mean": 3.289992,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_chips": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.337349,
+        "devices_with_values": 10
+      },
+      "raw_life_distinct_ranks": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 1.0,
+        "mean": 1.0,
+        "devices_with_values": 12
+      },
+      "raw_life_max_err_bits": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 23.0,
+        "mean": 4.687565,
+        "devices_with_values": 10
+      },
+      "raw_life_max_dq_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 3.025692,
+        "devices_with_values": 10
+      },
+      "raw_life_max_beat_count": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 1.960196,
+        "devices_with_values": 10
+      },
+      "raw_life_risky_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 9289.0,
+        "mean": 367.657196,
+        "devices_with_values": 10
+      },
+      "raw_life_adjacent_dq_events": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 377855.0,
+        "mean": 53510.484375,
+        "devices_with_values": 10
+      },
+      "raw_life_top_cell_share": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0023112480994313955,
+        "maximum": 1.0,
+        "mean": 0.419495,
+        "devices_with_values": 12
+      },
+      "raw_life_max_cols_per_row": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 42.0,
+        "mean": 8.458872,
+        "devices_with_values": 12
+      },
+      "raw_life_max_rows_per_col": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 7456.0,
+        "mean": 1323.050903,
+        "devices_with_values": 12
+      },
+      "raw_life_days_since_first": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 91.18075561523438,
+        "mean": 40.759129,
+        "devices_with_values": 12
+      },
+      "raw_life_new_rows_7d": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1979.0,
+        "mean": 188.789368,
+        "devices_with_values": 12
+      },
+      "raw_life_new_cols_7d": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 147.0,
+        "mean": 3.7468,
+        "devices_with_values": 12
+      },
+      "raw_life_new_patterns_7d": {
+        "sample_rows": 45553,
+        "finite_rows": 44995,
+        "missing_fraction": 0.01225,
+        "minimum": 0.0,
+        "maximum": 1498.0,
+        "mean": 39.614311,
+        "devices_with_values": 10
+      },
+      "raw_life_scrub_share": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.283381,
+        "devices_with_values": 12
+      },
+      "raw_6h_bit_observed_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1781.0,
+        "mean": 472.098511,
+        "devices_with_values": 12
+      },
+      "raw_24h_bit_observed_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6999.0,
+        "mean": 1855.804321,
+        "devices_with_values": 12
+      },
+      "raw_7d_bit_observed_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 48807.0,
+        "mean": 12151.618164,
+        "devices_with_values": 12
+      },
+      "raw_life_bit_observed_events": {
+        "sample_rows": 45553,
+        "finite_rows": 45553,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 377962.0,
+        "mean": 60330.371094,
+        "devices_with_values": 12
+      }
+    },
+    "training_examples": [
+      {
+        "rows": 258,
+        "median_gap_seconds": 900.0
+      },
+      {
+        "rows": 6,
+        "median_gap_seconds": 2346.0
+      },
+      {
+        "rows": 2,
+        "median_gap_seconds": 613.0
+      },
+      {
+        "rows": 8192,
+        "median_gap_seconds": 900.0
+      },
+      {
+        "rows": 7591,
+        "median_gap_seconds": 939.0
+      },
+      {
+        "rows": 7526,
+        "median_gap_seconds": 882.0
+      },
+      {
+        "rows": 6311,
+        "median_gap_seconds": 924.0
+      },
+      {
+        "rows": 5479,
+        "median_gap_seconds": 933.5
+      },
+      {
+        "rows": 5466,
+        "median_gap_seconds": 919.0
+      },
+      {
+        "rows": 4164,
+        "median_gap_seconds": 960.0
+      },
+      {
+        "rows": 21,
+        "median_gap_seconds": 1149.5
+      },
+      {
+        "rows": 537,
+        "median_gap_seconds": 1799.0
+      }
+    ],
+    "labels_visible": false,
+    "source": "Diverse training-only device prefixes across spread shards. Missing in sample does NOT mean missing in population."
+  },
+  "feature_api": {
+    "version": "causal_features_v2",
+    "signature": "def transform(frame)",
+    "input": "One device, chronological numeric rows. No labels, device IDs or future rows. Select literal column names from profile.feature_names.",
+    "output": "pd.DataFrame of declared unique fe_ columns; preserve rows and index. Original columns are retained automatically.",
+    "series_methods": [
+      "abs",
+      "astype",
+      "clip",
+      "count",
+      "cummax",
+      "cummin",
+      "cumprod",
+      "cumsum",
+      "diff",
+      "ewm",
+      "expanding",
+      "ffill",
+      "fillna",
+      "isna",
+      "mask",
+      "max",
+      "mean",
+      "median",
+      "min",
+      "notna",
+      "quantile",
+      "replace",
+      "rolling",
+      "shift",
+      "std",
+      "sum",
+      "var",
+      "where"
+    ],
+    "numpy_functions": [
+      "abs",
+      "clip",
+      "exp",
+      "isfinite",
+      "isnan",
+      "log",
+      "log1p",
+      "maximum",
+      "minimum",
+      "sign",
+      "sqrt",
+      "where"
+    ],
+    "pandas_functions": [
+      "DataFrame"
+    ],
+    "past_helpers": {
+      "past.gap_seconds(frame)": "Series: current minus previous observation time in seconds; first value NaN.",
+      "past.observation_count(frame)": "Series: causal count 1,2,...,n; no measured-value missingness dependence."
+    },
+    "rules": [
+      "Only assignments to new local names and a final return. No loops, comprehensions, imports or arbitrary functions.",
+      "frame.index is permitted ONLY as index=frame.index in pd.DataFrame. For time gaps use past.gap_seconds(frame).",
+      "No frame.columns, to_series, dt, iloc, loc, values, pd.Series, pd.to_numeric or apply. Inputs are already numeric.",
+      "Use arithmetic operators / + - * instead of .div/.add/.sub/.mul. Use literal column names; never discover columns dynamically.",
+      "Reductions must directly follow rolling/expanding/ewm. Use trailing real-time rolling windows; center=True and negative shifts are forbidden.",
+      "Missing measurements stay unknown unless the hypothesis explicitly justifies a constant or forward fill. No infinities.",
+      "Zero finite values in a bounded sample is a coverage limitation, not evidence that the entire dataset is empty."
+    ],
+    "examples": [
+      {
+        "features": [
+          "fe_change"
+        ],
+        "source": "def transform(frame):\n    change = frame['metric'].diff(1)\n    return pd.DataFrame({'fe_change': change}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_gap",
+          "fe_count"
+        ],
+        "source": "def transform(frame):\n    gap = past.gap_seconds(frame)\n    count = past.observation_count(frame)\n    return pd.DataFrame({'fe_gap': gap, 'fe_count': count}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_mean"
+        ],
+        "source": "def transform(frame):\n    avg = frame['metric'].rolling('7D', min_periods=1).mean()\n    return pd.DataFrame({'fe_mean': avg}, index=frame.index)"
+      }
+    ]
+  },
+  "semantic_mapping": {
+    "observations": [
+      {
+        "glob": "type_B/*.feather",
+        "id_column": null,
+        "time_column": "LogTime",
+        "time_unit": "s",
+        "timezone": "UTC",
+        "filters": {},
+        "features": [
+          {
+            "name": "read_ce_log_num_15m",
+            "column": "read_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic read_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "scrub_ce_log_num_15m",
+            "column": "scrub_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic scrub_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "all_ce_log_num_15m",
+            "column": "all_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic all_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "read_ce_count_15m",
+            "column": "read_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic read_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "scrub_ce_count_15m",
+            "column": "scrub_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic scrub_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "all_ce_count_15m",
+            "column": "all_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic all_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "log_happen_frequency_15m",
+            "column": "log_happen_frequency_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic log_happen_frequency_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "ce_storm_count_15m",
+            "column": "ce_storm_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic ce_storm_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_others_15m",
+            "column": "fault_mode_others_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_others_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_device_15m",
+            "column": "fault_mode_device_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_device_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_bank_15m",
+            "column": "fault_mode_bank_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_bank_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_row_15m",
+            "column": "fault_mode_row_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_row_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_column_15m",
+            "column": "fault_mode_column_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_column_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_cell_15m",
+            "column": "fault_mode_cell_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_cell_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_row_num_15m",
+            "column": "fault_row_num_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_row_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_column_num_15m",
+            "column": "fault_column_num_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_column_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_bit_count_15m",
+            "column": "error_bit_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_bit_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_dq_count_15m",
+            "column": "error_dq_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_dq_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_burst_count_15m",
+            "column": "error_burst_count_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_burst_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "max_dq_interval_15m",
+            "column": "max_dq_interval_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic max_dq_interval_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "max_burst_interval_15m",
+            "column": "max_burst_interval_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic max_burst_interval_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_1_15m",
+            "column": "dq_count=1_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=1_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_2_15m",
+            "column": "dq_count=2_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=2_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_3_15m",
+            "column": "dq_count=3_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=3_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_4_15m",
+            "column": "dq_count=4_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=4_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_1_15m",
+            "column": "burst_count=1_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=1_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_2_15m",
+            "column": "burst_count=2_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=2_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_3_15m",
+            "column": "burst_count=3_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=3_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_4_15m",
+            "column": "burst_count=4_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=4_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_5_15m",
+            "column": "burst_count=5_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=5_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_6_15m",
+            "column": "burst_count=6_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=6_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_7_15m",
+            "column": "burst_count=7_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=7_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_8_15m",
+            "column": "burst_count=8_15m",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=8_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "read_ce_log_num_1h",
+            "column": "read_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic read_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "scrub_ce_log_num_1h",
+            "column": "scrub_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic scrub_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "all_ce_log_num_1h",
+            "column": "all_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic all_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "read_ce_count_1h",
+            "column": "read_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic read_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "scrub_ce_count_1h",
+            "column": "scrub_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic scrub_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "all_ce_count_1h",
+            "column": "all_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic all_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "log_happen_frequency_1h",
+            "column": "log_happen_frequency_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic log_happen_frequency_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "ce_storm_count_1h",
+            "column": "ce_storm_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic ce_storm_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_others_1h",
+            "column": "fault_mode_others_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_others_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_device_1h",
+            "column": "fault_mode_device_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_device_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_bank_1h",
+            "column": "fault_mode_bank_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_bank_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_row_1h",
+            "column": "fault_mode_row_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_row_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_column_1h",
+            "column": "fault_mode_column_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_column_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_mode_cell_1h",
+            "column": "fault_mode_cell_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_mode_cell_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_row_num_1h",
+            "column": "fault_row_num_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_row_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "fault_column_num_1h",
+            "column": "fault_column_num_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic fault_column_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_bit_count_1h",
+            "column": "error_bit_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_bit_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_dq_count_1h",
+            "column": "error_dq_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_dq_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "error_burst_count_1h",
+            "column": "error_burst_count_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic error_burst_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "max_dq_interval_1h",
+            "column": "max_dq_interval_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic max_dq_interval_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "max_burst_interval_1h",
+            "column": "max_burst_interval_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic max_burst_interval_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_1_1h",
+            "column": "dq_count=1_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=1_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_2_1h",
+            "column": "dq_count=2_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=2_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_3_1h",
+            "column": "dq_count=3_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=3_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "dq_count_4_1h",
+            "column": "dq_count=4_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic dq_count=4_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_1_1h",
+            "column": "burst_count=1_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=1_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_2_1h",
+            "column": "burst_count=2_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=2_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_3_1h",
+            "column": "burst_count=3_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=3_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_4_1h",
+            "column": "burst_count=4_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=4_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_5_1h",
+            "column": "burst_count=5_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=5_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_6_1h",
+            "column": "burst_count=6_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=6_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_7_1h",
+            "column": "burst_count=7_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=7_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          },
+          {
+            "name": "burst_count_8_1h",
+            "column": "burst_count=8_1h",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "Precomputed baseline statistic burst_count=8_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+          }
+        ]
+      }
+    ],
+    "failure": {
+      "mode": "tickets",
+      "glob": "failure_ticket.csv",
+      "id_column": "sn_name",
+      "time_column": "alarm_time",
+      "time_unit": "s",
+      "timezone": "UTC",
+      "definition": "First recorded uncorrectable memory failure from the released maintenance tickets; TypeB only."
+    },
+    "followup": {
+      "mode": "complete_coverage",
+      "basis": "Organizer announcement 2025-01-24 explicitly states tickets cover Jan 1 through May 31 2024 and devices absent from tickets had no failure in that interval. Coverage ends at June 1; June-July are unlabeled and excluded."
+    },
+    "description": "TypeB precomputed baseline features, 66 inputs from 15-minute and 1-hour historical windows, 7175 device files. Device ID from filename. No TypeA observations or labels mixed in. New active cache additionally contains 69 causal raw CE descriptors; the cache manifest documents definitions and raw source identity."
+  },
+  "prior_experience": null,
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Cumulative correctable-error burden: repeated CEs mark marginal cells/wordlines, so higher past CE volume and larger physical footprint predict impending uncorrectable fault.",
+      "basis": "DRAM field studies often observe CE storms before UE; repeated errors indicate weak cells.",
+      "fields": [
+        "raw_life_events",
+        "raw_life_distinct_cells",
+        "raw_24h_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing and healthy devices show overlapping distributions for raw_life_events, raw_life_distinct_cells and raw_24h_events; no positive association."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Recent expansion of fault footprint: new rows, columns, and error-bit patterns in the last 7 days indicate accelerating degradation rather than a stable single-cell defect.",
+      "basis": "Spatially spreading faults suggest growing row/column or bank damage.",
+      "fields": [
+        "raw_life_new_rows_7d",
+        "raw_life_new_cols_7d",
+        "raw_life_new_patterns_7d",
+        "raw_7d_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show elevated recent new rows/columns/patterns or 7-day CE activity compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Multi-bit error severity: CEs with more error bits consume more ECC correction margin and signal stronger cell interference or partial wordline failure.",
+      "basis": "Higher bit multiplicity reduces ECC margin and reflects broader electrical damage.",
+      "fields": [
+        "raw_24h_max_err_bits",
+        "raw_life_max_err_bits",
+        "raw_6h_max_err_bits"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "No positive difference in maximum error bits per CE between failing and healthy devices."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Multi-DQ/symbol extent: CEs spanning multiple DQ lanes indicate I/O or datapath damage, with more DQ lanes per event reflecting a wider electrical fault.",
+      "basis": "DRAM I/O and datapath failures often produce correlated errors across multiple DQ lanes.",
+      "fields": [
+        "raw_24h_multi_dq_events",
+        "raw_24h_max_dq_count",
+        "raw_life_max_dq_count"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-DQ event counts and max DQ counts are not elevated in failing devices."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Risky bitmap shape: error bitmaps not confined to one half of the 8x4 array are harder to correct and may indicate multiple adjacent cells or row/column defects.",
+      "basis": "Bitmaps crossing the coarse correctability region imply more complex failure geometry.",
+      "fields": [
+        "raw_24h_risky_events",
+        "raw_life_risky_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Risky bitmap event counts do not separate failing from healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Adjacent-DQ and multi-beat coupling: fatal faults may show either tight adjacency in DQ lanes or broad beat involvement, reflecting crosstalk or timing marginality.",
+      "basis": "I/O crosstalk and rank/bank timing marginality can create correlated symbol and beat errors.",
+      "fields": [
+        "raw_24h_adjacent_dq_events",
+        "raw_24h_min_dq_interval",
+        "raw_24h_multi_beat_events",
+        "raw_24h_max_beat_count"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "No joint difference in adjacent-DQ, minimum DQ interval, multi-beat or max-beat statistics between failing and healthy groups."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Hot-cell concentration versus broad dispersion: a dominant hot cell may repeat without progressing, while broad row/column spread indicates systemic degradation.",
+      "basis": "Different DRAM failure modes produce either concentrated single-cell signatures or widespread row/column damage.",
+      "fields": [
+        "raw_life_top_cell_share",
+        "raw_life_max_cols_per_row",
+        "raw_life_max_rows_per_col"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "These concentration/dispersion summaries show no separation between failing and healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Patrol scrub detection share: a higher share of CEs found by patrol scrub indicates latent defects not triggered only by demand traffic.",
+      "basis": "Background scrub reads can reveal weak cells before demand accesses encounter them.",
+      "fields": [
+        "raw_life_scrub_share"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Patrol scrub share is not elevated in failing devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Short-horizon burstiness and temporal clustering: bursts within one hour and high event frequency indicate unstable cells or transient voltage/temperature margin loss.",
+      "basis": "CE bursts often reflect repeated accesses to marginal cells or unstable operating conditions.",
+      "fields": [
+        "ce_storm_count_1h",
+        "error_burst_count_1h",
+        "max_burst_interval_1h",
+        "log_happen_frequency_1h"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "No temporal clustering signal in 1-hour storm/burst/interval/frequency metrics differs between failing and healthy devices."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Fault mode localization at bank/device level: high counts of bank- or device-level fault modes represent broader control/address damage than isolated cell faults.",
+      "basis": "Bank and device fault modes imply larger physical or logical units are affected.",
+      "fields": [
+        "fault_mode_bank_1h",
+        "fault_mode_device_1h"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Bank- or device-level fault mode counts are not higher in failing devices."
+    },
+    {
+      "id": "H11",
+      "mechanism": "Rapid onset from first CE: devices that fail shortly after their first observed CE have acute defects, while long stable histories with old CEs are less dangerous.",
+      "basis": "Short time from first CE to failure suggests rapid progression of an acute fault.",
+      "fields": [
+        "raw_life_days_since_first"
+      ],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices do not show shorter days since first CE than healthy devices."
+    }
+  ],
+  "hypothesis_id": "H2",
+  "error_evidence": [
+    {
+      "kind": "error_atlas",
+      "question": "基线中 25 个漏报（19 个有分数但低于阈值、6 个无及时分数）和 14 个误报分别呈现哪些因果特征差异？哪些特征能区分 TP 与 FP，哪些能区分 FN 与 TN？",
+      "trial": "trial_001",
+      "contrast": {
+        "kind": "error_atlas",
+        "error_counts": {
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "TN": 35736,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 19,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "precision": {
+          "kind": "high_score_contrast",
+          "step": 250,
+          "threshold": 0.9396138787269592,
+          "cv_metrics": {
+            "step": 250,
+            "f1": 0.3157894736842105,
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "precision": 0.391304347826087,
+            "recall": 0.2647058823529412,
+            "threshold": 0.9396138787269592
+          },
+          "tp_units": 9,
+          "fp_units": 14,
+          "group_counts": {
+            "TP": 9,
+            "FP": 14
+          },
+          "sampled_group_counts": {
+            "TP": 9,
+            "FP": 14
+          },
+          "features": [
+            {
+              "feature": "raw_life_max_cols_per_row",
+              "auc_tp_vs_fp": 0.20238095238095238,
+              "auc_positive_vs_negative": 0.20238095238095238,
+              "separation": 0.2976190476190476,
+              "positive_median": 4.0,
+              "negative_median": 8.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.02297348484848485,
+                0.4308258928571429
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_bit_observed_events",
+              "auc_tp_vs_fp": 0.2261904761904762,
+              "auc_positive_vs_negative": 0.2261904761904762,
+              "separation": 0.27380952380952384,
+              "positive_median": 29.0,
+              "negative_median": 63.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.07466346153846154,
+                0.43670634920634926
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_events",
+              "auc_tp_vs_fp": 0.23015873015873015,
+              "auc_positive_vs_negative": 0.23015873015873015,
+              "separation": 0.2698412698412699,
+              "positive_median": 46.0,
+              "negative_median": 72.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.07673076923076924,
+                0.4412581699346405
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_bit_observed_events",
+              "auc_tp_vs_fp": 0.23412698412698413,
+              "auc_positive_vs_negative": 0.23412698412698413,
+              "separation": 0.26587301587301587,
+              "positive_median": 29.0,
+              "negative_median": 62.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.07445075757575759,
+                0.4923660714285715
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_bit_observed_events",
+              "auc_tp_vs_fp": 0.23809523809523808,
+              "auc_positive_vs_negative": 0.23809523809523808,
+              "separation": 0.2619047619047619,
+              "positive_median": 29.0,
+              "negative_median": 66.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.04529857397504457,
+                0.4409722222222223
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_bit_observed_events",
+              "auc_tp_vs_fp": 0.25,
+              "auc_positive_vs_negative": 0.25,
+              "separation": 0.25,
+              "positive_median": 20.0,
+              "negative_median": 48.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.07479166666666667,
+                0.5078030303030303
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_24h_events",
+              "auc_tp_vs_fp": 0.2619047619047619,
+              "auc_positive_vs_negative": 0.2619047619047619,
+              "separation": 0.23809523809523808,
+              "positive_median": 37.0,
+              "negative_median": 62.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.09832535885167464,
+                0.5238888888888891
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_events",
+              "auc_tp_vs_fp": 0.2619047619047619,
+              "auc_positive_vs_negative": 0.2619047619047619,
+              "separation": 0.23809523809523808,
+              "positive_median": 46.0,
+              "negative_median": 78.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.08030899859943978,
+                0.46940476190476194
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_events",
+              "auc_tp_vs_fp": 0.2777777777777778,
+              "auc_positive_vs_negative": 0.2777777777777778,
+              "separation": 0.2222222222222222,
+              "positive_median": 29.0,
+              "negative_median": 48.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.09164772727272727,
+                0.5715178571428571
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_6h_adjacent_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 24.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_6h_multi_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_24h_adjacent_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 24.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_24h_multi_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_7d_adjacent_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 24.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_7d_multi_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_adjacent_dq_events",
+              "auc_tp_vs_fp": 0.30158730158730157,
+              "auc_positive_vs_negative": 0.30158730158730157,
+              "separation": 0.19841269841269843,
+              "positive_median": 0.0,
+              "negative_median": 24.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.10573752228163993,
+                0.5241517857142858
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_new_patterns_7d",
+              "auc_tp_vs_fp": 0.30952380952380953,
+              "auc_positive_vs_negative": 0.30952380952380953,
+              "separation": 0.19047619047619047,
+              "positive_median": 9.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.11361408199643494,
+                0.5395510835913313
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_6h_risky_events",
+              "auc_tp_vs_fp": 0.31746031746031744,
+              "auc_positive_vs_negative": 0.31746031746031744,
+              "separation": 0.18253968253968256,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.11598827030812325,
+                0.5459054834054835
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_24h_risky_events",
+              "auc_tp_vs_fp": 0.31746031746031744,
+              "auc_positive_vs_negative": 0.31746031746031744,
+              "separation": 0.18253968253968256,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.11598827030812325,
+                0.5459054834054835
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_7d_risky_events",
+              "auc_tp_vs_fp": 0.31746031746031744,
+              "auc_positive_vs_negative": 0.31746031746031744,
+              "separation": 0.18253968253968256,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.11598827030812325,
+                0.5459054834054835
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_risky_events",
+              "auc_tp_vs_fp": 0.31746031746031744,
+              "auc_positive_vs_negative": 0.31746031746031744,
+              "separation": 0.18253968253968256,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.11598827030812325,
+                0.5459054834054835
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_6h_multi_beat_events",
+              "auc_tp_vs_fp": 0.32142857142857145,
+              "auc_positive_vs_negative": 0.32142857142857145,
+              "separation": 0.17857142857142855,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.13076923076923078,
+                0.5476562500000001
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_24h_multi_beat_events",
+              "auc_tp_vs_fp": 0.32142857142857145,
+              "auc_positive_vs_negative": 0.32142857142857145,
+              "separation": 0.17857142857142855,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.13076923076923078,
+                0.5476562500000001
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_7d_multi_beat_events",
+              "auc_tp_vs_fp": 0.32142857142857145,
+              "auc_positive_vs_negative": 0.32142857142857145,
+              "separation": 0.17857142857142855,
+              "positive_median": 0.0,
+              "negative_median": 25.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.13076923076923078,
+                0.5476562500000001
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_max_rows_per_col",
+              "auc_tp_vs_fp": 0.3333333333333333,
+              "auc_positive_vs_negative": 0.3333333333333333,
+              "separation": 0.16666666666666669,
+              "positive_median": 2.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.125,
+                0.5686825980392157
+              ],
+              "credible": false
+            }
+          ],
+          "credible_features": [
+            "raw_life_max_cols_per_row",
+            "raw_7d_bit_observed_events",
+            "raw_7d_events",
+            "raw_24h_bit_observed_events",
+            "raw_life_bit_observed_events",
+            "raw_life_events"
+          ],
+          "eligible_units": 35784,
+          "error_counts": {
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "TN": 35736,
+            "fn_no_timely_clock": 0,
+            "fn_no_timely_score": 6,
+            "fn_scored_below_threshold": 19,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        },
+        "recall": {
+          "kind": "missed_fault_contrast",
+          "step": 250,
+          "threshold": 0.9396138787269592,
+          "cv_metrics": {
+            "step": 250,
+            "f1": 0.3157894736842105,
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "precision": 0.391304347826087,
+            "recall": 0.2647058823529412,
+            "threshold": 0.9396138787269592
+          },
+          "tp_units": 0,
+          "fp_units": 0,
+          "group_counts": {
+            "FN": 25,
+            "TN": 35736
+          },
+          "sampled_group_counts": {
+            "FN": 25,
+            "TN": 1000
+          },
+          "features": [
+            {
+              "feature": "raw_24h_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8216671119422922,
+              "separation": 0.32166711194229225,
+              "positive_median": 4.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.7260519073966221,
+                0.9070201012110751
+              ],
+              "credible": true
+            },
+            {
+              "feature": "read_ce_count_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8197969543147208,
+              "separation": 0.31979695431472077,
+              "positive_median": 7.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6948992366889365,
+                0.9115283555729985
+              ],
+              "credible": true
+            },
+            {
+              "feature": "read_ce_log_num_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8196633716270372,
+              "separation": 0.3196633716270372,
+              "positive_median": 3.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6923387222742893,
+                0.9155387084702971
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8160566390595779,
+              "separation": 0.3160566390595779,
+              "positive_median": 6.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.7170658422459893,
+                0.9034235649174674
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_events",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.81432006411969,
+              "separation": 0.31432006411969005,
+              "positive_median": 18.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6958863793133943,
+                0.9173132455131413
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8113812449906492,
+              "separation": 0.31138124499064923,
+              "positive_median": 4.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.7145508286647992,
+                0.8973290877185349
+              ],
+              "credible": true
+            },
+            {
+              "feature": "read_ce_log_num_15m",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8111140796152818,
+              "separation": 0.3111140796152818,
+              "positive_median": 2.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6901871229260935,
+                0.9092786628706506
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8101790008014961,
+              "separation": 0.3101790008014961,
+              "positive_median": 4.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6979307514866675,
+                0.9054228373965217
+              ],
+              "credible": true
+            },
+            {
+              "feature": "read_ce_count_15m",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8067058509217205,
+              "separation": 0.30670585092172054,
+              "positive_median": 3.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6944318181818182,
+                0.902154184490614
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8048356932941491,
+              "separation": 0.30483569329414906,
+              "positive_median": 7.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.7047661541889483,
+                0.900892063210865
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.804434945231098,
+              "separation": 0.30443494523109804,
+              "positive_median": 4.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6931685923361965,
+                0.9055083001793528
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8002938819129041,
+              "separation": 0.30029388191290407,
+              "positive_median": 8.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6969956462339335,
+                0.8917413243937635
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7854662035800161,
+              "separation": 0.28546620358001606,
+              "positive_median": 8.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6826956937367011,
+                0.8815349347613256
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_new_patterns_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7804054054054054,
+              "separation": 0.2804054054054054,
+              "positive_median": 2.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.36,
+              "negative_missing": 0.815,
+              "auc_interval_95": [
+                0.628665062814809,
+                0.8866962498212498
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_count_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7775848250066791,
+              "separation": 0.27758482500667914,
+              "positive_median": 11.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6513407060028409,
+                0.8768024634096063
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_events",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7745124231899546,
+              "separation": 0.2745124231899546,
+              "positive_median": 19.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6424949546348363,
+                0.888025877330001
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_new_cols_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7727758482500668,
+              "separation": 0.27277584825006684,
+              "positive_median": 3.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6453976826802836,
+                0.8732879640361892
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_max_cols_per_row",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7563451776649747,
+              "separation": 0.25634517766497467,
+              "positive_median": 5.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6519104704685722,
+                0.8517031233976825
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_log_num_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7511354528453112,
+              "separation": 0.25113545284531125,
+              "positive_median": 3.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.6237255387975346,
+                0.8571684511367998
+              ],
+              "credible": true
+            },
+            {
+              "feature": "log_happen_frequency_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.24886454715468875,
+              "separation": 0.25113545284531125,
+              "positive_median": 1200.0,
+              "negative_median": 3600.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.1428315488632001,
+                0.37627446120246544
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_count_15m",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7468608068394336,
+              "separation": 0.24686080683943357,
+              "positive_median": 7.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.633276241732124,
+                0.8676530493728463
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_top_cell_share",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.25541009885118887,
+              "separation": 0.24458990114881113,
+              "positive_median": 0.40423718094825745,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.16382490921826476,
+                0.35967334012813046
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fault_mode_cell_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.2594175794816992,
+              "separation": 0.2405824205183008,
+              "positive_median": 0.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.16630100403105405,
+                0.3766278954963166
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_distinct_rows",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7317659631311783,
+              "separation": 0.23176596313117825,
+              "positive_median": 2.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.600793455262583,
+                0.8362083175445244
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_distinct_rows",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7273577344376169,
+              "separation": 0.22735773443761687,
+              "positive_median": 2.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.24,
+              "negative_missing": 0.803,
+              "auc_interval_95": [
+                0.5906159807690172,
+                0.8421114526462464
+              ],
+              "credible": true
+            }
+          ],
+          "credible_features": [
+            "raw_24h_distinct_cols",
+            "read_ce_count_1h",
+            "read_ce_log_num_1h",
+            "raw_7d_distinct_cols",
+            "raw_6h_events",
+            "raw_24h_distinct_cells",
+            "read_ce_log_num_15m",
+            "raw_6h_distinct_cols",
+            "read_ce_count_15m",
+            "raw_7d_distinct_cells",
+            "raw_6h_distinct_cells",
+            "raw_life_distinct_cols",
+            "raw_life_distinct_cells",
+            "raw_life_new_patterns_7d",
+            "all_ce_count_1h",
+            "raw_24h_events",
+            "raw_life_new_cols_7d",
+            "raw_life_max_cols_per_row",
+            "all_ce_log_num_1h",
+            "log_happen_frequency_1h",
+            "all_ce_count_15m",
+            "raw_life_top_cell_share",
+            "fault_mode_cell_1h",
+            "raw_24h_distinct_rows",
+            "raw_6h_distinct_rows"
+          ],
+          "eligible_units": 35784,
+          "error_counts": {
+            "TP": 9,
+            "FP": 14,
+            "FN": 25,
+            "TN": 35736,
+            "fn_no_timely_clock": 0,
+            "fn_no_timely_score": 6,
+            "fn_scored_below_threshold": 19,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        }
+      }
+    },
+    {
+      "kind": "high_score_contrast",
+      "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，高于阈值 0.9396138787269592 的高分单元里，真故障 TP=9 与误报 FP=14 在哪些特征上差异最大？哪些特征有助于在不损失真故障命中的前提下降低高分误报？",
+      "trial": "trial_001",
+      "contrast": {
+        "kind": "high_score_contrast",
+        "step": 250,
+        "threshold": 0.9396138787269592,
+        "cv_metrics": {
+          "step": 250,
+          "f1": 0.3157894736842105,
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "precision": 0.391304347826087,
+          "recall": 0.2647058823529412,
+          "threshold": 0.9396138787269592
+        },
+        "tp_units": 9,
+        "fp_units": 14,
+        "group_counts": {
+          "TP": 9,
+          "FP": 14
+        },
+        "sampled_group_counts": {
+          "TP": 9,
+          "FP": 14
+        },
+        "features": [
+          {
+            "feature": "raw_life_max_cols_per_row",
+            "auc_tp_vs_fp": 0.20238095238095238,
+            "auc_positive_vs_negative": 0.20238095238095238,
+            "separation": 0.2976190476190476,
+            "positive_median": 4.0,
+            "negative_median": 8.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.02297348484848485,
+              0.4308258928571429
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_7d_bit_observed_events",
+            "auc_tp_vs_fp": 0.2261904761904762,
+            "auc_positive_vs_negative": 0.2261904761904762,
+            "separation": 0.27380952380952384,
+            "positive_median": 29.0,
+            "negative_median": 63.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.07466346153846154,
+              0.43670634920634926
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_7d_events",
+            "auc_tp_vs_fp": 0.23015873015873015,
+            "auc_positive_vs_negative": 0.23015873015873015,
+            "separation": 0.2698412698412699,
+            "positive_median": 46.0,
+            "negative_median": 72.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.07673076923076924,
+              0.4412581699346405
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_24h_bit_observed_events",
+            "auc_tp_vs_fp": 0.23412698412698413,
+            "auc_positive_vs_negative": 0.23412698412698413,
+            "separation": 0.26587301587301587,
+            "positive_median": 29.0,
+            "negative_median": 62.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.07445075757575759,
+              0.4923660714285715
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_bit_observed_events",
+            "auc_tp_vs_fp": 0.23809523809523808,
+            "auc_positive_vs_negative": 0.23809523809523808,
+            "separation": 0.2619047619047619,
+            "positive_median": 29.0,
+            "negative_median": 66.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.04529857397504457,
+              0.4409722222222223
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_bit_observed_events",
+            "auc_tp_vs_fp": 0.25,
+            "auc_positive_vs_negative": 0.25,
+            "separation": 0.25,
+            "positive_median": 20.0,
+            "negative_median": 48.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.07479166666666667,
+              0.5078030303030303
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_24h_events",
+            "auc_tp_vs_fp": 0.2619047619047619,
+            "auc_positive_vs_negative": 0.2619047619047619,
+            "separation": 0.23809523809523808,
+            "positive_median": 37.0,
+            "negative_median": 62.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.09832535885167464,
+              0.5238888888888891
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_life_events",
+            "auc_tp_vs_fp": 0.2619047619047619,
+            "auc_positive_vs_negative": 0.2619047619047619,
+            "separation": 0.23809523809523808,
+            "positive_median": 46.0,
+            "negative_median": 78.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.08030899859943978,
+              0.46940476190476194
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_events",
+            "auc_tp_vs_fp": 0.2777777777777778,
+            "auc_positive_vs_negative": 0.2777777777777778,
+            "separation": 0.2222222222222222,
+            "positive_median": 29.0,
+            "negative_median": 48.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.09164772727272727,
+              0.5715178571428571
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_6h_adjacent_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 24.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_6h_multi_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_24h_adjacent_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 24.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_24h_multi_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_7d_adjacent_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 24.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_7d_multi_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_life_adjacent_dq_events",
+            "auc_tp_vs_fp": 0.30158730158730157,
+            "auc_positive_vs_negative": 0.30158730158730157,
+            "separation": 0.19841269841269843,
+            "positive_median": 0.0,
+            "negative_median": 24.5,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.10573752228163993,
+              0.5241517857142858
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_life_new_patterns_7d",
+            "auc_tp_vs_fp": 0.30952380952380953,
+            "auc_positive_vs_negative": 0.30952380952380953,
+            "separation": 0.19047619047619047,
+            "positive_median": 9.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.11361408199643494,
+              0.5395510835913313
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_6h_risky_events",
+            "auc_tp_vs_fp": 0.31746031746031744,
+            "auc_positive_vs_negative": 0.31746031746031744,
+            "separation": 0.18253968253968256,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.11598827030812325,
+              0.5459054834054835
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_24h_risky_events",
+            "auc_tp_vs_fp": 0.31746031746031744,
+            "auc_positive_vs_negative": 0.31746031746031744,
+            "separation": 0.18253968253968256,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.11598827030812325,
+              0.5459054834054835
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_7d_risky_events",
+            "auc_tp_vs_fp": 0.31746031746031744,
+            "auc_positive_vs_negative": 0.31746031746031744,
+            "separation": 0.18253968253968256,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.11598827030812325,
+              0.5459054834054835
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_life_risky_events",
+            "auc_tp_vs_fp": 0.31746031746031744,
+            "auc_positive_vs_negative": 0.31746031746031744,
+            "separation": 0.18253968253968256,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.11598827030812325,
+              0.5459054834054835
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_6h_multi_beat_events",
+            "auc_tp_vs_fp": 0.32142857142857145,
+            "auc_positive_vs_negative": 0.32142857142857145,
+            "separation": 0.17857142857142855,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.13076923076923078,
+              0.5476562500000001
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_24h_multi_beat_events",
+            "auc_tp_vs_fp": 0.32142857142857145,
+            "auc_positive_vs_negative": 0.32142857142857145,
+            "separation": 0.17857142857142855,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.13076923076923078,
+              0.5476562500000001
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_7d_multi_beat_events",
+            "auc_tp_vs_fp": 0.32142857142857145,
+            "auc_positive_vs_negative": 0.32142857142857145,
+            "separation": 0.17857142857142855,
+            "positive_median": 0.0,
+            "negative_median": 25.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.13076923076923078,
+              0.5476562500000001
+            ],
+            "credible": false
+          },
+          {
+            "feature": "raw_life_max_rows_per_col",
+            "auc_tp_vs_fp": 0.3333333333333333,
+            "auc_positive_vs_negative": 0.3333333333333333,
+            "separation": 0.16666666666666669,
+            "positive_median": 2.0,
+            "negative_median": 4.0,
+            "positive_missing": 0.0,
+            "negative_missing": 0.0,
+            "auc_interval_95": [
+              0.125,
+              0.5686825980392157
+            ],
+            "credible": false
+          }
+        ],
+        "credible_features": [
+          "raw_life_max_cols_per_row",
+          "raw_7d_bit_observed_events",
+          "raw_7d_events",
+          "raw_24h_bit_observed_events",
+          "raw_life_bit_observed_events",
+          "raw_life_events"
+        ],
+        "eligible_units": 35784,
+        "error_counts": {
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "TN": 35736,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 19,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+      }
+    },
+    {
+      "kind": "missed_fault_contrast",
+      "question": "在 TRAIN 交叉验证的留出设备上，比较漏报故障单元(FN)与正常单元(TN)在候选因果 raw-CE 描述子上的分布/AUC，特别是当前 19 个有分数但低于阈值的漏报，能否看到 H1/H2/H3 等假设字段的差异？",
+      "trial": "trial_001",
+      "contrast": {
+        "kind": "missed_fault_contrast",
+        "step": 250,
+        "threshold": 0.9396138787269592,
+        "cv_metrics": {
+          "step": 250,
+          "f1": 0.3157894736842105,
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "precision": 0.391304347826087,
+          "recall": 0.2647058823529412,
+          "threshold": 0.9396138787269592
+        },
+        "tp_units": 0,
+        "fp_units": 0,
+        "group_counts": {
+          "FN": 25,
+          "TN": 35736
+        },
+        "sampled_group_counts": {
+          "FN": 25,
+          "TN": 1000
+        },
+        "features": [
+          {
+            "feature": "raw_24h_distinct_cols",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8216671119422922,
+            "separation": 0.32166711194229225,
+            "positive_median": 4.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.7260519073966221,
+              0.9070201012110751
+            ],
+            "credible": true
+          },
+          {
+            "feature": "read_ce_count_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8197969543147208,
+            "separation": 0.31979695431472077,
+            "positive_median": 7.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6948992366889365,
+              0.9115283555729985
+            ],
+            "credible": true
+          },
+          {
+            "feature": "read_ce_log_num_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8196633716270372,
+            "separation": 0.3196633716270372,
+            "positive_median": 3.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6923387222742893,
+              0.9155387084702971
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_7d_distinct_cols",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8160566390595779,
+            "separation": 0.3160566390595779,
+            "positive_median": 6.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.7170658422459893,
+              0.9034235649174674
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_events",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.81432006411969,
+            "separation": 0.31432006411969005,
+            "positive_median": 18.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6958863793133943,
+              0.9173132455131413
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_24h_distinct_cells",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8113812449906492,
+            "separation": 0.31138124499064923,
+            "positive_median": 4.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.7145508286647992,
+              0.8973290877185349
+            ],
+            "credible": true
+          },
+          {
+            "feature": "read_ce_log_num_15m",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8111140796152818,
+            "separation": 0.3111140796152818,
+            "positive_median": 2.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6901871229260935,
+              0.9092786628706506
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_distinct_cols",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8101790008014961,
+            "separation": 0.3101790008014961,
+            "positive_median": 4.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6979307514866675,
+              0.9054228373965217
+            ],
+            "credible": true
+          },
+          {
+            "feature": "read_ce_count_15m",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8067058509217205,
+            "separation": 0.30670585092172054,
+            "positive_median": 3.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6944318181818182,
+              0.902154184490614
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_7d_distinct_cells",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8048356932941491,
+            "separation": 0.30483569329414906,
+            "positive_median": 7.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.7047661541889483,
+              0.900892063210865
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_distinct_cells",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.804434945231098,
+            "separation": 0.30443494523109804,
+            "positive_median": 4.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6931685923361965,
+              0.9055083001793528
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_distinct_cols",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.8002938819129041,
+            "separation": 0.30029388191290407,
+            "positive_median": 8.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6969956462339335,
+              0.8917413243937635
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_distinct_cells",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7854662035800161,
+            "separation": 0.28546620358001606,
+            "positive_median": 8.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6826956937367011,
+              0.8815349347613256
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_new_patterns_7d",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7804054054054054,
+            "separation": 0.2804054054054054,
+            "positive_median": 2.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.36,
+            "negative_missing": 0.815,
+            "auc_interval_95": [
+              0.628665062814809,
+              0.8866962498212498
+            ],
+            "credible": true
+          },
+          {
+            "feature": "all_ce_count_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7775848250066791,
+            "separation": 0.27758482500667914,
+            "positive_median": 11.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6513407060028409,
+              0.8768024634096063
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_24h_events",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7745124231899546,
+            "separation": 0.2745124231899546,
+            "positive_median": 19.0,
+            "negative_median": 2.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6424949546348363,
+              0.888025877330001
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_new_cols_7d",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7727758482500668,
+            "separation": 0.27277584825006684,
+            "positive_median": 3.0,
+            "negative_median": 0.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6453976826802836,
+              0.8732879640361892
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_max_cols_per_row",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7563451776649747,
+            "separation": 0.25634517766497467,
+            "positive_median": 5.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6519104704685722,
+              0.8517031233976825
+            ],
+            "credible": true
+          },
+          {
+            "feature": "all_ce_log_num_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7511354528453112,
+            "separation": 0.25113545284531125,
+            "positive_median": 3.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.6237255387975346,
+              0.8571684511367998
+            ],
+            "credible": true
+          },
+          {
+            "feature": "log_happen_frequency_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.24886454715468875,
+            "separation": 0.25113545284531125,
+            "positive_median": 1200.0,
+            "negative_median": 3600.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.1428315488632001,
+              0.37627446120246544
+            ],
+            "credible": true
+          },
+          {
+            "feature": "all_ce_count_15m",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7468608068394336,
+            "separation": 0.24686080683943357,
+            "positive_median": 7.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.633276241732124,
+              0.8676530493728463
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_life_top_cell_share",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.25541009885118887,
+            "separation": 0.24458990114881113,
+            "positive_median": 0.40423718094825745,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.16382490921826476,
+              0.35967334012813046
+            ],
+            "credible": true
+          },
+          {
+            "feature": "fault_mode_cell_1h",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.2594175794816992,
+            "separation": 0.2405824205183008,
+            "positive_median": 0.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.16630100403105405,
+              0.3766278954963166
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_24h_distinct_rows",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7317659631311783,
+            "separation": 0.23176596313117825,
+            "positive_median": 2.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.600793455262583,
+              0.8362083175445244
+            ],
+            "credible": true
+          },
+          {
+            "feature": "raw_6h_distinct_rows",
+            "auc_tp_vs_fp": null,
+            "auc_positive_vs_negative": 0.7273577344376169,
+            "separation": 0.22735773443761687,
+            "positive_median": 2.0,
+            "negative_median": 1.0,
+            "positive_missing": 0.24,
+            "negative_missing": 0.803,
+            "auc_interval_95": [
+              0.5906159807690172,
+              0.8421114526462464
+            ],
+            "credible": true
+          }
+        ],
+        "credible_features": [
+          "raw_24h_distinct_cols",
+          "read_ce_count_1h",
+          "read_ce_log_num_1h",
+          "raw_7d_distinct_cols",
+          "raw_6h_events",
+          "raw_24h_distinct_cells",
+          "read_ce_log_num_15m",
+          "raw_6h_distinct_cols",
+          "read_ce_count_15m",
+          "raw_7d_distinct_cells",
+          "raw_6h_distinct_cells",
+          "raw_life_distinct_cols",
+          "raw_life_distinct_cells",
+          "raw_life_new_patterns_7d",
+          "all_ce_count_1h",
+          "raw_24h_events",
+          "raw_life_new_cols_7d",
+          "raw_life_max_cols_per_row",
+          "all_ce_log_num_1h",
+          "log_happen_frequency_1h",
+          "all_ce_count_15m",
+          "raw_life_top_cell_share",
+          "fault_mode_cell_1h",
+          "raw_24h_distinct_rows",
+          "raw_6h_distinct_rows"
+        ],
+        "eligible_units": 35784,
+        "error_counts": {
+          "TP": 9,
+          "FP": 14,
+          "FN": 25,
+          "TN": 35736,
+          "fn_no_timely_clock": 0,
+          "fn_no_timely_score": 6,
+          "fn_scored_below_threshold": 19,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+      }
+    }
+  ],
+  "target": "precision",
+  "exploration_reason": "高分区 TP/FP 样本量有限，trial_009 的比值特征未纳入首次 CE 以来的时间或浓度/分散度量；组合效应与交互可能是分离高分区误报的关键，使用一次探索训练预算验证。",
+  "error": null,
+  "previous_response": null
+}

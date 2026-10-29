@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "2349a290a4ccd85ea8f0d088d0efd1c78426ed1eed2c3ccebcc2279533f7f54a",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '2349a290a4ccd85ea8f0d088d0efd1c78426ed1eed2c3ccebcc2279533f7f54a', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 TRAIN OOF 的漏报(FN)与正常(TN)对比中，能否用累积 CE 负担相关字段（如 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 等）构造因果特征，使 FN 与 TN 的 AUC 在召回方向上可信分离，并提升 CV 召回？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 TRAIN OOF 的漏报(FN)与正常(TN)对比中，能否用累积 CE 负担相关字段（如 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 等）构造因果特征，使 FN 与 TN 的 AUC 在召回方向上可信分离，并提升 CV 召回？",
+    "reason": "missed_fault_contrast 已显示多个 H1 相关字段的 AUC 区间不含 0.5，例如 raw_24h_distinct_cols AUC=0.822、read_ce_count_1h AUC=0.820、raw_7d_distinct_cols AUC=0.816，说明 FN 的 CE 累计负担高于 TN；当前漏报 19/25 有分数但低于阈值，特征增强可能提高漏报得分。",
+    "expected": "新增的因果特征在 missed_fault_contrast 中保持 AUC>0.5 且区间不含 0.5；训练对照的 CV recall 相对 trial_001 提高，新增命中 >0，同时 FP 不显著增加。",
+    "falsification": "若新特征在 FN/TN 或 TP/FP 的 AUC 区间含 0.5，或 CV F1/recall 未改善甚至更差，则 H1 的当前表达不能改进模型。",
+    "hypothesis_id": "H1",
+    "target": "recall",
+    "job": "job_001"
+  }
+}

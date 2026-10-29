@@ -1,0 +1,7 @@
+{
+  "model": "deepseek-v4-pro",
+  "finish_reason": "stop",
+  "max_tokens": 65536,
+  "reasoning_effort": null,
+  "reply_characters": 313
+}

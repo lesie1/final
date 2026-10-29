@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，高分区域的真故障(TP)与误报(FP)以及漏报(FN)与正常(TN)分别由哪些因果特征可信区分？特别关注 raw_life_events、raw_life_new_cols_7d、raw_7d_distinct_cols、fault_mode_* 及短时突发特征，以便为最后一次试验选择有效特征或重排序。",
+  "reason": "当前 best trial_001 CV F1=0.3158，FP=14，FN=25（其中6个无及时分数、19个有分数但低于阈值）。此前6次特征试验大多降低CV F1，parallel试验虽将CV F1提高到0.3582但新增7个FP且未达0.9采纳概率。目前尚未使用任何正式诊断，在仅剩1次试验前需要error_atlas同时提供高分TP/FP与FN/TN的特征对比及漏报原因分解，避免盲试特征或参数。"
+}

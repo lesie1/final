@@ -1,0 +1,67 @@
+{
+  "id": "cbb4d68017959665359804d46870c36af754cb190c7014d415398b2f1a0effdf",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    new_cols = frame['raw_life_new_cols_7d']\n    new_rows = frame['raw_life_new_rows_7d']\n    new_patterns = frame['raw_life_new_patterns_7d']\n    life_events = frame['raw_life_events']\n    life_cols = frame['raw_life_distinct_cols']\n    recent_cols = frame['raw_7d_distinct_cols']\n    fe_recent_cols_per_life_event = np.log1p(new_cols) - np.log1p(life_events)\n    fe_recent_rows_per_life_event = np.log1p(new_rows) - np.log1p(life_events)\n    fe_recent_patterns_per_life_event = np.log1p(new_patterns) - np.log1p(life_events)\n    fe_recent_7d_cols_per_lifetime_cols = np.log1p(recent_cols) - np.log1p(life_cols)\n    return pd.DataFrame({'fe_recent_cols_per_life_event': fe_recent_cols_per_life_event, 'fe_recent_rows_per_life_event': fe_recent_rows_per_life_event, 'fe_recent_patterns_per_life_event': fe_recent_patterns_per_life_event, 'fe_recent_7d_cols_per_lifetime_cols': fe_recent_7d_cols_per_lifetime_cols}, index=frame.index)",
+    "features": [
+      "fe_recent_cols_per_life_event",
+      "fe_recent_rows_per_life_event",
+      "fe_recent_patterns_per_life_event",
+      "fe_recent_7d_cols_per_lifetime_cols"
+    ]
+  },
+  "reason": "H2：近期空间扩展相对生命周期 CE 负担的比值应能分离高分区 TP 与 FP。fe_recent_cols_per_life_event 直接检验 log1p(raw_life_new_cols_7d)-log1p(raw_life_events)；FP 可能有高生命周期事件总量但缺少近期新列扩展。同时加入 rows/patterns 以及 7 天列数相对生命周期总列数的对数比，捕获同一机制的不同空间扩展侧面。若这些特征在高分区 TP 的中位数不高于 FP，或 bootstrap AUC 区间包含 0.5，则表明该组合无法在精确率方向减少高分区误报。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32762
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 21,
+      "finite_values": 63
+    },
+    {
+      "rows": 537,
+      "finite_values": 1611
+    }
+  ],
+  "sample_validation_seconds": 0.15098635852336884,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

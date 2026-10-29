@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在最佳单阶段模型 trial_001 的 TRAIN 设备分组 OOF 中，漏报(FN=25)里 19 个有分数但低于阈值、6 个无及时分数；这些 FN 与正常(TN)在 raw 描述子/预计算特征上是否有可信差异？高分 TP 与误报 FP 又由哪些特征区分？请同时给出漏报原因计数。",
+  "reason": "trial_002 降低 min_child_weight 后 CV F1 未提升，trial_003 的累积 CE 特征仅在选择窗口被筛除且未进入 CV；当前 CV 漏报 25/34，其中 19 个已有分数但低于阈值，说明主要问题不是完全没有打分而是排序不够。先用 error_atlas 同时检查 FN/TN 和高分 TP/FP 的特征对比及漏报分解，以决定是提出新特征、改 parallel 分支还是调整参数。"
+}

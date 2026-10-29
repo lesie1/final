@@ -1,0 +1,69 @@
+2026-10-29T09:43:54Z raw_typeb_search_started {"max_trials": 13, "raw_features": 69, "base_features": 66, "historical_test_previously_exposed": true}
+2026-10-29T09:44:04Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:45:14Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:47:25Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:47:35Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:50:15Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:50:25Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:51:35Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:52:55Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:53:05Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:53:45Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:55:35Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:56:35Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:58:15Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:58:25Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T09:59:36Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:00:46Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:00:56Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:02:36Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:04:36Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:04:46Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:05:56Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:08:26Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:10:26Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:11:56Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:14:17Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:16:37Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:17:57Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:18:57Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:19:07Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:20:07Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:21:27Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:22:47Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:25:07Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:26:28Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:27:58Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:29:08Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:29:18Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:31:38Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:33:08Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:34:28Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:37:18Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:37:28Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:38:39Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:40:09Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:40:19Z worker_finished {"phase": "search", "exit_code": 0, "error": null}
+2026-10-29T10:40:29Z worker_finished {"phase": "confirmation", "exit_code": 0, "error": null}
+2026-10-29T10:46:49Z worker_finished {"phase": "historical_test", "exit_code": -15, "error": null}
+2026-10-29T10:46:49Z batch_failed {"error": "Worker failed; inspect historical_test.log"}
+Traceback (most recent call last):
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 57, in <module>
+    try:main()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 51, in main
+    run([R/'evaluate.py'],'historical_test')
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 38, in run
+    require(p.returncode==0,why or 'Worker failed; inspect '+phase+'.log')
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/runtime/common.py", line 21, in require
+    raise ValueError(message)
+ValueError: Worker failed; inspect historical_test.log
+Traceback (most recent call last):
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 57, in <module>
+    try:main()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 51, in main
+    run([R/'evaluate.py'],'historical_test')
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/supervisor.py", line 38, in run
+    require(p.returncode==0,why or 'Worker failed; inspect '+phase+'.log')
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/runtime/common.py", line 21, in require
+    raise ValueError(message)
+ValueError: Worker failed; inspect historical_test.log

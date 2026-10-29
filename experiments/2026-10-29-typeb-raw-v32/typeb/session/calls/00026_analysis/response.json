@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "短时风暴/突发特征（如1小时 CE 风暴数、突发数、最大突发间隔、发生频率）能否在漏报(FN)与正常(TN)中形成可信分离，并从 trial_001 中 19 个已有及时分数但低于阈值的低分故障行中恢复命中？",
+  "reason": "trial_001 CV 中 25 个 FN 里 19 个有及时分数但低于阈值，说明主模型对部分真实故障行排序不足。trial_004 parallel 改善了 CV recall（0.2647→0.3529）但未达到采纳且增加较多 FP；trial_003/trial_007 的累积 CE 特征未改善 CV。短时突发/时间聚集是不同于累积负担的机制，可能只在这些低分故障行中与主模型产生互补。",
+  "expected": "新增短时风暴/突发特征在 FN vs TN 或 TP vs FP 至少一个方向上给出可信 AUC 分离，并在 CV 中提高 recall 与 F1，且不带来大量新增误报。",
+  "falsification": "若新增特征的 bootstrap AUC 区间包含 0.5，且 CV recall/F1 未提升或误报大幅增加，则 H9 在当前样本中不成立。",
+  "hypothesis_id": "H9",
+  "target": "recall",
+  "exploration_reason": "尚无本轮可引用的单变量错例对比证据，但 trial_004 证明低分漏报存在通过补充信号部分恢复的空间；短时突发可能仅在与主模型低分组合时有效，属于组合效应。当前故障单元仅 34，样本量小；使用 balanced prescreen 并消耗 1 个探索预算位，若单变量无信号仍请求训练以检验交互作用。"
+}

@@ -1,0 +1,11 @@
+{
+  "at": 1793270947.262092,
+  "old_script": "5e88417d889cce113135353519c278874982d212d3d160100f908bb05d76105f",
+  "new_script": "afa02ec17749b6a17e636a26e0801e3d435fcb909a84e7adb5a295849a74da26",
+  "changes": [
+    "Remove duplicated threshold keyword; check equality with frozen operating point",
+    "Include CV/confirmation and early-stop reason, data quality manifests, and infrastructure repair provenance"
+  ],
+  "evaluation_ast_guard_only": true,
+  "training_and_test_unchanged": true
+}

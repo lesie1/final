@@ -1,0 +1,39 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "2976e262f1070101cb87a9a33a246e6106f139bfe2c62b50564f0c0585a3b403",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '2976e262f1070101cb87a9a33a246e6106f139bfe2c62b50564f0c0585a3b403', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 TRAIN OOF 中，漏报(FN)与正常(TN)在 raw_7d_distinct_cols、raw_life_new_cols_7d 等近期扩展字段上 AUC 很高，但高分区真故障(TP)的 raw_life_events 等生命周期总量却低于误报(FP)。能否构造“近期扩展/生命周期总量”(如 raw_life_new_cols_7d / raw_life_events 或 raw_7d_distinct_cols / raw_life_events 的对数比值)特征，使 TP 与 FP 的 AUC 可信分离，并提升 F1？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 TRAIN OOF 中，漏报(FN)与正常(TN)在 raw_7d_distinct_cols、raw_life_new_cols_7d 等近期扩展字段上 AUC 很高，但高分区真故障(TP)的 raw_life_events 等生命周期总量却低于误报(FP)。能否构造“近期扩展/生命周期总量”(如 raw_life_new_cols_7d / raw_life_events 或 raw_7d_distinct_cols / raw_life_events 的对数比值)特征，使 TP 与 FP 的 AUC 可信分离，并提升 F1？",
+    "reason": "高分数对比中 TP 的生命周期事件数低于 FP（raw_life_events TP中位46 vs FP中位78.5），而漏报对比中 FN 的近期扩展字段显著高于 TN（raw_24h_distinct_cols AUC 0.82）。单独使用生命周期总量可能把真故障排在误报之后，单独使用近期扩展未能提升模型（trial_003/007/008）。需要构建相对变化指标同时支持召回漏报并抑制高分区误报。",
+    "expected": "新特征在 TP/FP 的 AUC 区间不含 0.5，且特征对照实验的 CV F1 高于 trial_001（0.3158），漏报中 fn_scored_below_threshold 数量下降，同时 FP 不显著增加。",
+    "falsification": "若新特征在 TP 与 FP 上的 AUC 区间包含 0.5，或特征对照实验的 CV F1 未超过基线，则说明该组合不能解释错误。",
+    "hypothesis_id": "H2",
+    "job": "job_004"
+  }
+}

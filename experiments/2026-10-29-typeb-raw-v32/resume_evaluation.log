@@ -1,0 +1,23 @@
+2026-10-29T10:47:23Z evaluation_infrastructure_repair {"retraining": false, "threshold_reselection": false, "import_guard_test_passed": true}
+2026-10-29T10:47:33Z worker_finished {"phase": "historical_test_resumed", "exit_code": 0, "error": null}
+2026-10-29T10:47:33Z raw_typeb_complete {"old_sessions_unchanged": true, "publication_pending": true}
+Traceback (most recent call last):
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/resume_evaluation.py", line 37, in <module>
+    try:main()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/resume_evaluation.py", line 34, in main
+    export()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/report_export.py", line 16, in main
+    rows=[dict(trial=x['trial'],step=x['operating_point']['step'],threshold=x['operating_point']['threshold'],**x['metrics']) for x in reports]
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/report_export.py", line 16, in <listcomp>
+    rows=[dict(trial=x['trial'],step=x['operating_point']['step'],threshold=x['operating_point']['threshold'],**x['metrics']) for x in reports]
+TypeError: dict() got multiple values for keyword argument 'threshold'
+Traceback (most recent call last):
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/resume_evaluation.py", line 37, in <module>
+    try:main()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/resume_evaluation.py", line 34, in main
+    export()
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/report_export.py", line 16, in main
+    rows=[dict(trial=x['trial'],step=x['operating_point']['step'],threshold=x['operating_point']['threshold'],**x['metrics']) for x in reports]
+  File "/root/autodl-tmp/typeb_raw_v32_20261029/report_export.py", line 16, in <listcomp>
+    rows=[dict(trial=x['trial'],step=x['operating_point']['step'],threshold=x['operating_point']['threshold'],**x['metrics']) for x in reports]
+TypeError: dict() got multiple values for keyword argument 'threshold'

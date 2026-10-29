@@ -1,0 +1,10 @@
+{
+  "status": "ready",
+  "max_trials": 13,
+  "features": 135,
+  "raw_features": 69,
+  "test_opened": false,
+  "existing_source_verified": true,
+  "source_sha256": "85c67e8d6466238ada5f19eadaa3f3693593f02bb214a8d8f21d4a6b875b52f5",
+  "quality": "/root/autodl-tmp/typeb_raw_v32_20261029/raw_cache/quality.json"
+}

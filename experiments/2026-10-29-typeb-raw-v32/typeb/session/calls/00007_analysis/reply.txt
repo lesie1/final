@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "missed_fault_contrast",
+  "question": "在 TRAIN 交叉验证的留出设备上，比较漏报故障单元(FN)与正常单元(TN)在候选因果 raw-CE 描述子上的分布/AUC，特别是当前 19 个有分数但低于阈值的漏报，能否看到 H1/H2/H3 等假设字段的差异？",
+  "reason": "best 模型的 CV 有 25 个 FN，其中 19 个已有分数但低于阈值，说明模型对这部分故障设备打分不足；需要特征级证据从 H1-H11 中选择最有希望的假设，而不是继续盲目调参。"
+}

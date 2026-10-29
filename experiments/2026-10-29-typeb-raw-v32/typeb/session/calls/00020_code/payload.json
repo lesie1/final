@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "当前 best trial_001 使用 sample 权重，而 trial_004 的 parallel 分支包含设备均衡辅助分支，使 CV F1 从 0.3158 提高到 0.3582，概率 0.823 接近但未达到 0.9。该组合实验不能单独归因于设备权重，因此按照 scope 允许的单因素对照，仅将 base_weight 改为 device，保留其余配置不变，检验设备均衡权重本身能否改善设备分组 OOF F1。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "base_weight": "device"
+    },
+    "reason": "当前 best trial_001 使用 sample 权重，而 trial_004 的 parallel 分支包含设备均衡辅助分支，使 CV F1 从 0.3158 提高到 0.3582，概率 0.823 接近但未达到 0.9。该组合实验不能单独归因于设备权重，因此按照 scope 允许的单因素对照，仅将 base_weight 改为 device，保留其余配置不变，检验设备均衡权重本身能否改善设备分组 OOF F1。",
+    "hypothesis": "设备均衡权重可以减少多样本设备在训练中的过度影响，提高少样本故障设备的召回，从而在不显著增加误报的前提下改善设备分组 OOF F1。",
+    "expected": "CV F1 点估计优于 trial_001，且配对 bootstrap 的 P(better) >= 0.9；同时新增误报数应低于 trial_004 平行分支新增的 7 个，新增命中数尽量不减少。",
+    "falsification": "若 CV F1 未提高，或 P(better) < 0.9，则该单因素权重调整不足以改善模型，后续应转向特征研究而非继续调整权重或参数。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "at": 1793270947.2625096,
+  "publication_pending": true,
+  "trials": 12,
+  "adopted": "trial_001",
+  "repairs": [
+    "evaluation_startup_repair.json",
+    "report_repair.json"
+  ]
+}

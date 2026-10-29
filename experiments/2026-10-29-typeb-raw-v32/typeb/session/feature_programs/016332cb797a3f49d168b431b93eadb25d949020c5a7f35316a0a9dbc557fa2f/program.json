@@ -1,0 +1,67 @@
+{
+  "id": "016332cb797a3f49d168b431b93eadb25d949020c5a7f35316a0a9dbc557fa2f",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    read_1h = np.maximum(frame['read_ce_count_1h'], 1.0)\n    read_15m = frame['read_ce_count_15m']\n    short_read = read_15m / read_1h\n\n    burst_1h = np.maximum(frame['error_burst_count_1h'], 1.0)\n    burst_15m = frame['error_burst_count_15m']\n    short_burst = burst_15m / burst_1h\n\n    raw_24h = np.maximum(frame['raw_24h_events'], 1.0)\n    raw_6h = frame['raw_6h_events']\n    recent_ratio = raw_6h / raw_24h\n\n    all_1h = np.maximum(frame['all_ce_count_1h'], 1.0)\n    storm_1h = frame['ce_storm_count_1h']\n    storm_density = storm_1h / all_1h\n\n    return pd.DataFrame({\n        'fe_short_term_read_ce_share': short_read,\n        'fe_short_term_burst_share': short_burst,\n        'fe_6h_to_24h_event_ratio': recent_ratio,\n        'fe_1h_storm_density': storm_density\n    }, index=frame.index)",
+    "features": [
+      "fe_short_term_read_ce_share",
+      "fe_short_term_burst_share",
+      "fe_6h_to_24h_event_ratio",
+      "fe_1h_storm_density"
+    ]
+  },
+  "reason": "These features test H9: short-horizon temporal clustering and burstiness. `fe_short_term_read_ce_share` and `fe_short_term_burst_share` capture whether the current 15m contains a large share of the last hour's read-CE or burst activity, flagging acute short storms; `fe_6h_to_24h_event_ratio` measures a recent 6h surge relative to daily history; `fe_1h_storm_density` measures how clustered 1h CEs are into storms. They target the 19 low-score FNs where missed_fault_contrast showed elevated read_ce_count_1h and raw_24h_events but the main model ranked below threshold, complementing cumulative burden with short-term temporal shape. If these ratios do not separate FN from TN or fail to improve CV recall/F1 without large added FP, the short-term clustering benefit is not supported.",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 6311,
+      "finite_values": 25244
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 636,
+      "finite_values": 2544
+    },
+    {
+      "rows": 5,
+      "finite_values": 20
+    }
+  ],
+  "sample_validation_seconds": 0.14637134224176407,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

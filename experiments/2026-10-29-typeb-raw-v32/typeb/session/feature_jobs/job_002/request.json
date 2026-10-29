@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "hypothesis_id": "H2",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，漏报(FN)与正常(TN)以及高分真故障(TP)与误报(FP)分别由哪些数值/原始特征区分？漏报中已有及时分数但低于阈值的样本有何特征模式？",
+  "target": "recall",
+  "reason": "当前 best CV 中 25 个漏报里有 19 个已有及时分数但低于阈值（fn_scored_below_threshold=19），说明主模型对这批低分故障行排序不足；trial_003 的累计 CE 负担特征未改善选择 F1。H2 关注近期新增行/列/位型（raw_life_new_rows_7d、raw_life_new_cols_7d、raw_life_new_patterns_7d）和 7 天 CE 事件量（raw_7d_events），这些因果原始字段尚未被单独训练验证，可能提供与累计总量不同的低分漏报信号。",
+  "expected": "构造的近期空间足迹扩张特征应在 FN/TN 或 TP/FP 的 bootstrap AUC 区间上不含 0.5，并提高设备分组 OOF 召回或 F1，同时不显著增加误报。",
+  "falsification": "若这些近期扩张特征在 FN/TN 与 TP/FP 对比中 AUC 区间包含 0.5，或新特征实验的选择/CV F1 无提升且误报增加，则 H2 在当前数据上不成立。",
+  "exploration_reason": "当前没有已保存的诊断快照可用于先验筛选（diagnostic 请求被拒绝且 evidence 为空）；但基于 CV 错误计数，低分漏报集中，且首次特征实验只检验了累计 CE 负担。近期空间扩张是另一机制，属于平衡预筛下的探索性特征请求，剩余探索预算为 2。",
+  "job": "job_002"
+}

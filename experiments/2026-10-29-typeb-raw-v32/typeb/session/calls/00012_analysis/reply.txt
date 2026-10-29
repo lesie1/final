@@ -1,0 +1,9 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {"rerank": "parallel"},
+  "reason": "当前 best trial_001 的 TRAIN 设备分组 OOF 中，25 个漏报里有 19 个已有及时分数但低于阈值（fn_scored_below_threshold=19），说明主模型对这部分低分故障行排序不足。parallel 分支会在全部 TRAIN 行上训练独立浅层 XGBoost，并与主模型逐行 max 融合，可能对低分行给出互补高分，从而在不大幅增加误报的前提下恢复命中。保持父模型和其余参数不变，仅增加 parallel 重排序。",
+  "hypothesis": "一个在全部训练行上、按设备均衡权重的浅层 XGBoost 平行分支可以学习主模型未利用的低分故障模式，并通过 max 融合提升这些行的分数。",
+  "expected": "CV 中 TP 增加、部分 scored_below_threshold 的 FN 被恢复；若新增误报有限，CV F1 提升并通过配对 bootstrap 采纳检验。",
+  "falsification": "平行分支新增大量误报，或提升的分数不足以使低分 FN 超过阈值，导致 CV F1 未优于 best；或配对 bootstrap P(better) < 0.9。"
+}

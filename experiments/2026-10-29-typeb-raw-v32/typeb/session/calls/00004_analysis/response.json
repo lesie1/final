@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "漏报设备在最近7天是否出现新列、新模式或新cell的短期扩张，而正常设备没有；能否用最近7天新增列/新模式/新cell及其占生命周期比例来区分 FN 与 TN？",
+  "reason": "error_atlas 漏报对比中，raw_life_new_patterns_7d（AUC 0.780，95% CI 0.629-0.887）、raw_life_new_cols_7d（AUC 0.773，95% CI 0.645-0.873）、raw_7d_distinct_cols（AUC 0.816）等H2相关特征可信，FN中位数高于TN，但当前模型仍将19个有分数的漏报样本压在阈值以下。",
+  "expected": "近期扩张比例特征可提高漏报样本分数，提升召回；在交叉验证中 TP 增加、FN 下降，且 FP 不显著上升。",
+  "falsification": "若特征加入后 CV 的 FN 仍≥25 或召回无改善，或 FP 大幅增加导致 F1 下降，则近期扩张不足以解释漏报。",
+  "hypothesis_id": "H2",
+  "target": "recall"
+}

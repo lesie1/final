@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 TRAIN 设备分组 OOF 中，raw_life_days_since_first 较短（首次 CE 后迅速恶化）能否区分真故障(TP)与高分误报(FP)，以及漏报(FN)与正常(TN)？具体测试该字段及其对数/倒数等因果派生特征，目标是同时提高低分故障行排序并降低慢性噪声误报。",
+  "reason": "H11 尚未测试。当前 best trial_001 的 CV 中有 14 个 FP，且 25 个 FN 里有 19 个已有及时分数但低于阈值；已有特征多关注总量和近期扩展，未显式捕捉首次 CE 后的病程长短。急性故障可能已有分数但排序不足，而长期稳定旧 CE 可能形成高分误报。若 raw_life_days_since_first 短时风险更高，可同时减少 FP 并恢复低分 FN。",
+  "hypothesis_id": "H11",
+  "target": "balanced",
+  "expected": "在 TP/FP 或 FN/TN 至少一个方向上，raw_life_days_since_first 派生特征呈现可信 AUC 分离（bootstrap 区间不含 0.5），且 CV F1 相对 trial_001 提升，不显著增加 FP。",
+  "falsification": "raw_life_days_since_first 及其派生特征在两个方向均无可信分离，或 CV F1 下降/无明显提升，或误报大幅增加导致概率_better 仍远低于 0.9。",
+  "exploration_reason": "H11 尚无单变量证据，但当前 CV 漏报证据明确：19/25 FN 为 scored_below_threshold，且高分区域存在 14 个 FP。首次 CE 后的病程长度可能与急性进展交互，现有体积类特征未覆盖该维度。探索预算未使用，建议用一次 bounded exploration 验证。"
+}

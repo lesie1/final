@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best trial_001 的 TRAIN 设备分组 OOF 中，漏报(FN)与正常(TN)以及高分真故障(TP)与误报(FP)分别由哪些数值/原始特征区分？漏报中已有及时分数但低于阈值的样本有何特征模式？",
+  "reason": "当前 best 的 CV 有 14 FP、25 FN，其中 19/25 漏报已有及时分数但低于阈值；需要同时比较 FN/TN 与 TP/FP，以定位下一步因果特征或权重方向，而不是继续盲目调参。"
+}
