@@ -26,24 +26,36 @@ python -m unittest discover -s tests -v
 
 ### 2.1 内存 TypeA（本次结果所用数据）
 
-来源：[SmartMem 竞赛数据](https://www.codabench.org/competitions/3586/)。数据目录结构如下：
+TypeA 的模型输入 = **官方给出的 99 个特征 + 官方原始日志**，再经过我们的数据处理脚本得到。
 
-```
-data/
-├── type_A/<设备ID>.feather     # 官方给出的 99 个时间窗统计特征；文件名就是设备 ID；时间列 LogTime（Unix 秒）
-├── failure_ticket.csv          # 故障工单：sn_name, alarm_time（Unix 秒）, sn_type（取 'A'）
-└── followup.csv                # 每台设备的观测区间：sn_name, observed_start, observed_end（Unix 秒）
-```
+**① 官方输入**（来源：[SmartMem 竞赛数据](https://www.codabench.org/competitions/3586/)）
 
-- 本次使用的完整映射在 [`results/typea_v3.2/session/mapping.json`](../results/typea_v3.2/session/mapping.json)，可以直接复用；
-- 故障定义：每台设备第一次出现 TypeA 内存故障工单的时间；
-- `followup.csv` 的构造规则：观测起点是第一条 CE 记录；终点是故障工单时间，没有工单的设备取最后一条 CE 记录。没有工单**不等于**健康，不能当作完整随访。
+| 文件 | 内容 |
+|---|---|
+| `type_A/<设备ID>.feather` | 官方预处理好的 99 个时间窗统计特征（15 分钟、1 小时、6 小时等窗口的 CE 计数等）；文件名就是设备 ID；时间列 `LogTime`（Unix 秒） |
+| 原始 CE 日志：`stage1_csv.zip`（或解压后的 `type_A` 原始 CSV 目录） | 每条可纠正错误（CE）的原始记录，包含地址、比特等信息 |
+| `failure_ticket.csv` | 故障工单：`sn_name`、`alarm_time`（Unix 秒）、`sn_type`（取 `'A'`） |
 
-另外，原始 CE 日志（官方的 `stage1_csv.zip` 或 `type_A` 原始 CSV 目录）由 `raw_cache.py` 转换成 65 个原始比特/突发/空间特征。99 + 65 = TypeA 模型使用的 164 个基础特征。
+文件名以官方数据包为准；上表是代码里使用的名称（映射中的 `type_A/*.feather`，`raw_cache.py --raw` 接受的 zip 或目录）。
+
+**② 我们的数据处理**（按顺序）
+
+| 步骤 | 脚本 | 做什么 | 产出 |
+|---|---|---|---|
+| 1. 整理输入目录 | 早期版本的整理脚本（**不在本仓库**，见 §3.4） | 剔除 2 个表结构不完整、且没有故障工单的特征文件；按下面的规则生成每台设备的观测区间 | 输入目录：`type_A/*.feather`、`failure_ticket.csv`、`followup.csv` |
+| 2. 规范化 | `agent.py init` + `prepare`（`data_ingest.normalize`） | 按映射读取 99 个特征和工单；统一时间和设备 ID；删除故障之后的记录；按时间 6:2:2 划分 TRAIN/VAL/TEST | 99 特征的 TRAIN/VAL 缓存 |
+| 3. 原始日志特征 | `raw_cache.py`（`raw_events.py`） | 解析原始 CE 日志，在**相同的设备和时间点**上补充 65 个比特、DQ、突发、行/列/单元分布特征；没有原始日志的设备保持缺失，不填 0 | 164 特征的缓存 |
+| 4. 冻结负采样 | 早期版本的采样脚本（**不在本仓库**，见 §3.4） | 只用 TRAIN；保留全部正样本，按设备和周抽取负样本，并记录补偿权重 | `sampling_reference.json` 及行号、权重数组 |
+
+`followup.csv` 的规则：观测起点是该设备第一条 CE 记录，终点是故障工单时间；没有工单的设备取最后一条 CE 记录。没有工单**不等于**健康，不当作完整随访。
+
+**③ 模型输入**：164 个基础特征（99 个官方 + 65 个原始日志特征）。搜索过程中，特征 Agent 还会在这些特征上生成组合特征，例如最终采纳的 trial_008 多了 4 个，一共 168 个。
+
+本次使用的完整映射在 [`results/typea_v3.2/session/mapping.json`](../results/typea_v3.2/session/mapping.json)，可以直接复用。故障定义是每台设备第一次出现 TypeA 内存故障工单的时间。
 
 ### 2.2 内存 TypeB
 
-结构和 TypeA 相同（`type_B/`，工单里 `sn_type` 取 `'B'`）。**一定要同时提供原始日志**，否则只有 66 个统计特征，缺少原始比特特征，模型效果会明显变差。
+官方输入是 `type_B/<设备ID>.feather`（官方预处理好的 **66 个**统计特征）+ TypeB 的原始 CE 日志 + 故障工单（`sn_type` 取 `'B'`），然后按 §2.1 的四步处理。**原始日志一定要提供并经过第 3 步**，否则模型只有 66 个统计特征，缺少原始比特特征，效果会明显变差。原始日志的格式如果和 TypeA 不同，要先用 `raw_cache.py --smoke-parts 1` 确认解析正确。
 
 ### 2.3 硬盘（Backblaze）
 
@@ -62,6 +74,7 @@ data/
 export DEEPSEEK_API_KEY=...        # 只放在环境变量里
 
 # ① 建立会话：扫描数据、固定配置、记录代码封印、确定字段映射
+#    --data 指向 §2.1 第 1 步整理好的输入目录（type_A/*.feather、failure_ticket.csv、followup.csv）
 python agent.py init --data /data/typeA --workspace /ws/typea --domain memory \
     --mapping mapping.json --config examples/runtime.json
 #   → 输出 SESSION: /ws/typea/sessions/<时间>_memory_<id>
@@ -100,9 +113,10 @@ python tools/session_report.py --session /ws/typea/search --json summary.json --
 ### 3.2 本次 TypeA 结果的实际执行链
 
 ```
-SmartMem TypeA 数据
-  → agent.py init / prepare                      官方 99 特征缓存
-  → raw_cache.py（v1 表示）                       + 65 个原始特征 = 164 特征缓存
+官方 99 特征（type_A/*.feather）+ 原始 CE 日志 + 故障工单
+  → 整理输入目录（剔除 2 个不完整文件，生成 followup.csv）
+  → agent.py init / prepare                      99 特征的 TRAIN/VAL 缓存
+  → raw_cache.py（v1 表示）                       + 65 个原始日志特征 = 164 特征缓存
   → 冻结负采样文件 sampling_reference.json        只用 TRAIN；所有正样本保留
   → v3.1 会话（search_step.py --initialize-from）
   → v3.2 会话（results/typea_v3.2/run_scripts/setup_run.py：复用 v3.1 的缓存、采样和配置，只换采纳规则和工作点）
@@ -130,8 +144,8 @@ SmartMem TypeA 数据
 
 要**逐字节**复现 `results/typea_v3.2` 的数字，除了代码和原始数据，还需要两份不在仓库里的文件：
 
-1. **`followup.csv` 的生成脚本**：上面写了构造规则，但生成脚本是早期版本留下的，不在本仓库中；
-2. **冻结负采样文件** `sampling_reference.json` 及其行号、权重数组（策略：`frozen_selective_device_week_10pct_20pct_hard`）。生成脚本同样来自早期版本。
+1. **输入目录整理脚本**（§2.1 第 1 步：剔除不完整文件、生成 `followup.csv`）：规则已经写在上面，但脚本是早期版本留下的，不在本仓库中；
+2. **冻结负采样文件** `sampling_reference.json` 及其行号、权重数组（§2.1 第 4 步，策略：`frozen_selective_device_week_10pct_20pct_hard`）。生成脚本同样来自早期版本。
 
 缺少采样文件时，框架会使用全部训练行（不采样）。流程完全可以运行，但具体数字会和本次结果不同。所有输入文件的 SHA-256 都记录在会话的 `config.json`、`bootstrap.json` 和缓存 `manifest.json` 里，可以用来核对。
 
