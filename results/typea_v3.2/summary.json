@@ -282,7 +282,61 @@
       "f1": 0.07582938388625593,
       "accuracy": 0.9939403404654068,
       "specificity": 0.9949335418295543,
-      "balanced_accuracy": 0.5974667709147772
+      "balanced_accuracy": 0.5974667709147772,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 80,
+          "review_devices": 80,
+          "review_cutoff": 0.8623761534690857,
+          "alarmed_devices": 171,
+          "fault_devices": 40,
+          "alarm_hits": 8,
+          "review_faults": 2,
+          "review_precision": 0.025,
+          "recall_alarm": 0.2,
+          "recall_alarm_and_review": 0.25
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 160,
+          "review_devices": 160,
+          "review_cutoff": 0.8217155933380127,
+          "alarmed_devices": 171,
+          "fault_devices": 40,
+          "alarm_hits": 8,
+          "review_faults": 3,
+          "review_precision": 0.01875,
+          "recall_alarm": 0.2,
+          "recall_alarm_and_review": 0.275
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 320,
+          "review_devices": 320,
+          "review_cutoff": 0.7648054957389832,
+          "alarmed_devices": 171,
+          "fault_devices": 40,
+          "alarm_hits": 8,
+          "review_faults": 3,
+          "review_precision": 0.009375,
+          "recall_alarm": 0.2,
+          "recall_alarm_and_review": 0.275
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 640,
+          "review_devices": 640,
+          "review_cutoff": 0.6741817593574524,
+          "alarmed_devices": 171,
+          "fault_devices": 40,
+          "alarm_hits": 8,
+          "review_faults": 4,
+          "review_precision": 0.00625,
+          "recall_alarm": 0.2,
+          "recall_alarm_and_review": 0.3
+        }
+      }
     },
     "confirmation/trial_001/selection_window": {
       "path": "confirmation/trial_001/devices_selection_window.csv",
@@ -298,7 +352,61 @@
       "f1": 0.11282051282051282,
       "accuracy": 0.9946587537091988,
       "specificity": 0.9955590304925723,
-      "balanced_accuracy": 0.6352795152462862
+      "balanced_accuracy": 0.6352795152462862,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 80,
+          "review_devices": 80,
+          "review_cutoff": 0.7593008875846863,
+          "alarmed_devices": 155,
+          "fault_devices": 40,
+          "alarm_hits": 11,
+          "review_faults": 1,
+          "review_precision": 0.0125,
+          "recall_alarm": 0.275,
+          "recall_alarm_and_review": 0.3
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 160,
+          "review_devices": 160,
+          "review_cutoff": 0.7246842384338379,
+          "alarmed_devices": 155,
+          "fault_devices": 40,
+          "alarm_hits": 11,
+          "review_faults": 2,
+          "review_precision": 0.0125,
+          "recall_alarm": 0.275,
+          "recall_alarm_and_review": 0.325
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 320,
+          "review_devices": 320,
+          "review_cutoff": 0.66371089220047,
+          "alarmed_devices": 155,
+          "fault_devices": 40,
+          "alarm_hits": 11,
+          "review_faults": 2,
+          "review_precision": 0.00625,
+          "recall_alarm": 0.275,
+          "recall_alarm_and_review": 0.325
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 640,
+          "review_devices": 640,
+          "review_cutoff": 0.5697091221809387,
+          "alarmed_devices": 155,
+          "fault_devices": 40,
+          "alarm_hits": 11,
+          "review_faults": 4,
+          "review_precision": 0.00625,
+          "recall_alarm": 0.275,
+          "recall_alarm_and_review": 0.375
+        }
+      }
     },
     "confirmation/trial_008/deployed": {
       "path": "confirmation/trial_008/devices_deployed.csv",
@@ -314,7 +422,61 @@
       "f1": 0.15483870967741936,
       "accuracy": 0.995939403404654,
       "specificity": 0.9968100078186083,
-      "balanced_accuracy": 0.6484050039093041
+      "balanced_accuracy": 0.6484050039093041,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 80,
+          "review_devices": 80,
+          "review_cutoff": 0.8859443068504333,
+          "alarmed_devices": 115,
+          "fault_devices": 40,
+          "alarm_hits": 12,
+          "review_faults": 4,
+          "review_precision": 0.05,
+          "recall_alarm": 0.3,
+          "recall_alarm_and_review": 0.4
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 160,
+          "review_devices": 160,
+          "review_cutoff": 0.8423246741294861,
+          "alarmed_devices": 115,
+          "fault_devices": 40,
+          "alarm_hits": 12,
+          "review_faults": 5,
+          "review_precision": 0.03125,
+          "recall_alarm": 0.3,
+          "recall_alarm_and_review": 0.425
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 320,
+          "review_devices": 320,
+          "review_cutoff": 0.7603725790977478,
+          "alarmed_devices": 115,
+          "fault_devices": 40,
+          "alarm_hits": 12,
+          "review_faults": 5,
+          "review_precision": 0.015625,
+          "recall_alarm": 0.3,
+          "recall_alarm_and_review": 0.425
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 640,
+          "review_devices": 640,
+          "review_cutoff": 0.6552459597587585,
+          "alarmed_devices": 115,
+          "fault_devices": 40,
+          "alarm_hits": 12,
+          "review_faults": 7,
+          "review_precision": 0.0109375,
+          "recall_alarm": 0.3,
+          "recall_alarm_and_review": 0.475
+        }
+      }
     },
     "confirmation/trial_008/selection_window": {
       "path": "confirmation/trial_008/devices_selection_window.csv",
@@ -330,7 +492,61 @@
       "f1": 0.16363636363636364,
       "accuracy": 0.9971263470248322,
       "specificity": 0.9980922595777951,
-      "balanced_accuracy": 0.6115461297888976
+      "balanced_accuracy": 0.6115461297888976,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 80,
+          "review_devices": 80,
+          "review_cutoff": 0.9168153405189514,
+          "alarmed_devices": 70,
+          "fault_devices": 40,
+          "alarm_hits": 9,
+          "review_faults": 6,
+          "review_precision": 0.075,
+          "recall_alarm": 0.225,
+          "recall_alarm_and_review": 0.375
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 160,
+          "review_devices": 160,
+          "review_cutoff": 0.875361442565918,
+          "alarmed_devices": 70,
+          "fault_devices": 40,
+          "alarm_hits": 9,
+          "review_faults": 7,
+          "review_precision": 0.04375,
+          "recall_alarm": 0.225,
+          "recall_alarm_and_review": 0.4
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 320,
+          "review_devices": 320,
+          "review_cutoff": 0.7932716608047485,
+          "alarmed_devices": 70,
+          "fault_devices": 40,
+          "alarm_hits": 9,
+          "review_faults": 8,
+          "review_precision": 0.025,
+          "recall_alarm": 0.225,
+          "recall_alarm_and_review": 0.425
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 640,
+          "review_devices": 640,
+          "review_cutoff": 0.6767421960830688,
+          "alarmed_devices": 70,
+          "fault_devices": 40,
+          "alarm_hits": 9,
+          "review_faults": 10,
+          "review_precision": 0.015625,
+          "recall_alarm": 0.225,
+          "recall_alarm_and_review": 0.475
+        }
+      }
     },
     "historical_test/trial_001/deployed": {
       "path": "historical_test/trial_001/deployed/devices.csv",
@@ -346,7 +562,61 @@
       "f1": 0.13157894736842105,
       "accuracy": 0.9923253352152435,
       "specificity": 0.9946913616657327,
-      "balanced_accuracy": 0.5963555818229653
+      "balanced_accuracy": 0.5963555818229653,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 85,
+          "review_devices": 85,
+          "review_cutoff": 0.8696057796478271,
+          "alarmed_devices": 203,
+          "fault_devices": 101,
+          "alarm_hits": 20,
+          "review_faults": 3,
+          "review_precision": 0.03529411764705882,
+          "recall_alarm": 0.19801980198019803,
+          "recall_alarm_and_review": 0.22772277227722773
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 170,
+          "review_devices": 170,
+          "review_cutoff": 0.8337392807006836,
+          "alarmed_devices": 203,
+          "fault_devices": 101,
+          "alarm_hits": 20,
+          "review_faults": 8,
+          "review_precision": 0.047058823529411764,
+          "recall_alarm": 0.19801980198019803,
+          "recall_alarm_and_review": 0.27722772277227725
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 340,
+          "review_devices": 340,
+          "review_cutoff": 0.779125988483429,
+          "alarmed_devices": 203,
+          "fault_devices": 101,
+          "alarm_hits": 20,
+          "review_faults": 13,
+          "review_precision": 0.03823529411764706,
+          "recall_alarm": 0.19801980198019803,
+          "recall_alarm_and_review": 0.32673267326732675
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 680,
+          "review_devices": 680,
+          "review_cutoff": 0.6834403276443481,
+          "alarmed_devices": 203,
+          "fault_devices": 101,
+          "alarm_hits": 20,
+          "review_faults": 20,
+          "review_precision": 0.029411764705882353,
+          "recall_alarm": 0.19801980198019803,
+          "recall_alarm_and_review": 0.39603960396039606
+        }
+      }
     },
     "historical_test/trial_001/selection_window": {
       "path": "historical_test/trial_001/selection_window/devices.csv",
@@ -362,7 +632,61 @@
       "f1": 0.16271186440677965,
       "accuracy": 0.9927664079040226,
       "specificity": 0.9950157784528268,
-      "balanced_accuracy": 0.6163197704145322
+      "balanced_accuracy": 0.6163197704145322,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 85,
+          "review_devices": 85,
+          "review_cutoff": 0.7832152843475342,
+          "alarmed_devices": 194,
+          "fault_devices": 101,
+          "alarm_hits": 24,
+          "review_faults": 8,
+          "review_precision": 0.09411764705882353,
+          "recall_alarm": 0.2376237623762376,
+          "recall_alarm_and_review": 0.31683168316831684
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 170,
+          "review_devices": 170,
+          "review_cutoff": 0.7441965937614441,
+          "alarmed_devices": 194,
+          "fault_devices": 101,
+          "alarm_hits": 24,
+          "review_faults": 16,
+          "review_precision": 0.09411764705882353,
+          "recall_alarm": 0.2376237623762376,
+          "recall_alarm_and_review": 0.39603960396039606
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 340,
+          "review_devices": 340,
+          "review_cutoff": 0.6970639228820801,
+          "alarmed_devices": 194,
+          "fault_devices": 101,
+          "alarm_hits": 24,
+          "review_faults": 20,
+          "review_precision": 0.058823529411764705,
+          "recall_alarm": 0.2376237623762376,
+          "recall_alarm_and_review": 0.43564356435643564
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 680,
+          "review_devices": 680,
+          "review_cutoff": 0.6036314964294434,
+          "alarmed_devices": 194,
+          "fault_devices": 101,
+          "alarm_hits": 24,
+          "review_faults": 26,
+          "review_precision": 0.03823529411764706,
+          "recall_alarm": 0.2376237623762376,
+          "recall_alarm_and_review": 0.49504950495049505
+        }
+      }
     },
     "historical_test/trial_008/deployed": {
       "path": "historical_test/trial_008/deployed/devices.csv",
@@ -378,7 +702,61 @@
       "f1": 0.20224719101123595,
       "accuracy": 0.9939131968948482,
       "specificity": 0.9960775061196803,
-      "balanced_accuracy": 0.6317021193964738
+      "balanced_accuracy": 0.6317021193964738,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 85,
+          "review_devices": 85,
+          "review_cutoff": 0.8903404474258423,
+          "alarmed_devices": 166,
+          "fault_devices": 101,
+          "alarm_hits": 27,
+          "review_faults": 10,
+          "review_precision": 0.11764705882352941,
+          "recall_alarm": 0.26732673267326734,
+          "recall_alarm_and_review": 0.36633663366336633
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 170,
+          "review_devices": 170,
+          "review_cutoff": 0.8500289916992188,
+          "alarmed_devices": 166,
+          "fault_devices": 101,
+          "alarm_hits": 27,
+          "review_faults": 12,
+          "review_precision": 0.07058823529411765,
+          "recall_alarm": 0.26732673267326734,
+          "recall_alarm_and_review": 0.38613861386138615
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 340,
+          "review_devices": 340,
+          "review_cutoff": 0.7776668071746826,
+          "alarmed_devices": 166,
+          "fault_devices": 101,
+          "alarm_hits": 27,
+          "review_faults": 21,
+          "review_precision": 0.061764705882352944,
+          "recall_alarm": 0.26732673267326734,
+          "recall_alarm_and_review": 0.4752475247524752
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 680,
+          "review_devices": 680,
+          "review_cutoff": 0.6857846975326538,
+          "alarmed_devices": 166,
+          "fault_devices": 101,
+          "alarm_hits": 27,
+          "review_faults": 31,
+          "review_precision": 0.045588235294117645,
+          "recall_alarm": 0.26732673267326734,
+          "recall_alarm_and_review": 0.5742574257425742
+        }
+      }
     },
     "historical_test/trial_008/selection_window": {
       "path": "historical_test/trial_008/selection_window/devices.csv",
@@ -394,7 +772,61 @@
       "f1": 0.19387755102040816,
       "accuracy": 0.9954422488826159,
       "specificity": 0.9978470522311027,
-      "balanced_accuracy": 0.5929829320561454
+      "balanced_accuracy": 0.5929829320561454,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 85,
+          "review_devices": 85,
+          "review_cutoff": 0.928643524646759,
+          "alarmed_devices": 95,
+          "fault_devices": 101,
+          "alarm_hits": 19,
+          "review_faults": 11,
+          "review_precision": 0.12941176470588237,
+          "recall_alarm": 0.18811881188118812,
+          "recall_alarm_and_review": 0.297029702970297
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 170,
+          "review_devices": 170,
+          "review_cutoff": 0.8885659575462341,
+          "alarmed_devices": 95,
+          "fault_devices": 101,
+          "alarm_hits": 19,
+          "review_faults": 17,
+          "review_precision": 0.1,
+          "recall_alarm": 0.18811881188118812,
+          "recall_alarm_and_review": 0.3564356435643564
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 340,
+          "review_devices": 340,
+          "review_cutoff": 0.8185152411460876,
+          "alarmed_devices": 95,
+          "fault_devices": 101,
+          "alarm_hits": 19,
+          "review_faults": 25,
+          "review_precision": 0.07352941176470588,
+          "recall_alarm": 0.18811881188118812,
+          "recall_alarm_and_review": 0.43564356435643564
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 680,
+          "review_devices": 680,
+          "review_cutoff": 0.7152687311172485,
+          "alarmed_devices": 95,
+          "fault_devices": 101,
+          "alarm_hits": 19,
+          "review_faults": 39,
+          "review_precision": 0.057352941176470586,
+          "recall_alarm": 0.18811881188118812,
+          "recall_alarm_and_review": 0.5742574257425742
+        }
+      }
     }
   },
   "models": {
@@ -419,16 +851,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.11842250387417153,
-          "per_row_us": 118.42250387417153
+          "median_ms": 0.12660249922191724,
+          "per_row_us": 126.60249922191724
         },
         "batch_1000": {
-          "median_ms": 2.56084548891522,
-          "per_row_us": 2.56084548891522
+          "median_ms": 2.6137109962292016,
+          "per_row_us": 2.6137109962292016
         },
         "batch_10000": {
-          "median_ms": 24.123665993101895,
-          "per_row_us": 2.4123665993101895
+          "median_ms": 24.810695002088323,
+          "per_row_us": 2.4810695002088323
         }
       },
       "recorded_training_timings_seconds": {
@@ -460,16 +892,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.1188789974548854,
-          "per_row_us": 118.8789974548854
+          "median_ms": 0.12574200809467584,
+          "per_row_us": 125.74200809467584
         },
         "batch_1000": {
-          "median_ms": 2.6645610050763935,
-          "per_row_us": 2.6645610050763935
+          "median_ms": 2.730864995101001,
+          "per_row_us": 2.730864995101001
         },
         "batch_10000": {
-          "median_ms": 24.739225991652347,
-          "per_row_us": 2.4739225991652347
+          "median_ms": 24.58701399154961,
+          "per_row_us": 2.458701399154961
         }
       },
       "recorded_training_timings_seconds": {

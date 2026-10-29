@@ -19,6 +19,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.dont_write_bytecode = True
 
 # Events written only when a person changes the run; everything else is the controller or an agent.
@@ -127,7 +128,9 @@ def evaluations(session):
     for kind in ('confirmation', 'historical_test'):
         for path in sorted((session.parent/kind).rglob('devices*.csv')):
             label = path.relative_to(session.parent).with_suffix('').as_posix().replace('/devices_', '/').replace('/devices', '')
-            out[label] = dict(path=path.relative_to(session.parent).as_posix(), **device_metrics(path))
+            from review_list import budgets
+            out[label] = dict(path=path.relative_to(session.parent).as_posix(), **device_metrics(path),
+                              review_list=budgets(path))
     return out
 
 
@@ -255,6 +258,14 @@ def markdown(r):
                          f'{pct(m["precision"])} | {pct(m["recall"])} | {pct(m["f1"])} | {pct(m["accuracy"])} | {pct(m["balanced_accuracy"])} |')
         lines += ['', 'Accuracy counts a device as correct when it is a fault hit in time or a normal device with no alarm. '
                   'Normal devices dominate, so accuracy stays high even with F1 near zero; read it with F1 and balanced accuracy.']
+        lines += ['', '| evaluation | review budget | listed devices | faults caught by review | recall: alarms only -> alarms + review |',
+                  '|---|---|---|---|---|']
+        for label, m in r['evaluations'].items():
+            for budget, v in m['review_list'].items():
+                lines.append(f'| {label} | {budget} | {v["review_devices"]} | {v["review_faults"]} | '
+                             f'{pct(v["recall_alarm"])} -> {pct(v["recall_alarm_and_review"])} |')
+        lines += ['', 'Review list = the highest-scoring devices that did not alarm (tools/review_list.py). The budget should come from '
+                  'how many devices people can review; all four budgets are shown so none is picked after seeing results.']
     lines += ['', '| model | operating point | trees | nodes | parameters | max depth | features | file | 1 row | 10k rows |',
               '|---|---|---|---|---|---|---|---|---|---|']
     for name, m in r['models'].items():

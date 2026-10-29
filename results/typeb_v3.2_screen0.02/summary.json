@@ -265,7 +265,61 @@
       "f1": 0.5454545454545454,
       "accuracy": 0.9992983440920572,
       "specificity": 0.9998595308329822,
-      "balanced_accuracy": 0.7142154797022053
+      "balanced_accuracy": 0.7142154797022053,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 18,
+          "review_devices": 18,
+          "review_cutoff": 0.5887202024459839,
+          "alarmed_devices": 4,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.1111111111111111,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 36,
+          "review_devices": 36,
+          "review_cutoff": 0.4787591397762298,
+          "alarmed_devices": 4,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.05555555555555555,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 71,
+          "review_devices": 71,
+          "review_cutoff": 0.4000895023345947,
+          "alarmed_devices": 4,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.028169014084507043,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 143,
+          "review_devices": 143,
+          "review_cutoff": 0.2789088189601898,
+          "alarmed_devices": 4,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.013986013986013986,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        }
+      }
     },
     "confirmation/trial_001/selection_window": {
       "path": "confirmation/trial_001/devices_selection_window.csv",
@@ -281,7 +335,61 @@
       "f1": 0.5,
       "accuracy": 0.9991580129104687,
       "specificity": 0.9997190616659644,
-      "balanced_accuracy": 0.7141452451186965
+      "balanced_accuracy": 0.7141452451186965,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 18,
+          "review_devices": 18,
+          "review_cutoff": 0.6382044553756714,
+          "alarmed_devices": 5,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.1111111111111111,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 36,
+          "review_devices": 36,
+          "review_cutoff": 0.5374388098716736,
+          "alarmed_devices": 5,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.05555555555555555,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 71,
+          "review_devices": 71,
+          "review_cutoff": 0.426349937915802,
+          "alarmed_devices": 5,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.028169014084507043,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 143,
+          "review_devices": 143,
+          "review_cutoff": 0.4028724133968353,
+          "alarmed_devices": 5,
+          "fault_devices": 7,
+          "alarm_hits": 3,
+          "review_faults": 2,
+          "review_precision": 0.013986013986013986,
+          "recall_alarm": 0.42857142857142855,
+          "recall_alarm_and_review": 0.7142857142857143
+        }
+      }
     },
     "historical_test/trial_001": {
       "path": "historical_test/trial_001/devices.csv",
@@ -297,7 +405,61 @@
       "f1": 0.0,
       "accuracy": 0.9980334316617503,
       "specificity": 0.9997185873082876,
-      "balanced_accuracy": 0.4998592936541438
+      "balanced_accuracy": 0.4998592936541438,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 18,
+          "review_devices": 18,
+          "review_cutoff": 0.75033038854599,
+          "alarmed_devices": 2,
+          "fault_devices": 12,
+          "alarm_hits": 0,
+          "review_faults": 2,
+          "review_precision": 0.1111111111111111,
+          "recall_alarm": 0.0,
+          "recall_alarm_and_review": 0.16666666666666666
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 36,
+          "review_devices": 36,
+          "review_cutoff": 0.6461079120635986,
+          "alarmed_devices": 2,
+          "fault_devices": 12,
+          "alarm_hits": 0,
+          "review_faults": 2,
+          "review_precision": 0.05555555555555555,
+          "recall_alarm": 0.0,
+          "recall_alarm_and_review": 0.16666666666666666
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 71,
+          "review_devices": 71,
+          "review_cutoff": 0.4872240722179413,
+          "alarmed_devices": 2,
+          "fault_devices": 12,
+          "alarm_hits": 0,
+          "review_faults": 3,
+          "review_precision": 0.04225352112676056,
+          "recall_alarm": 0.0,
+          "recall_alarm_and_review": 0.25
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 142,
+          "review_devices": 142,
+          "review_cutoff": 0.4000895023345947,
+          "alarmed_devices": 2,
+          "fault_devices": 12,
+          "alarm_hits": 0,
+          "review_faults": 3,
+          "review_precision": 0.02112676056338028,
+          "recall_alarm": 0.0,
+          "recall_alarm_and_review": 0.25
+        }
+      }
     }
   },
   "models": {
@@ -322,16 +484,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.11269951210124418,
-          "per_row_us": 112.69951210124418
+          "median_ms": 0.12394500663504004,
+          "per_row_us": 123.94500663504004
         },
         "batch_1000": {
-          "median_ms": 2.730888496444095,
-          "per_row_us": 2.730888496444095
+          "median_ms": 2.602075503091328,
+          "per_row_us": 2.602075503091328
         },
         "batch_10000": {
-          "median_ms": 24.693723011296242,
-          "per_row_us": 2.4693723011296242
+          "median_ms": 24.355724002816714,
+          "per_row_us": 2.4355724002816714
         }
       },
       "recorded_training_timings_seconds": {

@@ -37,6 +37,7 @@
 ├── tests/                 # 回归测试（合成数据，不调用付费 API）
 ├── tools/
 │   ├── propose_features.py # 训练前：特征 Agent 根据领域知识提出特征建议，人来采纳和实现
+│   ├── review_list.py      # 复核名单：没有报警但分数最高的设备，交给人判断
 │   └── session_report.py   # 比赛指标汇总：轮数、token、自动化程度、模型复杂度、时延
 ├── examples/              # 映射与运行配置示例
 ├── results/               # 最终实验结果（session、模型、确认与测试评估）

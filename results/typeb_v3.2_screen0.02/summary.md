@@ -29,9 +29,26 @@
 
 Accuracy counts a device as correct when it is a fault hit in time or a normal device with no alarm. Normal devices dominate, so accuracy stays high even with F1 near zero; read it with F1 and balanced accuracy.
 
+| evaluation | review budget | listed devices | faults caught by review | recall: alarms only -> alarms + review |
+|---|---|---|---|---|
+| confirmation/trial_001/deployed | 0.25% | 18 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/deployed | 0.50% | 36 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/deployed | 1.00% | 71 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/deployed | 2.00% | 143 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/selection_window | 0.25% | 18 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/selection_window | 0.50% | 36 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/selection_window | 1.00% | 71 | 2 | 42.86% -> 71.43% |
+| confirmation/trial_001/selection_window | 2.00% | 143 | 2 | 42.86% -> 71.43% |
+| historical_test/trial_001 | 0.25% | 18 | 2 | 0.00% -> 16.67% |
+| historical_test/trial_001 | 0.50% | 36 | 2 | 0.00% -> 16.67% |
+| historical_test/trial_001 | 1.00% | 71 | 3 | 0.00% -> 25.00% |
+| historical_test/trial_001 | 2.00% | 142 | 3 | 0.00% -> 25.00% |
+
+Review list = the highest-scoring devices that did not alarm (tools/review_list.py). The budget should come from how many devices people can review; all four budgets are shown so none is picked after seeing results.
+
 | model | operating point | trees | nodes | parameters | max depth | features | file | 1 row | 10k rows |
 |---|---|---|---|---|---|---|---|---|---|
-| trial_001 | cv_oof step 250, thr 0.9396 | 250 | 5718 | 5,718 | 4 | 135 | 534 KiB | 0.113 ms | 24.7 ms |
+| trial_001 | cv_oof step 250, thr 0.9396 | 250 | 5718 | 5,718 | 4 | 135 | 534 KiB | 0.124 ms | 24.4 ms |
 
 Parameters = split thresholds + leaf values of the deployed (step-truncated) model.
 Latency is model-only scoring on this machine (1 CPUs, Python 3.12.3); feature construction and the full validation pass are in `recorded_training_timings_seconds`.
