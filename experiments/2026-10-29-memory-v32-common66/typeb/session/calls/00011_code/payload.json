@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "d5c86f6368fc98243d92ba7f6ea49cbf0a99d695b0575bdb77c43ec164eef1c4",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'd5c86f6368fc98243d92ba7f6ea49cbf0a99d695b0575bdb77c43ec164eef1c4', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: Read-path correctable-error activity can separate missed-fault rows from healthy rows: do explicit presence/missing indicators for read_ce fields, recent read_ce_count magnitudes, and interactions between read_ce_count and aggregate CE counts distinguish FN from TN and high-score TP from FP?",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "hypothesis_id": "H6",
+    "target": "balanced",
+    "question": "Read-path correctable-error activity can separate missed-fault rows from healthy rows: do explicit presence/missing indicators for read_ce fields, recent read_ce_count magnitudes, and interactions between read_ce_count and aggregate CE counts distinguish FN from TN and high-score TP from FP?",
+    "reason": "Error atlas already shows credible FN-vs-TN separation for read_ce_log_num_1h/15m and read_ce_count_1h/15m (AUC 0.855/0.815/0.844/0.814), while high-score contrast only had limited credible features. The base model uses raw counts but may not exploit the large missingness contrast (22% missing in FN vs 84% in TN) or read-CE interaction. Ask for causally available read-CE presence/missing indicators and count interactions rather than another parameter change.",
+    "expected": "Added read-CE features provide at least one credible exploratory AUC in FN/TN contrast and improve CV OOF recall or precision enough to increase F1 over trial_001.",
+    "falsification": "If the new read-CE features do not produce credible FN/TN or TP/FP separation and do not change CV TP/FP/FN relative to trial_001, H6 is not supported in this representation.",
+    "job": "job_001"
+  }
+}

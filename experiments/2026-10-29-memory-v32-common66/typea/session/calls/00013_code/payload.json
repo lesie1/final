@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "当前最佳仍为基线 trial_001，CV 中 FP=544、FN=210；trial_003 针对 FN/TN 分离的特征对照未提升 CV F1（P(better)=0.249），trial_002 调大 max_depth 也无效。基线使用 sample 权重，事件丰富的设备会在训练损失中占更高比例，而评估 protocol 是 device-period F1，需要设备级更均衡的性能。尝试保持相同行 ID 与标签、设备内归一化权重的单因素 base_weight=device 对照，验证是否能减少高活动设备的误报并改善设备级 F1。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "base_weight": "device"
+    },
+    "reason": "当前最佳仍为基线 trial_001，CV 中 FP=544、FN=210；trial_003 针对 FN/TN 分离的特征对照未提升 CV F1（P(better)=0.249），trial_002 调大 max_depth 也无效。基线使用 sample 权重，事件丰富的设备会在训练损失中占更高比例，而评估 protocol 是 device-period F1，需要设备级更均衡的性能。尝试保持相同行 ID 与标签、设备内归一化权重的单因素 base_weight=device 对照，验证是否能减少高活动设备的误报并改善设备级 F1。",
+    "hypothesis": "按设备归一化训练权重，使每个设备的总贡献相等，可降低对事件丰富设备的过拟合，提升设备级 F1。",
+    "expected": "与 trial_001 相比，CV 配对 bootstrap 的 P(better) ≥ 0.9，且 CV F1 点估计提升 > 0；理想情况下 FP 明显减少，TP 不降或仅少量下降，F1 上升。",
+    "falsification": "如果 CV F1 点估计未高于 trial_001，或 P(better) < 0.9，则 device 权重在当前特征与标签下不能改善设备级 F1，应回退到 trial_001 并考虑 parallel 分支。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

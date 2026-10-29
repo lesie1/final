@@ -1,0 +1,67 @@
+{
+  "id": "2e59a9bda0aa2e86148e2b5c34dd6c41e1236609cc7ed2acb0cf80d47145ccae",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    b1 = frame['burst_count_1_15m']\n    b2 = frame['burst_count_2_15m']\n    b3 = frame['burst_count_3_15m']\n    b4 = frame['burst_count_4_15m']\n    b5 = frame['burst_count_5_15m']\n    b6 = frame['burst_count_6_15m']\n    b7 = frame['burst_count_7_15m']\n    b8 = frame['burst_count_8_15m']\n    active1 = (b1 > 0).where(b1.notna()) * 1.0\n    active2 = (b2 > 0).where(b2.notna()) * 1.0\n    active3 = (b3 > 0).where(b3.notna()) * 1.0\n    active4 = (b4 > 0).where(b4.notna()) * 1.0\n    active5 = (b5 > 0).where(b5.notna()) * 1.0\n    active6 = (b6 > 0).where(b6.notna()) * 1.0\n    active7 = (b7 > 0).where(b7.notna()) * 1.0\n    active8 = (b8 > 0).where(b8.notna()) * 1.0\n    fe_active_burst_types_15m = active1 + active2 + active3 + active4 + active5 + active6 + active7 + active8\n    fe_burst_weighted_energy_15m = b1 + b2 * 2 + b3 * 3 + b4 * 4 + b5 * 5 + b6 * 6 + b7 * 7 + b8 * 8\n    total_burst_count = b1 + b2 + b3 + b4 + b5 + b6 + b7 + b8\n    fe_large_burst_share_15m = (b2 + b3 + b4 + b5 + b6 + b7 + b8) / (1.0 + total_burst_count)\n    fe_burst_energy_per_active_type_15m = fe_burst_weighted_energy_15m / (1.0 + fe_active_burst_types_15m)\n    return pd.DataFrame({'fe_active_burst_types_15m': fe_active_burst_types_15m, 'fe_burst_weighted_energy_15m': fe_burst_weighted_energy_15m, 'fe_large_burst_share_15m': fe_large_burst_share_15m, 'fe_burst_energy_per_active_type_15m': fe_burst_energy_per_active_type_15m}, index=frame.index)",
+    "features": [
+      "fe_active_burst_types_15m",
+      "fe_burst_weighted_energy_15m",
+      "fe_large_burst_share_15m",
+      "fe_burst_energy_per_active_type_15m"
+    ]
+  },
+  "reason": "基于 trial_001 漏报证据：fn_scored_below_threshold 在 CE/log 相关字段有方向，但单一 burst_count_*_15m 未带来 CV 提升。H2 认为跨突发大小的同时活跃更可能反映局部缺陷广度；用 .where 保留缺失并将布尔活跃转为 1.0 避免 float 未定义问题。新特征统计活跃突发类型数、按大小加权能量、大突发占比和每活跃类型平均能量，以检验是否比单一大小的计数更能区分漏报与健康行。",
+  "checks": [
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 23,
+      "finite_values": 92
+    },
+    {
+      "rows": 89,
+      "finite_values": 356
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 7591,
+      "finite_values": 30364
+    },
+    {
+      "rows": 5466,
+      "finite_values": 21864
+    },
+    {
+      "rows": 4234,
+      "finite_values": 16936
+    },
+    {
+      "rows": 4231,
+      "finite_values": 16924
+    },
+    {
+      "rows": 14,
+      "finite_values": 56
+    },
+    {
+      "rows": 96,
+      "finite_values": 384
+    }
+  ],
+  "sample_validation_seconds": 0.37665966898202896,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

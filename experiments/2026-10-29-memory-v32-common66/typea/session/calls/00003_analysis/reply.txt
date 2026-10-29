@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 TRAIN 交叉验证留出设备上：高分区域中真故障 TP 与误报 FP 在哪些缓存特征上有可区分差异；漏报 FN 与正常 TN 的因果特征快照有何不同？尤其要区分 FN 中 197 个已有时序分数但低于阈值的设备，它们与 TN 的哪些特征模式不同，可用于提高召回而不过度增加 FP。",
+  "reason": "Baseline CV F1=0.141，precision=0.102，recall=0.228。FN=210 中 197 个（93.8%）为已有分数但低于阈值，说明主要漏报不是无预测机会，而是模型分数未把故障设备排高；同时 FP=544 导致大量误报。需要同时获得 high_score_contrast 和 missed_fault_contrast，先定位可区分的特征方向，再提 features，避免盲目调参。"
+}

@@ -1,0 +1,67 @@
+{
+  "id": "a617ced0c73ee7f71dbf08dd5612e76e736768ab846deaf5de3f308fe4d79836",
+  "spec": {
+    "parent": "a2765a08ca44d95f2c8348304da9a029535c27f56a4206a05bc90f77f02b62b2",
+    "source": "def transform(frame):\n    adj_share = frame['raw_24h_adjacent_dq_events'] / (frame['raw_24h_events'] + 1)\n    multi_share = frame['raw_24h_multi_beat_events'] / (frame['raw_24h_events'] + 1)\n    adj_x_spread = adj_share * frame['fe_spread_error_intensity']\n    multi_x_pattern = multi_share * frame['fe_recent_new_pattern_rate']\n    return pd.DataFrame({'fe_adj_dq_share_24h': adj_share, 'fe_multi_beat_share_24h': multi_share, 'fe_adj_dq_share_x_spread': adj_x_spread, 'fe_multi_beat_share_x_new_pattern': multi_x_pattern}, index=frame.index)",
+    "features": [
+      "fe_adj_dq_share_24h",
+      "fe_multi_beat_share_24h",
+      "fe_adj_dq_share_x_spread",
+      "fe_multi_beat_share_x_new_pattern"
+    ]
+  },
+  "reason": "H8: adjacent DQ and multi-beat events indicate wider data-path damage. For missed-fault recall, these features measure the share of adjacent-DQ and multi-beat events in the recent 24h window, then interact them with fe_spread_error_intensity and fe_recent_new_pattern_rate to test co-occurrence with dispersion/new-pattern signals. They complement existing counts and are expected to be higher in failing devices; if they do not improve FN vs TN separation or model F1, the hypothesis is not supported.",
+  "checks": [
+    {
+      "rows": 1653,
+      "finite_values": 6612
+    },
+    {
+      "rows": 130,
+      "finite_values": 520
+    },
+    {
+      "rows": 4,
+      "finite_values": 16
+    },
+    {
+      "rows": 108,
+      "finite_values": 432
+    },
+    {
+      "rows": 100,
+      "finite_values": 400
+    },
+    {
+      "rows": 12,
+      "finite_values": 48
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 74,
+      "finite_values": 296
+    },
+    {
+      "rows": 2,
+      "finite_values": 8
+    }
+  ],
+  "sample_validation_seconds": 0.1023317500948906,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

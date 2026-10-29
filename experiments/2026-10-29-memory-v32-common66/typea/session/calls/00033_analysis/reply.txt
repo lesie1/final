@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_009",
+  "target": "balanced",
+  "hypothesis_id": "H5",
+  "question": "能否构造因果特征，同时利用“近期新增模式速率/新列占比”与“地址/列扩散强度”，并用生命周期事件总量进行归一化或交互，来区分高分真故障与历史事件总量驱动的误报，同时提高对已有及时分数但低于阈值的分散扩散故障的召回？例如：fe_recent_new_pattern_rate × fe_spread_error_intensity、fe_recent_new_pattern_rate/log1p(raw_life_events)、fe_spread_error_intensity/log1p(raw_life_events)、fe_recent_new_col_share × fe_spread_error_intensity。",
+  "reason": "trial_009 的选择窗口 F1 从 trial_008 的 0.1835 提升到 0.1974，CV F1 从 0.1622 提升到 0.1723，但 P(better)=0.82 未达 0.9，主要问题是新特征降低了 FP 也丢失了 19 个命中，FN 仍达 216，其中 203 个已有及时分数但低于阈值。error_atlas 显示：高分 TP 与 FP 之间，fe_recent_new_pattern_rate AUC=0.684、fe_recent_pattern_x_15m_burst AUC=0.674、fe_recent_new_col_share AUC=0.642，且 TP 的 median 更高；同时 TP 的 raw_life_events(368.5 vs 1227.0) 和 raw_7d_events(96 vs 435) 更低，说明当前高分误报主要是历史事件总量高。漏报 FN 与 TN 之间，raw_life_distinct_cols/cells、error_dq_count_6h、fe_spread_error_intensity、raw_life_new_cols_7d、raw_life_new_patterns_7d 的 AUC 高达 0.76-0.82，FN 具有更明显的近期扩散和新模式。需要组合这些信号，而不是单独增加事件总量或单独增加扩散度，以恢复漏报并继续保持对历史总量误报的抑制。",
+  "expected": "新增的归一化/交互特征能提高对分散扩散漏报的分数，同时不会重新抬高历史事件总量驱动的误报；在 TRAIN 设备分组 CV 中 TP 增加、FP 不显著恶化，CV F1 提升，且相对 trial_009 或 trial_008 的配对 bootstrap P(better) 更接近或达到 0.9。",
+  "falsification": "若这些归一化/交互特征在 TRAIN CV 中不能同时提高召回并保住精度，导致 CV F1 不升反降，或 P(better) 低于 0.9，则说明仅靠组合已有近期/扩散/历史总量特征不足以解决该模型在当前阈值下的漏报与误报权衡。"
+}

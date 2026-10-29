@@ -1,0 +1,73 @@
+{
+  "arm": "A_plus_B",
+  "seed": 44,
+  "target": "typeb",
+  "split": "confirmation",
+  "operating_point": {
+    "source": "B_train_oof",
+    "model": "full/model_full.ubj",
+    "model_sha256": "2953430f5ab8999cdfa0d9577dad319efbde43db2bcc09d6571cd1bbc2a95f36",
+    "step": 150,
+    "threshold": 0.9863827228546143,
+    "cv_metrics": {
+      "step": 150,
+      "f1": 0.15384615384615385,
+      "TP": 5,
+      "FP": 26,
+      "FN": 29,
+      "precision": 0.16129032258064516,
+      "recall": 0.14705882352941177,
+      "threshold": 0.9863827228546143
+    },
+    "oof_sha256": "28b9ccbfbe48a1013bcaa5a20c69e6149600ea57c9a7ae619e51198a29ef0fe7",
+    "target": "typeb",
+    "test_opened": false
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.9863827228546143,
+    "TP": 1,
+    "FP": 2,
+    "FN": 6,
+    "precision": 0.3333333333333333,
+    "recall": 0.14285714285714285,
+    "f1": 0.2,
+    "eligible_devices": 7126,
+    "eligible_fault_devices": 7,
+    "alarmed_devices": 3,
+    "no_history_devices": 5544,
+    "no_history_fault_devices": 0,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 0,
+    "unknown_devices": 0,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 0,
+    "excluded_preexisting_fault_devices": 49,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "lead_summary": {
+    "count": 1,
+    "median": 1.2846064814814815,
+    "p25": 1.2846064814814815,
+    "p75": 1.2846064814814815,
+    "minimum": 1.2846064814814815,
+    "maximum": 1.2846064814814815,
+    "buckets": {
+      "15_minutes_to_under_1_day": 0,
+      "1_to_under_7_days": 1,
+      "7_through_15_days": 0,
+      "over_15_days": 0
+    }
+  },
+  "prediction_stats": {
+    "score_sha256": "df44c24d54b6c123ed95eca21ab220284d6ca473042948da0fd935abefca58b3",
+    "val_period_unweighted_bce": 0.5223836456872106,
+    "scored_rows": 35538
+  },
+  "window": [
+    1713231360,
+    1714544640
+  ],
+  "threshold_reselected": false,
+  "independent_blind_test": false
+}

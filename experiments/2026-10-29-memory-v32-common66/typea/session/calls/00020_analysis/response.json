@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在当前最佳模型 trial_001 的 TRAIN 留出设备上，哪些特征能区分高分真故障 TP 与高分误报 FP？在漏报 FN 中主要是已有及时分数但低于阈值（197/210），哪些特征能区分 FN 与 TN？",
+  "reason": "基线 CV 中 FP=544、FN=210；trial_003 的 H4 空间集中特征和 trial_006 的 H3 突发风暴特征均未提升 CV F1（P(better)=0.249/0.209）。需要同时查看高分误报和低分漏报的特征快照，以定位下一轮特征构造方向，而不是继续盲调参数。"
+}

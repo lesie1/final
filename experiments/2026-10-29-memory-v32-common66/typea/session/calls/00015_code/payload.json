@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'parallel', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "当前最佳仍为 trial_001，其 CV 中 FP=544、FN=210；trial_004 仅改 base_weight=device 未达采纳标准（P(better)=0.776，CV F1 增益 0.0138）。FN 中 197/210 属于已有及时分数但低于阈值，trial_002 增深未能提升。scope.parallel.allowed=true，允许在冻结的单阶段父模型上增加独立设备均衡浅层 XGBoost 分支并与父模型逐行 max 融合；该分支在全部 TRAIN 保留行上训练，可为父模型低分故障提供互补评分。因此提出 parallel 对照，验证第二分支能否通过互补信号提升 device-period F1。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "rerank": "parallel"
+    },
+    "reason": "当前最佳仍为 trial_001，其 CV 中 FP=544、FN=210；trial_004 仅改 base_weight=device 未达采纳标准（P(better)=0.776，CV F1 增益 0.0138）。FN 中 197/210 属于已有及时分数但低于阈值，trial_002 增深未能提升。scope.parallel.allowed=true，允许在冻结的单阶段父模型上增加独立设备均衡浅层 XGBoost 分支并与父模型逐行 max 融合；该分支在全部 TRAIN 保留行上训练，可为父模型低分故障提供互补评分。因此提出 parallel 对照，验证第二分支能否通过互补信号提升 device-period F1。",
+    "hypothesis": "独立设备均衡浅层分支能捕捉与父模型互补的低分故障信号，提高低分 FN 的行分数；max 融合后 TP 增加带来的 F1 收益超过新增 FP。",
+    "expected": "CV 中 TP 可能从 62 明显上升，FN 下降；FP 可能上升。期望净效应 CV F1 高于 baseline 0.141，且 paired bootstrap P(better)≥0.9、CV F1 增益 >0。",
+    "falsification": "若 CV paired bootstrap P(better)<0.9 或 CV F1 点估计提升 ≤0；或新增 FP 大幅抵消新增 TP，使 CV F1 不达标，则放弃 parallel，转为针对高分区 TP/FP 的 feature 诊断。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

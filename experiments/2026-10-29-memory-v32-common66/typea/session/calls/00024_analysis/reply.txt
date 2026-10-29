@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_007",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_007 的 TRAIN 交叉验证中，FN=220，其中 207 个单元已有及时分数但低于阈值。请比较这些 FN 与 TN 的因果特征快照，找出哪些特征（如 raw_24h_max_dq_count、raw_24h_risky_events、burst/storm 时序、地址/行列集中度等）能区分被漏掉的故障与正常单元。重点关注漏报单元是否在近期短窗口（1h/6h/24h）的 CE 活动、错误位宽/DQ 扩展或突发间隔上有局部抬升，而长期统计信号未被 device 权重后的模型充分利用。",
+  "reason": "trial_004 的 device 权重将 FP 从 544 降到 347，但 TP 从 62 降到 52，丢失 28 个命中；parallel 分支未恢复这些命中。当前 220 个 FN 中 207 个属于已有及时分数但低于阈值，需要先定位漏报特征，再提出以 recall 为目标的特征请求。"
+}

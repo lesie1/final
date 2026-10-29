@@ -1,0 +1,39 @@
+{
+  "source": "/root/autodl-tmp/final_v31_20261028/typeb/workspace/sessions/20261028_211935_memory_8740df2e",
+  "source_seals": {
+    "config.json": "6a84314fcb1a744c92d83ba0413653b3eab8185c54e075599abb582b7a4eb621",
+    "state.json": "a833eacc79a81da5271a947d6ab68ef11f2ba042e9fc1e2e037c4649c93a7400",
+    "events.jsonl": "86254cbc14c4b31e3acdcf42e43c0cb856f225e9b1b3bd484197efd5d81aae12",
+    "mapping.json": "bf0046fe9c2fd7730f36a2e6731fc4e1d567d5730d1b9b13f052dfd52183a438",
+    "code_seal.json": "f9a3ea8721b3b19286182b4cf68a5807438c8edd566d59e1902faf600f382acb"
+  },
+  "changed_config": {
+    "workspace": {
+      "before": "/root/autodl-tmp/final_v31_20261028/typeb/workspace",
+      "after": "/root/autodl-tmp/final_v32_20261029/typeb/workspace"
+    },
+    "output_root": {
+      "before": "/root/autodl-tmp/final_v31_20261028/typeb/workspace/sessions/20261028_211935_memory_8740df2e",
+      "after": "/root/autodl-tmp/final_v32_20261029/typeb/session"
+    },
+    "accept_test": {
+      "before": null,
+      "after": "probability"
+    },
+    "accept_probability": {
+      "before": null,
+      "after": 0.9
+    },
+    "accept_require_net_hits": {
+      "before": null,
+      "after": false
+    },
+    "operating_point": {
+      "before": null,
+      "after": "cv_oof"
+    }
+  },
+  "model_weights_imported": false,
+  "test_opened": false,
+  "note": "Retain original search budgets/sampling; only v3.2 policy and output paths change. Historical validation and TEST have prior exposure."
+}

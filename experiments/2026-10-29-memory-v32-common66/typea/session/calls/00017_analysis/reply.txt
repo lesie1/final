@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "hypothesis_id": "H3",
+  "question": "故障设备在故障前窗口是否表现出突发风暴的近期加速（如 burst_count_*_1h、ce_storm_count_15m/1h 相对前 7 天均值的增量或比值），而误报设备只有历史突发但近期已减弱或平稳？用这些特征能否区分高分真故障与高分误报。",
+  "reason": "当前最佳 trial_001 的 CV FP=544、FN=210；trial_003 基于 H4 的空间集中度特征未提升 CV F1（P(better)=0.249）。H3 的时间爆发假设尚未被特征实验检验，且 base 中已有 burst_count_*_1h、ce_storm_count_* 等字段，适合构造近期发作强度/趋势的因果特征，避免继续盲调参数或重复空间特征。",
+  "expected": "新增特征能在高分 TP/FP 对比中提供可信分离（AUC 区间不含 0.5），或与 CE 总量等特征形成交互，帮助设备分组 CV 降低高分误报并维持/增加漏报命中，从而提升 CV F1。",
+  "falsification": "若这些特征的高分 TP/FP AUC 区间含 0.5，且设备分组 CV 的配对 bootstrap 未显示 F1 增益（P(better)<0.9），则 H3 在当前表示和窗口下不能解释剩余错误。",
+  "target": "precision",
+  "exploration_reason": "尚无针对 H3 的单变量证据；trial_003 的空间特征未改善，说明可能需要时间动态与突发强度的交互，而非单一突发计数。当前误报较高，优先检验近期急性发作与历史慢发/已缓解的区分。"
+}

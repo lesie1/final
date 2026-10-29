@@ -1,0 +1,7 @@
+{
+  "pid": 334317,
+  "started_utc": "2026-10-29T07:42:43Z",
+  "authorization": "User requested TypeB trial 13 TEST after baseline TEST results.",
+  "post_hoc_trial_selection": true,
+  "agent_feedback": false
+}

@@ -1,0 +1,9 @@
+{
+  "action": "diagnose",
+  "diagnose": {
+    "parent": "trial_001",
+    "kind": "error_atlas",
+    "question": "在 TRAIN 设备分组的交叉验证 OOF 单元中，哪些因果特征能够分别区分高分误报 FP 与高分真故障 TP，以及漏报 FN 与健康 TN？FN 中有多少属于无及时预测时刻、有预测时刻但无及时分数、有分数但低于阈值？",
+    "reason": "当前 best trial_001 的 CV 中 FP=17、TP=7、FN=27，其中 21 个 FN 分数低于阈值、6 个无及时分数；selection 中 FP=13、TP=6。已尝试 read_ce 相关特征（trial_003）和近期突发簇比例特征（trial_006），均未提升 F1。需要同时获取高分 TP/FP 和 FN/TN 的因果特征对比及漏报原因分解，以选择下一轮更有针对性的特征假设，避免继续盲目调参。"
+  }
+}

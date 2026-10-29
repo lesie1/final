@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_008",
+  "kind": "high_score_contrast",
+  "question": "在 trial_008 的 TRAIN 交叉验证留出设备中，超过阈值的高分单元里，哪些因果特征能区分真故障 TP 与误报 FP？特别关注当前误报是否由近期分散/扩散类特征触发，但缺乏错误强度、历史基线或突发持续性支撑。",
+  "reason": "当前 best trial_008 的 CV 混淆矩阵为 TP=73、FP=555、FN=199，选择窗口 TP=10、FP=48，误报仍是主要拖累。尚未使用 high_score_contrast 定位高分区真故障与误报的可区分特征；先取得该证据，再据此提出降低误报的因果特征，避免继续增加召回特征导致 FP 进一步上升。"
+}

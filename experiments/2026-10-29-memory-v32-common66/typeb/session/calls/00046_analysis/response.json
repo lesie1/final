@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 best 的 TRAIN OOF 高分单元中，fault_mode_row_15m/fault_mode_column_15m 相对 fault_mode_bank_15m、fault_mode_device_15m、fault_mode_cell_15m、fault_mode_others_15m 的占比，以及 fault_mode_row/column 近15分钟相对1小时的变化，能否区分真故障（TP）与误报（FP），从而在不降低 recall 的前提下减少误报？",
+  "reason": "现有 best 在 CV 中 FP=17，trial_012 加入 fault_row/column 与 burst 交互后 CV FP=20，仍未解决误报。H9 的 fault_mode 分布字段尚未被显式作为交互特征使用；行/列模式更可能对应真实局部缺陷，而 bank/device/other 可能更多是背景噪声。用剩余 exploration slot 验证该空间模式是否能作为 precision 方向的因果特征。",
+  "expected": "若 H9 成立，fault_mode_row/column 占比或变化率在高分 TP 中更高、在 FP 中更低，加入后 CV FP 减少且 TP/FN 不明显恶化，CV F1 点估计提升并可能达到 P(better)≥0.9。",
+  "falsification": "若 CV 中 new_false_alarms 未减少或 new_hits 丢失，且 paired bootstrap P(better)<0.9，则 H9 的 fault_mode 分布不能在高分区区分 TP/FP。",
+  "hypothesis_id": "H9",
+  "target": "precision",
+  "exploration_reason": "saved evidence 中没有 high_score_contrast；H9 的 fault_mode_*_15m/1h 字段尚未在任何已试特征程序中使用。当前主要误差为高分区 FP（CV FP=17/20），该特征是与已有 fault_row/column 互补的空间模式解释，值得使用剩余 exploration slot。"
+}

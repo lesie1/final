@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    life_denom = np.log1p(frame['raw_life_events'].clip(lower=1.0))\n    recent_pattern_x_spread = frame['fe_recent_new_pattern_rate'] * frame['fe_spread_error_intensity']\n    recent_pattern_per_life = frame['fe_recent_new_pattern_rate'] / life_denom\n    spread_per_life = frame['fe_spread_error_intensity'] / life_denom\n    recent_colshare_x_spread = frame['fe_recent_new_col_share'] * frame['fe_spread_error_intensity']\n    return pd.DataFrame({\n        'fe_recent_pattern_x_spread': recent_pattern_x_spread,\n        'fe_recent_pattern_per_life': recent_pattern_per_life,\n        'fe_spread_per_life': spread_per_life,\n        'fe_recent_colshare_x_spread': recent_colshare_x_spread\n    }, index=frame.index)",
+  "features": [
+    "fe_recent_pattern_x_spread",
+    "fe_recent_pattern_per_life",
+    "fe_spread_per_life",
+    "fe_recent_colshare_x_spread"
+  ],
+  "reason": "检验 H5：近期新列/新模式占比与地址/列扩散强度同时升高才代表正在扩展的缺陷。乘积特征提高分散扩散漏报的分数；除以 log1p(raw_life_events) 抑制历史事件总量高导致的高分误报。若这些组合不能提高设备分组 CV 召回/F1 或重新抬高 FP，则假设被否定。"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_008",
+  "kind": "error_atlas",
+  "question": "当前 best trial_008 的 TRAIN CV 中 FP=555、FN=199，其中 186 个 FN 是已有及时分数但低于阈值；高分 TP 与高分 FP、低分 FN 与 TN 在哪些因果特征上存在可重复分离？特别比较尚未重点利用的 H7/H8 字段（distinct_ranks/banks/chips、adjacent_dq/multi_beat/min_dq_interval/max_beat_interval）和 H2 字段（max_err_bits/multi_dq/risky），是否比已尝试的 H4/H5 扩散特征更明显区分两类错误？",
+  "reason": "已有试验显示 trial_009 的 CV F1 0.1723 虽高于 best 0.1622，但 P(better)=0.82 未达到 0.9；trial_010 归一化交互和 trial_012 降低 min_child_weight 均未提升。在只剩 1 次试验前，需要 error_atlas 同时提供高分误报和低分漏报的特征对比，以便基于证据选择最终特征/参数方向，而不是继续盲调超参数。"
+}

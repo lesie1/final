@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "params.max_depth": 6
+  },
+  "reason": "基线 max_depth=4，CV 中 197 个 FN 属于已有分数但低于阈值，missed_fault_contrast 显示地址集中度等特征有强分离，但当前浅树难以捕捉交互。单因素提高深度以增强对漏报特征的非线性利用。",
+  "hypothesis": "当前深度不足，无法有效利用地址集中度与错误计数的交互来提高漏报故障的分数；深度增至 6 可改善召回并提升 F1。",
+  "expected": "CV F1 应高于基线 0.1412，新增 TP 多于新增 FP，或 FP 增幅可控。",
+  "falsification": "若 CV F1 无提升或下降，或新增 FP 显著多于新增 TP 导致 F1 恶化，则拒绝该深度调整。"
+}

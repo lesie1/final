@@ -1,0 +1,67 @@
+{
+  "id": "a2765a08ca44d95f2c8348304da9a029535c27f56a4206a05bc90f77f02b62b2",
+  "spec": {
+    "parent": "0e508b9d920307b71958129be58310de13b729cd3afa4ad1e04b359506764c52",
+    "source": "def transform(frame):\n    life_events = frame['raw_life_events'] + 1.0\n    pattern_rate = frame['fe_recent_new_pattern_rate']\n    normalized = pattern_rate / life_events\n    risky_6h = frame['raw_6h_risky_events']\n    risky_24h = frame['raw_24h_risky_events']\n    burst_15m = frame['error_burst_count_15m']\n    return pd.DataFrame({\n        'fe_recent_pattern_life_norm': normalized,\n        'fe_recent_pattern_x_6h_risky': normalized * risky_6h,\n        'fe_recent_pattern_x_24h_risky': normalized * risky_24h,\n        'fe_recent_pattern_x_15m_burst': normalized * burst_15m\n    }, index=frame.index)",
+    "features": [
+      "fe_recent_pattern_life_norm",
+      "fe_recent_pattern_x_6h_risky",
+      "fe_recent_pattern_x_24h_risky",
+      "fe_recent_pattern_x_15m_burst"
+    ]
+  },
+  "reason": "检验 H5：真故障应有更高的近期新异性，同时伴随短时突发/risky 事件；误报则历史事件总量高但近期新异性与突发强度低。将 fe_recent_new_pattern_rate 按 raw_life_events 归一化，降低历史事件量大的误报；再分别乘 raw_6h_risky_events、raw_24h_risky_events、error_burst_count_15m，放大近期新异与短时突发强度的联合信号。若 TP 在这些交互特征上系统性高于 FP，则支持该机制；若与单变量相比区间仍含 0.5，则否定该交互假设。",
+  "checks": [
+    {
+      "rows": 1653,
+      "finite_values": 6612
+    },
+    {
+      "rows": 8,
+      "finite_values": 32
+    },
+    {
+      "rows": 4,
+      "finite_values": 16
+    },
+    {
+      "rows": 605,
+      "finite_values": 2420
+    },
+    {
+      "rows": 72,
+      "finite_values": 288
+    },
+    {
+      "rows": 2,
+      "finite_values": 8
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 74,
+      "finite_values": 296
+    },
+    {
+      "rows": 2,
+      "finite_values": 8
+    }
+  ],
+  "sample_validation_seconds": 0.09775377810001373,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

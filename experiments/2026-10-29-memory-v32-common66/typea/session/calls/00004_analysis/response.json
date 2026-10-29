@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 TRAIN OOF 中，漏报故障设备 FN 与正常 TN 的地址集中度指标存在可信差异：raw_life_distinct_cols AUC=0.798 [0.772,0.831]、raw_life_distinct_cells AUC=0.797、raw_life_max_cols_per_row AUC=0.792、raw_7d_distinct_cols AUC=0.780 等。请构造因果特征（如 distinct columns/cells 与事件数的比值、近期 distinct 与终身 distinct 的比值、top cell share 的近期变化）来强调行/列/cell 地址集中度，测试能否在不显著增加 FP 的情况下提高对低分漏报故障的召回。",
+  "reason": "error_atlas 的 missed_fault_contrast（FN=210 vs TN 样本）显示地址集中度特征有强且可信的分离，但当前模型 CV recall 仅 0.228，197 个 FN 已有低分未过阈值，说明这些已有特征未被有效利用或需要归一化/组合。",
+  "expected": "新特征应在 TRAIN OOF 中提高 FN/TN 分离（AUC 区间不含 0.5），并在 CV 中提升 F1，新增 TP 多于新增 FP。",
+  "falsification": "若新特征在 TRAIN OOF 的 FN/TN 单变量 AUC 置信区间包含 0.5，或加入后 CV F1 无提升/新增 FP 显著多于新增 TP，则拒绝该特征方向。",
+  "hypothesis_id": "H4",
+  "target": "recall"
+}

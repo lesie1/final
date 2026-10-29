@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN 交叉验证留出设备中，高于 CV 阈值 0.9147 的高分单元里，真故障（TP）与误报（FP）在哪些特征上存在 AUC 可区分的差异？特别关注 CE 计数、burst 计数、地址集中度、错误位宽、最近 7 天新地址等，以找出可降低高分区误报的因果特征。",
+  "reason": "当前最佳模型 trial_001 CV 精度仅 0.1023，FP 高达 544；trial_003 特征对照针对漏报 FN 与正常 TN 的分离未提升 CV F1（0.1352 vs 0.1412，P(better)=0.249），且 trial_002 调参也无效。需要从高分区 TP 与 FP 的对比中定位可减少误报的信号，为下一轮 features 提供依据。"
+}

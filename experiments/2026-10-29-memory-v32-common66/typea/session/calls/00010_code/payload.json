@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "0672d73734ffd1af01e91756501af5b849c64e0ae7f1c7fc20c1d0c7960162bf",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '0672d73734ffd1af01e91756501af5b849c64e0ae7f1c7fc20c1d0c7960162bf', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 TRAIN 交叉验证中，漏报 FN 与正常 TN 在 raw_life_distinct_cols/cells、raw_life_max_cols_per_row 等 H4 字段上存在强分离（AUC 约 0.79-0.80），但当前模型仍将 197 个及时有分数的故障单元判为低于阈值。能否构造描述“近期空间集中度加速/密度”的因果特征，例如近 7 天 distinct cells/cols 相对生命周期的增量或比值、近 7 天 max_cols_per_row 的密度变化，以及集中度与 error_dq_count_6h/burst_count 的交互，用来区分正在扩散的局部缺陷与长期稳定集中的健康设备？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在 TRAIN 交叉验证中，漏报 FN 与正常 TN 在 raw_life_distinct_cols/cells、raw_life_max_cols_per_row 等 H4 字段上存在强分离（AUC 约 0.79-0.80），但当前模型仍将 197 个及时有分数的故障单元判为低于阈值。能否构造描述“近期空间集中度加速/密度”的因果特征，例如近 7 天 distinct cells/cols 相对生命周期的增量或比值、近 7 天 max_cols_per_row 的密度变化，以及集中度与 error_dq_count_6h/burst_count 的交互，用来区分正在扩散的局部缺陷与长期稳定集中的健康设备？",
+    "reason": "trial_002 仅提高 max_depth 未通过采纳检验（CV F1 0.1227，P(better)=0.095），且 197/210 个 FN 属于已有分数但低于阈值，说明不是缺少非线性深度，而是现有特征表示不足以刻画漏报设备的故障前扩展模式。missed_fault_contrast 显示 H4 相关字段对 FN/TN 的 AUC 明显高于高分 TP/FP 对比中的多数特征，优先验证该机制。",
+    "hypothesis_id": "H4",
+    "target": "recall",
+    "expected": "新特征在 TRAIN CV 中使漏报的故障单元获得更高分数，FN 数量下降；同时因集中度加速特征与长期稳定集中有区别，新增 FP 应小于 TP 收益，整体 CV F1 较 trial_001 提升。",
+    "falsification": "若新特征在 TRAIN CV 中未提升召回，或 FP 增长导致 CV F1 不升反降；或 missed_fault_contrast 中新特征 AUC 区间包含 0.5，则视为未验证 H4 在故障前扩展模式上的区分能力。",
+    "job": "job_001"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_009",
+  "changes": {
+    "rerank": "parallel"
+  },
+  "reason": "trial_009 单阶段 CV F1=0.1723，高于 best trial_008 的 0.1622，但 P(better)=0.82 未达 0.9；其混淆矩阵为 TP=56/FP=322/FN=216，FN 中 203 个属于已有及时分数但低于阈值。trial_010 继续叠加归一化交互特征后 CV F1 降至 0.1577 并丢失 23 个命中，说明继续加特征收益不确定。scope.parallel.allowed=true，可以在冻结的 trial_009 父模型上增加一个独立设备均衡浅层 XGBoost 分支，对低分故障提供补充评分，同时保留父模型对误报的抑制。",
+  "hypothesis": "在 trial_009 父模型上增加 parallel 分支，能够独立恢复部分被父模型压低的故障命中，新增 TP 多于新增 FP，使 CV F1 超过 best trial_008 并满足 P(better)>=0.9。",
+  "expected": "CV 中 TP 增加、FN 减少，新增 FP 有限；CV F1 较 trial_009 提升，且相对 best trial_008 的配对 bootstrap P(better)>=0.9。",
+  "falsification": "若 CV F1 较 trial_009 无提升，或相对 best trial_008 的 P(better)<0.9，说明 parallel 分支没有提供互补增益；不改变 best，后续再考虑基于错误证据的有限特征探索或停止。"
+}

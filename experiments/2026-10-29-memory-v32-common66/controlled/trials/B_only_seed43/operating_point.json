@@ -1,0 +1,20 @@
+{
+  "source": "B_train_oof",
+  "model": "full/model_full.ubj",
+  "model_sha256": "3d64ce60428d51b2dd92d5dfd490a428cb7fff378adc522ce953859c6dedf82c",
+  "step": 250,
+  "threshold": 0.9707490801811218,
+  "cv_metrics": {
+    "step": 250,
+    "f1": 0.14736842105263157,
+    "TP": 7,
+    "FP": 54,
+    "FN": 27,
+    "precision": 0.11475409836065574,
+    "recall": 0.20588235294117646,
+    "threshold": 0.9707490801811218
+  },
+  "oof_sha256": "6e213d589a44ed9a9a2ce4a18910880f0786ff662b6c260da5825a69ba456f76",
+  "target": "typeb",
+  "test_opened": false
+}

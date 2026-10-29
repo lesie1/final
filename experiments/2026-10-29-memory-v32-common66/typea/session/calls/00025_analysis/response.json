@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_004",
+  "hypothesis_id": "H5",
+  "target": "recall",
+  "question": "在 trial_007 的 TRAIN 交叉验证中，FN=220，其中 207 个单元已有及时分数但低于阈值。missed_fault_contrast 显示 FN 与 TN 相比，raw_7d_distinct_cols、raw_7d_distinct_cells、raw_life_new_cols_7d、raw_life_new_patterns_7d 等特征 AUC 约 0.74-0.78，且 FN 的 raw_life_top_cell_share 中位数明显更低（0.20 vs 0.64），说明漏报单元更倾向于近期在多个列/模式上扩散，而不是集中在单一 top cell。能否构造因果特征：近 7 天新增列数/生命周期列数、近 7 天新增模式数/生命周期模式数、1 - raw_life_top_cell_share 作为分散度，以及这些分散度特征与 error_dq_count_6h、error_burst_count_6h 的交互，用来提高对这类分散扩散漏报的召回？",
+  "reason": "trial_004 使用 base_weight=device 后 CV F1 从 trial_001 的 0.1412 提升到 0.1550，选择窗口 F1 从 0.1010 提升到 0.1863，但 P(better)=0.776 未达 0.9；其 CV 混淆矩阵为 TP=52/FP=347/FN=220，相比基线 FP 从 544 降到 347，但丢失了更多命中。trial_005 在 sample 权重父模型上增加 parallel 分支几乎无变化，trial_007 在 device 权重父模型上增加 parallel 分支与 trial_004 完全一致，说明仅靠并行分支无法恢复低分漏报。现有 missed_fault_contrast 证据表明漏报集中在高 spatial spread、低 top_cell_share 的近期扩散模式，这是 H5 的可区分行为，且当前特征程序可能未显式表达“近期扩散分散度”与突发错误的交互。因此以 device 权重的单阶段 parent trial_004 为基础，提出特征研究以提升召回。",
+  "expected": "新增的分散度/近期扩散特征在 TRAIN OOF 中对 FN 与 TN 的单变量 AUC 应保持 credible（区间不含 0.5），并能在 trial_004 基础上提高 CV 召回率；理想情况下相比 trial_004 增加 new_hits 且不引入大量新误报，使 CV F1 点估计提升。",
+  "falsification": "若新增特征在 FN/TN 中无单变量分离证据，或加入后 CV 召回率没有改善，反而降低了 precision 并使 CV F1 未超过 trial_004，则说明仅靠这类近期扩散分散度特征不足以恢复漏报。"
+}

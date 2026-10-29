@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN 交叉验证留出设备上，超过阈值的高分单元中，真故障（TP）与误报（FP）在 all_ce_count_15m、all_ce_count_1h、burst_count_*_15m、dq_count_*_15m、read_ce_count_15m 等现有特征上的 AUC 及 bootstrap 区间如何？哪些特征能可靠区分 TP 与 FP（区间不含 0.5）？",
+  "reason": "best（trial_001）选择窗口 TP=6、FP=13，CV TP=7、FP=17，误报占比高。多个参数、特征和权重对照未提升，优先用高分区 TP/FP 对比定位可减少误报的因果特征，再据此提出特征实验。"
+}

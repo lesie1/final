@@ -1,0 +1,3644 @@
+{
+  "task": "features",
+  "question": "能否构造因果特征，同时利用“近期新增模式速率/新列占比”与“地址/列扩散强度”，并用生命周期事件总量进行归一化或交互，来区分高分真故障与历史事件总量驱动的误报，同时提高对已有及时分数但低于阈值的分散扩散故障的召回？例如：fe_recent_new_pattern_rate × fe_spread_error_intensity、fe_recent_new_pattern_rate/log1p(raw_life_events)、fe_spread_error_intensity/log1p(raw_life_events)、fe_recent_new_col_share × fe_spread_error_intensity。",
+  "reason": "trial_009 的选择窗口 F1 从 trial_008 的 0.1835 提升到 0.1974，CV F1 从 0.1622 提升到 0.1723，但 P(better)=0.82 未达 0.9，主要问题是新特征降低了 FP 也丢失了 19 个命中，FN 仍达 216，其中 203 个已有及时分数但低于阈值。error_atlas 显示：高分 TP 与 FP 之间，fe_recent_new_pattern_rate AUC=0.684、fe_recent_pattern_x_15m_burst AUC=0.674、fe_recent_new_col_share AUC=0.642，且 TP 的 median 更高；同时 TP 的 raw_life_events(368.5 vs 1227.0) 和 raw_7d_events(96 vs 435) 更低，说明当前高分误报主要是历史事件总量高。漏报 FN 与 TN 之间，raw_life_distinct_cols/cells、error_dq_count_6h、fe_spread_error_intensity、raw_life_new_cols_7d、raw_life_new_patterns_7d 的 AUC 高达 0.76-0.82，FN 具有更明显的近期扩散和新模式。需要组合这些信号，而不是单独增加事件总量或单独增加扩散度，以恢复漏报并继续保持对历史总量误报的抑制。",
+  "expected": "新增的归一化/交互特征能提高对分散扩散漏报的分数，同时不会重新抬高历史事件总量驱动的误报；在 TRAIN 设备分组 CV 中 TP 增加、FP 不显著恶化，CV F1 提升，且相对 trial_009 或 trial_008 的配对 bootstrap P(better) 更接近或达到 0.9。",
+  "parent": "a2765a08ca44d95f2c8348304da9a029535c27f56a4206a05bc90f77f02b62b2",
+  "max_features": 4,
+  "profile": {
+    "feature_program": "a2765a08ca44d95f2c8348304da9a029535c27f56a4206a05bc90f77f02b62b2",
+    "feature_names": [
+      "all_ce_count_15m",
+      "all_ce_count_1h",
+      "all_ce_count_6h",
+      "all_ce_log_num_15m",
+      "all_ce_log_num_1h",
+      "all_ce_log_num_6h",
+      "burst_count_1_15m",
+      "burst_count_1_1h",
+      "burst_count_1_6h",
+      "burst_count_2_15m",
+      "burst_count_2_1h",
+      "burst_count_2_6h",
+      "burst_count_3_15m",
+      "burst_count_3_1h",
+      "burst_count_3_6h",
+      "burst_count_4_15m",
+      "burst_count_4_1h",
+      "burst_count_4_6h",
+      "burst_count_5_15m",
+      "burst_count_5_1h",
+      "burst_count_5_6h",
+      "burst_count_6_15m",
+      "burst_count_6_1h",
+      "burst_count_6_6h",
+      "burst_count_7_15m",
+      "burst_count_7_1h",
+      "burst_count_7_6h",
+      "burst_count_8_15m",
+      "burst_count_8_1h",
+      "burst_count_8_6h",
+      "ce_storm_count_15m",
+      "ce_storm_count_1h",
+      "ce_storm_count_6h",
+      "dq_count_1_15m",
+      "dq_count_1_1h",
+      "dq_count_1_6h",
+      "dq_count_2_15m",
+      "dq_count_2_1h",
+      "dq_count_2_6h",
+      "dq_count_3_15m",
+      "dq_count_3_1h",
+      "dq_count_3_6h",
+      "dq_count_4_15m",
+      "dq_count_4_1h",
+      "dq_count_4_6h",
+      "error_bit_count_15m",
+      "error_bit_count_1h",
+      "error_bit_count_6h",
+      "error_burst_count_15m",
+      "error_burst_count_1h",
+      "error_burst_count_6h",
+      "error_dq_count_15m",
+      "error_dq_count_1h",
+      "error_dq_count_6h",
+      "fault_column_num_15m",
+      "fault_column_num_1h",
+      "fault_column_num_6h",
+      "fault_mode_bank_15m",
+      "fault_mode_bank_1h",
+      "fault_mode_bank_6h",
+      "fault_mode_cell_15m",
+      "fault_mode_cell_1h",
+      "fault_mode_cell_6h",
+      "fault_mode_column_15m",
+      "fault_mode_column_1h",
+      "fault_mode_column_6h",
+      "fault_mode_device_15m",
+      "fault_mode_device_1h",
+      "fault_mode_device_6h",
+      "fault_mode_others_15m",
+      "fault_mode_others_1h",
+      "fault_mode_others_6h",
+      "fault_mode_row_15m",
+      "fault_mode_row_1h",
+      "fault_mode_row_6h",
+      "fault_row_num_15m",
+      "fault_row_num_1h",
+      "fault_row_num_6h",
+      "log_happen_frequency_15m",
+      "log_happen_frequency_1h",
+      "log_happen_frequency_6h",
+      "max_burst_interval_15m",
+      "max_burst_interval_1h",
+      "max_burst_interval_6h",
+      "max_dq_interval_15m",
+      "max_dq_interval_1h",
+      "max_dq_interval_6h",
+      "read_ce_count_15m",
+      "read_ce_count_1h",
+      "read_ce_count_6h",
+      "read_ce_log_num_15m",
+      "read_ce_log_num_1h",
+      "read_ce_log_num_6h",
+      "scrub_ce_count_15m",
+      "scrub_ce_count_1h",
+      "scrub_ce_count_6h",
+      "scrub_ce_log_num_15m",
+      "scrub_ce_log_num_1h",
+      "scrub_ce_log_num_6h",
+      "raw_6h_events",
+      "raw_6h_max_err_bits",
+      "raw_6h_max_dq_count",
+      "raw_6h_max_beat_count",
+      "raw_6h_min_dq_interval",
+      "raw_6h_max_beat_interval",
+      "raw_6h_adjacent_dq_events",
+      "raw_6h_multi_dq_events",
+      "raw_6h_multi_beat_events",
+      "raw_6h_risky_events",
+      "raw_6h_distinct_cells",
+      "raw_6h_distinct_rows",
+      "raw_6h_distinct_cols",
+      "raw_6h_distinct_banks",
+      "raw_6h_distinct_chips",
+      "raw_24h_events",
+      "raw_24h_max_err_bits",
+      "raw_24h_max_dq_count",
+      "raw_24h_max_beat_count",
+      "raw_24h_min_dq_interval",
+      "raw_24h_max_beat_interval",
+      "raw_24h_adjacent_dq_events",
+      "raw_24h_multi_dq_events",
+      "raw_24h_multi_beat_events",
+      "raw_24h_risky_events",
+      "raw_24h_distinct_cells",
+      "raw_24h_distinct_rows",
+      "raw_24h_distinct_cols",
+      "raw_24h_distinct_banks",
+      "raw_24h_distinct_chips",
+      "raw_7d_events",
+      "raw_7d_max_err_bits",
+      "raw_7d_max_dq_count",
+      "raw_7d_max_beat_count",
+      "raw_7d_min_dq_interval",
+      "raw_7d_max_beat_interval",
+      "raw_7d_adjacent_dq_events",
+      "raw_7d_multi_dq_events",
+      "raw_7d_multi_beat_events",
+      "raw_7d_risky_events",
+      "raw_7d_distinct_cells",
+      "raw_7d_distinct_rows",
+      "raw_7d_distinct_cols",
+      "raw_7d_distinct_banks",
+      "raw_7d_distinct_chips",
+      "raw_life_events",
+      "raw_life_distinct_cells",
+      "raw_life_distinct_rows",
+      "raw_life_distinct_cols",
+      "raw_life_distinct_banks",
+      "raw_life_distinct_chips",
+      "raw_life_distinct_ranks",
+      "raw_life_max_err_bits",
+      "raw_life_max_dq_count",
+      "raw_life_max_beat_count",
+      "raw_life_risky_events",
+      "raw_life_adjacent_dq_events",
+      "raw_life_top_cell_share",
+      "raw_life_max_cols_per_row",
+      "raw_life_max_rows_per_col",
+      "raw_life_days_since_first",
+      "raw_life_new_rows_7d",
+      "raw_life_new_cols_7d",
+      "raw_life_new_patterns_7d",
+      "raw_life_scrub_share",
+      "fe_recent_new_col_share",
+      "fe_recent_new_pattern_rate",
+      "fe_top_cell_dispersion",
+      "fe_spread_error_intensity",
+      "fe_recent_pattern_life_norm",
+      "fe_recent_pattern_x_6h_risky",
+      "fe_recent_pattern_x_24h_risky",
+      "fe_recent_pattern_x_15m_burst"
+    ],
+    "interface_version": "causal_features_v2",
+    "column_summary": {
+      "all_ce_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 506.0,
+        "mean": 3.195091,
+        "devices_with_values": 12
+      },
+      "all_ce_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 1102.0,
+        "mean": 8.537552,
+        "devices_with_values": 12
+      },
+      "all_ce_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 1757.0,
+        "mean": 541.465576,
+        "devices_with_values": 12
+      },
+      "all_ce_log_num_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 23.0,
+        "mean": 1.72025,
+        "devices_with_values": 12
+      },
+      "all_ce_log_num_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 61.0,
+        "mean": 3.70272,
+        "devices_with_values": 12
+      },
+      "all_ce_log_num_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 171.0,
+        "mean": 27.21686,
+        "devices_with_values": 12
+      },
+      "burst_count_1_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 23.0,
+        "mean": 1.362887,
+        "devices_with_values": 12
+      },
+      "burst_count_1_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 61.0,
+        "mean": 2.968495,
+        "devices_with_values": 12
+      },
+      "burst_count_1_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 171.0,
+        "mean": 23.081316,
+        "devices_with_values": 12
+      },
+      "burst_count_2_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.239586,
+        "devices_with_values": 12
+      },
+      "burst_count_2_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 0.491504,
+        "devices_with_values": 12
+      },
+      "burst_count_2_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 29.0,
+        "mean": 2.771882,
+        "devices_with_values": 12
+      },
+      "burst_count_3_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 4.0,
+        "mean": 0.054618,
+        "devices_with_values": 12
+      },
+      "burst_count_3_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 0.105235,
+        "devices_with_values": 12
+      },
+      "burst_count_3_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 17.0,
+        "mean": 0.435034,
+        "devices_with_values": 12
+      },
+      "burst_count_4_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.013886,
+        "devices_with_values": 12
+      },
+      "burst_count_4_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 0.027772,
+        "devices_with_values": 12
+      },
+      "burst_count_4_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.119569,
+        "devices_with_values": 12
+      },
+      "burst_count_5_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.002479,
+        "devices_with_values": 12
+      },
+      "burst_count_5_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 4.0,
+        "mean": 0.003793,
+        "devices_with_values": 12
+      },
+      "burst_count_5_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.010392,
+        "devices_with_values": 12
+      },
+      "burst_count_6_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 4.0,
+        "mean": 0.000836,
+        "devices_with_values": 12
+      },
+      "burst_count_6_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.002419,
+        "devices_with_values": 12
+      },
+      "burst_count_6_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 13.0,
+        "mean": 0.006391,
+        "devices_with_values": 12
+      },
+      "burst_count_7_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.001105,
+        "devices_with_values": 12
+      },
+      "burst_count_7_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 17.0,
+        "mean": 0.002927,
+        "devices_with_values": 12
+      },
+      "burst_count_7_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 18.0,
+        "mean": 0.008272,
+        "devices_with_values": 12
+      },
+      "burst_count_8_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 18.0,
+        "mean": 0.003225,
+        "devices_with_values": 12
+      },
+      "burst_count_8_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 27.0,
+        "mean": 0.006629,
+        "devices_with_values": 12
+      },
+      "burst_count_8_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 28.0,
+        "mean": 0.016066,
+        "devices_with_values": 12
+      },
+      "ce_storm_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 6e-05,
+        "devices_with_values": 12
+      },
+      "ce_storm_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.000209,
+        "devices_with_values": 12
+      },
+      "ce_storm_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.000567,
+        "devices_with_values": 12
+      },
+      "dq_count_1_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 12.0,
+        "mean": 1.617404,
+        "devices_with_values": 12
+      },
+      "dq_count_1_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 31.0,
+        "mean": 3.46424,
+        "devices_with_values": 12
+      },
+      "dq_count_1_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 106.0,
+        "mean": 25.805357,
+        "devices_with_values": 12
+      },
+      "dq_count_2_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 11.0,
+        "mean": 0.044883,
+        "devices_with_values": 12
+      },
+      "dq_count_2_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 32.0,
+        "mean": 0.100069,
+        "devices_with_values": 12
+      },
+      "dq_count_2_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 64.0,
+        "mean": 0.426643,
+        "devices_with_values": 12
+      },
+      "dq_count_3_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.009108,
+        "devices_with_values": 12
+      },
+      "dq_count_3_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 11.0,
+        "mean": 0.026787,
+        "devices_with_values": 12
+      },
+      "dq_count_3_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 31.0,
+        "mean": 0.149192,
+        "devices_with_values": 12
+      },
+      "dq_count_4_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 20.0,
+        "mean": 0.007227,
+        "devices_with_values": 12
+      },
+      "dq_count_4_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 45.0,
+        "mean": 0.017679,
+        "devices_with_values": 12
+      },
+      "dq_count_4_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 53.0,
+        "mean": 0.067728,
+        "devices_with_values": 12
+      },
+      "error_bit_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 311.0,
+        "mean": 2.208051,
+        "devices_with_values": 12
+      },
+      "error_bit_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 679.0,
+        "mean": 4.726162,
+        "devices_with_values": 12
+      },
+      "error_bit_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 806.0,
+        "mean": 31.683071,
+        "devices_with_values": 12
+      },
+      "error_burst_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 157.0,
+        "mean": 2.112402,
+        "devices_with_values": 12
+      },
+      "error_burst_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 330.0,
+        "mean": 4.485293,
+        "devices_with_values": 12
+      },
+      "error_burst_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 386.0,
+        "mean": 30.685192,
+        "devices_with_values": 12
+      },
+      "error_dq_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 80.0,
+        "mean": 1.763401,
+        "devices_with_values": 12
+      },
+      "error_dq_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 180.0,
+        "mean": 3.815451,
+        "devices_with_values": 12
+      },
+      "error_dq_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 300.0,
+        "mean": 27.377131,
+        "devices_with_values": 12
+      },
+      "fault_column_num_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.002508,
+        "devices_with_values": 12
+      },
+      "fault_column_num_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2.0,
+        "mean": 0.009735,
+        "devices_with_values": 12
+      },
+      "fault_column_num_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0,
+        "mean": 0.162063,
+        "devices_with_values": 12
+      },
+      "fault_mode_bank_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.004599,
+        "devices_with_values": 12
+      },
+      "fault_mode_bank_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.008959,
+        "devices_with_values": 12
+      },
+      "fault_mode_bank_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.001404,
+        "devices_with_values": 12
+      },
+      "fault_mode_cell_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.574492,
+        "devices_with_values": 12
+      },
+      "fault_mode_cell_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.192284,
+        "devices_with_values": 12
+      },
+      "fault_mode_cell_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.003494,
+        "devices_with_values": 12
+      },
+      "fault_mode_column_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.000597,
+        "devices_with_values": 12
+      },
+      "fault_mode_column_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.000418,
+        "devices_with_values": 12
+      },
+      "fault_mode_column_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 6e-05,
+        "devices_with_values": 12
+      },
+      "fault_mode_device_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.028578,
+        "devices_with_values": 12
+      },
+      "fault_mode_device_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.086481,
+        "devices_with_values": 12
+      },
+      "fault_mode_device_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.224893,
+        "devices_with_values": 12
+      },
+      "fault_mode_others_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.067847,
+        "devices_with_values": 12
+      },
+      "fault_mode_others_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.190611,
+        "devices_with_values": 12
+      },
+      "fault_mode_others_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.368143,
+        "devices_with_values": 12
+      },
+      "fault_mode_row_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.323887,
+        "devices_with_values": 12
+      },
+      "fault_mode_row_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.521247,
+        "devices_with_values": 12
+      },
+      "fault_mode_row_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.402007,
+        "devices_with_values": 12
+      },
+      "fault_row_num_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 4.0,
+        "mean": 0.368083,
+        "devices_with_values": 12
+      },
+      "fault_row_num_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.816018,
+        "devices_with_values": 12
+      },
+      "fault_row_num_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 1.618359,
+        "devices_with_values": 12
+      },
+      "log_happen_frequency_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 39.130435943603516,
+        "maximum": 900.0,
+        "mean": 669.979248,
+        "devices_with_values": 12
+      },
+      "log_happen_frequency_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 59.01639175415039,
+        "maximum": 3600.0,
+        "mean": 1537.47168,
+        "devices_with_values": 12
+      },
+      "log_happen_frequency_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 126.31578826904297,
+        "maximum": 21600.0,
+        "mean": 1462.160156,
+        "devices_with_values": 12
+      },
+      "max_burst_interval_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 0.751874,
+        "devices_with_values": 12
+      },
+      "max_burst_interval_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 1.262221,
+        "devices_with_values": 12
+      },
+      "max_burst_interval_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 3.072924,
+        "devices_with_values": 12
+      },
+      "max_dq_interval_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 0.076686,
+        "devices_with_values": 12
+      },
+      "max_dq_interval_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 0.103742,
+        "devices_with_values": 12
+      },
+      "max_dq_interval_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3.0,
+        "mean": 0.210261,
+        "devices_with_values": 12
+      },
+      "read_ce_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 506.0,
+        "mean": 3.176815,
+        "devices_with_values": 12
+      },
+      "read_ce_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1102.0,
+        "mean": 8.508914,
+        "devices_with_values": 12
+      },
+      "read_ce_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1757.0,
+        "mean": 541.233154,
+        "devices_with_values": 12
+      },
+      "read_ce_log_num_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 23.0,
+        "mean": 1.702691,
+        "devices_with_values": 12
+      },
+      "read_ce_log_num_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 61.0,
+        "mean": 3.675994,
+        "devices_with_values": 12
+      },
+      "read_ce_log_num_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 167.0,
+        "mean": 27.103144,
+        "devices_with_values": 12
+      },
+      "scrub_ce_count_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 20.0,
+        "mean": 0.017798,
+        "devices_with_values": 12
+      },
+      "scrub_ce_count_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 30.0,
+        "mean": 0.027145,
+        "devices_with_values": 12
+      },
+      "scrub_ce_count_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 56.0,
+        "mean": 0.216741,
+        "devices_with_values": 12
+      },
+      "scrub_ce_log_num_15m": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 20.0,
+        "mean": 0.017081,
+        "devices_with_values": 12
+      },
+      "scrub_ce_log_num_1h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 30.0,
+        "mean": 0.025234,
+        "devices_with_values": 12
+      },
+      "scrub_ce_log_num_6h": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 30.0,
+        "mean": 0.106997,
+        "devices_with_values": 12
+      },
+      "raw_6h_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 1757.0,
+        "mean": 541.31134,
+        "devices_with_values": 12
+      },
+      "raw_6h_max_err_bits": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 30.0,
+        "mean": 2.290326,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_dq_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.13147,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_beat_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 2.230236,
+        "devices_with_values": 10
+      },
+      "raw_6h_min_dq_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 3634,
+        "missing_fraction": 0.89148,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.707485,
+        "devices_with_values": 10
+      },
+      "raw_6h_max_beat_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 2.795001,
+        "devices_with_values": 10
+      },
+      "raw_6h_adjacent_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 371.0,
+        "mean": 1.272374,
+        "devices_with_values": 12
+      },
+      "raw_6h_multi_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 479.0,
+        "mean": 1.966196,
+        "devices_with_values": 12
+      },
+      "raw_6h_multi_beat_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1070.0,
+        "mean": 61.749008,
+        "devices_with_values": 12
+      },
+      "raw_6h_risky_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 62.0,
+        "mean": 0.077582,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_cells": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 100.0,
+        "mean": 21.411055,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_rows": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 46.0,
+        "mean": 2.039359,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_cols": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 100.0,
+        "mean": 21.234211,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_banks": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.853167,
+        "devices_with_values": 12
+      },
+      "raw_6h_distinct_chips": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.598531,
+        "devices_with_values": 12
+      },
+      "raw_24h_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 6718.0,
+        "mean": 2142.465332,
+        "devices_with_values": 12
+      },
+      "raw_24h_max_err_bits": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 30.0,
+        "mean": 2.840008,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_dq_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.333274,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_beat_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 2.754652,
+        "devices_with_values": 10
+      },
+      "raw_24h_min_dq_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 10372,
+        "missing_fraction": 0.69027,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.765715,
+        "devices_with_values": 10
+      },
+      "raw_24h_max_beat_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 3.710928,
+        "devices_with_values": 10
+      },
+      "raw_24h_adjacent_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 640.0,
+        "mean": 2.903306,
+        "devices_with_values": 12
+      },
+      "raw_24h_multi_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1033.0,
+        "mean": 4.891719,
+        "devices_with_values": 12
+      },
+      "raw_24h_multi_beat_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 3759.0,
+        "mean": 244.889893,
+        "devices_with_values": 12
+      },
+      "raw_24h_risky_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 73.0,
+        "mean": 0.219339,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_cells": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 121.0,
+        "mean": 36.601875,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_rows": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 55.0,
+        "mean": 2.684534,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_cols": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 121.0,
+        "mean": 36.04163,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_banks": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.22994,
+        "devices_with_values": 12
+      },
+      "raw_24h_distinct_chips": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.853077,
+        "devices_with_values": 12
+      },
+      "raw_7d_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 45696.0,
+        "mean": 14381.472656,
+        "devices_with_values": 12
+      },
+      "raw_7d_max_err_bits": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 30.0,
+        "mean": 3.52107,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_dq_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.608607,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_beat_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 3.388048,
+        "devices_with_values": 10
+      },
+      "raw_7d_min_dq_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 19538,
+        "missing_fraction": 0.41655,
+        "minimum": 1.0,
+        "maximum": 3.0,
+        "mean": 1.554049,
+        "devices_with_values": 10
+      },
+      "raw_7d_max_beat_interval": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 4.771824,
+        "devices_with_values": 10
+      },
+      "raw_7d_adjacent_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1070.0,
+        "mean": 6.74614,
+        "devices_with_values": 12
+      },
+      "raw_7d_multi_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1563.0,
+        "mean": 12.852361,
+        "devices_with_values": 12
+      },
+      "raw_7d_multi_beat_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 20826.0,
+        "mean": 1608.224365,
+        "devices_with_values": 12
+      },
+      "raw_7d_risky_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 106.0,
+        "mean": 1.077075,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_cells": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 126.0,
+        "mean": 67.269386,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_rows": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 86.0,
+        "mean": 3.425867,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_cols": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 126.0,
+        "mean": 65.444618,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_banks": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.587094,
+        "devices_with_values": 12
+      },
+      "raw_7d_distinct_chips": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.010751,
+        "devices_with_values": 12
+      },
+      "raw_life_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 500444.0,
+        "mean": 87624.90625,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_cells": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 167.0,
+        "mean": 100.805298,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_rows": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 86.0,
+        "mean": 3.828441,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_cols": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 166.0,
+        "mean": 97.086571,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_banks": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.706453,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_chips": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 2.028847,
+        "devices_with_values": 12
+      },
+      "raw_life_distinct_ranks": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 2.0,
+        "mean": 1.239735,
+        "devices_with_values": 12
+      },
+      "raw_life_max_err_bits": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 30.0,
+        "mean": 3.973569,
+        "devices_with_values": 10
+      },
+      "raw_life_max_dq_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 4.0,
+        "mean": 1.748081,
+        "devices_with_values": 10
+      },
+      "raw_life_max_beat_count": {
+        "sample_rows": 33487,
+        "finite_rows": 33483,
+        "missing_fraction": 0.00012,
+        "minimum": 1.0,
+        "maximum": 8.0,
+        "mean": 3.736194,
+        "devices_with_values": 10
+      },
+      "raw_life_risky_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 108.0,
+        "mean": 4.924747,
+        "devices_with_values": 12
+      },
+      "raw_life_adjacent_dq_events": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 2245.0,
+        "mean": 12.692836,
+        "devices_with_values": 12
+      },
+      "raw_life_top_cell_share": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.01785714365541935,
+        "maximum": 1.0,
+        "mean": 0.31112,
+        "devices_with_values": 12
+      },
+      "raw_life_max_cols_per_row": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 128.0,
+        "mean": 65.382538,
+        "devices_with_values": 12
+      },
+      "raw_life_max_rows_per_col": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 1.0,
+        "maximum": 57.0,
+        "mean": 1.513184,
+        "devices_with_values": 12
+      },
+      "raw_life_days_since_first": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 86.59562683105469,
+        "mean": 42.669239,
+        "devices_with_values": 12
+      },
+      "raw_life_new_rows_7d": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 86.0,
+        "mean": 0.435393,
+        "devices_with_values": 12
+      },
+      "raw_life_new_cols_7d": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 116.0,
+        "mean": 11.072297,
+        "devices_with_values": 12
+      },
+      "raw_life_new_patterns_7d": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 76.0,
+        "mean": 8.119719,
+        "devices_with_values": 12
+      },
+      "raw_life_scrub_share": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.005304,
+        "devices_with_values": 12
+      },
+      "fe_recent_new_col_share": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.170804,
+        "devices_with_values": 12
+      },
+      "fe_recent_new_pattern_rate": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 1.0,
+        "mean": 0.003622,
+        "devices_with_values": 12
+      },
+      "fe_top_cell_dispersion": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.9821428656578064,
+        "mean": 0.68888,
+        "devices_with_values": 12
+      },
+      "fe_spread_error_intensity": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.188963413238525,
+        "mean": 2.698951,
+        "devices_with_values": 12
+      },
+      "fe_recent_pattern_life_norm": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.5,
+        "mean": 0.000172,
+        "devices_with_values": 12
+      },
+      "fe_recent_pattern_x_6h_risky": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.90674889087677,
+        "mean": 0.000708,
+        "devices_with_values": 12
+      },
+      "fe_recent_pattern_x_24h_risky": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 0.90674889087677,
+        "mean": 0.001,
+        "devices_with_values": 12
+      },
+      "fe_recent_pattern_x_15m_burst": {
+        "sample_rows": 33487,
+        "finite_rows": 33487,
+        "missing_fraction": 0.0,
+        "minimum": 0.0,
+        "maximum": 6.0714287757873535,
+        "mean": 0.00137,
+        "devices_with_values": 12
+      }
+    },
+    "training_examples": [
+      {
+        "rows": 29,
+        "median_gap_seconds": 4092.5
+      },
+      {
+        "rows": 3,
+        "median_gap_seconds": 27896.0
+      },
+      {
+        "rows": 2,
+        "median_gap_seconds": 1074.0
+      },
+      {
+        "rows": 16,
+        "median_gap_seconds": 1075.0
+      },
+      {
+        "rows": 382,
+        "median_gap_seconds": 928.0
+      },
+      {
+        "rows": 283,
+        "median_gap_seconds": 8038.0
+      },
+      {
+        "rows": 8192,
+        "median_gap_seconds": 905.0
+      },
+      {
+        "rows": 8192,
+        "median_gap_seconds": 901.0
+      },
+      {
+        "rows": 8192,
+        "median_gap_seconds": 906.0
+      },
+      {
+        "rows": 8192,
+        "median_gap_seconds": 914.0
+      },
+      {
+        "rows": 2,
+        "median_gap_seconds": 1368631.0
+      },
+      {
+        "rows": 2,
+        "median_gap_seconds": 4569658.0
+      }
+    ],
+    "labels_visible": false,
+    "source": "Diverse training-only device prefixes across spread shards. Missing in sample does NOT mean missing in population."
+  },
+  "feature_api": {
+    "version": "causal_features_v2",
+    "signature": "def transform(frame)",
+    "input": "One device, chronological numeric rows. No labels, device IDs or future rows. Select literal column names from profile.feature_names.",
+    "output": "pd.DataFrame of declared unique fe_ columns; preserve rows and index. Original columns are retained automatically.",
+    "series_methods": [
+      "abs",
+      "astype",
+      "clip",
+      "count",
+      "cummax",
+      "cummin",
+      "cumprod",
+      "cumsum",
+      "diff",
+      "ewm",
+      "expanding",
+      "ffill",
+      "fillna",
+      "isna",
+      "mask",
+      "max",
+      "mean",
+      "median",
+      "min",
+      "notna",
+      "quantile",
+      "replace",
+      "rolling",
+      "shift",
+      "std",
+      "sum",
+      "var",
+      "where"
+    ],
+    "numpy_functions": [
+      "abs",
+      "clip",
+      "exp",
+      "isfinite",
+      "isnan",
+      "log",
+      "log1p",
+      "maximum",
+      "minimum",
+      "sign",
+      "sqrt",
+      "where"
+    ],
+    "pandas_functions": [
+      "DataFrame"
+    ],
+    "past_helpers": {
+      "past.gap_seconds(frame)": "Series: current minus previous observation time in seconds; first value NaN.",
+      "past.observation_count(frame)": "Series: causal count 1,2,...,n; no measured-value missingness dependence."
+    },
+    "rules": [
+      "Only assignments to new local names and a final return. No loops, comprehensions, imports or arbitrary functions.",
+      "frame.index is permitted ONLY as index=frame.index in pd.DataFrame. For time gaps use past.gap_seconds(frame).",
+      "No frame.columns, to_series, dt, iloc, loc, values, pd.Series, pd.to_numeric or apply. Inputs are already numeric.",
+      "Use arithmetic operators / + - * instead of .div/.add/.sub/.mul. Use literal column names; never discover columns dynamically.",
+      "Reductions must directly follow rolling/expanding/ewm. Use trailing real-time rolling windows; center=True and negative shifts are forbidden.",
+      "Missing measurements stay unknown unless the hypothesis explicitly justifies a constant or forward fill. No infinities.",
+      "Zero finite values in a bounded sample is a coverage limitation, not evidence that the entire dataset is empty."
+    ],
+    "examples": [
+      {
+        "features": [
+          "fe_change"
+        ],
+        "source": "def transform(frame):\n    change = frame['metric'].diff(1)\n    return pd.DataFrame({'fe_change': change}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_gap",
+          "fe_count"
+        ],
+        "source": "def transform(frame):\n    gap = past.gap_seconds(frame)\n    count = past.observation_count(frame)\n    return pd.DataFrame({'fe_gap': gap, 'fe_count': count}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_mean"
+        ],
+        "source": "def transform(frame):\n    avg = frame['metric'].rolling('7D', min_periods=1).mean()\n    return pd.DataFrame({'fe_mean': avg}, index=frame.index)"
+      }
+    ]
+  },
+  "semantic_mapping": {
+    "observations": [
+      {
+        "glob": "type_A/*.feather",
+        "id_column": null,
+        "time_column": "LogTime",
+        "time_unit": "s",
+        "timezone": "UTC",
+        "filters": {},
+        "features": [
+          {
+            "name": "read_ce_log_num_15m",
+            "column": "read_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_15m"
+          },
+          {
+            "name": "scrub_ce_log_num_15m",
+            "column": "scrub_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_15m"
+          },
+          {
+            "name": "all_ce_log_num_15m",
+            "column": "all_ce_log_num_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_15m"
+          },
+          {
+            "name": "read_ce_count_15m",
+            "column": "read_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_15m"
+          },
+          {
+            "name": "scrub_ce_count_15m",
+            "column": "scrub_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_15m"
+          },
+          {
+            "name": "all_ce_count_15m",
+            "column": "all_ce_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_15m"
+          },
+          {
+            "name": "log_happen_frequency_15m",
+            "column": "log_happen_frequency_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_15m"
+          },
+          {
+            "name": "ce_storm_count_15m",
+            "column": "ce_storm_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_15m"
+          },
+          {
+            "name": "fault_mode_others_15m",
+            "column": "fault_mode_others_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_15m"
+          },
+          {
+            "name": "fault_mode_device_15m",
+            "column": "fault_mode_device_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_15m"
+          },
+          {
+            "name": "fault_mode_bank_15m",
+            "column": "fault_mode_bank_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_15m"
+          },
+          {
+            "name": "fault_mode_row_15m",
+            "column": "fault_mode_row_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_15m"
+          },
+          {
+            "name": "fault_mode_column_15m",
+            "column": "fault_mode_column_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_15m"
+          },
+          {
+            "name": "fault_mode_cell_15m",
+            "column": "fault_mode_cell_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_15m"
+          },
+          {
+            "name": "fault_row_num_15m",
+            "column": "fault_row_num_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_15m"
+          },
+          {
+            "name": "fault_column_num_15m",
+            "column": "fault_column_num_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_15m"
+          },
+          {
+            "name": "error_bit_count_15m",
+            "column": "error_bit_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_15m"
+          },
+          {
+            "name": "error_dq_count_15m",
+            "column": "error_dq_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_15m"
+          },
+          {
+            "name": "error_burst_count_15m",
+            "column": "error_burst_count_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_15m"
+          },
+          {
+            "name": "max_dq_interval_15m",
+            "column": "max_dq_interval_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_15m"
+          },
+          {
+            "name": "max_burst_interval_15m",
+            "column": "max_burst_interval_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_15m"
+          },
+          {
+            "name": "dq_count_1_15m",
+            "column": "dq_count=1_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_15m"
+          },
+          {
+            "name": "dq_count_2_15m",
+            "column": "dq_count=2_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_15m"
+          },
+          {
+            "name": "dq_count_3_15m",
+            "column": "dq_count=3_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_15m"
+          },
+          {
+            "name": "dq_count_4_15m",
+            "column": "dq_count=4_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_15m"
+          },
+          {
+            "name": "burst_count_1_15m",
+            "column": "burst_count=1_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_15m"
+          },
+          {
+            "name": "burst_count_2_15m",
+            "column": "burst_count=2_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_15m"
+          },
+          {
+            "name": "burst_count_3_15m",
+            "column": "burst_count=3_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_15m"
+          },
+          {
+            "name": "burst_count_4_15m",
+            "column": "burst_count=4_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_15m"
+          },
+          {
+            "name": "burst_count_5_15m",
+            "column": "burst_count=5_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_15m"
+          },
+          {
+            "name": "burst_count_6_15m",
+            "column": "burst_count=6_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_15m"
+          },
+          {
+            "name": "burst_count_7_15m",
+            "column": "burst_count=7_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_15m"
+          },
+          {
+            "name": "burst_count_8_15m",
+            "column": "burst_count=8_15m",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_15m"
+          },
+          {
+            "name": "read_ce_log_num_1h",
+            "column": "read_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_1h"
+          },
+          {
+            "name": "scrub_ce_log_num_1h",
+            "column": "scrub_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_1h"
+          },
+          {
+            "name": "all_ce_log_num_1h",
+            "column": "all_ce_log_num_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_1h"
+          },
+          {
+            "name": "read_ce_count_1h",
+            "column": "read_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_1h"
+          },
+          {
+            "name": "scrub_ce_count_1h",
+            "column": "scrub_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_1h"
+          },
+          {
+            "name": "all_ce_count_1h",
+            "column": "all_ce_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_1h"
+          },
+          {
+            "name": "log_happen_frequency_1h",
+            "column": "log_happen_frequency_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_1h"
+          },
+          {
+            "name": "ce_storm_count_1h",
+            "column": "ce_storm_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_1h"
+          },
+          {
+            "name": "fault_mode_others_1h",
+            "column": "fault_mode_others_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_1h"
+          },
+          {
+            "name": "fault_mode_device_1h",
+            "column": "fault_mode_device_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_1h"
+          },
+          {
+            "name": "fault_mode_bank_1h",
+            "column": "fault_mode_bank_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_1h"
+          },
+          {
+            "name": "fault_mode_row_1h",
+            "column": "fault_mode_row_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_1h"
+          },
+          {
+            "name": "fault_mode_column_1h",
+            "column": "fault_mode_column_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_1h"
+          },
+          {
+            "name": "fault_mode_cell_1h",
+            "column": "fault_mode_cell_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_1h"
+          },
+          {
+            "name": "fault_row_num_1h",
+            "column": "fault_row_num_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_1h"
+          },
+          {
+            "name": "fault_column_num_1h",
+            "column": "fault_column_num_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_1h"
+          },
+          {
+            "name": "error_bit_count_1h",
+            "column": "error_bit_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_1h"
+          },
+          {
+            "name": "error_dq_count_1h",
+            "column": "error_dq_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_1h"
+          },
+          {
+            "name": "error_burst_count_1h",
+            "column": "error_burst_count_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_1h"
+          },
+          {
+            "name": "max_dq_interval_1h",
+            "column": "max_dq_interval_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_1h"
+          },
+          {
+            "name": "max_burst_interval_1h",
+            "column": "max_burst_interval_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_1h"
+          },
+          {
+            "name": "dq_count_1_1h",
+            "column": "dq_count=1_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_1h"
+          },
+          {
+            "name": "dq_count_2_1h",
+            "column": "dq_count=2_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_1h"
+          },
+          {
+            "name": "dq_count_3_1h",
+            "column": "dq_count=3_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_1h"
+          },
+          {
+            "name": "dq_count_4_1h",
+            "column": "dq_count=4_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_1h"
+          },
+          {
+            "name": "burst_count_1_1h",
+            "column": "burst_count=1_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_1h"
+          },
+          {
+            "name": "burst_count_2_1h",
+            "column": "burst_count=2_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_1h"
+          },
+          {
+            "name": "burst_count_3_1h",
+            "column": "burst_count=3_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_1h"
+          },
+          {
+            "name": "burst_count_4_1h",
+            "column": "burst_count=4_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_1h"
+          },
+          {
+            "name": "burst_count_5_1h",
+            "column": "burst_count=5_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_1h"
+          },
+          {
+            "name": "burst_count_6_1h",
+            "column": "burst_count=6_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_1h"
+          },
+          {
+            "name": "burst_count_7_1h",
+            "column": "burst_count=7_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_1h"
+          },
+          {
+            "name": "burst_count_8_1h",
+            "column": "burst_count=8_1h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_1h"
+          },
+          {
+            "name": "read_ce_log_num_6h",
+            "column": "read_ce_log_num_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_6h"
+          },
+          {
+            "name": "scrub_ce_log_num_6h",
+            "column": "scrub_ce_log_num_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_6h"
+          },
+          {
+            "name": "all_ce_log_num_6h",
+            "column": "all_ce_log_num_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_6h"
+          },
+          {
+            "name": "read_ce_count_6h",
+            "column": "read_ce_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_6h"
+          },
+          {
+            "name": "scrub_ce_count_6h",
+            "column": "scrub_ce_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_6h"
+          },
+          {
+            "name": "all_ce_count_6h",
+            "column": "all_ce_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_6h"
+          },
+          {
+            "name": "log_happen_frequency_6h",
+            "column": "log_happen_frequency_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_6h"
+          },
+          {
+            "name": "ce_storm_count_6h",
+            "column": "ce_storm_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_6h"
+          },
+          {
+            "name": "fault_mode_others_6h",
+            "column": "fault_mode_others_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_6h"
+          },
+          {
+            "name": "fault_mode_device_6h",
+            "column": "fault_mode_device_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_6h"
+          },
+          {
+            "name": "fault_mode_bank_6h",
+            "column": "fault_mode_bank_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_6h"
+          },
+          {
+            "name": "fault_mode_row_6h",
+            "column": "fault_mode_row_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_6h"
+          },
+          {
+            "name": "fault_mode_column_6h",
+            "column": "fault_mode_column_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_6h"
+          },
+          {
+            "name": "fault_mode_cell_6h",
+            "column": "fault_mode_cell_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_6h"
+          },
+          {
+            "name": "fault_row_num_6h",
+            "column": "fault_row_num_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_6h"
+          },
+          {
+            "name": "fault_column_num_6h",
+            "column": "fault_column_num_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_6h"
+          },
+          {
+            "name": "error_bit_count_6h",
+            "column": "error_bit_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_6h"
+          },
+          {
+            "name": "error_dq_count_6h",
+            "column": "error_dq_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_6h"
+          },
+          {
+            "name": "error_burst_count_6h",
+            "column": "error_burst_count_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_6h"
+          },
+          {
+            "name": "max_dq_interval_6h",
+            "column": "max_dq_interval_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_6h"
+          },
+          {
+            "name": "max_burst_interval_6h",
+            "column": "max_burst_interval_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_6h"
+          },
+          {
+            "name": "dq_count_1_6h",
+            "column": "dq_count=1_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_6h"
+          },
+          {
+            "name": "dq_count_2_6h",
+            "column": "dq_count=2_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_6h"
+          },
+          {
+            "name": "dq_count_3_6h",
+            "column": "dq_count=3_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_6h"
+          },
+          {
+            "name": "dq_count_4_6h",
+            "column": "dq_count=4_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_6h"
+          },
+          {
+            "name": "burst_count_1_6h",
+            "column": "burst_count=1_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_6h"
+          },
+          {
+            "name": "burst_count_2_6h",
+            "column": "burst_count=2_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_6h"
+          },
+          {
+            "name": "burst_count_3_6h",
+            "column": "burst_count=3_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_6h"
+          },
+          {
+            "name": "burst_count_4_6h",
+            "column": "burst_count=4_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_6h"
+          },
+          {
+            "name": "burst_count_5_6h",
+            "column": "burst_count=5_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_6h"
+          },
+          {
+            "name": "burst_count_6_6h",
+            "column": "burst_count=6_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_6h"
+          },
+          {
+            "name": "burst_count_7_6h",
+            "column": "burst_count=7_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_6h"
+          },
+          {
+            "name": "burst_count_8_6h",
+            "column": "burst_count=8_6h",
+            "kind": "numeric_unknown",
+            "unit": "source_native",
+            "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_6h"
+          }
+        ]
+      }
+    ],
+    "failure": {
+      "mode": "tickets",
+      "glob": "failure_ticket.csv",
+      "id_column": "sn_name",
+      "time_column": "alarm_time",
+      "time_unit": "s",
+      "timezone": "UTC",
+      "filters": {
+        "sn_type": "A"
+      },
+      "definition": "First recorded TypeA memory failure ticket; no inferred recovery after failure."
+    },
+    "followup": {
+      "mode": "file",
+      "glob": "followup.csv",
+      "id_column": "sn_name",
+      "start_column": "observed_start",
+      "end_column": "observed_end",
+      "time_unit": "s",
+      "timezone": "UTC",
+      "basis": "Observed contact interval: CE observation timestamps plus an actually recorded terminal failure ticket. Ticket-free devices retain the last CE observation endpoint. No complete population coverage or post-terminal health is asserted. Loader censors at split boundaries and removes post-failure features."
+    },
+    "description": "SmartMem TypeA, 99 original numeric features, filename stem is stable device ID. Two known incomplete-schema source files without failure tickets excluded and documented. No TypeB input. Original Unix timestamps unchanged. Follow-up is conservatively evidenced, not assumed complete."
+  },
+  "prior_experience": null,
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "正确able error 活动总量越高，未来故障风险越高。",
+      "basis": "CE 计数反映潜在存储单元退化，公开研究和运维经验表明 CE 率上升先于不可纠正故障。",
+      "fields": [
+        "all_ce_count_1h",
+        "all_ce_count_6h",
+        "ce_storm_count_1h",
+        "raw_6h_events",
+        "raw_24h_events",
+        "raw_7d_events",
+        "raw_life_events",
+        "log_happen_frequency_1h"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "在 TRAIN 内，故障设备这些 CE 计数/频率在故障前窗口并不系统性高于健康设备；或调整观测时长后关联消失。"
+    },
+    {
+      "id": "H2",
+      "mechanism": "单次 CE 的多 bit/多 DQ 扩展越宽，表示物理缺陷范围越大，越可能发生故障。",
+      "basis": "DRAM 错误若跨多个 DQ lane 或多个 bit，常对应 wordline/局部缺陷扩大；多 DQ 扩展比孤立单 bit 错误更危险。",
+      "fields": [
+        "error_bit_count_1h",
+        "error_bit_count_6h",
+        "raw_6h_max_err_bits",
+        "raw_24h_max_err_bits",
+        "raw_life_max_err_bits",
+        "raw_6h_max_dq_count",
+        "raw_24h_max_dq_count",
+        "raw_6h_multi_dq_events",
+        "raw_24h_multi_dq_events",
+        "raw_24h_risky_events"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "故障设备的最大错误 bit 数/DQ 跨度和 multi-dq/risky 事件占比没有高于健康设备，或差异仅由事件总数驱动。"
+    },
+    {
+      "id": "H3",
+      "mechanism": "错误呈时间爆发簇集，而非均匀散发的设备更容易故障。",
+      "basis": "突发错误风暴常是局部电路或刷新失效的前兆；短时间高 burst 计数和突发间隔变化可反映加速退化。",
+      "fields": [
+        "ce_storm_count_15m",
+        "ce_storm_count_1h",
+        "burst_count_4_1h",
+        "burst_count_5_1h",
+        "burst_count_6_1h",
+        "burst_count_7_1h",
+        "burst_count_8_1h",
+        "max_burst_interval_15m",
+        "max_burst_interval_1h"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "故障设备在故障前窗口的 burst 计数、风暴次数和 burst 间隔分布与健康设备无差异，或没有短时爆发/间隔缩短的模式。"
+    },
+    {
+      "id": "H4",
+      "mechanism": "错误在行/列地址上高度集中，指向弱 row/column 或局部缺陷，比分散错误更危险。",
+      "basis": "DRAM 故障常表现为 row hammer、弱 wordline 或 column 短路，导致特定 row/column/cell 反复报错。",
+      "fields": [
+        "fault_row_num_6h",
+        "fault_column_num_6h",
+        "raw_6h_distinct_rows",
+        "raw_6h_distinct_cols",
+        "raw_24h_distinct_cells",
+        "raw_24h_distinct_rows",
+        "raw_24h_distinct_cols",
+        "raw_life_top_cell_share",
+        "raw_life_max_cols_per_row",
+        "raw_life_max_rows_per_col"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "故障设备的行/列/cell 集中度没有高于健康设备，或高集中度主要出现在健康设备而非故障设备。"
+    },
+    {
+      "id": "H5",
+      "mechanism": "最近 7 天出现新的故障行/列或错误位型，是缺陷正在扩展的信号。",
+      "basis": "新地址/新错误模式的出现表示不稳定的新物理损伤，而不是长期稳定弱单元的重复报错。",
+      "fields": [
+        "raw_life_new_rows_7d",
+        "raw_life_new_cols_7d",
+        "raw_life_new_patterns_7d"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "故障设备在故障前的最近 7 天新行/列/错误模式数量没有系统性高于健康设备，或事件总量归一后差异消失。"
+    },
+    {
+      "id": "H6",
+      "mechanism": "故障设备中由 patrol scrub 发现的 CE 占比更低，因为活跃故障更多在读写访问中暴露。",
+      "basis": "Patrol scrub 是被动后台扫描；读写压力下更活跃的缺陷会表现为 demand/read CE，而非依赖后台 scrub 发现。",
+      "fields": [
+        "raw_life_scrub_share",
+        "read_ce_count_1h",
+        "scrub_ce_count_1h"
+      ],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "故障设备的 scrub CE 占比没有低于健康设备，或 read/scrub 比例与故障风险无关。"
+    },
+    {
+      "id": "H7",
+      "mechanism": "错误跨越更多 rank/bank/chip，表明缺陷涉及更广的芯片区域，未来故障风险更高。",
+      "basis": "DRAM 多 bank、多 chip、多 rank 同时报错提示系统性退化而非单一 cell 异常，影响范围更大。",
+      "fields": [
+        "raw_life_distinct_ranks",
+        "raw_life_distinct_banks",
+        "raw_life_distinct_chips",
+        "fault_mode_bank_6h",
+        "fault_mode_device_6h"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "故障设备涉及的 rank/bank/chip 数量没有高于健康设备，或广泛分布并不伴随更高故障风险。"
+    },
+    {
+      "id": "H8",
+      "mechanism": "相邻 DQ lane 错误和跨 beat 错误显示了更宽的数据通路损坏，风险更高。",
+      "basis": "DQ lane 相邻错误常对应 IO/数据线短路，跨 beat 错误表明同一 burst 内多拍失效；这类模式比随机孤立位错误更严重。",
+      "fields": [
+        "raw_6h_adjacent_dq_events",
+        "raw_24h_adjacent_dq_events",
+        "raw_6h_multi_beat_events",
+        "raw_24h_multi_beat_events",
+        "raw_6h_min_dq_interval",
+        "raw_24h_min_dq_interval",
+        "raw_6h_max_beat_interval",
+        "raw_24h_max_beat_interval"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "故障设备的相邻 DQ 事件、多 beat 事件和 DQ/beat 间隔指标与健康设备无差异，或间隔模式不指向相邻/跨拍损伤。"
+    }
+  ],
+  "hypothesis_id": "H5",
+  "error_evidence": [
+    {
+      "kind": "error_atlas",
+      "question": "在 trial_009 的 TRAIN OOF 上，高分 TP 与 FP 在近期新增模式/突发/risky 及原始地址扩散特征上分别由哪些方向主导；FN 与 TN 在哪些因果特征上可分离，FN 中低于阈值的单元是否仍具有 trial_008 曾捕捉的分散扩散或近期新模式信号？",
+      "trial": "trial_009",
+      "contrast": {
+        "kind": "error_atlas",
+        "error_counts": {
+          "TP": 56,
+          "FP": 322,
+          "FN": 216,
+          "TN": 129285,
+          "fn_no_timely_clock": 1,
+          "fn_no_timely_score": 12,
+          "fn_scored_below_threshold": 203,
+          "fn_with_outside_window_alarm": 5,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "precision": {
+          "kind": "high_score_contrast",
+          "step": 200,
+          "threshold": 0.9468749165534973,
+          "cv_metrics": {
+            "step": 200,
+            "f1": 0.1723076923076923,
+            "TP": 56,
+            "FP": 322,
+            "FN": 216,
+            "precision": 0.14814814814814814,
+            "recall": 0.20588235294117646,
+            "threshold": 0.9468749165534973
+          },
+          "tp_units": 56,
+          "fp_units": 317,
+          "group_counts": {
+            "TP": 56,
+            "FP": 317
+          },
+          "sampled_group_counts": {
+            "TP": 56,
+            "FP": 317
+          },
+          "features": [
+            {
+              "feature": "fe_recent_new_pattern_rate",
+              "auc_tp_vs_fp": 0.6844580892293826,
+              "auc_positive_vs_negative": 0.6844580892293826,
+              "separation": 0.18445808922938256,
+              "positive_median": 0.02211473509669304,
+              "negative_median": 0.0033003301359713078,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.6042578017973588,
+                0.764441236746018
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_recent_pattern_x_15m_burst",
+              "auc_tp_vs_fp": 0.6739240648940964,
+              "auc_positive_vs_negative": 0.6739240648940964,
+              "separation": 0.1739240648940964,
+              "positive_median": 0.00029352646379265934,
+              "negative_median": 4.152136170887388e-06,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5986886791381504,
+                0.7491341161536454
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_recent_pattern_life_norm",
+              "auc_tp_vs_fp": 0.6719242902208202,
+              "auc_positive_vs_negative": 0.6719242902208202,
+              "separation": 0.17192429022082023,
+              "positive_median": 4.251119025866501e-05,
+              "negative_median": 1.009568222798407e-06,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5961555534047287,
+                0.7394603663659765
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_events",
+              "auc_tp_vs_fp": 0.3419051374493015,
+              "auc_positive_vs_negative": 0.3419051374493015,
+              "separation": 0.1580948625506985,
+              "positive_median": 368.5,
+              "negative_median": 1227.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.2741898508178448,
+                0.4349059175479402
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_recent_new_col_share",
+              "auc_tp_vs_fp": 0.6415896800360523,
+              "auc_positive_vs_negative": 0.6415896800360523,
+              "separation": 0.14158968003605232,
+              "positive_median": 0.21913109719753265,
+              "negative_median": 0.12931033968925476,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5710649366188952,
+                0.7075431128862217
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_events",
+              "auc_tp_vs_fp": 0.36959215863001355,
+              "auc_positive_vs_negative": 0.36959215863001355,
+              "separation": 0.13040784136998645,
+              "positive_median": 96.0,
+              "negative_median": 435.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.294980709176914,
+                0.4715678601193176
+              ],
+              "credible": true
+            },
+            {
+              "feature": "dq_count_1_6h",
+              "auc_tp_vs_fp": 0.382999098693105,
+              "auc_positive_vs_negative": 0.382999098693105,
+              "separation": 0.117000901306895,
+              "positive_median": 3.5,
+              "negative_median": 6.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3087695019494164,
+                0.46023039396596555
+              ],
+              "credible": true
+            },
+            {
+              "feature": "burst_count_1_6h",
+              "auc_tp_vs_fp": 0.3839567372690401,
+              "auc_positive_vs_negative": 0.3839567372690401,
+              "separation": 0.11604326273095988,
+              "positive_median": 3.5,
+              "negative_median": 6.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3109825789160861,
+                0.46251378129970777
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_days_since_first",
+              "auc_tp_vs_fp": 0.3875619648490311,
+              "auc_positive_vs_negative": 0.3875619648490311,
+              "separation": 0.1124380351509689,
+              "positive_median": 31.125324249267578,
+              "negative_median": 33.38761520385742,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3120750574921011,
+                0.46038813321487
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_dq_count_15m",
+              "auc_tp_vs_fp": 0.6070020279405137,
+              "auc_positive_vs_negative": 0.6070020279405137,
+              "separation": 0.10700202794051372,
+              "positive_median": 6.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.526372713140484,
+                0.6928547932330827
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_events",
+              "auc_tp_vs_fp": 0.3940682739972961,
+              "auc_positive_vs_negative": 0.3940682739972961,
+              "separation": 0.1059317260027039,
+              "positive_median": 20.0,
+              "negative_median": 93.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3209517878745917,
+                0.48230541531044424
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_max_beat_interval",
+              "auc_tp_vs_fp": 0.39613436615522124,
+              "auc_positive_vs_negative": 0.39613436615522124,
+              "separation": 0.10386563384477876,
+              "positive_median": 4.0,
+              "negative_median": 5.0,
+              "positive_missing": 0.125,
+              "negative_missing": 0.13564668769716087,
+              "auc_interval_95": [
+                0.3120445859391523,
+                0.48870803359560855
+              ],
+              "credible": true
+            },
+            {
+              "feature": "dq_count_2_15m",
+              "auc_tp_vs_fp": 0.6006365479945922,
+              "auc_positive_vs_negative": 0.6006365479945922,
+              "separation": 0.10063654799459221,
+              "positive_median": 1.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5263291643885548,
+                0.6891950337346843
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_max_beat_interval",
+              "auc_tp_vs_fp": 0.40518783542039355,
+              "auc_positive_vs_negative": 0.40518783542039355,
+              "separation": 0.09481216457960645,
+              "positive_median": 4.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.23214285714285715,
+              "negative_missing": 0.17981072555205047,
+              "auc_interval_95": [
+                0.32933706757732245,
+                0.48090851814516133
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_count_6h",
+              "auc_tp_vs_fp": 0.4055599369085173,
+              "auc_positive_vs_negative": 0.4055599369085173,
+              "separation": 0.09444006309148267,
+              "positive_median": 10.5,
+              "negative_median": 52.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.33446506892230576,
+                0.4887603664253009
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_events",
+              "auc_tp_vs_fp": 0.40558810274898605,
+              "auc_positive_vs_negative": 0.40558810274898605,
+              "separation": 0.09441189725101395,
+              "positive_median": 10.5,
+              "negative_median": 52.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.33446506892230576,
+                0.4889321826846994
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_bit_count_15m",
+              "auc_tp_vs_fp": 0.5942992338891393,
+              "auc_positive_vs_negative": 0.5942992338891393,
+              "separation": 0.0942992338891393,
+              "positive_median": 6.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.509084561675817,
+                0.6823401158268971
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_max_beat_interval",
+              "auc_tp_vs_fp": 0.40595690747782004,
+              "auc_positive_vs_negative": 0.40595690747782004,
+              "separation": 0.09404309252217996,
+              "positive_median": 4.0,
+              "negative_median": 5.0,
+              "positive_missing": 0.19642857142857142,
+              "negative_missing": 0.17034700315457413,
+              "auc_interval_95": [
+                0.31147257951010876,
+                0.4816094029599501
+              ],
+              "credible": true
+            },
+            {
+              "feature": "read_ce_count_6h",
+              "auc_tp_vs_fp": 0.40612325371789093,
+              "auc_positive_vs_negative": 0.40612325371789093,
+              "separation": 0.09387674628210907,
+              "positive_median": 7.0,
+              "negative_median": 47.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.335814836022793,
+                0.4799367949352753
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_burst_count_15m",
+              "auc_tp_vs_fp": 0.5914544840018026,
+              "auc_positive_vs_negative": 0.5914544840018026,
+              "separation": 0.09145448400180256,
+              "positive_median": 6.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5049155816419303,
+                0.6771025219298246
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_log_num_15m",
+              "auc_tp_vs_fp": 0.591426318161334,
+              "auc_positive_vs_negative": 0.591426318161334,
+              "separation": 0.09142631816133395,
+              "positive_median": 5.0,
+              "negative_median": 3.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5090572751425304,
+                0.6678301429925327
+              ],
+              "credible": true
+            },
+            {
+              "feature": "log_happen_frequency_15m",
+              "auc_tp_vs_fp": 0.40857368183866605,
+              "auc_positive_vs_negative": 0.40857368183866605,
+              "separation": 0.09142631816133395,
+              "positive_median": 180.0,
+              "negative_median": 300.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.33216985700746726,
+                0.49094272485746965
+              ],
+              "credible": true
+            },
+            {
+              "feature": "max_dq_interval_15m",
+              "auc_tp_vs_fp": 0.587905588102749,
+              "auc_positive_vs_negative": 0.587905588102749,
+              "separation": 0.08790558810274895,
+              "positive_median": 1.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5264761467513907,
+                0.6746695484941142
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_distinct_cols",
+              "auc_tp_vs_fp": 0.41634745380802163,
+              "auc_positive_vs_negative": 0.41634745380802163,
+              "separation": 0.08365254619197837,
+              "positive_median": 30.5,
+              "negative_median": 46.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3486066806479207,
+                0.5214859786395216
+              ],
+              "credible": false
+            },
+            {
+              "feature": "raw_life_distinct_cols",
+              "auc_tp_vs_fp": 0.4194456962595764,
+              "auc_positive_vs_negative": 0.4194456962595764,
+              "separation": 0.0805543037404236,
+              "positive_median": 55.5,
+              "negative_median": 81.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3464444257509422,
+                0.5317171730688597
+              ],
+              "credible": false
+            }
+          ],
+          "credible_features": [
+            "fe_recent_new_pattern_rate",
+            "fe_recent_pattern_x_15m_burst",
+            "fe_recent_pattern_life_norm",
+            "raw_life_events",
+            "fe_recent_new_col_share",
+            "raw_7d_events",
+            "dq_count_1_6h",
+            "burst_count_1_6h",
+            "raw_life_days_since_first",
+            "error_dq_count_15m",
+            "raw_24h_events",
+            "raw_7d_max_beat_interval",
+            "dq_count_2_15m",
+            "raw_6h_max_beat_interval",
+            "all_ce_count_6h",
+            "raw_6h_events",
+            "error_bit_count_15m",
+            "raw_24h_max_beat_interval",
+            "read_ce_count_6h",
+            "error_burst_count_15m",
+            "all_ce_log_num_15m",
+            "log_happen_frequency_15m",
+            "max_dq_interval_15m"
+          ],
+          "eligible_units": 129874,
+          "error_counts": {
+            "TP": 56,
+            "FP": 322,
+            "FN": 216,
+            "TN": 129285,
+            "fn_no_timely_clock": 1,
+            "fn_no_timely_score": 12,
+            "fn_scored_below_threshold": 203,
+            "fn_with_outside_window_alarm": 5,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        },
+        "recall": {
+          "kind": "missed_fault_contrast",
+          "step": 200,
+          "threshold": 0.9468749165534973,
+          "cv_metrics": {
+            "step": 200,
+            "f1": 0.1723076923076923,
+            "TP": 56,
+            "FP": 322,
+            "FN": 216,
+            "precision": 0.14814814814814814,
+            "recall": 0.20588235294117646,
+            "threshold": 0.9468749165534973
+          },
+          "tp_units": 0,
+          "fp_units": 0,
+          "group_counts": {
+            "FN": 216,
+            "TN": 129285
+          },
+          "sampled_group_counts": {
+            "FN": 216,
+            "TN": 1000
+          },
+          "features": [
+            {
+              "feature": "raw_life_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8160841134685045,
+              "separation": 0.3160841134685045,
+              "positive_median": 53.0,
+              "negative_median": 5.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7811986852528809,
+                0.8487290817737545
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8122265606623701,
+              "separation": 0.3122265606623701,
+              "positive_median": 57.0,
+              "negative_median": 5.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7779633416149693,
+                0.8462981304511827
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_max_cols_per_row",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.811010154638136,
+              "separation": 0.31101015463813597,
+              "positive_median": 39.0,
+              "negative_median": 3.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7779198225923383,
+                0.8436979759250759
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_dq_count_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7998004018844213,
+              "separation": 0.29980040188442125,
+              "positive_median": 8.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7630492957597822,
+                0.8350819697758509
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_bit_count_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7941216002795718,
+              "separation": 0.2941216002795718,
+              "positive_median": 9.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7585861604870371,
+                0.8302685772532896
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7937049308127071,
+              "separation": 0.2937049308127071,
+              "positive_median": 25.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7530017035716823,
+                0.8307087630958253
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_spread_error_intensity",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7933823479996506,
+              "separation": 0.2933823479996506,
+              "positive_median": 2.18709135055542,
+              "negative_median": 0.48921236395835876,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7548575615835985,
+                0.8316631464764608
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_burst_count_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7921659419754165,
+              "separation": 0.29216594197541645,
+              "positive_median": 9.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7543870308914199,
+                0.8280870110090663
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7915510184880274,
+              "separation": 0.29155101848802745,
+              "positive_median": 25.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7512646775929622,
+                0.8300379275756793
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_dq_count_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7820885893050357,
+              "separation": 0.28208858930503566,
+              "positive_median": 4.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7404731700942344,
+                0.8200222275919067
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_log_num_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7806336064086452,
+              "separation": 0.2806336064086452,
+              "positive_median": 8.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7380633341923749,
+                0.8246182863149363
+              ],
+              "credible": true
+            },
+            {
+              "feature": "log_happen_frequency_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.2193663935913548,
+              "separation": 0.2806336064086452,
+              "positive_median": 2700.0,
+              "negative_median": 21600.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.1753817136850637,
+                0.26193666580762515
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7806000040322851,
+              "separation": 0.28060000403228513,
+              "positive_median": 11.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7428549250819924,
+                0.8262395701743798
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_24h_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7791853439875268,
+              "separation": 0.2791853439875268,
+              "positive_median": 11.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7406231338979794,
+                0.8224908695185154
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_bit_count_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7768903016821349,
+              "separation": 0.2768903016821349,
+              "positive_median": 5.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7359018200853501,
+                0.8158678108163185
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_distinct_cols",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.774524694386387,
+              "separation": 0.27452469438638705,
+              "positive_median": 7.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7362738118445091,
+                0.81902437767216
+              ],
+              "credible": true
+            },
+            {
+              "feature": "error_burst_count_1h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7735334242837654,
+              "separation": 0.27353342428376537,
+              "positive_median": 5.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.732490721385304,
+                0.8128136549512291
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_distinct_cells",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7734158159665051,
+              "separation": 0.2734158159665051,
+              "positive_median": 7.0,
+              "negative_median": 1.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7344368874844917,
+                0.8183790615865243
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_new_cols_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7717961814259504,
+              "separation": 0.2717961814259504,
+              "positive_median": 5.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7375881548405574,
+                0.8097784160148668
+              ],
+              "credible": true
+            },
+            {
+              "feature": "all_ce_count_6h",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7646489559741665,
+              "separation": 0.2646489559741665,
+              "positive_median": 25.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7268665725251946,
+                0.8010313462879223
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_6h_events",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7646388752612585,
+              "separation": 0.2646388752612585,
+              "positive_median": 25.0,
+              "negative_median": 2.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7268367178688889,
+                0.8010587273907488
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_top_cell_share",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.23800227152064193,
+              "separation": 0.2619977284793581,
+              "positive_median": 0.2109072059392929,
+              "negative_median": 0.6190476417541504,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.19751938100004462,
+                0.2758976097390784
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_top_cell_dispersion",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7619977284793581,
+              "separation": 0.2619977284793581,
+              "positive_median": 0.7890927791595459,
+              "negative_median": 0.3809523582458496,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7241023902609216,
+                0.8024806189999554
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_life_new_patterns_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7610367005154605,
+              "separation": 0.26103670051546046,
+              "positive_median": 2.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.7293645259956936,
+                0.7993811152746023
+              ],
+              "credible": true
+            },
+            {
+              "feature": "raw_7d_events",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7560333066754481,
+              "separation": 0.2560333066754481,
+              "positive_median": 230.0,
+              "negative_median": 18.0,
+              "positive_missing": 0.06018518518518518,
+              "negative_missing": 0.267,
+              "auc_interval_95": [
+                0.719692896077444,
+                0.7928107267122282
+              ],
+              "credible": true
+            }
+          ],
+          "credible_features": [
+            "raw_life_distinct_cols",
+            "raw_life_distinct_cells",
+            "raw_life_max_cols_per_row",
+            "error_dq_count_6h",
+            "error_bit_count_6h",
+            "raw_7d_distinct_cols",
+            "fe_spread_error_intensity",
+            "error_burst_count_6h",
+            "raw_7d_distinct_cells",
+            "error_dq_count_1h",
+            "all_ce_log_num_6h",
+            "log_happen_frequency_6h",
+            "raw_24h_distinct_cols",
+            "raw_24h_distinct_cells",
+            "error_bit_count_1h",
+            "raw_6h_distinct_cols",
+            "error_burst_count_1h",
+            "raw_6h_distinct_cells",
+            "raw_life_new_cols_7d",
+            "all_ce_count_6h",
+            "raw_6h_events",
+            "raw_life_top_cell_share",
+            "fe_top_cell_dispersion",
+            "raw_life_new_patterns_7d",
+            "raw_7d_events"
+          ],
+          "eligible_units": 129874,
+          "error_counts": {
+            "TP": 56,
+            "FP": 322,
+            "FN": 216,
+            "TN": 129285,
+            "fn_no_timely_clock": 1,
+            "fn_no_timely_score": 12,
+            "fn_scored_below_threshold": 203,
+            "fn_with_outside_window_alarm": 5,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        }
+      }
+    }
+  ],
+  "target": "balanced",
+  "exploration_reason": null,
+  "error": null,
+  "previous_response": null
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "对当前最佳 trial_001 在 TRAIN 交叉验证的留出设备单元，获取高分 TP/FP 对比与漏报 FN/TN 对比，识别哪些因果特征能区分真故障和误报、哪些特征在漏报与正常单元间有可区分性，并给出漏报原因计数。优先为下一轮特征或参数调整提供证据。",
+  "reason": "当前最佳 trial_001 的 CV 误报很高：FP=544、FN=210；FN 中 197 例为有及时分数但低于阈值。trial_004 仅改 base_weight=device 未达采纳（P(better)=0.776），trial_005 并行分支也未达采纳（P(better)=0.62，CV F1 增益仅 0.00195）。需要同时查看高分误报和漏报两侧的可区分特征，避免继续盲目调参，并为后续 features 或参数对照提供证据。"
+}

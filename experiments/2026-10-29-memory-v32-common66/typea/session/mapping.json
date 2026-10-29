@@ -1,0 +1,730 @@
+{
+  "observations": [
+    {
+      "glob": "type_A/*.feather",
+      "id_column": null,
+      "time_column": "LogTime",
+      "time_unit": "s",
+      "timezone": "UTC",
+      "filters": {},
+      "features": [
+        {
+          "name": "read_ce_log_num_15m",
+          "column": "read_ce_log_num_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_15m"
+        },
+        {
+          "name": "scrub_ce_log_num_15m",
+          "column": "scrub_ce_log_num_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_15m"
+        },
+        {
+          "name": "all_ce_log_num_15m",
+          "column": "all_ce_log_num_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_15m"
+        },
+        {
+          "name": "read_ce_count_15m",
+          "column": "read_ce_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_15m"
+        },
+        {
+          "name": "scrub_ce_count_15m",
+          "column": "scrub_ce_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_15m"
+        },
+        {
+          "name": "all_ce_count_15m",
+          "column": "all_ce_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_15m"
+        },
+        {
+          "name": "log_happen_frequency_15m",
+          "column": "log_happen_frequency_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_15m"
+        },
+        {
+          "name": "ce_storm_count_15m",
+          "column": "ce_storm_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_15m"
+        },
+        {
+          "name": "fault_mode_others_15m",
+          "column": "fault_mode_others_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_15m"
+        },
+        {
+          "name": "fault_mode_device_15m",
+          "column": "fault_mode_device_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_15m"
+        },
+        {
+          "name": "fault_mode_bank_15m",
+          "column": "fault_mode_bank_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_15m"
+        },
+        {
+          "name": "fault_mode_row_15m",
+          "column": "fault_mode_row_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_15m"
+        },
+        {
+          "name": "fault_mode_column_15m",
+          "column": "fault_mode_column_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_15m"
+        },
+        {
+          "name": "fault_mode_cell_15m",
+          "column": "fault_mode_cell_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_15m"
+        },
+        {
+          "name": "fault_row_num_15m",
+          "column": "fault_row_num_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_15m"
+        },
+        {
+          "name": "fault_column_num_15m",
+          "column": "fault_column_num_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_15m"
+        },
+        {
+          "name": "error_bit_count_15m",
+          "column": "error_bit_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_15m"
+        },
+        {
+          "name": "error_dq_count_15m",
+          "column": "error_dq_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_15m"
+        },
+        {
+          "name": "error_burst_count_15m",
+          "column": "error_burst_count_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_15m"
+        },
+        {
+          "name": "max_dq_interval_15m",
+          "column": "max_dq_interval_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_15m"
+        },
+        {
+          "name": "max_burst_interval_15m",
+          "column": "max_burst_interval_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_15m"
+        },
+        {
+          "name": "dq_count_1_15m",
+          "column": "dq_count=1_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_15m"
+        },
+        {
+          "name": "dq_count_2_15m",
+          "column": "dq_count=2_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_15m"
+        },
+        {
+          "name": "dq_count_3_15m",
+          "column": "dq_count=3_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_15m"
+        },
+        {
+          "name": "dq_count_4_15m",
+          "column": "dq_count=4_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_15m"
+        },
+        {
+          "name": "burst_count_1_15m",
+          "column": "burst_count=1_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_15m"
+        },
+        {
+          "name": "burst_count_2_15m",
+          "column": "burst_count=2_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_15m"
+        },
+        {
+          "name": "burst_count_3_15m",
+          "column": "burst_count=3_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_15m"
+        },
+        {
+          "name": "burst_count_4_15m",
+          "column": "burst_count=4_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_15m"
+        },
+        {
+          "name": "burst_count_5_15m",
+          "column": "burst_count=5_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_15m"
+        },
+        {
+          "name": "burst_count_6_15m",
+          "column": "burst_count=6_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_15m"
+        },
+        {
+          "name": "burst_count_7_15m",
+          "column": "burst_count=7_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_15m"
+        },
+        {
+          "name": "burst_count_8_15m",
+          "column": "burst_count=8_15m",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_15m"
+        },
+        {
+          "name": "read_ce_log_num_1h",
+          "column": "read_ce_log_num_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_1h"
+        },
+        {
+          "name": "scrub_ce_log_num_1h",
+          "column": "scrub_ce_log_num_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_1h"
+        },
+        {
+          "name": "all_ce_log_num_1h",
+          "column": "all_ce_log_num_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_1h"
+        },
+        {
+          "name": "read_ce_count_1h",
+          "column": "read_ce_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_1h"
+        },
+        {
+          "name": "scrub_ce_count_1h",
+          "column": "scrub_ce_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_1h"
+        },
+        {
+          "name": "all_ce_count_1h",
+          "column": "all_ce_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_1h"
+        },
+        {
+          "name": "log_happen_frequency_1h",
+          "column": "log_happen_frequency_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_1h"
+        },
+        {
+          "name": "ce_storm_count_1h",
+          "column": "ce_storm_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_1h"
+        },
+        {
+          "name": "fault_mode_others_1h",
+          "column": "fault_mode_others_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_1h"
+        },
+        {
+          "name": "fault_mode_device_1h",
+          "column": "fault_mode_device_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_1h"
+        },
+        {
+          "name": "fault_mode_bank_1h",
+          "column": "fault_mode_bank_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_1h"
+        },
+        {
+          "name": "fault_mode_row_1h",
+          "column": "fault_mode_row_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_1h"
+        },
+        {
+          "name": "fault_mode_column_1h",
+          "column": "fault_mode_column_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_1h"
+        },
+        {
+          "name": "fault_mode_cell_1h",
+          "column": "fault_mode_cell_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_1h"
+        },
+        {
+          "name": "fault_row_num_1h",
+          "column": "fault_row_num_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_1h"
+        },
+        {
+          "name": "fault_column_num_1h",
+          "column": "fault_column_num_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_1h"
+        },
+        {
+          "name": "error_bit_count_1h",
+          "column": "error_bit_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_1h"
+        },
+        {
+          "name": "error_dq_count_1h",
+          "column": "error_dq_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_1h"
+        },
+        {
+          "name": "error_burst_count_1h",
+          "column": "error_burst_count_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_1h"
+        },
+        {
+          "name": "max_dq_interval_1h",
+          "column": "max_dq_interval_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_1h"
+        },
+        {
+          "name": "max_burst_interval_1h",
+          "column": "max_burst_interval_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_1h"
+        },
+        {
+          "name": "dq_count_1_1h",
+          "column": "dq_count=1_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_1h"
+        },
+        {
+          "name": "dq_count_2_1h",
+          "column": "dq_count=2_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_1h"
+        },
+        {
+          "name": "dq_count_3_1h",
+          "column": "dq_count=3_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_1h"
+        },
+        {
+          "name": "dq_count_4_1h",
+          "column": "dq_count=4_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_1h"
+        },
+        {
+          "name": "burst_count_1_1h",
+          "column": "burst_count=1_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_1h"
+        },
+        {
+          "name": "burst_count_2_1h",
+          "column": "burst_count=2_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_1h"
+        },
+        {
+          "name": "burst_count_3_1h",
+          "column": "burst_count=3_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_1h"
+        },
+        {
+          "name": "burst_count_4_1h",
+          "column": "burst_count=4_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_1h"
+        },
+        {
+          "name": "burst_count_5_1h",
+          "column": "burst_count=5_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_1h"
+        },
+        {
+          "name": "burst_count_6_1h",
+          "column": "burst_count=6_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_1h"
+        },
+        {
+          "name": "burst_count_7_1h",
+          "column": "burst_count=7_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_1h"
+        },
+        {
+          "name": "burst_count_8_1h",
+          "column": "burst_count=8_1h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_1h"
+        },
+        {
+          "name": "read_ce_log_num_6h",
+          "column": "read_ce_log_num_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_log_num_6h"
+        },
+        {
+          "name": "scrub_ce_log_num_6h",
+          "column": "scrub_ce_log_num_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_log_num_6h"
+        },
+        {
+          "name": "all_ce_log_num_6h",
+          "column": "all_ce_log_num_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_log_num_6h"
+        },
+        {
+          "name": "read_ce_count_6h",
+          "column": "read_ce_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: read_ce_count_6h"
+        },
+        {
+          "name": "scrub_ce_count_6h",
+          "column": "scrub_ce_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: scrub_ce_count_6h"
+        },
+        {
+          "name": "all_ce_count_6h",
+          "column": "all_ce_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: all_ce_count_6h"
+        },
+        {
+          "name": "log_happen_frequency_6h",
+          "column": "log_happen_frequency_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: log_happen_frequency_6h"
+        },
+        {
+          "name": "ce_storm_count_6h",
+          "column": "ce_storm_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: ce_storm_count_6h"
+        },
+        {
+          "name": "fault_mode_others_6h",
+          "column": "fault_mode_others_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_others_6h"
+        },
+        {
+          "name": "fault_mode_device_6h",
+          "column": "fault_mode_device_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_device_6h"
+        },
+        {
+          "name": "fault_mode_bank_6h",
+          "column": "fault_mode_bank_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_bank_6h"
+        },
+        {
+          "name": "fault_mode_row_6h",
+          "column": "fault_mode_row_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_row_6h"
+        },
+        {
+          "name": "fault_mode_column_6h",
+          "column": "fault_mode_column_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_column_6h"
+        },
+        {
+          "name": "fault_mode_cell_6h",
+          "column": "fault_mode_cell_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_mode_cell_6h"
+        },
+        {
+          "name": "fault_row_num_6h",
+          "column": "fault_row_num_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_row_num_6h"
+        },
+        {
+          "name": "fault_column_num_6h",
+          "column": "fault_column_num_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: fault_column_num_6h"
+        },
+        {
+          "name": "error_bit_count_6h",
+          "column": "error_bit_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_bit_count_6h"
+        },
+        {
+          "name": "error_dq_count_6h",
+          "column": "error_dq_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_dq_count_6h"
+        },
+        {
+          "name": "error_burst_count_6h",
+          "column": "error_burst_count_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: error_burst_count_6h"
+        },
+        {
+          "name": "max_dq_interval_6h",
+          "column": "max_dq_interval_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_dq_interval_6h"
+        },
+        {
+          "name": "max_burst_interval_6h",
+          "column": "max_burst_interval_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: max_burst_interval_6h"
+        },
+        {
+          "name": "dq_count_1_6h",
+          "column": "dq_count=1_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=1_6h"
+        },
+        {
+          "name": "dq_count_2_6h",
+          "column": "dq_count=2_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=2_6h"
+        },
+        {
+          "name": "dq_count_3_6h",
+          "column": "dq_count=3_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=3_6h"
+        },
+        {
+          "name": "dq_count_4_6h",
+          "column": "dq_count=4_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: dq_count=4_6h"
+        },
+        {
+          "name": "burst_count_1_6h",
+          "column": "burst_count=1_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=1_6h"
+        },
+        {
+          "name": "burst_count_2_6h",
+          "column": "burst_count=2_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=2_6h"
+        },
+        {
+          "name": "burst_count_3_6h",
+          "column": "burst_count=3_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=3_6h"
+        },
+        {
+          "name": "burst_count_4_6h",
+          "column": "burst_count=4_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=4_6h"
+        },
+        {
+          "name": "burst_count_5_6h",
+          "column": "burst_count=5_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=5_6h"
+        },
+        {
+          "name": "burst_count_6_6h",
+          "column": "burst_count=6_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=6_6h"
+        },
+        {
+          "name": "burst_count_7_6h",
+          "column": "burst_count=7_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=7_6h"
+        },
+        {
+          "name": "burst_count_8_6h",
+          "column": "burst_count=8_6h",
+          "kind": "numeric_unknown",
+          "unit": "source_native",
+          "description": "Supplied SmartMem TypeA trailing-window feature; original values and units preserved: burst_count=8_6h"
+        }
+      ]
+    }
+  ],
+  "failure": {
+    "mode": "tickets",
+    "glob": "failure_ticket.csv",
+    "id_column": "sn_name",
+    "time_column": "alarm_time",
+    "time_unit": "s",
+    "timezone": "UTC",
+    "filters": {
+      "sn_type": "A"
+    },
+    "definition": "First recorded TypeA memory failure ticket; no inferred recovery after failure."
+  },
+  "followup": {
+    "mode": "file",
+    "glob": "followup.csv",
+    "id_column": "sn_name",
+    "start_column": "observed_start",
+    "end_column": "observed_end",
+    "time_unit": "s",
+    "timezone": "UTC",
+    "basis": "Observed contact interval: CE observation timestamps plus an actually recorded terminal failure ticket. Ticket-free devices retain the last CE observation endpoint. No complete population coverage or post-terminal health is asserted. Loader censors at split boundaries and removes post-failure features."
+  },
+  "description": "SmartMem TypeA, 99 original numeric features, filename stem is stable device ID. Two known incomplete-schema source files without failure tickets excluded and documented. No TypeB input. Original Unix timestamps unchanged. Follow-up is conservatively evidenced, not assumed complete."
+}

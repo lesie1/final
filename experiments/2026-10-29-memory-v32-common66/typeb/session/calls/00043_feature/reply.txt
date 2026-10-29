@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    spatial = frame['fault_row_num_15m'] + frame['fault_column_num_15m']\n    burst = np.maximum(frame['burst_count_3_15m'], frame['burst_count_4_15m'])\n    spatial_mean = spatial.rolling('24h', min_periods=1).mean()\n    spatial_std = spatial.rolling('24h', min_periods=1).std()\n    burst_mean = burst.rolling('24h', min_periods=1).mean()\n    burst_std = burst.rolling('24h', min_periods=1).std()\n    spatial_z = (spatial - spatial_mean) / spatial_std\n    burst_z = (burst - burst_mean) / burst_std\n    interaction = spatial_z * burst_z\n    spatial_z = spatial_z.where(np.isfinite(spatial_z))\n    interaction = interaction.where(np.isfinite(interaction))\n    return pd.DataFrame({'fe_spatial_extent_15m': spatial, 'fe_burst34_15m': burst, 'fe_spatial_burst_interaction_15m': interaction, 'fe_spatial_z_15m': spatial_z}, index=frame.index)",
+  "features": [
+    "fe_spatial_extent_15m",
+    "fe_burst34_15m",
+    "fe_spatial_burst_interaction_15m",
+    "fe_spatial_z_15m"
+  ],
+  "reason": "H10: 故障进展通常表现为唯一故障行/列扩展，同时出现中等突发簇。该特征把 fault_row_num_15m/fault_column_num_15m 的空间范围与 burst_count_3_15m/burst_count_4_15m 的突发强度相乘，限制在两者同时升高的行上，以保留 trial_009 的召回、减少单独空间增量引入的健康 FP。若 FN/TN 对比中交互特征无区分度，或加入后 CV 召回低于 trial_009 且 FP 未明显下降，则该机制被否定。"
+}

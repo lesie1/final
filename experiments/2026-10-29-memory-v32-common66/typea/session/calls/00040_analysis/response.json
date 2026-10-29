@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_009",
+  "changes": {
+    "params.min_child_weight": 10
+  },
+  "reason": "trial_009 的 TRAIN OOF 中 FN=216，其中 203 个单元已有及时分数但低于阈值；当前 min_child_weight=50 可能限制了模型对少数故障设备的细粒度分裂，导致分散扩散/近期新增模式故障得分不足。单因素降低 min_child_weight 到 10，尝试提高这类少数故障的召回，同时保留 device 权重和现有特征对误报的抑制。",
+  "hypothesis": "降低 min_child_weight 能让模型对少数故障设备形成更细粒度规则，提高其预测分数，减少低于阈值的 FN；device 权重和现有特征可控制 FP 增长。",
+  "expected": "CV TP 较 trial_009 增加，FN 减少，CV F1 提升；若对误报影响有限，则可能超过 best trial_008 并达到采纳标准。",
+  "falsification": "若 CV F1 点估计未提升或 P(better) 仍 < 0.9，或 FP 大幅增加导致 precision 下降超过 recall 收益，则说明 min_child_weight 不是当前瓶颈。"
+}

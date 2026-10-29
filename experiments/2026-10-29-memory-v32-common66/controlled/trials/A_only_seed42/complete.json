@@ -1,0 +1,25 @@
+{
+  "files": {
+    "recipe.json": "1e17cd3f3358c7e1ee05efe1648b6821165a0074e31a4f0de47e8c8a717d477f",
+    "operating_point.json": "2fe5e62cd804556354f4499a8f68ab630f7b811c0eb357d07820aef2adf0d0a4",
+    "full/train_audit.json": "71a24053e7b08b699170bc18c461dc29daea5153207016293abd44207b8da1f1",
+    "full/model_full.ubj": "78a3ad4736f7d249b64645d2635546c98a35407bf57d50e9f801d534a91a4194",
+    "full/fit_complete.json": "4b438d3f3ab3e272c5166abe516f55f7e161d5e5182abac837b8262c5f3003e0",
+    "cv/oof.parquet": "9532875ea37ecead1792c7d5e52f3cc0a9fa602be5c30d8c18cf355f999f5ce3",
+    "cv/oof_complete.json": "2bf9cf40940c3751bac9d02fe87a7a623ee88590b9bffd352f0429da7c0c26aa",
+    "cv/fold_0/oof.parquet": "41b657a85bea97629e85aec6ed86d976bb9961a5491fa694bbbdd48392c51969",
+    "cv/fold_0/score_complete.json": "3736d5f53378bba96d3cdc91bd495228dc580c8bd1c95e260560ed1e13b1b59e",
+    "cv/fold_1/oof.parquet": "83c20cd85675a0b0cd9310b62c40bff681c43b9be2f9c39acca36ce2d757e58b",
+    "cv/fold_1/score_complete.json": "c4ff954c4bc326a166db02b8882390ecedbb577090f9db64f2279e37d2908f80",
+    "cv/fold_2/oof.parquet": "2407d7be8bb9b3f505c4f928e72d811474d9ee838f970dedf1ab708a360ac063",
+    "cv/fold_2/score_complete.json": "34ba9a5ff119070f60a1b911dcca889cf7874f9a7add53064ecffd94bc94e32b",
+    "cv/fold_3/oof.parquet": "86c70c380d36f2db758d874a8145be5aec316f47605ceed31ac73cea8c3f2c0d",
+    "cv/fold_3/score_complete.json": "5a199111d2800cd27c6bcd808a53655cc39afd202b66eef87cc88b2b00711dc2",
+    "cv/fold_4/oof.parquet": "fdc65d597ec46c930b9fdd3ea6f4268f1a08b27ab10405d0201afeac0c178eb4",
+    "cv/fold_4/score_complete.json": "4f0cb4f7667a46e449b47050885068c58ba7fe88ab176237eb5528b1a3d51d5e"
+  },
+  "arm": "A_only",
+  "seed": 42,
+  "trained": true,
+  "test_opened": false
+}

@@ -1,0 +1,49 @@
+{
+  "components": [
+    {
+      "source": "typea",
+      "rows": 19656724,
+      "devices": 32068,
+      "positive_devices": 446,
+      "positive_rows": 58420,
+      "device_ids_sha256": "195122746247093af996941012ee26c36acd61a19c25a787ae0ae6f2f982f8dc",
+      "weighted_positive": 245.86632898471726,
+      "weighted_negative": 31822.13389334797
+    },
+    {
+      "source": "typeb",
+      "rows": 249040,
+      "devices": 2278,
+      "positive_devices": 30,
+      "positive_rows": 1817,
+      "device_ids_sha256": "8c5273628119264cb8870ecf9485a6503eaf993a85f160a20be3e82a172adddc",
+      "weighted_positive": 21.686805670615286,
+      "weighted_negative": 2256.3132125415577
+    }
+  ],
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0,
+    "eta": 0.1,
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "device": "cuda:0",
+    "nthread": 8,
+    "subsample": 1.0,
+    "scale_pos_weight": 127.37076375423553,
+    "base_score": 0.5,
+    "seed": 43,
+    "disable_default_eval_metric": 1
+  },
+  "rows": 19905764,
+  "features": 66,
+  "rounds": 400,
+  "fit_uses_only_train": true,
+  "base_weight": "one per included device"
+}

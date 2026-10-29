@@ -1,0 +1,7 @@
+{
+  "previous_sha256": "4a3655ae4aceba0a0762d7ecffe30f606bcde5244f3d4aede7de0cf0e05c299d",
+  "reason": "Report-only update to include user-authorized TypeB trial 13 supplement and evidence-based findings. Training, scoring and frozen runtime unchanged.",
+  "at_utc": "2026-10-29T08:51:48Z",
+  "updated_sha256": "411de40fee5e14d91f03d0252f5670733356899518a0ae1785eae1133716683f",
+  "findings_sha256": "40ebc3f9c2ff14aaa014f2ad8b24ce6bacb25792db8eda05df879a3199359226"
+}

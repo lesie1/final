@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "故障前窗口内，独特故障行/列数量（fault_row_num, fault_column_num）或错误比特数（error_bit_count）在近 15 分钟相对于过去 1 小时的增量，是否能区分 CV 中已有及时分数但低于阈值的漏报（FN）与健康正常行（TN），并提升低分故障单元的分数？",
+  "reason": "CV 中 27 个漏报里 21 个已有及时分数但低于阈值，说明模型对这些行的置信度不足。missed_fault_contrast 曾显示 read_ce_count、all_ce_count 在 FN 与 TN 有较高 AUC（0.84），但直接加入这些计数特征（trial_003）未带来提升，可能因为基线模型未能捕获故障扩散的动态过程。H10 提出独特故障位置随故障进展增加；当前特征集中于 15m/1h 计数，缺少近期增量或占比的交互表示。构造增长特征可新增因果信息，可能提升低分故障行分数。",
+  "hypothesis_id": "H10",
+  "expected": "故障设备在临近故障时独特行/列或错误比特的近期增量显著高于健康设备，FN 的特征值高于 TN；加入该特征后 CV 中 FN 数量下降（尤其 scored_below_threshold），且 FP 不显著增加，CV F1 相对 trial_001 提升。",
+  "falsification": "若 FN 与 TN 在该特征上没有可用的单变量分离（AUC 区间含 0.5），或训练后 CV F1 未超过 trial_001、FP 大幅增加导致无采纳，则 H10 的该表示不被支持。",
+  "target": "recall",
+  "exploration_reason": "H10 的直接单变量 AUC 尚未在已有诊断中报告；依据故障进展机制和 trial_003 单特征失败提示需要动态/交互表示，当前属于交互/低覆盖场景。特征将同时接受 FN/TN 与 TP/FP 两方向筛查。"
+}
