@@ -35,7 +35,9 @@
 ├── raw_events.py, raw_spatial_v3.py                                           # 内存原始日志解析
 ├── common.py, worker_entry.py, worker_errors.py, scratch.py, ...              # 子进程、文件锁、哈希、错误分类
 ├── tests/                 # 回归测试（合成数据，不调用付费 API）
-├── tools/session_report.py  # 比赛指标汇总：轮数、token、自动化程度、模型复杂度、时延
+├── tools/
+│   ├── propose_features.py # 训练前：特征 Agent 根据领域知识提出特征建议，人来采纳和实现
+│   └── session_report.py   # 比赛指标汇总：轮数、token、自动化程度、模型复杂度、时延
 ├── examples/              # 映射与运行配置示例
 ├── results/               # 最终实验结果（session、模型、确认与测试评估）
 └── docs/                  # 复现指南、接口参考、架构、比赛要求、版本历史
@@ -55,6 +57,8 @@ python agent.py run --session /path/to/ws/sessions/<会话名>
 python confirm_search.py --session <会话> --out <会话>/../confirmation
 python tools/session_report.py --session <会话> --md summary.md
 ```
+
+对于有原始日志的数据，训练开始前先运行 `tools/propose_features.py`，让特征 Agent 提出需要补充的特征，再由人决定是否采纳并实现（[复现指南 §3.3](docs/reproduce.md#33-训练前的特征建议agent-提出人采纳和实现)）。
 
 完整步骤（数据准备、Agent 接入、输出位置）见 **[复现指南](docs/reproduce.md)**；命令行与 Python 接口见 **[接口参考](docs/interfaces.md)**。
 

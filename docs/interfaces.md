@@ -30,6 +30,8 @@
 | `confirm_search.py --session <会话> --out <目录>` | – | 搜索结束后，在确认窗口上评估基线和最优模型，同时给出 CV OOF 和选择窗口两种工作点的结果 |
 | `operating_point.py --trial <会话>/trials/<id>/attempt_01` | `[--mode cv_oof\|selection_window]` | 打印某个 trial 部署时使用的步数、阈值和模型文件 |
 | `raw_cache.py --source-cache <缓存> --raw <zip 或目录> --out <目录>` | `[--workers N] [--smoke-parts N] [--representation v1\|spatial_v3] [--final-test]` | 从内存原始 CE 日志构建原始特征缓存 |
+| `tools/propose_features.py propose --raw <原始数据> --task-file <任务说明> --out <新目录>` | `[--current-features mapping.json] [--time-column 列 --before 时间] [--rows 20] [--max-files 5] [--model] [--base-url] [--dry-run]` | **训练前**由特征 Agent 根据领域知识和原始字段提出特征建议。`--before` 限制只展示训练期的样例；`--dry-run` 只生成请求、不调用 API |
+| `tools/propose_features.py review --out <目录>` | – | 校验人工填写的 `adoption.json`（每条建议的决定、审查人、理由、实现的特征名），生成 `review.md` |
 | `tools/session_report.py --session <会话>` | `[--target-f1 F] [--json 文件] [--md 文件]` | 汇总比赛指标：搜索过程、token、自动化程度、模型复杂度、推理时延、预设目标达成情况 |
 
 `xgb_runner.py`、`crossval.py`、`feature_worker.py`、`worker_entry.py` 由控制器在子进程里调用，不需要手动执行。

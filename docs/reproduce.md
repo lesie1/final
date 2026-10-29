@@ -69,7 +69,14 @@ python agent.py init --data /data/typeA --workspace /ws/typea --domain memory \
 # ② 构建 TRAIN/VAL 缓存，按时间 6:2:2 划分；VAL 再分成前半段"选择窗口"和后半段"确认窗口"
 python agent.py prepare --session /ws/typea/sessions/<会话名>
 
-# ③（仅内存）加入原始日志特征：先用一个分片试跑，再全量构建
+# ②′ 训练开始之前：特征 Agent 根据领域知识和原始数据字段提出特征建议，人逐条决定是否采纳（见 3.3）
+#    --before 填 TRAIN 的结束时间（在 <会话>/cache/manifest.json 的 windows.train 里），保证 Agent 只看到训练期的样例
+python tools/propose_features.py propose --raw /data/stage1_csv.zip --time-column LogTime --before <TRAIN结束时间> \
+    --current-features <会话>/mapping.json --task-file task.txt --out /ws/typea/feature_proposals
+#    人工在 adoption.json 里填写决定和理由，然后生成审查记录
+python tools/propose_features.py review --out /ws/typea/feature_proposals
+
+# ③（仅内存）实现被采纳的原始日志特征：先用一个分片试跑，再全量构建
 python raw_cache.py --source-cache <会话>/cache --raw /data/stage1_csv.zip --out /ws/typea/raw_cache --smoke-parts 1
 python raw_cache.py --source-cache <会话>/cache --raw /data/stage1_csv.zip --out /ws/typea/raw_cache --workers 4
 
@@ -88,7 +95,7 @@ python confirm_search.py --session /ws/typea/search --out /ws/typea/confirmation
 python tools/session_report.py --session /ws/typea/search --json summary.json --md summary.md
 ```
 
-硬盘等没有原始日志的数据跳过 ③ 和 ④，在 ② 之后直接执行 `agent.py run`。
+硬盘等没有原始日志的数据跳过 ②′、③ 和 ④，在 ② 之后直接执行 `agent.py run`。
 
 ### 3.2 本次 TypeA 结果的实际执行链
 
@@ -104,7 +111,22 @@ SmartMem TypeA 数据
 
 `run_scripts/` 下的脚本是在服务器上实际执行过的版本，里面写的是服务器的绝对路径，换机器使用时需要相应修改。
 
-### 3.3 复现时的已知缺口
+### 3.3 训练前的特征建议：Agent 提出，人采纳和实现
+
+官方给出的预处理特征往往不够用。在**任何训练开始之前**，由特征 Agent 根据已有的领域知识和研究，看原始数据的字段和少量训练期样例，提出还需要补充哪些特征：
+
+| 步骤 | 谁来做 | 产出 |
+|---|---|---|
+| 1. 提出建议 | 特征 Agent（`propose_features.py propose`） | `proposals.json` / `proposals.md`：每条建议的计算方法、时间窗口、因果性说明、故障机理、依据及其可信度；数据中缺少的信息另列在 `data_requests` |
+| 2. 审查和决定 | 人 | 在 `adoption.json` 中给每条建议填写 `adopted` / `rejected` / `deferred`、审查人和理由 |
+| 3. 实现 | 人 | 把采纳的建议实现为特征（内存数据实现在 `raw_cache.py` 里），在 `implemented_as` 里写上对应的特征名 |
+| 4. 记录 | `propose_features.py review` | `review.md` / `review_summary.json`：建议、决定、实现情况的完整记录，可以直接放进报告 |
+
+这一步 Agent **看不到**故障标签、故障时间和任何实验结果；样例只取 `--before` 之前（训练期）的数据；引用了原始数据中不存在的列会被要求修正；没把握的论文依据必须标为低可信度。之后的搜索阶段，特征 Agent 还会在这些特征的基础上继续根据诊断生成组合特征。
+
+**关于本次 TypeA 结果：** 这个工具是在 TypeA 实验之后才加入的。TypeA 中的 65 个原始日志特征是项目成员参考相关研究后人工设计和实现的，不是由 Agent 提出的。之后的新数据都按上面的流程执行。
+
+### 3.4 复现时的已知缺口
 
 要**逐字节**复现 `results/typea_v3.2` 的数字，除了代码和原始数据，还需要两份不在仓库里的文件：
 
