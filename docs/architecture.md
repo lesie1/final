@@ -1,6 +1,6 @@
 # 框架与模块说明
 
-整体流程图和特征 Agent 的四个作用见 [特征 Agent 的作用与整体流程](feature_agent.md)。
+三个 Agent 的分工和整体流程图见 [三个 Agent 的作用与整体流程](agents.md)。
 
 ## 设计目标
 
