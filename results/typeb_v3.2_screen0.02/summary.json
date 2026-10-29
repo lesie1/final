@@ -1,0 +1,352 @@
+{
+  "session": "typeb_v3.2_screen0.02/session",
+  "domain": "memory",
+  "status": "stopped",
+  "wall_clock_hours": 0.9372222222222222,
+  "policy": {
+    "acceptance": "cv_paired",
+    "accept_test": "probability",
+    "accept_probability": 0.9,
+    "accept_require_net_hits": false,
+    "operating_point": "cv_oof",
+    "max_trials": 13,
+    "cv_folds": 5
+  },
+  "trials": [
+    {
+      "trial": "trial_001",
+      "status": "complete",
+      "parent": null,
+      "reason": "baseline",
+      "accepted": true,
+      "rule": "baseline",
+      "probability_better": null,
+      "cv_delta_f1": null,
+      "selection_f1": 0.375,
+      "cv_f1": 0.3157894736842105,
+      "cv_TP": 9,
+      "cv_FP": 14,
+      "cv_FN": 25
+    },
+    {
+      "trial": "trial_002",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "CV 中 19/25 个漏报有分数但低于阈值，说明模型可能欠拟合；当前 min_child_weight=50 限制叶子节点样本量，降低该参数可允许更复杂的局部边界，可能提高这些漏报样本的得分。",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.258,
+      "cv_delta_f1": -0.03007518796992481,
+      "selection_f1": 0.375,
+      "cv_f1": 0.2857142857142857,
+      "cv_TP": 7,
+      "cv_FP": 8,
+      "cv_FN": 27
+    },
+    {
+      "trial": "trial_003",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 TRAIN OOF 的漏报(FN)与正常(TN)对比中，能否用累积 CE 负担相关字段（如 raw_24h_distinct_cols、read_ce_count_1h、raw_7d_distinct_cols、raw_life_distinct_cells 等）构造因",
+      "accepted": false,
+      "rule": "screened_out",
+      "probability_better": null,
+      "cv_delta_f1": null,
+      "selection_f1": 0.3333333333333333,
+      "cv_f1": null,
+      "cv_TP": null,
+      "cv_FP": null,
+      "cv_FN": null
+    },
+    {
+      "trial": "trial_004",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "当前 best trial_001 的 TRAIN 设备分组 OOF 中，25 个漏报里有 19 个已有及时分数但低于阈值（fn_scored_below_threshold=19），说明主模型对这部分低分故障行排序不足。parallel 分支会在全部 TRAIN 行上训练独立浅层 XGBoost，并与主模型逐行 ma",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.823,
+      "cv_delta_f1": 0.04241948153967007,
+      "selection_f1": 0.375,
+      "cv_f1": 0.3582089552238806,
+      "cv_TP": 12,
+      "cv_FP": 21,
+      "cv_FN": 22
+    },
+    {
+      "trial": "trial_005",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Controller fallback after invalid analysis response",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.581,
+      "cv_delta_f1": 0.005639097744360944,
+      "selection_f1": 0.38095238095238093,
+      "cv_f1": 0.32142857142857145,
+      "cv_TP": 9,
+      "cv_FP": 13,
+      "cv_FN": 25
+    },
+    {
+      "trial": "trial_006",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "当前 best trial_001 使用 sample 权重，而 trial_004 的 parallel 分支包含设备均衡辅助分支，使 CV F1 从 0.3158 提高到 0.3582，概率 0.823 接近但未达到 0.9。该组合实验不能单独归因于设备权重，因此按照 scope 允许的单因素对照，仅将 base_",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.292,
+      "cv_delta_f1": -0.03801169590643272,
+      "selection_f1": 0.47058823529411764,
+      "cv_f1": 0.2777777777777778,
+      "cv_TP": 10,
+      "cv_FP": 28,
+      "cv_FN": 24
+    },
+    {
+      "trial": "trial_007",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 best trial_001 的 TRAIN 设备分组 OOF 中，漏报(FN)与正常(TN)以及高分真故障(TP)与误报(FP)分别由哪些数值/原始特征区分？漏报中已有及时分数但低于阈值的样本有何特征模式？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.015,
+      "cv_delta_f1": -0.05349439171699738,
+      "selection_f1": 0.38095238095238093,
+      "cv_f1": 0.26229508196721313,
+      "cv_TP": 8,
+      "cv_FP": 19,
+      "cv_FN": 26
+    },
+    {
+      "trial": "trial_008",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 短时风暴/突发特征（如1小时 CE 风暴数、突发数、最大突发间隔、发生频率）能否在漏报(FN)与正常(TN)中形成可信分离，并从 trial_001 中 19 个已有及时分数但低于阈值的低分故障行中恢复命中？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.367,
+      "cv_delta_f1": -0.017917133258678608,
+      "selection_f1": 0.375,
+      "cv_f1": 0.2978723404255319,
+      "cv_TP": 7,
+      "cv_FP": 6,
+      "cv_FN": 27
+    },
+    {
+      "trial": "trial_009",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 TRAIN OOF 中，漏报(FN)与正常(TN)在 raw_7d_distinct_cols、raw_life_new_cols_7d 等近期扩展字段上 AUC 很高，但高分区真故障(TP)的 raw_life_events 等生命周期总量却低于误报(FP)。能否构造",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.204,
+      "cv_delta_f1": -0.025934401220442382,
+      "selection_f1": 0.42105263157894735,
+      "cv_f1": 0.2898550724637681,
+      "cv_TP": 10,
+      "cv_FP": 25,
+      "cv_FN": 24
+    },
+    {
+      "trial": "trial_010",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 TRAIN 设备分组 OOF 中，当前 best trial_001 得分超过阈值的高分单元里，真故障(TP)与误报(FP)在哪些因果特征上存在可信 AUC 分离（bootstrap 区间不含 0.5）？特别关注 raw_life_events、raw_life_new",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.277,
+      "cv_delta_f1": -0.01728201099764337,
+      "selection_f1": 0.47058823529411764,
+      "cv_f1": 0.29850746268656714,
+      "cv_TP": 10,
+      "cv_FP": 23,
+      "cv_FN": 24
+    },
+    {
+      "trial": "trial_011",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: 在 best trial_001 的 TRAIN 设备分组 OOF 高分区域，fault_mode_cell_1h 与 fault_mode_bank_1h/fault_mode_device_1h 的比值或交互能否区分真故障(TP)与误报(FP)，从而在不损失召回的情况下",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.0,
+      "cv_delta_f1": -0.0254668930390492,
+      "selection_f1": 0.42857142857142855,
+      "cv_f1": 0.2903225806451613,
+      "cv_TP": 9,
+      "cv_FP": 19,
+      "cv_FN": 25
+    },
+    {
+      "trial": "trial_012",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Controller fallback after invalid analysis response",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.176,
+      "cv_delta_f1": -0.0430622009569378,
+      "selection_f1": 0.42857142857142855,
+      "cv_f1": 0.2727272727272727,
+      "cv_TP": 9,
+      "cv_FP": 23,
+      "cv_FN": 25
+    }
+  ],
+  "completed": 12,
+  "accepted": [],
+  "baseline": "trial_001",
+  "best": "trial_001",
+  "agent": {
+    "calls": 47,
+    "calls_by_role": {
+      "code": 12,
+      "feature": 7,
+      "analysis": 28
+    },
+    "total_tokens": 888651,
+    "prompt_tokens": 756154,
+    "completion_tokens": 132497
+  },
+  "autonomy": {
+    "event_counts": {
+      "scheduler_step_complete": 45,
+      "agent_call": 47,
+      "training_started": 12,
+      "cross_validation_started": 11,
+      "experiment_complete": 12,
+      "hypotheses_recorded": 1,
+      "decision_accepted": 16,
+      "diagnostic_complete": 4,
+      "response_repair": 14,
+      "feature_prescreen": 6,
+      "controller_fallback": 2
+    },
+    "manual_interventions": 0,
+    "agent_decisions": 16,
+    "controller_fallbacks": 2,
+    "response_repairs": 14,
+    "agent_decision_share": 0.875,
+    "note": "manual_interventions counts recorded limit changes only; session setup and restarts outside the loop are not logged as events."
+  },
+  "automation": {
+    "automatic_steps": 62,
+    "manual_steps": 0,
+    "steps_by_kind": {
+      "training": 12,
+      "cross-validation": 11,
+      "acceptance decision": 12,
+      "failure-mechanism hypotheses": 1,
+      "analysis decision": 16,
+      "diagnostic": 4,
+      "feature prescreen": 6
+    },
+    "step_coverage": 1.0,
+    "trials_completed": 12,
+    "trials_without_intervention": 12,
+    "trial_coverage": 1.0,
+    "full_pipeline_automated": true,
+    "definition": "Manual = budget changes (limits_changed) only. Step coverage = automatic steps / (automatic + manual). A trial counts as automatic when no manual event falls between the previous trial completing and it completing. Full pipeline = the search finished (stopped or trial budget complete) with no manual event. Commands a person runs outside the loop (session setup, data preparation, TEST replay) are not counted."
+  },
+  "target": null,
+  "evaluations": {
+    "confirmation/trial_001/deployed": {
+      "path": "confirmation/trial_001/devices_deployed.csv",
+      "eligible_devices": 7126,
+      "fault_devices": 7,
+      "alarmed_devices": 4,
+      "TP": 3,
+      "FP": 1,
+      "FN": 4,
+      "TN": 7118,
+      "precision": 0.75,
+      "recall": 0.42857142857142855,
+      "f1": 0.5454545454545454,
+      "accuracy": 0.9992983440920572,
+      "specificity": 0.9998595308329822,
+      "balanced_accuracy": 0.7142154797022053
+    },
+    "confirmation/trial_001/selection_window": {
+      "path": "confirmation/trial_001/devices_selection_window.csv",
+      "eligible_devices": 7126,
+      "fault_devices": 7,
+      "alarmed_devices": 5,
+      "TP": 3,
+      "FP": 2,
+      "FN": 4,
+      "TN": 7117,
+      "precision": 0.6,
+      "recall": 0.42857142857142855,
+      "f1": 0.5,
+      "accuracy": 0.9991580129104687,
+      "specificity": 0.9997190616659644,
+      "balanced_accuracy": 0.7141452451186965
+    },
+    "historical_test/trial_001": {
+      "path": "historical_test/trial_001/devices.csv",
+      "eligible_devices": 7119,
+      "fault_devices": 12,
+      "alarmed_devices": 2,
+      "TP": 0,
+      "FP": 2,
+      "FN": 12,
+      "TN": 7105,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "accuracy": 0.9980334316617503,
+      "specificity": 0.9997185873082876,
+      "balanced_accuracy": 0.4998592936541438
+    }
+  },
+  "models": {
+    "trial_001": {
+      "trial": "trial_001",
+      "operating_point": {
+        "source": "cv_oof",
+        "step": 250,
+        "threshold": 0.9396138787269592
+      },
+      "model_file": "model_full.ubj",
+      "model_file_bytes": 546752,
+      "complexity": {
+        "trees": 250,
+        "nodes": 5718,
+        "leaves": 2984,
+        "split_nodes": 2734,
+        "parameters": 5718,
+        "parameter_definition": "split thresholds + leaf values (feature choices and tree shape not counted)",
+        "max_depth": 4,
+        "input_features": 135
+      },
+      "model_only_latency": {
+        "batch_1": {
+          "median_ms": 0.11269951210124418,
+          "per_row_us": 112.69951210124418
+        },
+        "batch_1000": {
+          "median_ms": 2.730888496444095,
+          "per_row_us": 2.730888496444095
+        },
+        "batch_10000": {
+          "median_ms": 24.693723011296242,
+          "per_row_us": 2.4693723011296242
+        }
+      },
+      "recorded_training_timings_seconds": {
+        "data_verification": 0.13799776136875153,
+        "feature_and_matrix_seconds": 2.3844313248991966,
+        "boost_updates_seconds": 0.6268980801105499,
+        "validation_prediction_seconds": 32.069022327661514,
+        "total_seconds": 35.54675234854221
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpus": 1
+  }
+}

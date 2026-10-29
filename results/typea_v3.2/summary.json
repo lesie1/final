@@ -247,7 +247,156 @@
     "agent_decision_share": 1.0,
     "note": "manual_interventions counts recorded limit changes only; session setup and restarts outside the loop are not logged as events."
   },
+  "automation": {
+    "automatic_steps": 74,
+    "manual_steps": 0,
+    "steps_by_kind": {
+      "training": 13,
+      "cross-validation": 13,
+      "acceptance decision": 13,
+      "failure-mechanism hypotheses": 1,
+      "analysis decision": 20,
+      "diagnostic": 8,
+      "feature prescreen": 6
+    },
+    "step_coverage": 1.0,
+    "trials_completed": 13,
+    "trials_without_intervention": 13,
+    "trial_coverage": 1.0,
+    "full_pipeline_automated": true,
+    "definition": "Manual = budget changes (limits_changed) only. Step coverage = automatic steps / (automatic + manual). A trial counts as automatic when no manual event falls between the previous trial completing and it completing. Full pipeline = the search finished (stopped or trial budget complete) with no manual event. Commands a person runs outside the loop (session setup, data preparation, TEST replay) are not counted."
+  },
   "target": null,
+  "evaluations": {
+    "confirmation/trial_001/deployed": {
+      "path": "confirmation/trial_001/devices_deployed.csv",
+      "eligible_devices": 32015,
+      "fault_devices": 40,
+      "alarmed_devices": 171,
+      "TP": 8,
+      "FP": 163,
+      "FN": 32,
+      "TN": 31813,
+      "precision": 0.04678362573099415,
+      "recall": 0.2,
+      "f1": 0.07582938388625593,
+      "accuracy": 0.9939403404654068,
+      "specificity": 0.9949335418295543,
+      "balanced_accuracy": 0.5974667709147772
+    },
+    "confirmation/trial_001/selection_window": {
+      "path": "confirmation/trial_001/devices_selection_window.csv",
+      "eligible_devices": 32015,
+      "fault_devices": 40,
+      "alarmed_devices": 155,
+      "TP": 11,
+      "FP": 144,
+      "FN": 29,
+      "TN": 31833,
+      "precision": 0.07096774193548387,
+      "recall": 0.275,
+      "f1": 0.11282051282051282,
+      "accuracy": 0.9946587537091988,
+      "specificity": 0.9955590304925723,
+      "balanced_accuracy": 0.6352795152462862
+    },
+    "confirmation/trial_008/deployed": {
+      "path": "confirmation/trial_008/devices_deployed.csv",
+      "eligible_devices": 32015,
+      "fault_devices": 40,
+      "alarmed_devices": 115,
+      "TP": 12,
+      "FP": 103,
+      "FN": 28,
+      "TN": 31873,
+      "precision": 0.10434782608695652,
+      "recall": 0.3,
+      "f1": 0.15483870967741936,
+      "accuracy": 0.995939403404654,
+      "specificity": 0.9968100078186083,
+      "balanced_accuracy": 0.6484050039093041
+    },
+    "confirmation/trial_008/selection_window": {
+      "path": "confirmation/trial_008/devices_selection_window.csv",
+      "eligible_devices": 32015,
+      "fault_devices": 40,
+      "alarmed_devices": 70,
+      "TP": 9,
+      "FP": 61,
+      "FN": 31,
+      "TN": 31914,
+      "precision": 0.12857142857142856,
+      "recall": 0.225,
+      "f1": 0.16363636363636364,
+      "accuracy": 0.9971263470248322,
+      "specificity": 0.9980922595777951,
+      "balanced_accuracy": 0.6115461297888976
+    },
+    "historical_test/trial_001/deployed": {
+      "path": "historical_test/trial_001/deployed/devices.csv",
+      "eligible_devices": 34008,
+      "fault_devices": 101,
+      "alarmed_devices": 203,
+      "TP": 20,
+      "FP": 183,
+      "FN": 81,
+      "TN": 33727,
+      "precision": 0.09852216748768473,
+      "recall": 0.19801980198019803,
+      "f1": 0.13157894736842105,
+      "accuracy": 0.9923253352152435,
+      "specificity": 0.9946913616657327,
+      "balanced_accuracy": 0.5963555818229653
+    },
+    "historical_test/trial_001/selection_window": {
+      "path": "historical_test/trial_001/selection_window/devices.csv",
+      "eligible_devices": 34008,
+      "fault_devices": 101,
+      "alarmed_devices": 194,
+      "TP": 24,
+      "FP": 170,
+      "FN": 77,
+      "TN": 33738,
+      "precision": 0.12371134020618557,
+      "recall": 0.2376237623762376,
+      "f1": 0.16271186440677965,
+      "accuracy": 0.9927664079040226,
+      "specificity": 0.9950157784528268,
+      "balanced_accuracy": 0.6163197704145322
+    },
+    "historical_test/trial_008/deployed": {
+      "path": "historical_test/trial_008/deployed/devices.csv",
+      "eligible_devices": 34008,
+      "fault_devices": 101,
+      "alarmed_devices": 166,
+      "TP": 27,
+      "FP": 139,
+      "FN": 74,
+      "TN": 33774,
+      "precision": 0.16265060240963855,
+      "recall": 0.26732673267326734,
+      "f1": 0.20224719101123595,
+      "accuracy": 0.9939131968948482,
+      "specificity": 0.9960775061196803,
+      "balanced_accuracy": 0.6317021193964738
+    },
+    "historical_test/trial_008/selection_window": {
+      "path": "historical_test/trial_008/selection_window/devices.csv",
+      "eligible_devices": 34008,
+      "fault_devices": 101,
+      "alarmed_devices": 95,
+      "TP": 19,
+      "FP": 76,
+      "FN": 82,
+      "TN": 33834,
+      "precision": 0.2,
+      "recall": 0.18811881188118812,
+      "f1": 0.19387755102040816,
+      "accuracy": 0.9954422488826159,
+      "specificity": 0.9978470522311027,
+      "balanced_accuracy": 0.5929829320561454
+    }
+  },
   "models": {
     "trial_001": {
       "trial": "trial_001",
@@ -263,21 +412,23 @@
         "nodes": 7742,
         "leaves": 3996,
         "split_nodes": 3746,
+        "parameters": 7742,
+        "parameter_definition": "split thresholds + leaf values (feature choices and tree shape not counted)",
         "max_depth": 4,
         "input_features": 164
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.11235350393690169,
-          "per_row_us": 112.35350393690169
+          "median_ms": 0.11842250387417153,
+          "per_row_us": 118.42250387417153
         },
         "batch_1000": {
-          "median_ms": 2.5400825034012087,
-          "per_row_us": 2.5400825034012087
+          "median_ms": 2.56084548891522,
+          "per_row_us": 2.56084548891522
         },
         "batch_10000": {
-          "median_ms": 25.79746900300961,
-          "per_row_us": 2.579746900300961
+          "median_ms": 24.123665993101895,
+          "per_row_us": 2.4123665993101895
         }
       },
       "recorded_training_timings_seconds": {
@@ -302,21 +453,23 @@
         "nodes": 5480,
         "leaves": 2865,
         "split_nodes": 2615,
+        "parameters": 5480,
+        "parameter_definition": "split thresholds + leaf values (feature choices and tree shape not counted)",
         "max_depth": 4,
         "input_features": 168
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.12350700126262382,
-          "per_row_us": 123.50700126262382
+          "median_ms": 0.1188789974548854,
+          "per_row_us": 118.8789974548854
         },
         "batch_1000": {
-          "median_ms": 2.6844604944926687,
-          "per_row_us": 2.6844604944926687
+          "median_ms": 2.6645610050763935,
+          "per_row_us": 2.6645610050763935
         },
         "batch_10000": {
-          "median_ms": 25.630328003899194,
-          "per_row_us": 2.5630328003899194
+          "median_ms": 24.739225991652347,
+          "per_row_us": 2.4739225991652347
         }
       },
       "recorded_training_timings_seconds": {
