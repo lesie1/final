@@ -9,10 +9,10 @@
 | 数据 | 状态 | 结果 |
 |---|---|---|
 | 内存 TypeA（SmartMem） | ✅ 完成 | 13 组全自动搜索，无人工干预。采纳 trial_008；历史 TEST 设备级 F1 由基线 13.16% 提高到 **20.22%**（TP 20→27，FP 183→139）。详见 [results/typea_v3.2](results/typea_v3.2/README.md) |
-| 内存 TypeB | ✅ 完成 | 135 特征，`screen_margin=1.0` 重跑 13 组并全部 CV；最终仍保留 trial_001，历史 TEST F1=0（TP=0、FP=2、FN=12）。[本轮报告与 events](experiments/2026-10-29-typeb-screen1-v32/README.md) · [上一轮](experiments/2026-10-29-typeb-raw-v32/report.md) |
+| 内存 TypeB | ✅ 完成 | 135 特征（含原始日志特征），`screen_margin=1.0`，13 组全部经过 CV，最终保留基线。确认窗口 F1 **54.55%**，历史 TEST F1 0（TP=0、FP=2、FN=12）。测试期多数故障在训练数据中缺乏可学习的前兆，详见 [results/typeb_v3.2 的原因分析](results/typeb_v3.2/README.md) |
 | 硬盘（Backblaze） | ⏳ 运行中 | – |
 
-历史 TEST 时间段在项目早期被查看过，因此以上测试成绩属于回顾性评估，不是全新的独立盲测。确认窗口的结果（搜索阶段没有用过的日期）一并保存在结果目录中。
+历史 TEST 时间段在项目早期被查看过，因此以上测试成绩属于回顾性评估，不是全新的独立盲测。确认窗口的结果（搜索阶段没有用过的日期）一并保存在结果目录中。Accuracy、模型参数量、自动化覆盖率等全部指标的对比见 [results/README.md](results/README.md)。
 
 ## 目录结构
 
@@ -37,6 +37,7 @@
 ├── tests/                 # 回归测试（合成数据，不调用付费 API）
 ├── tools/
 │   ├── propose_features.py # 训练前：特征 Agent 根据领域知识提出特征建议，人来采纳和实现
+│   ├── review_list.py      # 复核名单：没有报警但分数最高的设备，交给人判断
 │   └── session_report.py   # 比赛指标汇总：轮数、token、自动化程度、模型复杂度、时延
 ├── examples/              # 映射与运行配置示例
 ├── results/               # 最终实验结果（session、模型、确认与测试评估）
@@ -64,10 +65,8 @@ python tools/session_report.py --session <会话> --md summary.md
 
 ## 文档
 
-- [2026-10-29 TypeB screen_margin=1.0 重跑：13 组 CV、冻结 TEST 与完整 events](experiments/2026-10-29-typeb-screen1-v32/README.md)
-
-- [2026-10-29 TypeB 原始日志实验：session、events 与结果报告](experiments/2026-10-29-typeb-raw-v32/README.md)
-
+- [实验结果与指标汇总](results/README.md)：TypeA、TypeB 的结果，以及 Accuracy、参数量、自动化覆盖率等指标对比
+- [TypeB 结果与原因分析](results/typeb_v3.2/README.md)：为什么确认窗口有效、测试期失败
 - [复现指南](docs/reproduce.md)：要准备哪些数据、按什么顺序执行、输出在哪里
 - [接口参考](docs/interfaces.md)：命令行、Python API、LLM 接入、配置项、会话目录结构
 - [三个 Agent 的作用与整体流程图](docs/agents.md)

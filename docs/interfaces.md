@@ -32,7 +32,8 @@
 | `raw_cache.py --source-cache <缓存> --raw <zip 或目录> --out <目录>` | `[--workers N] [--smoke-parts N] [--representation v1\|spatial_v3] [--final-test]` | 从内存原始 CE 日志构建原始特征缓存 |
 | `tools/propose_features.py propose --raw <原始数据> --task-file <任务说明> --out <新目录>` | `[--current-features mapping.json] [--time-column 列 --before 时间] [--rows 20] [--max-files 5] [--model] [--base-url] [--dry-run]` | **训练前**由特征 Agent 根据领域知识和原始字段提出特征建议。`--before` 限制只展示训练期的样例；`--dry-run` 只生成请求、不调用 API |
 | `tools/propose_features.py review --out <目录>` | – | 校验人工填写的 `adoption.json`（每条建议的决定、审查人、理由、实现的特征名），生成 `review.md` |
-| `tools/session_report.py --session <会话>` | `[--target-f1 F] [--json 文件] [--md 文件]` | 汇总比赛指标：搜索过程、token、自动化程度、模型复杂度、推理时延、预设目标达成情况 |
+| `tools/review_list.py --devices <devices*.csv>` | `--fraction F` 或 `--count N`，`[--out 名单.csv]` | 生成**复核名单**：没有报警的设备中分数最高的前 N 台，交给人判断。名单大小由人工复核能力决定。表中有标签时，还会统计名单里及时发现的故障数和"报警 + 复核"的召回率 |
+| `tools/session_report.py --session <会话>` | `[--target-f1 F] [--json 文件] [--md 文件]` | 汇总比赛指标：搜索过程、token、步骤级/实验组级/全流程自动化覆盖率、模型复杂度和参数量、推理时延；会话旁边有 `confirmation/`、`historical_test/` 的逐设备结果时，还会计算 P/R/F1/Accuracy/平衡准确率；预设目标达成情况 |
 
 `xgb_runner.py`、`crossval.py`、`feature_worker.py`、`worker_entry.py` 由控制器在子进程里调用，不需要手动执行。
 

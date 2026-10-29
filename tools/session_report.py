@@ -1,4 +1,5 @@
-"""Competition metrics for one finished session: search, agent cost, autonomy, model size, latency.
+"""Competition metrics for one finished session: search, agent cost, automation coverage, model size and
+parameter count, latency, and device-level P/R/F1/Accuracy on any saved evaluation tables.
 
 Read-only: it opens session files and saved models and never writes into the session. It lives
 outside the repository root so adding it does not change the code seal of recorded sessions.
@@ -18,10 +19,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 sys.dont_write_bytecode = True
 
 # Events written only when a person changes the run; everything else is the controller or an agent.
 MANUAL_EVENTS = {'limits_changed'}
+# Units of work the controller schedules and finishes without a person; each logged event is one step.
+STEP_EVENTS = {'hypotheses_recorded': 'failure-mechanism hypotheses', 'decision_accepted': 'analysis decision',
+               'training_started': 'training', 'cross_validation_started': 'cross-validation',
+               'diagnostic_complete': 'diagnostic', 'feature_prescreen': 'feature prescreen',
+               'experiment_complete': 'acceptance decision'}
+FINISHED = {'stopped', 'trial_budget_complete'}
 
 
 def read(path):
@@ -72,11 +80,68 @@ def autonomy(events):
                 note='manual_interventions counts recorded limit changes only; session setup and restarts outside the loop are not logged as events.')
 
 
+def automation(events, status):
+    """Step, trial and whole-search coverage; only budget changes (limits_changed) count as manual."""
+    steps = {}
+    for e in events:
+        if e['event'] in STEP_EVENTS:
+            steps[STEP_EVENTS[e['event']]] = steps.get(STEP_EVENTS[e['event']], 0)+1
+    manual = [stamp(e['at']) for e in events if e['event'] in MANUAL_EVENTS]
+    automatic = sum(steps.values())
+    done = [(e['trial'], stamp(e['at'])) for e in events if e['event'] == 'experiment_complete']
+    previous, clean = stamp(events[0]['at']), 0
+    for _, at in done:
+        clean += not any(previous < m <= at for m in manual)
+        previous = at
+    return dict(automatic_steps=automatic, manual_steps=len(manual), steps_by_kind=steps,
+                step_coverage=automatic/(automatic+len(manual)) if automatic+len(manual) else None,
+                trials_completed=len(done), trials_without_intervention=clean,
+                trial_coverage=clean/len(done) if done else None,
+                full_pipeline_automated=not manual and status in FINISHED,
+                definition='Manual = budget changes (limits_changed) only. Step coverage = automatic steps / (automatic + manual). '
+                           'A trial counts as automatic when no manual event falls between the previous trial completing and it completing. '
+                           'Full pipeline = the search finished (stopped or trial budget complete) with no manual event. '
+                           'Commands a person runs outside the loop (session setup, data preparation, TEST replay) are not counted.')
+
+
+def device_metrics(path):
+    """Device-level counts on one evaluation table; every eligible device lands in exactly one outcome."""
+    import pandas as pd
+    t = pd.read_csv(path)
+    e = t.loc[t.status.eq('eligible')]
+    pos, alarm, hit = e.positive.astype(bool), e.alarm.astype(bool), e.hit.astype(bool)
+    tp, fp, fn = int(hit.sum()), int(e.fp.astype(bool).sum()), int(e.fn.astype(bool).sum())
+    tn = int((~pos & ~alarm).sum())
+    correct = int(((pos & hit) | (~pos & ~alarm)).sum())
+    negatives = int((~pos).sum())
+    recall = tp/(tp+fn) if tp+fn else 0.
+    specificity = tn/negatives if negatives else 0.
+    return dict(eligible_devices=len(e), fault_devices=int(pos.sum()), alarmed_devices=int(alarm.sum()),
+                TP=tp, FP=fp, FN=fn, TN=tn, precision=tp/(tp+fp) if tp+fp else 0., recall=recall,
+                f1=2*tp/(2*tp+fp+fn) if 2*tp+fp+fn else 0., accuracy=correct/len(e) if len(e) else None,
+                specificity=specificity, balanced_accuracy=(recall+specificity)/2)
+
+
+def evaluations(session):
+    """Saved confirmation / TEST device tables next to the session (results layout)."""
+    out = {}
+    for kind in ('confirmation', 'historical_test'):
+        for path in sorted((session.parent/kind).rglob('devices*.csv')):
+            label = path.relative_to(session.parent).with_suffix('').as_posix().replace('/devices_', '/').replace('/devices', '')
+            from review_list import budgets
+            out[label] = dict(path=path.relative_to(session.parent).as_posix(), **device_metrics(path),
+                              review_list=budgets(path))
+    return out
+
+
 def complexity(booster):
-    if hasattr(booster, 'primary'):
-        return dict(primary=complexity(booster.primary), auxiliary=complexity(booster.auxiliary))
-    if hasattr(booster, 'stage1'):
-        return dict(stage1=complexity(booster.stage1), stage2=complexity(booster.stage2))
+    if hasattr(booster, 'primary') or hasattr(booster, 'stage1'):
+        parts = (dict(primary=complexity(booster.primary), auxiliary=complexity(booster.auxiliary)) if hasattr(booster, 'primary')
+                 else dict(stage1=complexity(booster.stage1), stage2=complexity(booster.stage2)))
+        a, b = parts.values()
+        return dict(parts, **{k: a[k]+b[k] for k in ('trees', 'nodes', 'leaves', 'split_nodes', 'parameters')},
+                    parameter_definition=a['parameter_definition'], max_depth=max(a['max_depth'], b['max_depth']),
+                    input_features=a['input_features'])
     trees = booster.trees_to_dataframe()
     leaves = trees.loc[trees.Feature.eq('Leaf')]
 
@@ -93,8 +158,11 @@ def complexity(booster):
                 node, d = parent[node], d+1
             best = max(best, d)
         return best
+    # Learned parameters: one threshold per split node and one output value per leaf.
     return dict(trees=int(trees.Tree.nunique()), nodes=len(trees), leaves=len(leaves),
-                split_nodes=len(trees)-len(leaves), max_depth=int(max(depth(g) for _, g in trees.groupby('Tree'))),
+                split_nodes=len(trees)-len(leaves), parameters=len(trees),
+                parameter_definition='split thresholds + leaf values (feature choices and tree shape not counted)',
+                max_depth=int(max(depth(g) for _, g in trees.groupby('Tree'))),
                 input_features=int(booster.num_features()))
 
 
@@ -154,7 +222,8 @@ def report(session, goal=None):
                         'accept_require_net_hits', 'operating_point', 'max_trials', 'cv_folds')},
                 trials=rows, completed=sum(r['status'] == 'complete' for r in rows),
                 accepted=[r['trial'] for r in rows[1:] if r['accepted']], baseline=baseline, best=best,
-                agent=agent_cost(session), autonomy=autonomy(events), target=target(rows, events, start, goal),
+                agent=agent_cost(session), autonomy=autonomy(events), automation=automation(events, state['status']),
+                target=target(rows, events, start, goal), evaluations=evaluations(session),
                 models={name: deployed(session, config, name) for name in dict.fromkeys([baseline, best])},
                 environment=dict(python=platform.python_version(), machine=platform.machine(),
                                  processor=platform.processor() or None, cpus=os.cpu_count()))
@@ -167,7 +236,11 @@ def markdown(r):
              f'- Baseline `{r["baseline"]}`, final best `{r["best"]}`, accepted {r["accepted"] or "none"}',
              f'- Agent calls {r["agent"]["calls"]} {r["agent"]["calls_by_role"]}, tokens {r["agent"]["total_tokens"]:,}',
              f'- Manual interventions {r["autonomy"]["manual_interventions"]}, agent decisions {r["autonomy"]["agent_decisions"]}, '
-             f'controller fallbacks {r["autonomy"]["controller_fallbacks"]}, response repairs {r["autonomy"]["response_repairs"]}']
+             f'controller fallbacks {r["autonomy"]["controller_fallbacks"]}, response repairs {r["autonomy"]["response_repairs"]}',
+             f'- Automation (manual = budget changes only): step coverage {pct(r["automation"]["step_coverage"])} '
+             f'({r["automation"]["automatic_steps"]} automatic / {r["automation"]["manual_steps"]} manual steps), '
+             f'trial coverage {pct(r["automation"]["trial_coverage"])} ({r["automation"]["trials_without_intervention"]}/{r["automation"]["trials_completed"]}), '
+             f'full pipeline automated: {"yes" if r["automation"]["full_pipeline_automated"] else "no"}']
     if r['target']:
         lines.append(f'- Target CV F1 {pct(r["target"]["target_cv_f1"])}: ' + (
             f'reached by `{r["target"]["trial"]}` at round {r["target"]["rounds"]} ({r["target"]["hours"]:.2f} h)'
@@ -177,16 +250,31 @@ def markdown(r):
         p = '' if t['probability_better'] is None else f'{t["probability_better"]:.3f}'
         lines.append(f'| {t["trial"]} | {t["status"]} | {t["accepted"]} | {p} | {pct(t["selection_f1"])} | {pct(t["cv_f1"])} | '
                      f'{t["cv_TP"]}/{t["cv_FP"]}/{t["cv_FN"]} |')
-    lines += ['', '| model | operating point | trees | nodes | max depth | features | file | 1 row | 10k rows |',
-              '|---|---|---|---|---|---|---|---|---|']
+    if r['evaluations']:
+        lines += ['', '| evaluation | devices | faults | TP | FP | FN | TN | precision | recall | F1 | accuracy | balanced acc. |',
+                  '|---|---|---|---|---|---|---|---|---|---|---|---|']
+        for label, m in r['evaluations'].items():
+            lines.append(f'| {label} | {m["eligible_devices"]} | {m["fault_devices"]} | {m["TP"]} | {m["FP"]} | {m["FN"]} | {m["TN"]} | '
+                         f'{pct(m["precision"])} | {pct(m["recall"])} | {pct(m["f1"])} | {pct(m["accuracy"])} | {pct(m["balanced_accuracy"])} |')
+        lines += ['', 'Accuracy counts a device as correct when it is a fault hit in time or a normal device with no alarm. '
+                  'Normal devices dominate, so accuracy stays high even with F1 near zero; read it with F1 and balanced accuracy.']
+        lines += ['', '| evaluation | review budget | listed devices | faults caught by review | recall: alarms only -> alarms + review |',
+                  '|---|---|---|---|---|']
+        for label, m in r['evaluations'].items():
+            for budget, v in m['review_list'].items():
+                lines.append(f'| {label} | {budget} | {v["review_devices"]} | {v["review_faults"]} | '
+                             f'{pct(v["recall_alarm"])} -> {pct(v["recall_alarm_and_review"])} |')
+        lines += ['', 'Review list = the highest-scoring devices that did not alarm (tools/review_list.py). The budget should come from '
+                  'how many devices people can review; all four budgets are shown so none is picked after seeing results.']
+    lines += ['', '| model | operating point | trees | nodes | parameters | max depth | features | file | 1 row | 10k rows |',
+              '|---|---|---|---|---|---|---|---|---|---|']
     for name, m in r['models'].items():
         c, lat, op = m['complexity'], m['model_only_latency'], m['operating_point']
-        if 'trees' not in c:
-            c = next(iter(c.values()))
         lines.append(f'| {name} | {op["source"]} step {op["step"]}, thr {op["threshold"]:.4f} | {c["trees"]} | {c["nodes"]} | '
-                     f'{c["max_depth"]} | {c["input_features"]} | {m["model_file_bytes"]/1024:.0f} KiB | '
+                     f'{c["parameters"]:,} | {c["max_depth"]} | {c["input_features"]} | {m["model_file_bytes"]/1024:.0f} KiB | '
                      f'{lat["batch_1"]["median_ms"]:.3f} ms | {lat["batch_10000"]["median_ms"]:.1f} ms |')
-    lines += ['', f'Latency is model-only scoring on this machine ({r["environment"]["cpus"]} CPUs, Python {r["environment"]["python"]}); '
+    lines += ['', 'Parameters = split thresholds + leaf values of the deployed (step-truncated) model.',
+              f'Latency is model-only scoring on this machine ({r["environment"]["cpus"]} CPUs, Python {r["environment"]["python"]}); '
               'feature construction and the full validation pass are in `recorded_training_timings_seconds`.']
     return '\n'.join(lines)+'\n'
 

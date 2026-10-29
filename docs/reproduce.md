@@ -106,7 +106,10 @@ python agent.py status --session /ws/typea/search        # 查看进度
 # ⑥ 搜索结束后，在确认窗口上评估基线和最优模型
 python confirm_search.py --session /ws/typea/search --out /ws/typea/confirmation
 
-# ⑦ 汇总比赛指标
+# ⑦（可选）生成复核名单：没有报警、但分数最高的前 0.5% 设备交给人判断；比例按人工复核能力设定
+python tools/review_list.py --devices /ws/typea/confirmation/<trial>/devices_deployed.csv --fraction 0.005 --out review_list.csv
+
+# ⑧ 汇总比赛指标（同时给出 0.25%～2% 四档复核名单的效果）
 python tools/session_report.py --session /ws/typea/search --json summary.json --md summary.md
 ```
 
