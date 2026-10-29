@@ -16,7 +16,7 @@
 | `run` | `--session` | 运行 Agent 闭环，直到 Agent 主动停止或实验预算用完。中断后再执行一次会从断点继续 |
 | `status` | `--session` | 打印 `state.json`（trial 列表、最优模型、调用次数和 token 数） |
 | `doctor` | `--session` `[--api-check]` | 检查 XGBoost、设备、磁盘和缓存哈希；`--api-check` 会对三个角色各做一次连接测试 |
-| `limits` | `--session` 加上 `--max-trials` `--max-agent-calls` `--max-reported-tokens` `--memory-limit-gb` `--trial-timeout-seconds` `--feature-timeout-seconds` 中的一个或多个 | 调整资源和预算。只能改这几项，修改会记录为 `limits_changed` 事件 |
+| `limits` | `--session` 加上 `--max-trials` `--max-agent-calls` `--max-reported-tokens` `--memory-limit-gb` `--trial-timeout-seconds` `--feature-timeout-seconds` 中的一个或多个 | 调整资源和预算。只能改这几项，修改会记录为 `limits_changed` 事件，并**算作一次人工干预**。实验组数等预算最好在建会话时设好（见[复现指南](reproduce.md#运行前设置实验组数和预算)） |
 | `freeze` | `--session` | 冻结基线和最优模型，记录模型哈希、阈值和工作点 |
 | `export` | `--session` | 打包成 `<会话名>_report.zip`（不含缓存和大数组） |
 | `test` | `--session` | **已禁用**。TEST 评估要在搜索之外单独执行 |
