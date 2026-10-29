@@ -27,7 +27,7 @@ flowchart TD
 | `accept_test` | `probability`（P(更好) ≥ `accept_probability`） | `interval_95`：要求 bootstrap 95% 区间下界 > `accept_lower_bound`，更保守 |
 | `accept_probability` | 0.9 | 0.5～1 之间 |
 | `accept_require_net_hits` | `false` | `true`：丢失的命中多于新增的命中时不采纳，适合更看重召回的场景 |
-| `screen_margin` | 0.02 | – |
+| `screen_margin` | 0.02 | `1.0`：不做初筛，所有实验都跑 CV。**时间充裕时推荐**，可以去掉选择窗口故障太少带来的偶然淘汰 |
 
 ## 2. 部署工作点
 
@@ -64,6 +64,6 @@ F1 本身就同时考虑了漏报和误报。上面那个挑战者主要靠减�
 - 在确定这套规则之前，项目已经看过早期模型在历史 TEST 时间段上的成绩。上面的理由只用到 CV 和选择窗口的证据，但 **0.9 这个门槛是在看过这些 TEST 成绩之后才确定的**；
 - 因此，新规则在旧 TEST 时间段上的表现**不能**作为它更好的独立证据。评价新规则，应该看用新规则重新运行的会话，以及搜索中没有使用过的确认窗口；
 - 重复比较会累积风险：一次搜索要做 10 次左右的比较，每次大约有 10% 的误采纳机会。好在每次采纳之后，后面的挑战者都要和新的最优比，一个侥幸进来的模型很难一直保住位置；
-- 初筛仍然使用选择窗口：一个好模型如果恰好在选择窗口上运气差，可能在跑 CV 之前就被淘汰。这是目前已知的局限。
+- 初筛仍然使用选择窗口：一个好模型如果恰好在选择窗口上运气差，可能在跑 CV 之前就被淘汰。TypeB 的 trial_003 就是这样被淘汰的。时间充裕时，把 `screen_margin` 设为 1.0 就能避免这个问题。
 
 相关代码：`agent.py` 的 `accept()`、`crossval.py` 的 `paired_cv()`、`settings.py`、`operating_point.py`、`xgb_runner.py`、`confirm_search.py`；测试见 `tests/test_operating_point.py`。

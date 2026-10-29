@@ -125,7 +125,7 @@ Loop(session, provider=MyProvider()).run()
 | `accept_test` / `accept_probability` / `accept_lower_bound` | `probability` / 0.9 / 0.0 | 采纳条件：P(更好) ≥ 0.9 并且 CV ΔF1 > 0 |
 | `accept_require_net_hits` | `false` | 设为 `true` 时，丢失的命中多于新增的命中就不采纳 |
 | `operating_point` | `cv_oof` | 部署用的步数和阈值来源（或 `selection_window`） |
-| `screen_margin` | 0.02 | 选择窗口 F1 比当前最优低这么多就不跑 CV |
+| `screen_margin` | 0.02 | 选择窗口 F1 比当前最优低这么多就不跑 CV。**时间充裕时建议设为 1.0，让所有实验都跑 CV**（见[复现指南](reproduce.md#运行前请根据需要调整初筛门槛-screen_margin)） |
 | `analysis_model` / `feature_model` / `code_model` | `deepseek-v4-pro` | 三个角色使用的模型 |
 | `deepseek_base_url` | `https://api.deepseek.com` | OpenAI 兼容服务的地址 |
 
