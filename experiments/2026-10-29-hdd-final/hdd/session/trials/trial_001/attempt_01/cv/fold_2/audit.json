@@ -1,0 +1,32 @@
+{
+  "audit": {
+    "sampling": {
+      "strategy": "frozen_random_device_week_10pct_mass_preserving",
+      "selection_seal_sha256": "23a4f0b061b65540e57765eb340032b56bd2f66b60c8b2c627729bf879bbea39",
+      "full_training_samples": 59817661,
+      "full_positive_samples": 17990,
+      "full_membership_sha256": "ef39dbdd69717dbd0624fe7fd6f74bcb44dee89c6694ff34d7b9235b13057830",
+      "selection_membership_sha256": "ce29890a3203ba650bc244bbf384ee3469f466844dc503052850ad6f79ed3642",
+      "all_positives_retained": true,
+      "selection_uses_validation_or_test": false,
+      "note": "Reuse earlier TRAIN-only mature-prefix mining and fixed device/week quotas; no re-mining from validation errors.",
+      "cross_validation_devices": 264741,
+      "cross_validation_rows": 7042793
+    },
+    "training_samples": 7042793,
+    "positive_samples": 14442,
+    "sample_membership_sha256": "ef39dbdd69717dbd0624fe7fd6f74bcb44dee89c6694ff34d7b9235b13057830",
+    "training_devices": 246005,
+    "positive_devices": 2235,
+    "candidate_samples_in_train_interval": 61962300,
+    "eligible_no_history_samples": 0,
+    "excluded_maturity_or_lead_samples": 2144639,
+    "weighted_class_ratio": 3313.860961085722,
+    "positive_weight": 3313.860961085722,
+    "estimated_matrix_ram_gib": 13.988340340554714,
+    "base_weight_audit": {},
+    "weight_definition": "frozen sampling loss weights"
+  },
+  "held_out_devices": 66186,
+  "scored_units": 281533
+}

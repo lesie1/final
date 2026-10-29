@@ -1,0 +1,10 @@
+{
+  "status": "needs_attention",
+  "error": "available memory below 8 GiB",
+  "export_exit": -15,
+  "trials": 13,
+  "best": "trial_004",
+  "steps": 46,
+  "test_opened": false,
+  "confirmation_is_independent_test": false
+}

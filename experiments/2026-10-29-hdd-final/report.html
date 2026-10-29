@@ -1,0 +1,76 @@
+<!doctype html><meta charset="utf-8"><title>HDD 最终测试</title><style>body{font:16px/1.7 system-ui;max-width:1050px;margin:36px auto;padding:0 20px}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><pre># HDD 最终测试报告
+
+13 组搜索结束，按原 v3.1 配对 CV 规则最终选用 **trial_004**。本次只对该模型执行最终 TEST，没有按 TEST 改模型、树数或阈值。
+
+最终 TEST：**F1 29.42%，Precision 22.28%，Recall 43.28%**。
+
+## 最终 TEST
+| 模型 | TP | FP | FN | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|---:|---:|
+| trial_004 | 348 | 1214 | 456 | 22.28% | 43.28% | 29.42% |
+
+评价协议 `period_device_f1_v2`。可评价设备 292,103 台，其中故障设备 804 台；未知随访设备 21,069 台单独报告，不当作健康负例。
+
+TEST 时间窗（UTC，左闭右开）：`2024-10-19T00:00:00+00:00` 至 `2024-12-31T00:00:01+00:00`。
+
+历史 TEST 是否从未使用未得到独立确认，因此不能宣称这是全新盲测。本次执行期间，TEST 不用于搜索、阈值选择或给 Agent 反馈。只测试已选模型，未额外测试基线或其他候选，因此不报告“TEST 相对基线提升”。
+
+## 模型与工作点
+
+- 运行库：`e35150a021c52ed5605c4bb3a2c436b59113e8c0`（v3.1）；不是后来内存实验的 v3.2 工作点规则。
+- 冻结模型 SHA256：`0e5b497e84bf87d25e64bec25c34b94d433620cc1a5813c24551975099147f68`。
+- 实际模型输入：190 列，即 186 个基础列加 4 个已采纳的时序特征。
+- 树数：550；阈值：`0.987483024597168`。
+- CV 用于候选采纳；部署模型和阈值沿用原程序的前段验证工作点，与后段验证确认完全一致。没有替换为 CV 全量重训模型或 CV 阈值。
+
+新增四列：`fe_187_recent_nonzero_7d_count`、`fe_187_recent_increase_7d`、`fe_187_rolling_mean_7d`、`fe_187_expanding_mean`。特征程序先按冻结定义生成完整历史视图，再由原推理代码读取 TEST。
+
+## CV 与后段验证确认
+
+各阶段的数据不同，下面的分数不能混作 TEST 分数。
+| 阶段／模型 | TP | FP | FN | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|---:|---:|
+| CV baseline trial_001 | 716 | 2555 | 1634 | 21.89% | 30.47% | 25.48% |
+| CV selected trial_004 | 861 | 2948 | 1489 | 22.60% | 36.64% | 27.96% |
+| later-VAL trial_001 | 177 | 836 | 249 | 17.47% | 41.55% | 24.60% |
+| later-VAL trial_004 | 184 | 851 | 242 | 17.78% | 43.19% | 25.19% |
+
+第 13 组未采纳：相对第 4 组，CV F1 差值为 -0.0069，配对 95% 区间为 [-0.01387488408445557, -0.0005776780996165777]；新增命中 33、丢失命中 91。最终仍保留第 4 组。
+
+## 全部搜索记录
+| 组 | CV F1 | 本组采纳 | 采纳规则 | 最终模型 |
+|---|---:|---|---|---|
+| trial_001 | 25.48% | True | baseline | False |
+| trial_002 | 24.98% | False | cv_paired | False |
+| trial_003 | 25.99% | False | cv_paired | False |
+| trial_004 | 27.96% | True | cv_paired | True |
+| trial_005 | 27.96% | False | cv_paired | False |
+| trial_006 | 28.47% | False | cv_paired | False |
+| trial_007 | 28.27% | False | cv_paired | False |
+| trial_008 | 26.69% | False | cv_paired | False |
+| trial_009 | 28.01% | False | cv_paired | False |
+| trial_010 | 27.76% | False | cv_paired | False |
+| trial_011 | 27.30% | False | cv_paired | False |
+| trial_012 | 27.53% | False | cv_paired | False |
+| trial_013 | 27.27% | False | cv_paired | False |
+
+## 数据与完整性
+
+原始 366 日文件共 105,379,761 行，基础缓存包含 330,927 个设备登记项；其中 330,902 台有可写入的观测行。这些计数是原始／缓存范围，不能当作 TEST 可评价设备数。原始文件、标签、时间切分、采样和评分定义均未修改。
+
+预算仍为 13 组，50 次 Agent 调用、989,281 reported tokens。缓存准备和最终测试不调用模型 API。
+
+中途发生两类资源调度问题：原 supervisor 的内存保护中断第 13 组 CV；之后缓存程序也因未计入可回收的活跃文件缓存而等待。保留中断前状态、事件和折模型后，复用已完成的主模型重算同一组 CV，并通过仅释放干净文件缓存恢复预处理。没有追加候选、修改评分规则或重训最终模型。
+
+复核 115 项原运行库／输入／主模型哈希，并确认中断前事件字节序列完整保留为当前事件前缀。最终 TEST 完成回执进一步确认搜索状态、原事件、模型和冻结工作点未改变。
+
+## 审阅文件
+
+- `hdd/session/events.jsonl`：完整搜索事件；`hdd/session/state.json`：13 组状态和采纳证据。
+- `evaluation/report_test.json`、`evaluation/frozen.json`：最终指标和冻结依据。
+- `evaluation/devices_test.csv.gz`：完整设备级 TEST 明细的无损压缩副本。
+- `recovery_20261029/`、`resource_repair_20261029T1738.json`：中断、备份和资源修复记录。
+- `source_runtime/`：本次实际使用的封存运行库；仓库根目录的新版本不替代它。
+
+这是审阅快照，不是独立可续跑备份。原始数据、大缓存、训练矩阵、逐行分数、候选阈值扫描和 CV 折模型留在服务器；排除项及原因写入 `export_manifest.json`。原完成回执可能引用这些未导出的文件。
+</pre>

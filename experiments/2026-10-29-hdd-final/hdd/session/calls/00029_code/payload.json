@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "当前 best trial_004 使用 sample 权重，在事件级样本上训练会使观测密集的健康设备主导梯度；其 CV 中 FP=2948、FN=1489，设备级 F1 仍受高假阳性限制。scope.allowed_changes 包含 base_weight，且尚未做过设备权重单因素对照。本次只将 base_weight 改为 device，保持特征、样本行、标签、评分与 seed 不变，检验等设备贡献是否能抑制高观测健康设备造成的假阳性并保留故障召回。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_004",
+    "changes": {
+      "base_weight": "device"
+    },
+    "reason": "当前 best trial_004 使用 sample 权重，在事件级样本上训练会使观测密集的健康设备主导梯度；其 CV 中 FP=2948、FN=1489，设备级 F1 仍受高假阳性限制。scope.allowed_changes 包含 base_weight，且尚未做过设备权重单因素对照。本次只将 base_weight 改为 device，保持特征、样本行、标签、评分与 seed 不变，检验等设备贡献是否能抑制高观测健康设备造成的假阳性并保留故障召回。",
+    "hypothesis": "设备级训练权重能降低高观测密度健康设备对损失的主导，从而减少高分区误报，并避免故障设备被大量健康事件样本淹没。",
+    "expected": "CV paired F1 的 95% bootstrap 区间下界 > 0，且新增命中不少于丢失命中；理想情况下 precision 提升且 recall 不下降，或 FP 下降足以弥补任何小规模命中损失。",
+    "falsification": "若 CV 95% 区间跨过 0，或净命中丢失，则 device 权重在当前 best 特征与训练配置下不构成有效改进，不作为 best。",
+    "recipe": {
+      "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

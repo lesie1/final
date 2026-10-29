@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "当前 best trial_004 的 TRAIN 交叉验证漏报中，1489 个故障单元里有 1416 个因分数低于阈值而漏报。请比较这些 FN 与 TN 在候选 SMART 特征上的差异，并与高分 TP/FP 的错例证据对照，识别哪些尚未利用的字段或组合能区分低分故障与健康设备。",
+  "reason": "已连续尝试 H1/H2/H3 相关特征和 parallel 分支，trial_006 未改善净命中且 CV 区间跨 0，parallel 无效果。当前主要矛盾是低分 FN 占比高。诊断预算尚未使用，error_atlas 可同时提供 FN/TN、TP/FP 对比及漏报原因计数，帮助选择下一条有依据的特征假设，避免继续盲试参数或特征。"
+}

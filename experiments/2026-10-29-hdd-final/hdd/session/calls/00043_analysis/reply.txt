@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "在 trial_004 的 TRAIN 交叉验证留出设备中，哪些 SMART 原始/归一化特征能在高分区区分真故障(TP)与误报(FP)，哪些特征能在低分区区分漏报故障(FN)与健康(TN)？尤其关注尚未单独测试的 smart_195_raw、smart_10_raw、smart_9_raw、smart_193_raw。",
+  "reason": "best trial_004 的 CV 结果为 TP=861、FP=2948、FN=1489，其中 fn_scored_below_threshold=1416；当前主要矛盾是低分故障召回不足和高分误报过多。尚未使用任何诊断预算，先用 error_atlas 同时获取高分 TP/FP 与 FN/TN 的单变量特征对比，为下一轮 features 实验选择最有希望的假设和可区分行为，避免继续盲目尝试单个 SMART 计数器。"
+}

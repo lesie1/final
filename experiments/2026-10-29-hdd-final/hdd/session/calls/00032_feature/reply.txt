@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    raw = frame['smart_188_raw']\n    missing = raw.notna()\n    nonzero_flag = (raw > 0).astype(float).where(missing)\n    recent_nonzero = nonzero_flag.rolling('7D', min_periods=1).sum().where(missing)\n    recent_min = raw.rolling('7D', min_periods=1).min()\n    recent_increase = (raw - recent_min).where(missing)\n    rolling_mean = raw.rolling('7D', min_periods=1).mean().where(missing)\n    expanding_mean = raw.expanding(min_periods=1).mean().where(missing)\n    return pd.DataFrame({'fe_188_recent_nonzero_7d_count': recent_nonzero, 'fe_188_recent_increase_7d': recent_increase, 'fe_188_rolling_mean_7d': rolling_mean, 'fe_188_expanding_mean': expanding_mean}, index=frame.index)",
+  "features": [
+    "fe_188_recent_nonzero_7d_count",
+    "fe_188_recent_increase_7d",
+    "fe_188_rolling_mean_7d",
+    "fe_188_expanding_mean"
+  ],
+  "reason": "针对 H5 命令超时假说，服务低分漏报召回：7 日非零计数捕捉近期反复超时，7 日相对近期最小值捕捉突增，滚动均值与 expanding 均值捕捉持续高位。所有缺失保持 NaN，不将缺测当 0。若这些特征在 FN 群体上无稳定提升，或同时恶化高分区 FP，则说明 smart_188_raw 历史无法提供互补召回信号。"
+}

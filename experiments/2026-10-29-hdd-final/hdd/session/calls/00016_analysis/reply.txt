@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "在 best trial_004 的 TRAIN 留出设备上，按当前冻结阈值与聚合规则，比较漏报设备（FN，尤其占 1416/1489 的 scored_below_threshold）与正常设备（TN）在各已提供 SMART 数值列上的因果快照；同时比较高分区真故障（TP）与误报（FP）的可分特征；并复核 FN 的无及时调度、无及时分数、低于阈值分解，用于判断下一个特征应优先改善 recall 还是 precision。",
+  "reason": "当前验证 precision 仅 0.203、recall 0.348；CV FN 中 1416/1489 是分数低于阈值，但仍有大量 FP。诊断预算尚未使用，先取得同时覆盖高分错分与漏报的错例对比证据，再提出特征请求，避免继续盲目调参。"
+}

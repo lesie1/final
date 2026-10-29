@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "smart_187_raw（无法纠正错误数）的非零持续高位与近期突增，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并同时改善高分区真故障(TP)与误报(FP)的排序？",
+  "reason": "已有 error_atlas 显示：漏报对比中 smart_187_raw 对 FN/TN 的 AUC=0.794，95% CI [0.769,0.819]，方向为 FN 中位数更高；高分区对比中 smart_187_raw 对 TP/FP 的 AUC=0.581，95% CI [0.545,0.613]，均为可信信号。trial_003 仅围绕 smart_197 构造 pending 突增/持续特征，未利用 smart_187 的时序模式。当前漏报 1688，其中 1615 是得分低于阈值，优先需要提高低分故障单元的召回。",
+  "expected": "利用 smart_187_raw 生成因果时序特征（如近期非零持续天数、7天突增量、累计均值等），使 FN 与 TN 的分离度提高，CV 中 recall 上升、低于阈值的 FN 减少；若误报不显著增加，则净命中改善。",
+  "falsification": "若加入 smart_187 派生特征后，CV 中 FN/TN 分离度未提升、recall 未改善，或 paired bootstrap 95% 区间跨0且净命中下降，则不支持 H3 在该特征化方式下有效。",
+  "hypothesis_id": "H3",
+  "target": "recall",
+  "job": "job_002"
+}

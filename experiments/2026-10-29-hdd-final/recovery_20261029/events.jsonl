@@ -1,0 +1,11 @@
+{"at": "2026-10-29T13:22:23.691532+00:00", "event": "recovery_started", "reason": "Original supervisor terminated CV at its available-memory guard during concurrent cache ingestion", "changes": "Pause preprocessing and account for clean reclaimable file cache; retry same completed primary trial CV only", "initial_trials": 13, "initial_calls": 50, "initial_tokens": 989281, "credentials_required": false, "primary_model_retrained": false}
+{"at": "2026-10-29T13:22:23.692299+00:00", "event": "worker_started", "phase": "retry_trial013_cv", "pid": 681384}
+{"at": "2026-10-29T13:43:45.139571+00:00", "event": "worker_finished", "phase": "retry_trial013_cv", "exit_code": 0}
+{"at": "2026-10-29T13:43:45.143411+00:00", "event": "worker_started", "phase": "close_trial_budget", "pid": 682023}
+{"at": "2026-10-29T13:43:55.155514+00:00", "event": "worker_finished", "phase": "close_trial_budget", "exit_code": 0}
+{"at": "2026-10-29T13:43:55.159272+00:00", "event": "worker_started", "phase": "confirmation", "pid": 682036}
+{"at": "2026-10-29T13:55:25.987601+00:00", "event": "worker_finished", "phase": "confirmation", "exit_code": 0}
+{"at": "2026-10-29T13:55:25.989299+00:00", "event": "worker_started", "phase": "export", "pid": 682990}
+{"at": "2026-10-29T13:55:46.013470+00:00", "event": "worker_finished", "phase": "export", "exit_code": 0}
+{"at": "2026-10-29T13:55:46.078273+00:00", "event": "recovery_complete", "best": "trial_004", "test_opened": false}
+{"at": "2026-10-29T13:55:46.078717+00:00", "event": "preparation_resumed", "pid": 670219}

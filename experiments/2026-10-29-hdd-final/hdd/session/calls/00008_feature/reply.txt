@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    raw = frame['smart_197_raw']\n    mean_7d = raw.rolling('7D', min_periods=1).mean()\n    surge_7d = raw - raw.rolling('7D', min_periods=1).min()\n    pos_daily_change = raw.diff(1).clip(lower=0)\n    nonzero = (raw > 0).astype(float).where(raw.notna())\n    nonzero_days_7d = nonzero.rolling('7D', min_periods=1).sum()\n    return pd.DataFrame({\n        'fe_pending_7d_mean': mean_7d,\n        'fe_pending_surge_7d': surge_7d,\n        'fe_pending_pos_daily_change': pos_daily_change,\n        'fe_pending_nonzero_days_7d': nonzero_days_7d\n    }, index=frame.index)",
+  "features": [
+    "fe_pending_7d_mean",
+    "fe_pending_surge_7d",
+    "fe_pending_pos_daily_change",
+    "fe_pending_nonzero_days_7d"
+  ],
+  "reason": "H2: SMART 197 pending sectors indicate unstable sectors awaiting remap. These four causal features capture recent sustained high (7-day mean), surge above the recent 7-day trough, immediate positive daily increase, and persistent non-zero days over the past week. They aim to separate fault-like growing/persistent pending-sector activity from isolated high-score false alarms and to make below-threshold missed faults more visible. Falsified if TRAIN CV shows no improvement in TP/FP or FN/TN separation over raw smart_197_raw alone."
+}

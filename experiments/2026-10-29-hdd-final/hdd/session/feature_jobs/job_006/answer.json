@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    raw = frame['smart_7_raw']\n    rolling_mean = raw.rolling('7D', min_periods=1).mean()\n    expanding_mean = raw.expanding(min_periods=1).mean()\n    surge_ratio = rolling_mean / (expanding_mean + 1)\n    log_raw = np.log1p(raw)\n    return pd.DataFrame({'fe_s7_rolling_mean_7d': rolling_mean, 'fe_s7_expanding_mean': expanding_mean, 'fe_s7_surge_ratio': surge_ratio, 'fe_s7_log1p_raw': log_raw}, index=frame.index)",
+  "features": [
+    "fe_s7_rolling_mean_7d",
+    "fe_s7_expanding_mean",
+    "fe_s7_surge_ratio",
+    "fe_s7_log1p_raw"
+  ],
+  "reason": "针对 best trial_004 CV 漏报中 1416/1489 为低于阈值的低分故障，引入 SMART 7 raw 寻道错误率的机械定位信号：expansion mean 捕捉持续高位，7D rolling mean 捕捉近期水平，surge_ratio 捕捉近期相对历史突增，log1p 缩放原始计数量级。这些特征应提高低分故障设备分数，增加命中而不过多增加假阳性；若配对 CV recall 没有净提升或假阳性显著恶化则否定 H7。"
+}

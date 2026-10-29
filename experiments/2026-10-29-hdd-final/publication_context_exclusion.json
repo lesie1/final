@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-29T19:46:43.678214+00:00",
+  "action": "Exclude runtime contextual reference document from public review export; original source and all model/runtime files unchanged",
+  "excluded_path": "source_runtime/docs/competition_requirements.md",
+  "reason": "Not required for inference; neutral project presentation requested",
+  "new_exporter_sha256": "f8d992ed9fffe99a399c0404d08e0e27257f958c62a950e0cf0a4aa8a7763d73"
+}

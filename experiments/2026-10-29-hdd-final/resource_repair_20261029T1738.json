@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-29T17:39:11.418139+00:00",
+  "repair": "Discard only clean page-cache pages of immutable staging SQLite; flush first; no process restart or data change",
+  "target": "/root/autodl-tmp/hdd_final_test_20261029/cache_test/staging.sqlite",
+  "file_size": 89170321408,
+  "mtime_ns": 1793283014775622525,
+  "inode": 8603102551,
+  "before": {
+    "current": 96590114816,
+    "limit": 96636764160,
+    "anon": 1240948736,
+    "file": 94977372160,
+    "shmem": 0,
+    "inactive_file": 10658844672,
+    "active_file": 84318810112,
+    "file_dirty": 8192,
+    "file_writeback": 0
+  },
+  "after": {
+    "current": 10118717440,
+    "limit": 96636764160,
+    "anon": 1240956928,
+    "file": 8702238720,
+    "shmem": 0,
+    "inactive_file": 8007385088,
+    "active_file": 695152640,
+    "file_dirty": 0,
+    "file_writeback": 0
+  },
+  "reason": "Preprocessing guard counts only inactive file cache, but ~78.5GiB active clean file cache was reclaimable",
+  "preprocessing_before": {
+    "stage": "waiting_for_memory",
+    "updated_at": "2026-10-29T17:39:02.408040+00:00",
+    "pid": 670219,
+    "elapsed_seconds": 23147.6,
+    "disk_free_gib": 97.62,
+    "scoring_started": false,
+    "model_loaded": false,
+    "files_done": 366,
+    "files_total": 366,
+    "metadata_files": 366,
+    "ingest_files": 366,
+    "metadata_rows": 105379761,
+    "ingest_rows": 105379761,
+    "written_devices": 295500,
+    "current_source": "2024-12-31.csv"
+  },
+  "configuration_changed": false,
+  "model_changed": false,
+  "experiment_changed": false
+}

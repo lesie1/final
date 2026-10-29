@@ -1,0 +1,11 @@
+{
+  "forbidden_reads": [
+    "/root/autodl-tmp/backblaze_2024/zips"
+  ],
+  "readonly_roots": [
+    "/root/autodl-tmp/hdd_v2s_20261027",
+    "/root/autodl-tmp/hdd_source_20261023/cache",
+    "/root/autodl-tmp/hdd_v2s_20261027/sample",
+    "/root/autodl-tmp/final_v31_20261028/runtime"
+  ]
+}

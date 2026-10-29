@@ -1,0 +1,17 @@
+{
+  "stage": "ready",
+  "updated_at": "2026-10-29T17:46:41.619774+00:00",
+  "pid": 670219,
+  "elapsed_seconds": 23606.8,
+  "disk_free_gib": 180.31,
+  "scoring_started": false,
+  "model_loaded": false,
+  "files_done": 366,
+  "files_total": 366,
+  "metadata_files": 366,
+  "ingest_files": 366,
+  "metadata_rows": 105379761,
+  "ingest_rows": 105379761,
+  "written_devices": 330902,
+  "current_source": "2024-12-31.csv"
+}

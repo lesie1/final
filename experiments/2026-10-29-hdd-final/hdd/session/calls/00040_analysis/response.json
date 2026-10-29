@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_004",
+  "question": "在 best trial_004 的 TRAIN OOF 保留设备上，smart_195_raw 的持续高位、近期突增，以及它与 smart_187_raw、smart_5_raw 的联合模式，能否区分低分故障(FN)与健康(TN)，尤其是把当前 fn_scored_below_threshold=1416 的低分故障提升到阈值以上？",
+  "reason": "best trial_004 的 CV 仍有 FN=1489，其中 fn_scored_below_threshold=1416，主要矛盾是低分故障未被召回。已试的 smart_5/196/188/7 单特征程序均未通过 CV 采纳：trial_006 虽 CV F1 略升，但丢失 192 个命中；trial_010 净丢失 49 个命中。这提示单个 SMART 计数可能只提供弱且不稳定的边际信号，而 HDD 退化常表现为多个错误计数器共同上升，需要交互/组合特征来覆盖低分故障模式。SMART 195 尚未单独测试，但其 ECC 恢复活动与不可纠正错误、重分配扇区同时出现时，可能比任一单字段更接近真实的读通道/介质退化。",
+  "expected": "新构造的 fe 交互特征能把一部分低于阈值的低分 FN 拉高，提升 TRAIN 设备分组 CV 的 recall 和 F1，同时不按比例增加高分区误报；对照 trial_004 的配对 bootstrap 区间下界应大于 0，且净命中不减少。",
+  "falsification": "若加入 smart_195 及其与 smart_187/smart_5 交互特征后，CV 配对 bootstrap 区间跨 0，或与 trial_004 相比净命中减少，则说明这一交互不足以解释漏报，需转向其他诊断或参数/分支方案。",
+  "hypothesis_id": "H6",
+  "target": "interaction",
+  "exploration_reason": "当前没有可用的 saved evidence 快照，且已完成的单变量 SMART 特征试验未形成稳定提升；CV 中大量 FN 来自低分区域，单变量边际 AUC 可能不足以捕捉多字段联合退化，因此使用本会话剩余交互探索预算来检验 H6 与已有弱信号的组合效应。"
+}

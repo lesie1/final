@@ -1,0 +1,67 @@
+{
+  "id": "99bfbb42cfa2533202a3cdd2d82ef30e639082baf3d6551654abf54b78245d8b",
+  "spec": {
+    "parent": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+    "source": "def transform(frame):\n    s = frame['smart_196_raw']\n    recent_sum = s.rolling('7D', min_periods=1).sum()\n    recent_max = s.rolling('7D', min_periods=1).max()\n    nonzero_days = (s > 0).astype('float').rolling('7D', min_periods=1).sum()\n    daily_delta = s.diff(1)\n    return pd.DataFrame({\n        'fe_196_recent_sum_7d': recent_sum,\n        'fe_196_recent_max_7d': recent_max,\n        'fe_196_nonzero_days_7d': nonzero_days,\n        'fe_196_daily_delta': daily_delta\n    }, index=frame.index)",
+    "features": [
+      "fe_196_recent_sum_7d",
+      "fe_196_recent_max_7d",
+      "fe_196_nonzero_days_7d",
+      "fe_196_daily_delta"
+    ]
+  },
+  "reason": "H4 检验：从 SMART 196 raw 提取最近 7 天重映射事件总量、峰值、非零天数和日增量，用活动性/频率表示替代已试的累计稳态字段。若该机制成立，这些特征应帮助提高低分故障单元的排序分数，改善 recall；若仍无改善，则说明当前 SMART 196 raw 表示不足以捕捉 H4。",
+  "checks": [
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 217,
+      "finite_values": 865
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 219
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 219,
+      "finite_values": 875
+    },
+    {
+      "rows": 217,
+      "finite_values": 217
+    },
+    {
+      "rows": 217,
+      "finite_values": 217
+    }
+  ],
+  "sample_validation_seconds": 0.08233801648020744,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "frozen.json": "602820e7d3a39763dda26963553c07d056a6120f2274b6c3852a6f368248df8a",
+    "inference_config.json": "0e0d23ff3bb8e55dc50b732dd82e2cdeb11c6daacd5b3c7c76e0178865abb4fa",
+    "input_audit.json": "1c0159cf5e5b0e16e06b14387807044b1b6802cd02b72e724cc212ade3dce62a",
+    "report_test.json": "b46dfa267567add6cf835bf4ed061fe5f58692115aa2b60c8e87599b1967f559",
+    "devices_test.csv": "655eaea4dc51cdd1984161f7941313d38e9ff91a21ba0cdf6f99e84ac78781e7",
+    "unknown_devices_test.csv": "fc145dd355c4fd1814ef4f10dd8e0c14bd46996bbfa7441cc65cdd39618506fe"
+  },
+  "source_search_preserved": true,
+  "sealed_runtime_unchanged": true,
+  "publication_pending": true
+}

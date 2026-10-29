@@ -1,0 +1,1823 @@
+{
+  "task": "analysis",
+  "current": {
+    "id": "trial_003",
+    "status": "complete",
+    "recipe": {
+      "feature_program": "d467349aad9fb33a67659259867b15b0a9aa031f23dbdbf4fd996ad73318172b",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "parent": "trial_001",
+    "reason": "Feature-only contrast: SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+    "metrics": {
+      "protocol": "period_device_f1_v2",
+      "threshold": 0.9922163486480713,
+      "TP": 187,
+      "FP": 725,
+      "FN": 391,
+      "precision": 0.2050438596491228,
+      "recall": 0.3235294117647059,
+      "f1": 0.25100671140939596,
+      "eligible_devices": 289599,
+      "eligible_fault_devices": 578,
+      "alarmed_devices": 912,
+      "no_history_devices": 152,
+      "no_history_fault_devices": 19,
+      "fault_without_timely_scheduled_opportunity": 19,
+      "positive_without_scored_positive_day": 19,
+      "unknown_devices": 29082,
+      "unknown_alarm_devices": 3,
+      "excluded_late_entry_devices": 9417,
+      "excluded_preexisting_fault_devices": 2829,
+      "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+    },
+    "model_reused_from": null,
+    "comparison": {
+      "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+      "changed_factors": [
+        "feature_program"
+      ],
+      "delta": {
+        "f1": 0.013002872637802865,
+        "precision": 0.01621137233947814,
+        "recall": 0.0017301038062284002,
+        "TP": 1,
+        "FP": -74,
+        "FN": -1
+      },
+      "new_hits": 40,
+      "lost_hits": 39,
+      "new_false_alarms": 223,
+      "removed_false_alarms": 297,
+      "model_identical": false,
+      "same_training_samples": true,
+      "conditional_paired_f1_interval_95": [
+        -0.008984304425274576,
+        0.03698130346094121
+      ],
+      "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+    },
+    "cv": {
+      "best_step": 400,
+      "metrics": {
+        "step": 400,
+        "f1": 0.25986261040235525,
+        "TP": 662,
+        "FP": 2083,
+        "FN": 1688,
+        "precision": 0.24116575591985429,
+        "recall": 0.2817021276595745,
+        "threshold": 0.9945348501205444
+      },
+      "fault_units": 2350,
+      "error_counts": {
+        "TP": 662,
+        "FP": 2083,
+        "FN": 1688,
+        "TN": 1405720,
+        "fn_no_timely_clock": 25,
+        "fn_no_timely_score": 48,
+        "fn_scored_below_threshold": 1615,
+        "fn_with_outside_window_alarm": 0,
+        "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+      }
+    },
+    "acceptance": {
+      "accepted": false,
+      "rule": "cv_paired",
+      "reference": "trial_001",
+      "selection_f1_gap": 0.013002872637802865,
+      "cv_delta_f1": 0.005103670711908703,
+      "cv_interval_95": [
+        -0.005385960181986791,
+        0.01597069856637192
+      ],
+      "probability_better": 0.813,
+      "new_hits": 104,
+      "lost_hits": 158,
+      "new_false_alarms": 517,
+      "removed_false_alarms": 989,
+      "fault_units": 2350
+    }
+  },
+  "best": {
+    "id": "trial_001",
+    "status": "complete",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "parent": null,
+    "reason": "baseline",
+    "metrics": {
+      "protocol": "period_device_f1_v2",
+      "threshold": 0.9869956374168396,
+      "TP": 186,
+      "FP": 799,
+      "FN": 392,
+      "precision": 0.18883248730964466,
+      "recall": 0.3217993079584775,
+      "f1": 0.2380038387715931,
+      "eligible_devices": 289599,
+      "eligible_fault_devices": 578,
+      "alarmed_devices": 985,
+      "no_history_devices": 152,
+      "no_history_fault_devices": 19,
+      "fault_without_timely_scheduled_opportunity": 19,
+      "positive_without_scored_positive_day": 19,
+      "unknown_devices": 29082,
+      "unknown_alarm_devices": 1,
+      "excluded_late_entry_devices": 9417,
+      "excluded_preexisting_fault_devices": 2829,
+      "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+    },
+    "model_reused_from": null,
+    "cv": {
+      "best_step": 400,
+      "metrics": {
+        "step": 400,
+        "f1": 0.25475893969044655,
+        "TP": 716,
+        "FP": 2555,
+        "FN": 1634,
+        "precision": 0.21889330479975544,
+        "recall": 0.3046808510638298,
+        "threshold": 0.9903090596199036
+      },
+      "fault_units": 2350,
+      "error_counts": {
+        "TP": 716,
+        "FP": 2555,
+        "FN": 1634,
+        "TN": 1405248,
+        "fn_no_timely_clock": 25,
+        "fn_no_timely_score": 48,
+        "fn_scored_below_threshold": 1561,
+        "fn_with_outside_window_alarm": 0,
+        "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+      }
+    },
+    "acceptance": {
+      "accepted": true,
+      "rule": "baseline",
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.25475893969044655,
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "precision": 0.21889330479975544,
+          "recall": 0.3046808510638298,
+          "threshold": 0.9903090596199036
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "TN": 1405248,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1561,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      }
+    }
+  },
+  "history": [
+    {
+      "id": "trial_001",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": null,
+      "reason": "baseline",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9869956374168396,
+        "TP": 186,
+        "FP": 799,
+        "FN": 392,
+        "precision": 0.18883248730964466,
+        "recall": 0.3217993079584775,
+        "f1": 0.2380038387715931,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 985,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 1,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.25475893969044655,
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "precision": 0.21889330479975544,
+          "recall": 0.3046808510638298,
+          "threshold": 0.9903090596199036
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "TN": 1405248,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1561,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": true,
+        "rule": "baseline",
+        "cv": {
+          "best_step": 400,
+          "metrics": {
+            "step": 400,
+            "f1": 0.25475893969044655,
+            "TP": 716,
+            "FP": 2555,
+            "FN": 1634,
+            "precision": 0.21889330479975544,
+            "recall": 0.3046808510638298,
+            "threshold": 0.9903090596199036
+          },
+          "fault_units": 2350,
+          "error_counts": {
+            "TP": 716,
+            "FP": 2555,
+            "FN": 1634,
+            "TN": 1405248,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1561,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          }
+        }
+      }
+    },
+    {
+      "id": "trial_002",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 6,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "First propose one controlled parameter change as requested. Baseline uses max_depth=4; error_atlas shows credible but moderate univariate separations on SMART error counters, suggesting non-linear threshold interactions may need more tree depth. A single-factor change to max_depth=6 tests model capacity without altering features, sample weighting, labels, aggregation, or seed.",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9814440011978149,
+        "TP": 194,
+        "FP": 837,
+        "FN": 384,
+        "precision": 0.18816682832201745,
+        "recall": 0.3356401384083045,
+        "f1": 0.24114356743318832,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 1031,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 1,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "params.max_depth"
+        ],
+        "delta": {
+          "f1": 0.0031397286615952313,
+          "precision": -0.0006656589876272156,
+          "recall": 0.01384083044982698,
+          "TP": 8,
+          "FP": 38,
+          "FN": -8
+        },
+        "new_hits": 36,
+        "lost_hits": 28,
+        "new_false_alarms": 206,
+        "removed_false_alarms": 168,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.017990434832801896,
+          0.020959394098252707
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 150,
+        "metrics": {
+          "step": 150,
+          "f1": 0.2498011137629276,
+          "TP": 628,
+          "FP": 2050,
+          "FN": 1722,
+          "precision": 0.23450336071695296,
+          "recall": 0.2672340425531915,
+          "threshold": 0.9886009097099304
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 628,
+          "FP": 2050,
+          "FN": 1722,
+          "TN": 1405753,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1649,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.0031397286615952313,
+        "cv_delta_f1": -0.00495782592751895,
+        "cv_interval_95": [
+          -0.014669223641552105,
+          0.005059811822301472
+        ],
+        "probability_better": 0.149,
+        "new_hits": 52,
+        "lost_hits": 140,
+        "new_false_alarms": 312,
+        "removed_false_alarms": 817,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_003",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "d467349aad9fb33a67659259867b15b0a9aa031f23dbdbf4fd996ad73318172b",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9922163486480713,
+        "TP": 187,
+        "FP": 725,
+        "FN": 391,
+        "precision": 0.2050438596491228,
+        "recall": 0.3235294117647059,
+        "f1": 0.25100671140939596,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 912,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 3,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": 0.013002872637802865,
+          "precision": 0.01621137233947814,
+          "recall": 0.0017301038062284002,
+          "TP": 1,
+          "FP": -74,
+          "FN": -1
+        },
+        "new_hits": 40,
+        "lost_hits": 39,
+        "new_false_alarms": 223,
+        "removed_false_alarms": 297,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.008984304425274576,
+          0.03698130346094121
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.25986261040235525,
+          "TP": 662,
+          "FP": 2083,
+          "FN": 1688,
+          "precision": 0.24116575591985429,
+          "recall": 0.2817021276595745,
+          "threshold": 0.9945348501205444
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 662,
+          "FP": 2083,
+          "FN": 1688,
+          "TN": 1405720,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1615,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.013002872637802865,
+        "cv_delta_f1": 0.005103670711908703,
+        "cv_interval_95": [
+          -0.005385960181986791,
+          0.01597069856637192
+        ],
+        "probability_better": 0.813,
+        "new_hits": 104,
+        "lost_hits": 158,
+        "new_false_alarms": 517,
+        "removed_false_alarms": 989,
+        "fault_units": 2350
+      }
+    }
+  ],
+  "scope": {
+    "level": 2,
+    "allowed_changes": [
+      "params.max_depth",
+      "params.min_child_weight",
+      "params.learning_rate",
+      "params.reg_lambda",
+      "params.reg_alpha",
+      "params.gamma",
+      "params.max_bin",
+      "params.colsample_bytree",
+      "params.max_delta_step",
+      "seed",
+      "rerank",
+      "rerank_gate",
+      "base_weight"
+    ],
+    "features_allowed": true,
+    "controls_without_best_gain": 0,
+    "parallel": {
+      "allowed": true,
+      "mode": "parallel",
+      "gate": 0.5,
+      "note": "Independent shallow device-balanced branch trains on ALL TRAIN rows, including low-score rows. Fuses row scores by max; same scorer, no unconditional acceptance. Not the M2-MFP rule tree."
+    },
+    "feature_screen": {
+      "mode": "balanced",
+      "exploration_budget": 2,
+      "exploration_used": 0
+    },
+    "rerank": {
+      "allowed": false
+    },
+    "explanation": "Use evidence to choose parameter, causal-feature, permitted device-weight, or composite controls. Labels, sampling, feature_set, schedule and scorer remain fixed."
+  },
+  "evidence": [
+    {
+      "kind": "error_atlas",
+      "question": "在 trial_003 的 TRAIN 交叉验证 OOF 上，请同时返回高分区 TP/FP 的因果特征对比，以及漏报 FN/TN 的因果特征快照；并拆解漏报中无及时时钟、无及时分数、低于阈值的比例，以判断下一步应优先恢复低分命中还是继续抑制高分区误报。",
+      "trial": "trial_003",
+      "contrast": {
+        "kind": "error_atlas",
+        "error_counts": {
+          "TP": 662,
+          "FP": 2083,
+          "FN": 1688,
+          "TN": 1405720,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1615,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "precision": {
+          "kind": "high_score_contrast",
+          "step": 400,
+          "threshold": 0.9945348501205444,
+          "cv_metrics": {
+            "step": 400,
+            "f1": 0.25986261040235525,
+            "TP": 662,
+            "FP": 2083,
+            "FN": 1688,
+            "precision": 0.24116575591985429,
+            "recall": 0.2817021276595745,
+            "threshold": 0.9945348501205444
+          },
+          "tp_units": 662,
+          "fp_units": 2083,
+          "group_counts": {
+            "TP": 662,
+            "FP": 2083
+          },
+          "sampled_group_counts": {
+            "TP": 662,
+            "FP": 1000
+          },
+          "features": [
+            {
+              "feature": "smart_187_raw",
+              "auc_tp_vs_fp": 0.5814545436830773,
+              "auc_positive_vs_negative": 0.5814545436830773,
+              "separation": 0.08145454368307725,
+              "positive_median": 85.0,
+              "negative_median": 60.0,
+              "positive_missing": 0.40483383685800606,
+              "negative_missing": 0.479,
+              "auc_interval_95": [
+                0.5450285908498157,
+                0.6129885121512347
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_pending_surge_7d",
+              "auc_tp_vs_fp": 0.5801555891238671,
+              "auc_positive_vs_negative": 0.5801555891238671,
+              "separation": 0.08015558912386711,
+              "positive_median": 27.5,
+              "negative_median": 8.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5577715035308742,
+                0.6077945472684415
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_1_normalized",
+              "auc_tp_vs_fp": 0.4227447129909366,
+              "auc_positive_vs_negative": 0.4227447129909366,
+              "separation": 0.07725528700906342,
+              "positive_median": 80.5,
+              "negative_median": 100.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.3968972212880232,
+                0.44894389595578893
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_197_raw",
+              "auc_tp_vs_fp": 0.5761480362537764,
+              "auc_positive_vs_negative": 0.5761480362537764,
+              "separation": 0.07614803625377642,
+              "positive_median": 88.0,
+              "negative_median": 48.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5499862888717256,
+                0.6052558042551995
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_1_raw",
+              "auc_tp_vs_fp": 0.5760762839879154,
+              "auc_positive_vs_negative": 0.5760762839879154,
+              "separation": 0.07607628398791544,
+              "positive_median": 68160560.0,
+              "negative_median": 6170348.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.551821839498296,
+                0.6009109307932697
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_183_raw",
+              "auc_tp_vs_fp": 0.5747950819672131,
+              "auc_positive_vs_negative": 0.5747950819672131,
+              "separation": 0.07479508196721307,
+              "positive_median": 5.5,
+              "negative_median": 4.0,
+              "positive_missing": 0.9154078549848943,
+              "negative_missing": 0.939,
+              "auc_interval_95": [
+                0.46812873300292285,
+                0.6803583626073381
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_183_normalized",
+              "auc_tp_vs_fp": 0.4260831381733021,
+              "auc_positive_vs_negative": 0.4260831381733021,
+              "separation": 0.07391686182669788,
+              "positive_median": 94.5,
+              "negative_median": 96.0,
+              "positive_missing": 0.9154078549848943,
+              "negative_missing": 0.939,
+              "auc_interval_95": [
+                0.3199758489461358,
+                0.5314822595704949
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_187_normalized",
+              "auc_tp_vs_fp": 0.42618159143388834,
+              "auc_positive_vs_negative": 0.42618159143388834,
+              "separation": 0.07381840856611166,
+              "positive_median": 15.0,
+              "negative_median": 40.0,
+              "positive_missing": 0.40483383685800606,
+              "negative_missing": 0.479,
+              "auc_interval_95": [
+                0.39292262154882235,
+                0.46233230938032804
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_220_raw",
+              "auc_tp_vs_fp": 0.4287109375,
+              "auc_positive_vs_negative": 0.4287109375,
+              "separation": 0.0712890625,
+              "positive_median": 77529088.0,
+              "negative_median": 101777408.0,
+              "positive_missing": 0.9033232628398792,
+              "negative_missing": 0.92,
+              "auc_interval_95": [
+                0.32610399590163935,
+                0.5246482653060119
+              ],
+              "credible": false
+            },
+            {
+              "feature": "fe_pending_pos_daily_change",
+              "auc_tp_vs_fp": 0.566935515575999,
+              "auc_positive_vs_negative": 0.566935515575999,
+              "separation": 0.06693551557599897,
+              "positive_median": 8.0,
+              "negative_median": 8.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.001,
+              "auc_interval_95": [
+                0.5405742330555201,
+                0.5997923187765739
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_pending_7d_mean",
+              "auc_tp_vs_fp": 0.5617469788519638,
+              "auc_positive_vs_negative": 0.5617469788519638,
+              "separation": 0.061746978851963785,
+              "positive_median": 48.64285659790039,
+              "negative_median": 28.142857551574707,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5351165468025644,
+                0.5910614281776109
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_197_normalized",
+              "auc_tp_vs_fp": 0.4412711480362538,
+              "auc_positive_vs_negative": 0.4412711480362538,
+              "separation": 0.05872885196374622,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.4253826607822758,
+                0.45620862363386205
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_198_normalized",
+              "auc_tp_vs_fp": 0.4428965256797583,
+              "auc_positive_vs_negative": 0.4428965256797583,
+              "separation": 0.05710347432024171,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.42700624374255747,
+                0.45762742451537575
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_188_raw",
+              "auc_tp_vs_fp": 0.5570481405341153,
+              "auc_positive_vs_negative": 0.5570481405341153,
+              "separation": 0.05704814053411533,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.40483383685800606,
+              "negative_missing": 0.479,
+              "auc_interval_95": [
+                0.5220556590122487,
+                0.5894520132610837
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_198_raw",
+              "auc_tp_vs_fp": 0.5566540785498489,
+              "auc_positive_vs_negative": 0.5566540785498489,
+              "separation": 0.05665407854984894,
+              "positive_median": 44.0,
+              "negative_median": 31.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5298138641145462,
+                0.5804179578788679
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_192_raw",
+              "auc_tp_vs_fp": 0.44351208459214503,
+              "auc_positive_vs_negative": 0.44351208459214503,
+              "separation": 0.05648791540785497,
+              "positive_median": 28.0,
+              "negative_median": 70.5,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.41846384421667987,
+                0.46793840240349044
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_195_normalized",
+              "auc_tp_vs_fp": 0.4472900212577777,
+              "auc_positive_vs_negative": 0.4472900212577777,
+              "separation": 0.052709978742222274,
+              "positive_median": 17.0,
+              "negative_median": 21.0,
+              "positive_missing": 0.6631419939577039,
+              "negative_missing": 0.711,
+              "auc_interval_95": [
+                0.40750495330133935,
+                0.4964256633622501
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_222_normalized",
+              "auc_tp_vs_fp": 0.4490234375,
+              "auc_positive_vs_negative": 0.4490234375,
+              "separation": 0.05097656249999999,
+              "positive_median": 12.5,
+              "negative_median": 32.5,
+              "positive_missing": 0.9033232628398792,
+              "negative_missing": 0.92,
+              "auc_interval_95": [
+                0.3612126524205474,
+                0.5404714981652989
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_222_raw",
+              "auc_tp_vs_fp": 0.549609375,
+              "auc_positive_vs_negative": 0.549609375,
+              "separation": 0.049609374999999956,
+              "positive_median": 35196.0,
+              "negative_median": 27340.5,
+              "positive_missing": 0.9033232628398792,
+              "negative_missing": 0.92,
+              "auc_interval_95": [
+                0.45845163002336,
+                0.640293083804029
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_9_normalized",
+              "auc_tp_vs_fp": 0.4525581570996979,
+              "auc_positive_vs_negative": 0.4525581570996979,
+              "separation": 0.04744184290030212,
+              "positive_median": 65.0,
+              "negative_median": 67.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.4206264147670162,
+                0.47466241061257186
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_194_normalized",
+              "auc_tp_vs_fp": 0.4546910876132931,
+              "auc_positive_vs_negative": 0.4546910876132931,
+              "separation": 0.04530891238670692,
+              "positive_median": 40.0,
+              "negative_median": 44.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.43146268301063484,
+                0.475393873778348
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_pending_nonzero_days_7d",
+              "auc_tp_vs_fp": 0.45667824773413895,
+              "auc_positive_vs_negative": 0.45667824773413895,
+              "separation": 0.04332175226586105,
+              "positive_median": 7.0,
+              "negative_median": 7.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.43297732445762793,
+                0.48302762325081355
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_2_raw",
+              "auc_tp_vs_fp": 0.4585891004268844,
+              "auc_positive_vs_negative": 0.4585891004268844,
+              "separation": 0.04141089957311561,
+              "positive_median": 0.0,
+              "negative_median": 92.0,
+              "positive_missing": 0.595166163141994,
+              "negative_missing": 0.521,
+              "auc_interval_95": [
+                0.42404653803974685,
+                0.4916048281442934
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_195_raw",
+              "auc_tp_vs_fp": 0.5397613542911229,
+              "auc_positive_vs_negative": 0.5397613542911229,
+              "separation": 0.03976135429112293,
+              "positive_median": 159166848.0,
+              "negative_median": 147683440.0,
+              "positive_missing": 0.6631419939577039,
+              "negative_missing": 0.711,
+              "auc_interval_95": [
+                0.4928050807773969,
+                0.5898790743759595
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_8_raw",
+              "auc_tp_vs_fp": 0.4619504253263952,
+              "auc_positive_vs_negative": 0.4619504253263952,
+              "separation": 0.038049574673604813,
+              "positive_median": 0.0,
+              "negative_median": 15.0,
+              "positive_missing": 0.595166163141994,
+              "negative_missing": 0.521,
+              "auc_interval_95": [
+                0.4290290177251846,
+                0.5004878336557214
+              ],
+              "credible": false
+            }
+          ],
+          "credible_features": [
+            "smart_187_raw",
+            "fe_pending_surge_7d",
+            "smart_1_normalized",
+            "smart_197_raw",
+            "smart_1_raw",
+            "smart_187_normalized",
+            "fe_pending_pos_daily_change",
+            "fe_pending_7d_mean",
+            "smart_197_normalized",
+            "smart_198_normalized",
+            "smart_188_raw",
+            "smart_198_raw",
+            "smart_192_raw",
+            "smart_195_normalized",
+            "smart_9_normalized",
+            "smart_194_normalized",
+            "fe_pending_nonzero_days_7d",
+            "smart_2_raw"
+          ],
+          "eligible_units": 1410153,
+          "error_counts": {
+            "TP": 662,
+            "FP": 2083,
+            "FN": 1688,
+            "TN": 1405720,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1615,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        },
+        "recall": {
+          "kind": "missed_fault_contrast",
+          "step": 400,
+          "threshold": 0.9945348501205444,
+          "cv_metrics": {
+            "step": 400,
+            "f1": 0.25986261040235525,
+            "TP": 662,
+            "FP": 2083,
+            "FN": 1688,
+            "precision": 0.24116575591985429,
+            "recall": 0.2817021276595745,
+            "threshold": 0.9945348501205444
+          },
+          "tp_units": 0,
+          "fp_units": 0,
+          "group_counts": {
+            "FN": 1688,
+            "TN": 1405720
+          },
+          "sampled_group_counts": {
+            "FN": 1000,
+            "TN": 1000
+          },
+          "features": [
+            {
+              "feature": "smart_165_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 26983556710400.0,
+              "negative_median": 5617919459328.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_166_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 190.5,
+              "negative_median": 22.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_168_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 257.5,
+              "negative_median": 0.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.993,
+              "auc_interval_95": [
+                1.0,
+                1.0
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_170_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.0,
+              "separation": 0.5,
+              "positive_median": 0.0,
+              "negative_median": 101.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.993,
+              "auc_interval_95": [
+                0.0,
+                0.0
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_232_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.9464285714285714,
+              "separation": 0.4464285714285714,
+              "positive_median": 96.5,
+              "negative_median": 0.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.993,
+              "auc_interval_95": [
+                0.7852380952380952,
+                1.0
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_173_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.14285714285714285,
+              "separation": 0.35714285714285715,
+              "positive_median": 216.5,
+              "negative_median": 6829104955392.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.993,
+              "auc_interval_95": [
+                0.0,
+                0.5
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_233_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.14285714285714285,
+              "separation": 0.35714285714285715,
+              "positive_median": 272.5,
+              "negative_median": 231693.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.993,
+              "auc_interval_95": [
+                0.0,
+                0.5
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_183_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.1953405017921147,
+              "separation": 0.3046594982078853,
+              "positive_median": 96.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.969,
+              "negative_missing": 0.982,
+              "auc_interval_95": [
+                0.09882227891156463,
+                0.3049855049546701
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_183_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.8046594982078853,
+              "separation": 0.3046594982078853,
+              "positive_median": 4.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.969,
+              "negative_missing": 0.982,
+              "auc_interval_95": [
+                0.69501449504533,
+                0.9011777210884354
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_187_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7944615811463638,
+              "separation": 0.2944615811463638,
+              "positive_median": 5.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.632,
+              "negative_missing": 0.667,
+              "auc_interval_95": [
+                0.7693447187624494,
+                0.8188309041453983
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_187_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.20572610654132392,
+              "separation": 0.29427389345867605,
+              "positive_median": 95.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.632,
+              "negative_missing": 0.667,
+              "auc_interval_95": [
+                0.1811729743554591,
+                0.23079471952833208
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_11_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.75,
+              "separation": 0.25,
+              "positive_median": 100.0,
+              "negative_median": 98.0,
+              "positive_missing": 0.995,
+              "negative_missing": 0.998,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_167_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.25,
+              "separation": 0.25,
+              "positive_median": 9.5,
+              "negative_median": 15.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_169_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.25,
+              "separation": 0.25,
+              "positive_median": 45.5,
+              "negative_median": 72.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_230_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.75,
+              "separation": 0.25,
+              "positive_median": 16817641750528.0,
+              "negative_median": 3672317100032.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "fe_pending_7d_mean",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7127861027861028,
+              "separation": 0.21278610278610277,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.076,
+              "negative_missing": 0.025,
+              "auc_interval_95": [
+                0.6974650081153784,
+                0.7272153074372588
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_pending_nonzero_days_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.712032967032967,
+              "separation": 0.21203296703296703,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.076,
+              "negative_missing": 0.025,
+              "auc_interval_95": [
+                0.696505195813922,
+                0.7261882230834132
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_5_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7114342675086327,
+              "separation": 0.2114342675086327,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.046,
+              "negative_missing": 0.011,
+              "auc_interval_95": [
+                0.6964399546770015,
+                0.7285193931234886
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_197_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7090969270628912,
+              "separation": 0.20909692706289118,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.079,
+              "negative_missing": 0.029,
+              "auc_interval_95": [
+                0.6958511615259777,
+                0.7262819535701597
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_90_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7008547008547008,
+              "separation": 0.2008547008547008,
+              "positive_median": 528280977408.0,
+              "negative_median": 511101108224.0,
+              "positive_missing": 0.987,
+              "negative_missing": 0.973,
+              "auc_interval_95": [
+                0.48112725397208156,
+                0.8766976190476191
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_196_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.6757796241571631,
+              "separation": 0.17577962415716308,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.414,
+              "negative_missing": 0.344,
+              "auc_interval_95": [
+                0.6606338674482714,
+                0.6963410084745483
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_234_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.3333333333333333,
+              "separation": 0.16666666666666669,
+              "positive_median": 94000.0,
+              "negative_median": 224372523008.0,
+              "positive_missing": 0.996,
+              "negative_missing": 0.997,
+              "auc_interval_95": [
+                0.0,
+                1.0
+              ],
+              "credible": false
+            },
+            {
+              "feature": "fe_pending_surge_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.6411827917311032,
+              "separation": 0.14118279173110315,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.079,
+              "negative_missing": 0.029,
+              "auc_interval_95": [
+                0.6272012894156073,
+                0.6566406326335583
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_242_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.636045472901039,
+              "separation": 0.13604547290103897,
+              "positive_median": 515452026880.0,
+              "negative_median": 419479617536.0,
+              "positive_missing": 0.582,
+              "negative_missing": 0.609,
+              "auc_interval_95": [
+                0.6008818082260582,
+                0.673270175160985
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_9_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.6319327244187394,
+              "separation": 0.13193272441873938,
+              "positive_median": 34309.5,
+              "negative_median": 25313.0,
+              "positive_missing": 0.046,
+              "negative_missing": 0.005,
+              "auc_interval_95": [
+                0.606006652565075,
+                0.6530255004071348
+              ],
+              "credible": true
+            }
+          ],
+          "credible_features": [
+            "smart_168_raw",
+            "smart_170_raw",
+            "smart_232_raw",
+            "smart_183_normalized",
+            "smart_183_raw",
+            "smart_187_raw",
+            "smart_187_normalized",
+            "fe_pending_7d_mean",
+            "fe_pending_nonzero_days_7d",
+            "smart_5_raw",
+            "smart_197_raw",
+            "smart_196_raw",
+            "fe_pending_surge_7d",
+            "smart_242_raw",
+            "smart_9_raw"
+          ],
+          "eligible_units": 1410153,
+          "error_counts": {
+            "TP": 662,
+            "FP": 2083,
+            "FN": 1688,
+            "TN": 1405720,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1615,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        }
+      }
+    }
+  ],
+  "last_failure": null,
+  "policy": {
+    "evaluation_protocol": "period_device_f1_v2",
+    "minimum_lead_seconds": 900,
+    "maximum_lead_seconds": null
+  },
+  "feature_requests_used": 1,
+  "diagnostic_kinds_used": [
+    "error_atlas"
+  ],
+  "diagnostic_budget": 3,
+  "allowed_factor_values": {
+    "feature_set": [
+      "base",
+      "history",
+      "recent"
+    ],
+    "sample_unit": [
+      "event",
+      "device_day"
+    ],
+    "base_weight": [
+      "sample",
+      "device"
+    ],
+    "label_horizon_days": [
+      7
+    ],
+    "weight_policy": [
+      "ratio",
+      "sqrt_ratio",
+      "unit"
+    ],
+    "prediction_interval_hours": [
+      1,
+      24
+    ],
+    "score_aggregation": [
+      "latest",
+      "window_max",
+      "window_mean",
+      "window_second",
+      "all_history_max"
+    ],
+    "seed": [
+      42,
+      43,
+      44
+    ],
+    "rerank": [
+      "none",
+      "gated",
+      "parallel"
+    ],
+    "rerank_gate": [
+      0.5,
+      0.7,
+      0.8,
+      0.85,
+      0.9
+    ]
+  },
+  "hyperparameter_bounds": {
+    "max_depth": [
+      2,
+      10
+    ],
+    "min_child_weight": [
+      0.01,
+      1000
+    ],
+    "learning_rate": [
+      0.005,
+      0.3
+    ],
+    "reg_lambda": [
+      0,
+      1000
+    ],
+    "reg_alpha": [
+      0,
+      1000
+    ],
+    "gamma": [
+      0,
+      100
+    ],
+    "max_bin": [
+      16,
+      256
+    ],
+    "colsample_bytree": [
+      0.3,
+      1
+    ],
+    "max_delta_step": [
+      0,
+      10
+    ]
+  },
+  "remaining_trials": 10,
+  "diagnostic_kinds": [
+    "errors",
+    "coverage",
+    "score_distribution",
+    "feature_profiles",
+    "loss_curve",
+    "paired_devices",
+    "high_score_contrast",
+    "missed_fault_contrast",
+    "error_atlas"
+  ],
+  "feature_api": {
+    "version": "causal_features_v2",
+    "signature": "def transform(frame)",
+    "input": "One device, chronological numeric rows. No labels, device IDs or future rows. Select literal column names from profile.feature_names.",
+    "output": "pd.DataFrame of declared unique fe_ columns; preserve rows and index. Original columns are retained automatically.",
+    "series_methods": [
+      "abs",
+      "astype",
+      "clip",
+      "count",
+      "cummax",
+      "cummin",
+      "cumprod",
+      "cumsum",
+      "diff",
+      "ewm",
+      "expanding",
+      "ffill",
+      "fillna",
+      "isna",
+      "mask",
+      "max",
+      "mean",
+      "median",
+      "min",
+      "notna",
+      "quantile",
+      "replace",
+      "rolling",
+      "shift",
+      "std",
+      "sum",
+      "var",
+      "where"
+    ],
+    "numpy_functions": [
+      "abs",
+      "clip",
+      "exp",
+      "isfinite",
+      "isnan",
+      "log",
+      "log1p",
+      "maximum",
+      "minimum",
+      "sign",
+      "sqrt",
+      "where"
+    ],
+    "pandas_functions": [
+      "DataFrame"
+    ],
+    "past_helpers": {
+      "past.gap_seconds(frame)": "Series: current minus previous observation time in seconds; first value NaN.",
+      "past.observation_count(frame)": "Series: causal count 1,2,...,n; no measured-value missingness dependence."
+    },
+    "rules": [
+      "Only assignments to new local names and a final return. No loops, comprehensions, imports or arbitrary functions.",
+      "frame.index is permitted ONLY as index=frame.index in pd.DataFrame. For time gaps use past.gap_seconds(frame).",
+      "No frame.columns, to_series, dt, iloc, loc, values, pd.Series, pd.to_numeric or apply. Inputs are already numeric.",
+      "Use arithmetic operators / + - * instead of .div/.add/.sub/.mul. Use literal column names; never discover columns dynamically.",
+      "Reductions must directly follow rolling/expanding/ewm. Use trailing real-time rolling windows; center=True and negative shifts are forbidden.",
+      "Missing measurements stay unknown unless the hypothesis explicitly justifies a constant or forward fill. No infinities.",
+      "Zero finite values in a bounded sample is a coverage limitation, not evidence that the entire dataset is empty."
+    ],
+    "examples": [
+      {
+        "features": [
+          "fe_change"
+        ],
+        "source": "def transform(frame):\n    change = frame['metric'].diff(1)\n    return pd.DataFrame({'fe_change': change}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_gap",
+          "fe_count"
+        ],
+        "source": "def transform(frame):\n    gap = past.gap_seconds(frame)\n    count = past.observation_count(frame)\n    return pd.DataFrame({'fe_gap': gap, 'fe_count': count}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_mean"
+        ],
+        "source": "def transform(frame):\n    avg = frame['metric'].rolling('7D', min_periods=1).mean()\n    return pd.DataFrame({'fe_mean': avg}, index=frame.index)"
+      }
+    ]
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Grown surface defects trigger spare-sector reallocation, consuming the spare pool and indicating media degradation.",
+      "basis": "Backblaze Drive Stats and published SMART studies identify SMART 5 raw reallocated sector count as one of the strongest failure predictors; normalized value declines as spare sectors are consumed.",
+      "fields": [
+        "smart_5_raw",
+        "smart_5_normalized"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Pre-failure devices do not show higher raw reallocated counts and lower normalized values than healthy devices at comparable lead times."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Unstable sectors await remapping, producing current pending sectors that may later become uncorrectable.",
+      "basis": "Backblaze data shows SMART 197 raw pending sector count above zero strongly increases failure probability.",
+      "fields": [
+        "smart_197_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have elevated smart_197_raw counts in the prediction window compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Uncorrectable read/write errors reflect media, head, or channel failure that cannot be recovered by ECC.",
+      "basis": "SMART 187 reported uncorrectable errors are widely associated with imminent HDD failure in reliability studies.",
+      "fields": [
+        "smart_187_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reported uncorrectable error counts are not higher in failing devices than healthy devices before failure."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Frequent remapping attempts indicate active defect growth, even if reallocated sector total remains moderate.",
+      "basis": "SMART 196 reallocated event count captures the number of remap operations and is a known failure precursor.",
+      "fields": [
+        "smart_196_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reallocated event counts do not differentiate failing from healthy devices within the lead window."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Drive unresponsiveness from firmware, head, or media issues manifests as command timeouts.",
+      "basis": "Operational experience shows accumulating SMART 188 command timeouts often precedes total drive failure.",
+      "fields": [
+        "smart_188_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show higher command timeout counts than healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Increased ECC recovery activity indicates marginal read channels and deteriorating media signal quality.",
+      "basis": "SMART 195 hardware ECC recovered counts rise when drives must correct many errors, a known degradation indicator.",
+      "fields": [
+        "smart_195_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Hardware ECC recovered counts are not elevated in failing devices after controlling for workload."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Actuator or servo instability causes seek errors before mechanical failure.",
+      "basis": "SMART 7 seek error rate is associated with positioning degradation, a common near-failure signature.",
+      "fields": [
+        "smart_7_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Seek error rate does not increase in failing devices relative to healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Spindle or motor difficulty causes repeated spin-up attempts.",
+      "basis": "SMART 10 spin retry count captures motor start problems, a mechanical failure precursor.",
+      "fields": [
+        "smart_10_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have higher spin retry counts than healthy devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Age-related wear increases failure probability after high power-on hours, though risk is not strictly monotonic.",
+      "basis": "HDD reliability follows a bathtub curve: infant mortality, then steady wear-out at high power-on hours.",
+      "fields": [
+        "smart_9_raw"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Failure risk is not elevated at extreme high power-on hours after controlling for drive model and cohort."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Repeated head load/unload cycles mechanically wear the actuator and ramp, increasing late-life failure risk.",
+      "basis": "Load/unload cycle count, especially on 2.5-inch drives, is a mechanical wear indicator.",
+      "fields": [
+        "smart_193_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show accumulated load cycle counts different from healthy devices at similar age."
+    }
+  ],
+  "acceptance_rule": {
+    "rule": "cv_paired",
+    "lower_bound": 0.0,
+    "screen_margin": 0.02,
+    "explanation": "best changes only when paired CV bootstrap 95% lower bound > lower_bound and net hits are not lost"
+  },
+  "task_context": {
+    "variant": "v3_error_guided",
+    "instructions": "Domain-adapted evidence loop: separate false alarms, missed faults and coverage; allow bounded interaction/recall feature exploration, single-factor device weights and optional independent parallel branch. Reuse the source sampling policy and fixed evaluation. New source/representation requires a new cache/session. TEST stays outside search.",
+    "label_days": 7,
+    "maximum_lead_seconds": null,
+    "sampling_fixed": true,
+    "selection_period": [
+      1722988800,
+      1726142400
+    ],
+    "later_validation_hidden": true,
+    "test_opened": false
+  }
+}

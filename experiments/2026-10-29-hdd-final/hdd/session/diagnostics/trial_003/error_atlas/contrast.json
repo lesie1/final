@@ -1,0 +1,881 @@
+{
+  "kind": "error_atlas",
+  "error_counts": {
+    "TP": 662,
+    "FP": 2083,
+    "FN": 1688,
+    "TN": 1405720,
+    "fn_no_timely_clock": 25,
+    "fn_no_timely_score": 48,
+    "fn_scored_below_threshold": 1615,
+    "fn_with_outside_window_alarm": 0,
+    "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+  },
+  "precision": {
+    "kind": "high_score_contrast",
+    "step": 400,
+    "threshold": 0.9945348501205444,
+    "cv_metrics": {
+      "step": 400,
+      "f1": 0.25986261040235525,
+      "TP": 662,
+      "FP": 2083,
+      "FN": 1688,
+      "precision": 0.24116575591985429,
+      "recall": 0.2817021276595745,
+      "threshold": 0.9945348501205444
+    },
+    "tp_units": 662,
+    "fp_units": 2083,
+    "group_counts": {
+      "TP": 662,
+      "FP": 2083
+    },
+    "sampled_group_counts": {
+      "TP": 662,
+      "FP": 1000
+    },
+    "features": [
+      {
+        "feature": "smart_187_raw",
+        "auc_tp_vs_fp": 0.5814545436830773,
+        "auc_positive_vs_negative": 0.5814545436830773,
+        "separation": 0.08145454368307725,
+        "positive_median": 85.0,
+        "negative_median": 60.0,
+        "positive_missing": 0.40483383685800606,
+        "negative_missing": 0.479,
+        "auc_interval_95": [
+          0.5450285908498157,
+          0.6129885121512347
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_pending_surge_7d",
+        "auc_tp_vs_fp": 0.5801555891238671,
+        "auc_positive_vs_negative": 0.5801555891238671,
+        "separation": 0.08015558912386711,
+        "positive_median": 27.5,
+        "negative_median": 8.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.5577715035308742,
+          0.6077945472684415
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_1_normalized",
+        "auc_tp_vs_fp": 0.4227447129909366,
+        "auc_positive_vs_negative": 0.4227447129909366,
+        "separation": 0.07725528700906342,
+        "positive_median": 80.5,
+        "negative_median": 100.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.3968972212880232,
+          0.44894389595578893
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_197_raw",
+        "auc_tp_vs_fp": 0.5761480362537764,
+        "auc_positive_vs_negative": 0.5761480362537764,
+        "separation": 0.07614803625377642,
+        "positive_median": 88.0,
+        "negative_median": 48.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.5499862888717256,
+          0.6052558042551995
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_1_raw",
+        "auc_tp_vs_fp": 0.5760762839879154,
+        "auc_positive_vs_negative": 0.5760762839879154,
+        "separation": 0.07607628398791544,
+        "positive_median": 68160560.0,
+        "negative_median": 6170348.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.551821839498296,
+          0.6009109307932697
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_183_raw",
+        "auc_tp_vs_fp": 0.5747950819672131,
+        "auc_positive_vs_negative": 0.5747950819672131,
+        "separation": 0.07479508196721307,
+        "positive_median": 5.5,
+        "negative_median": 4.0,
+        "positive_missing": 0.9154078549848943,
+        "negative_missing": 0.939,
+        "auc_interval_95": [
+          0.46812873300292285,
+          0.6803583626073381
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_183_normalized",
+        "auc_tp_vs_fp": 0.4260831381733021,
+        "auc_positive_vs_negative": 0.4260831381733021,
+        "separation": 0.07391686182669788,
+        "positive_median": 94.5,
+        "negative_median": 96.0,
+        "positive_missing": 0.9154078549848943,
+        "negative_missing": 0.939,
+        "auc_interval_95": [
+          0.3199758489461358,
+          0.5314822595704949
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_187_normalized",
+        "auc_tp_vs_fp": 0.42618159143388834,
+        "auc_positive_vs_negative": 0.42618159143388834,
+        "separation": 0.07381840856611166,
+        "positive_median": 15.0,
+        "negative_median": 40.0,
+        "positive_missing": 0.40483383685800606,
+        "negative_missing": 0.479,
+        "auc_interval_95": [
+          0.39292262154882235,
+          0.46233230938032804
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_220_raw",
+        "auc_tp_vs_fp": 0.4287109375,
+        "auc_positive_vs_negative": 0.4287109375,
+        "separation": 0.0712890625,
+        "positive_median": 77529088.0,
+        "negative_median": 101777408.0,
+        "positive_missing": 0.9033232628398792,
+        "negative_missing": 0.92,
+        "auc_interval_95": [
+          0.32610399590163935,
+          0.5246482653060119
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_pending_pos_daily_change",
+        "auc_tp_vs_fp": 0.566935515575999,
+        "auc_positive_vs_negative": 0.566935515575999,
+        "separation": 0.06693551557599897,
+        "positive_median": 8.0,
+        "negative_median": 8.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.001,
+        "auc_interval_95": [
+          0.5405742330555201,
+          0.5997923187765739
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_pending_7d_mean",
+        "auc_tp_vs_fp": 0.5617469788519638,
+        "auc_positive_vs_negative": 0.5617469788519638,
+        "separation": 0.061746978851963785,
+        "positive_median": 48.64285659790039,
+        "negative_median": 28.142857551574707,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.5351165468025644,
+          0.5910614281776109
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_197_normalized",
+        "auc_tp_vs_fp": 0.4412711480362538,
+        "auc_positive_vs_negative": 0.4412711480362538,
+        "separation": 0.05872885196374622,
+        "positive_median": 100.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.4253826607822758,
+          0.45620862363386205
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_198_normalized",
+        "auc_tp_vs_fp": 0.4428965256797583,
+        "auc_positive_vs_negative": 0.4428965256797583,
+        "separation": 0.05710347432024171,
+        "positive_median": 100.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.42700624374255747,
+          0.45762742451537575
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_188_raw",
+        "auc_tp_vs_fp": 0.5570481405341153,
+        "auc_positive_vs_negative": 0.5570481405341153,
+        "separation": 0.05704814053411533,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.40483383685800606,
+        "negative_missing": 0.479,
+        "auc_interval_95": [
+          0.5220556590122487,
+          0.5894520132610837
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_198_raw",
+        "auc_tp_vs_fp": 0.5566540785498489,
+        "auc_positive_vs_negative": 0.5566540785498489,
+        "separation": 0.05665407854984894,
+        "positive_median": 44.0,
+        "negative_median": 31.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.5298138641145462,
+          0.5804179578788679
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_192_raw",
+        "auc_tp_vs_fp": 0.44351208459214503,
+        "auc_positive_vs_negative": 0.44351208459214503,
+        "separation": 0.05648791540785497,
+        "positive_median": 28.0,
+        "negative_median": 70.5,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.41846384421667987,
+          0.46793840240349044
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_195_normalized",
+        "auc_tp_vs_fp": 0.4472900212577777,
+        "auc_positive_vs_negative": 0.4472900212577777,
+        "separation": 0.052709978742222274,
+        "positive_median": 17.0,
+        "negative_median": 21.0,
+        "positive_missing": 0.6631419939577039,
+        "negative_missing": 0.711,
+        "auc_interval_95": [
+          0.40750495330133935,
+          0.4964256633622501
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_222_normalized",
+        "auc_tp_vs_fp": 0.4490234375,
+        "auc_positive_vs_negative": 0.4490234375,
+        "separation": 0.05097656249999999,
+        "positive_median": 12.5,
+        "negative_median": 32.5,
+        "positive_missing": 0.9033232628398792,
+        "negative_missing": 0.92,
+        "auc_interval_95": [
+          0.3612126524205474,
+          0.5404714981652989
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_222_raw",
+        "auc_tp_vs_fp": 0.549609375,
+        "auc_positive_vs_negative": 0.549609375,
+        "separation": 0.049609374999999956,
+        "positive_median": 35196.0,
+        "negative_median": 27340.5,
+        "positive_missing": 0.9033232628398792,
+        "negative_missing": 0.92,
+        "auc_interval_95": [
+          0.45845163002336,
+          0.640293083804029
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_9_normalized",
+        "auc_tp_vs_fp": 0.4525581570996979,
+        "auc_positive_vs_negative": 0.4525581570996979,
+        "separation": 0.04744184290030212,
+        "positive_median": 65.0,
+        "negative_median": 67.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.4206264147670162,
+          0.47466241061257186
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_194_normalized",
+        "auc_tp_vs_fp": 0.4546910876132931,
+        "auc_positive_vs_negative": 0.4546910876132931,
+        "separation": 0.04530891238670692,
+        "positive_median": 40.0,
+        "negative_median": 44.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.43146268301063484,
+          0.475393873778348
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_pending_nonzero_days_7d",
+        "auc_tp_vs_fp": 0.45667824773413895,
+        "auc_positive_vs_negative": 0.45667824773413895,
+        "separation": 0.04332175226586105,
+        "positive_median": 7.0,
+        "negative_median": 7.0,
+        "positive_missing": 0.0,
+        "negative_missing": 0.0,
+        "auc_interval_95": [
+          0.43297732445762793,
+          0.48302762325081355
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_2_raw",
+        "auc_tp_vs_fp": 0.4585891004268844,
+        "auc_positive_vs_negative": 0.4585891004268844,
+        "separation": 0.04141089957311561,
+        "positive_median": 0.0,
+        "negative_median": 92.0,
+        "positive_missing": 0.595166163141994,
+        "negative_missing": 0.521,
+        "auc_interval_95": [
+          0.42404653803974685,
+          0.4916048281442934
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_195_raw",
+        "auc_tp_vs_fp": 0.5397613542911229,
+        "auc_positive_vs_negative": 0.5397613542911229,
+        "separation": 0.03976135429112293,
+        "positive_median": 159166848.0,
+        "negative_median": 147683440.0,
+        "positive_missing": 0.6631419939577039,
+        "negative_missing": 0.711,
+        "auc_interval_95": [
+          0.4928050807773969,
+          0.5898790743759595
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_8_raw",
+        "auc_tp_vs_fp": 0.4619504253263952,
+        "auc_positive_vs_negative": 0.4619504253263952,
+        "separation": 0.038049574673604813,
+        "positive_median": 0.0,
+        "negative_median": 15.0,
+        "positive_missing": 0.595166163141994,
+        "negative_missing": 0.521,
+        "auc_interval_95": [
+          0.4290290177251846,
+          0.5004878336557214
+        ],
+        "credible": false
+      }
+    ],
+    "credible_features": [
+      "smart_187_raw",
+      "fe_pending_surge_7d",
+      "smart_1_normalized",
+      "smart_197_raw",
+      "smart_1_raw",
+      "smart_187_normalized",
+      "fe_pending_pos_daily_change",
+      "fe_pending_7d_mean",
+      "smart_197_normalized",
+      "smart_198_normalized",
+      "smart_188_raw",
+      "smart_198_raw",
+      "smart_192_raw",
+      "smart_195_normalized",
+      "smart_9_normalized",
+      "smart_194_normalized",
+      "fe_pending_nonzero_days_7d",
+      "smart_2_raw"
+    ],
+    "eligible_units": 1410153,
+    "error_counts": {
+      "TP": 662,
+      "FP": 2083,
+      "FN": 1688,
+      "TN": 1405720,
+      "fn_no_timely_clock": 25,
+      "fn_no_timely_score": 48,
+      "fn_scored_below_threshold": 1615,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  },
+  "recall": {
+    "kind": "missed_fault_contrast",
+    "step": 400,
+    "threshold": 0.9945348501205444,
+    "cv_metrics": {
+      "step": 400,
+      "f1": 0.25986261040235525,
+      "TP": 662,
+      "FP": 2083,
+      "FN": 1688,
+      "precision": 0.24116575591985429,
+      "recall": 0.2817021276595745,
+      "threshold": 0.9945348501205444
+    },
+    "tp_units": 0,
+    "fp_units": 0,
+    "group_counts": {
+      "FN": 1688,
+      "TN": 1405720
+    },
+    "sampled_group_counts": {
+      "FN": 1000,
+      "TN": 1000
+    },
+    "features": [
+      {
+        "feature": "smart_165_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 26983556710400.0,
+        "negative_median": 5617919459328.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_166_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 190.5,
+        "negative_median": 22.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_168_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 257.5,
+        "negative_median": 0.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.993,
+        "auc_interval_95": [
+          1.0,
+          1.0
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_170_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.0,
+        "separation": 0.5,
+        "positive_median": 0.0,
+        "negative_median": 101.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.993,
+        "auc_interval_95": [
+          0.0,
+          0.0
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_232_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.9464285714285714,
+        "separation": 0.4464285714285714,
+        "positive_median": 96.5,
+        "negative_median": 0.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.993,
+        "auc_interval_95": [
+          0.7852380952380952,
+          1.0
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_173_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.14285714285714285,
+        "separation": 0.35714285714285715,
+        "positive_median": 216.5,
+        "negative_median": 6829104955392.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.993,
+        "auc_interval_95": [
+          0.0,
+          0.5
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_233_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.14285714285714285,
+        "separation": 0.35714285714285715,
+        "positive_median": 272.5,
+        "negative_median": 231693.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.993,
+        "auc_interval_95": [
+          0.0,
+          0.5
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_183_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.1953405017921147,
+        "separation": 0.3046594982078853,
+        "positive_median": 96.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.969,
+        "negative_missing": 0.982,
+        "auc_interval_95": [
+          0.09882227891156463,
+          0.3049855049546701
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_183_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.8046594982078853,
+        "separation": 0.3046594982078853,
+        "positive_median": 4.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.969,
+        "negative_missing": 0.982,
+        "auc_interval_95": [
+          0.69501449504533,
+          0.9011777210884354
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_187_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7944615811463638,
+        "separation": 0.2944615811463638,
+        "positive_median": 5.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.632,
+        "negative_missing": 0.667,
+        "auc_interval_95": [
+          0.7693447187624494,
+          0.8188309041453983
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_187_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.20572610654132392,
+        "separation": 0.29427389345867605,
+        "positive_median": 95.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.632,
+        "negative_missing": 0.667,
+        "auc_interval_95": [
+          0.1811729743554591,
+          0.23079471952833208
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_11_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.75,
+        "separation": 0.25,
+        "positive_median": 100.0,
+        "negative_median": 98.0,
+        "positive_missing": 0.995,
+        "negative_missing": 0.998,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_167_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.25,
+        "separation": 0.25,
+        "positive_median": 9.5,
+        "negative_median": 15.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_169_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.25,
+        "separation": 0.25,
+        "positive_median": 45.5,
+        "negative_median": 72.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_230_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.75,
+        "separation": 0.25,
+        "positive_median": 16817641750528.0,
+        "negative_median": 3672317100032.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_pending_7d_mean",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7127861027861028,
+        "separation": 0.21278610278610277,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.076,
+        "negative_missing": 0.025,
+        "auc_interval_95": [
+          0.6974650081153784,
+          0.7272153074372588
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_pending_nonzero_days_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.712032967032967,
+        "separation": 0.21203296703296703,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.076,
+        "negative_missing": 0.025,
+        "auc_interval_95": [
+          0.696505195813922,
+          0.7261882230834132
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_5_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7114342675086327,
+        "separation": 0.2114342675086327,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.046,
+        "negative_missing": 0.011,
+        "auc_interval_95": [
+          0.6964399546770015,
+          0.7285193931234886
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_197_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7090969270628912,
+        "separation": 0.20909692706289118,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.079,
+        "negative_missing": 0.029,
+        "auc_interval_95": [
+          0.6958511615259777,
+          0.7262819535701597
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_90_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7008547008547008,
+        "separation": 0.2008547008547008,
+        "positive_median": 528280977408.0,
+        "negative_median": 511101108224.0,
+        "positive_missing": 0.987,
+        "negative_missing": 0.973,
+        "auc_interval_95": [
+          0.48112725397208156,
+          0.8766976190476191
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_196_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6757796241571631,
+        "separation": 0.17577962415716308,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.414,
+        "negative_missing": 0.344,
+        "auc_interval_95": [
+          0.6606338674482714,
+          0.6963410084745483
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_234_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.3333333333333333,
+        "separation": 0.16666666666666669,
+        "positive_median": 94000.0,
+        "negative_median": 224372523008.0,
+        "positive_missing": 0.996,
+        "negative_missing": 0.997,
+        "auc_interval_95": [
+          0.0,
+          1.0
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_pending_surge_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6411827917311032,
+        "separation": 0.14118279173110315,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.079,
+        "negative_missing": 0.029,
+        "auc_interval_95": [
+          0.6272012894156073,
+          0.6566406326335583
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_242_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.636045472901039,
+        "separation": 0.13604547290103897,
+        "positive_median": 515452026880.0,
+        "negative_median": 419479617536.0,
+        "positive_missing": 0.582,
+        "negative_missing": 0.609,
+        "auc_interval_95": [
+          0.6008818082260582,
+          0.673270175160985
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_9_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6319327244187394,
+        "separation": 0.13193272441873938,
+        "positive_median": 34309.5,
+        "negative_median": 25313.0,
+        "positive_missing": 0.046,
+        "negative_missing": 0.005,
+        "auc_interval_95": [
+          0.606006652565075,
+          0.6530255004071348
+        ],
+        "credible": true
+      }
+    ],
+    "credible_features": [
+      "smart_168_raw",
+      "smart_170_raw",
+      "smart_232_raw",
+      "smart_183_normalized",
+      "smart_183_raw",
+      "smart_187_raw",
+      "smart_187_normalized",
+      "fe_pending_7d_mean",
+      "fe_pending_nonzero_days_7d",
+      "smart_5_raw",
+      "smart_197_raw",
+      "smart_196_raw",
+      "fe_pending_surge_7d",
+      "smart_242_raw",
+      "smart_9_raw"
+    ],
+    "eligible_units": 1410153,
+    "error_counts": {
+      "TP": 662,
+      "FP": 2083,
+      "FN": 1688,
+      "TN": 1405720,
+      "fn_no_timely_clock": 25,
+      "fn_no_timely_score": 48,
+      "fn_scored_below_threshold": 1615,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  }
+}

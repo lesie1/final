@@ -1,0 +1,752 @@
+{
+  "task": "hypotheses",
+  "domain": "hdd",
+  "instructions": "Domain-adapted evidence loop: separate false alarms, missed faults and coverage; allow bounded interaction/recall feature exploration, single-factor device weights and optional independent parallel branch. Reuse the source sampling policy and fixed evaluation. New source/representation requires a new cache/session. TEST stays outside search.",
+  "fields": [
+    {
+      "name": "smart_10_normalized",
+      "description": "SMART attribute 10 normalized"
+    },
+    {
+      "name": "smart_10_raw",
+      "description": "SMART attribute 10 raw"
+    },
+    {
+      "name": "smart_11_normalized",
+      "description": "SMART attribute 11 normalized"
+    },
+    {
+      "name": "smart_11_raw",
+      "description": "SMART attribute 11 raw"
+    },
+    {
+      "name": "smart_12_normalized",
+      "description": "SMART attribute 12 normalized"
+    },
+    {
+      "name": "smart_12_raw",
+      "description": "SMART attribute 12 raw"
+    },
+    {
+      "name": "smart_13_normalized",
+      "description": "SMART attribute 13 normalized"
+    },
+    {
+      "name": "smart_13_raw",
+      "description": "SMART attribute 13 raw"
+    },
+    {
+      "name": "smart_15_normalized",
+      "description": "SMART attribute 15 normalized"
+    },
+    {
+      "name": "smart_15_raw",
+      "description": "SMART attribute 15 raw"
+    },
+    {
+      "name": "smart_160_normalized",
+      "description": "SMART attribute 160 normalized"
+    },
+    {
+      "name": "smart_160_raw",
+      "description": "SMART attribute 160 raw"
+    },
+    {
+      "name": "smart_161_normalized",
+      "description": "SMART attribute 161 normalized"
+    },
+    {
+      "name": "smart_161_raw",
+      "description": "SMART attribute 161 raw"
+    },
+    {
+      "name": "smart_163_normalized",
+      "description": "SMART attribute 163 normalized"
+    },
+    {
+      "name": "smart_163_raw",
+      "description": "SMART attribute 163 raw"
+    },
+    {
+      "name": "smart_164_normalized",
+      "description": "SMART attribute 164 normalized"
+    },
+    {
+      "name": "smart_164_raw",
+      "description": "SMART attribute 164 raw"
+    },
+    {
+      "name": "smart_165_normalized",
+      "description": "SMART attribute 165 normalized"
+    },
+    {
+      "name": "smart_165_raw",
+      "description": "SMART attribute 165 raw"
+    },
+    {
+      "name": "smart_166_normalized",
+      "description": "SMART attribute 166 normalized"
+    },
+    {
+      "name": "smart_166_raw",
+      "description": "SMART attribute 166 raw"
+    },
+    {
+      "name": "smart_167_normalized",
+      "description": "SMART attribute 167 normalized"
+    },
+    {
+      "name": "smart_167_raw",
+      "description": "SMART attribute 167 raw"
+    },
+    {
+      "name": "smart_168_normalized",
+      "description": "SMART attribute 168 normalized"
+    },
+    {
+      "name": "smart_168_raw",
+      "description": "SMART attribute 168 raw"
+    },
+    {
+      "name": "smart_169_normalized",
+      "description": "SMART attribute 169 normalized"
+    },
+    {
+      "name": "smart_169_raw",
+      "description": "SMART attribute 169 raw"
+    },
+    {
+      "name": "smart_16_normalized",
+      "description": "SMART attribute 16 normalized"
+    },
+    {
+      "name": "smart_16_raw",
+      "description": "SMART attribute 16 raw"
+    },
+    {
+      "name": "smart_170_normalized",
+      "description": "SMART attribute 170 normalized"
+    },
+    {
+      "name": "smart_170_raw",
+      "description": "SMART attribute 170 raw"
+    },
+    {
+      "name": "smart_171_normalized",
+      "description": "SMART attribute 171 normalized"
+    },
+    {
+      "name": "smart_171_raw",
+      "description": "SMART attribute 171 raw"
+    },
+    {
+      "name": "smart_172_normalized",
+      "description": "SMART attribute 172 normalized"
+    },
+    {
+      "name": "smart_172_raw",
+      "description": "SMART attribute 172 raw"
+    },
+    {
+      "name": "smart_173_normalized",
+      "description": "SMART attribute 173 normalized"
+    },
+    {
+      "name": "smart_173_raw",
+      "description": "SMART attribute 173 raw"
+    },
+    {
+      "name": "smart_174_normalized",
+      "description": "SMART attribute 174 normalized"
+    },
+    {
+      "name": "smart_174_raw",
+      "description": "SMART attribute 174 raw"
+    },
+    {
+      "name": "smart_175_normalized",
+      "description": "SMART attribute 175 normalized"
+    },
+    {
+      "name": "smart_175_raw",
+      "description": "SMART attribute 175 raw"
+    },
+    {
+      "name": "smart_176_normalized",
+      "description": "SMART attribute 176 normalized"
+    },
+    {
+      "name": "smart_176_raw",
+      "description": "SMART attribute 176 raw"
+    },
+    {
+      "name": "smart_177_normalized",
+      "description": "SMART attribute 177 normalized"
+    },
+    {
+      "name": "smart_177_raw",
+      "description": "SMART attribute 177 raw"
+    },
+    {
+      "name": "smart_178_normalized",
+      "description": "SMART attribute 178 normalized"
+    },
+    {
+      "name": "smart_178_raw",
+      "description": "SMART attribute 178 raw"
+    },
+    {
+      "name": "smart_179_normalized",
+      "description": "SMART attribute 179 normalized"
+    },
+    {
+      "name": "smart_179_raw",
+      "description": "SMART attribute 179 raw"
+    },
+    {
+      "name": "smart_17_normalized",
+      "description": "SMART attribute 17 normalized"
+    },
+    {
+      "name": "smart_17_raw",
+      "description": "SMART attribute 17 raw"
+    },
+    {
+      "name": "smart_180_normalized",
+      "description": "SMART attribute 180 normalized"
+    },
+    {
+      "name": "smart_180_raw",
+      "description": "SMART attribute 180 raw"
+    },
+    {
+      "name": "smart_181_normalized",
+      "description": "SMART attribute 181 normalized"
+    },
+    {
+      "name": "smart_181_raw",
+      "description": "SMART attribute 181 raw"
+    },
+    {
+      "name": "smart_182_normalized",
+      "description": "SMART attribute 182 normalized"
+    },
+    {
+      "name": "smart_182_raw",
+      "description": "SMART attribute 182 raw"
+    },
+    {
+      "name": "smart_183_normalized",
+      "description": "SMART attribute 183 normalized"
+    },
+    {
+      "name": "smart_183_raw",
+      "description": "SMART attribute 183 raw"
+    },
+    {
+      "name": "smart_184_normalized",
+      "description": "SMART attribute 184 normalized"
+    },
+    {
+      "name": "smart_184_raw",
+      "description": "SMART attribute 184 raw"
+    },
+    {
+      "name": "smart_187_normalized",
+      "description": "SMART attribute 187 normalized"
+    },
+    {
+      "name": "smart_187_raw",
+      "description": "SMART attribute 187 raw"
+    },
+    {
+      "name": "smart_188_normalized",
+      "description": "SMART attribute 188 normalized"
+    },
+    {
+      "name": "smart_188_raw",
+      "description": "SMART attribute 188 raw"
+    },
+    {
+      "name": "smart_189_normalized",
+      "description": "SMART attribute 189 normalized"
+    },
+    {
+      "name": "smart_189_raw",
+      "description": "SMART attribute 189 raw"
+    },
+    {
+      "name": "smart_18_normalized",
+      "description": "SMART attribute 18 normalized"
+    },
+    {
+      "name": "smart_18_raw",
+      "description": "SMART attribute 18 raw"
+    },
+    {
+      "name": "smart_190_normalized",
+      "description": "SMART attribute 190 normalized"
+    },
+    {
+      "name": "smart_190_raw",
+      "description": "SMART attribute 190 raw"
+    },
+    {
+      "name": "smart_191_normalized",
+      "description": "SMART attribute 191 normalized"
+    },
+    {
+      "name": "smart_191_raw",
+      "description": "SMART attribute 191 raw"
+    },
+    {
+      "name": "smart_192_normalized",
+      "description": "SMART attribute 192 normalized"
+    },
+    {
+      "name": "smart_192_raw",
+      "description": "SMART attribute 192 raw"
+    },
+    {
+      "name": "smart_193_normalized",
+      "description": "SMART attribute 193 normalized"
+    },
+    {
+      "name": "smart_193_raw",
+      "description": "SMART attribute 193 raw"
+    },
+    {
+      "name": "smart_194_normalized",
+      "description": "SMART attribute 194 normalized"
+    },
+    {
+      "name": "smart_194_raw",
+      "description": "SMART attribute 194 raw"
+    },
+    {
+      "name": "smart_195_normalized",
+      "description": "SMART attribute 195 normalized"
+    },
+    {
+      "name": "smart_195_raw",
+      "description": "SMART attribute 195 raw"
+    },
+    {
+      "name": "smart_196_normalized",
+      "description": "SMART attribute 196 normalized"
+    },
+    {
+      "name": "smart_196_raw",
+      "description": "SMART attribute 196 raw"
+    },
+    {
+      "name": "smart_197_normalized",
+      "description": "SMART attribute 197 normalized"
+    },
+    {
+      "name": "smart_197_raw",
+      "description": "SMART attribute 197 raw"
+    },
+    {
+      "name": "smart_198_normalized",
+      "description": "SMART attribute 198 normalized"
+    },
+    {
+      "name": "smart_198_raw",
+      "description": "SMART attribute 198 raw"
+    },
+    {
+      "name": "smart_199_normalized",
+      "description": "SMART attribute 199 normalized"
+    },
+    {
+      "name": "smart_199_raw",
+      "description": "SMART attribute 199 raw"
+    },
+    {
+      "name": "smart_1_normalized",
+      "description": "SMART attribute 1 normalized"
+    },
+    {
+      "name": "smart_1_raw",
+      "description": "SMART attribute 1 raw"
+    },
+    {
+      "name": "smart_200_normalized",
+      "description": "SMART attribute 200 normalized"
+    },
+    {
+      "name": "smart_200_raw",
+      "description": "SMART attribute 200 raw"
+    },
+    {
+      "name": "smart_201_normalized",
+      "description": "SMART attribute 201 normalized"
+    },
+    {
+      "name": "smart_201_raw",
+      "description": "SMART attribute 201 raw"
+    },
+    {
+      "name": "smart_202_normalized",
+      "description": "SMART attribute 202 normalized"
+    },
+    {
+      "name": "smart_202_raw",
+      "description": "SMART attribute 202 raw"
+    },
+    {
+      "name": "smart_206_normalized",
+      "description": "SMART attribute 206 normalized"
+    },
+    {
+      "name": "smart_206_raw",
+      "description": "SMART attribute 206 raw"
+    },
+    {
+      "name": "smart_210_normalized",
+      "description": "SMART attribute 210 normalized"
+    },
+    {
+      "name": "smart_210_raw",
+      "description": "SMART attribute 210 raw"
+    },
+    {
+      "name": "smart_211_normalized",
+      "description": "SMART attribute 211 normalized"
+    },
+    {
+      "name": "smart_211_raw",
+      "description": "SMART attribute 211 raw"
+    },
+    {
+      "name": "smart_212_normalized",
+      "description": "SMART attribute 212 normalized"
+    },
+    {
+      "name": "smart_212_raw",
+      "description": "SMART attribute 212 raw"
+    },
+    {
+      "name": "smart_218_normalized",
+      "description": "SMART attribute 218 normalized"
+    },
+    {
+      "name": "smart_218_raw",
+      "description": "SMART attribute 218 raw"
+    },
+    {
+      "name": "smart_220_normalized",
+      "description": "SMART attribute 220 normalized"
+    },
+    {
+      "name": "smart_220_raw",
+      "description": "SMART attribute 220 raw"
+    },
+    {
+      "name": "smart_222_normalized",
+      "description": "SMART attribute 222 normalized"
+    },
+    {
+      "name": "smart_222_raw",
+      "description": "SMART attribute 222 raw"
+    },
+    {
+      "name": "smart_223_normalized",
+      "description": "SMART attribute 223 normalized"
+    },
+    {
+      "name": "smart_223_raw",
+      "description": "SMART attribute 223 raw"
+    },
+    {
+      "name": "smart_224_normalized",
+      "description": "SMART attribute 224 normalized"
+    },
+    {
+      "name": "smart_224_raw",
+      "description": "SMART attribute 224 raw"
+    },
+    {
+      "name": "smart_225_normalized",
+      "description": "SMART attribute 225 normalized"
+    },
+    {
+      "name": "smart_225_raw",
+      "description": "SMART attribute 225 raw"
+    },
+    {
+      "name": "smart_226_normalized",
+      "description": "SMART attribute 226 normalized"
+    },
+    {
+      "name": "smart_226_raw",
+      "description": "SMART attribute 226 raw"
+    },
+    {
+      "name": "smart_22_normalized",
+      "description": "SMART attribute 22 normalized"
+    },
+    {
+      "name": "smart_22_raw",
+      "description": "SMART attribute 22 raw"
+    },
+    {
+      "name": "smart_230_normalized",
+      "description": "SMART attribute 230 normalized"
+    },
+    {
+      "name": "smart_230_raw",
+      "description": "SMART attribute 230 raw"
+    },
+    {
+      "name": "smart_231_normalized",
+      "description": "SMART attribute 231 normalized"
+    },
+    {
+      "name": "smart_231_raw",
+      "description": "SMART attribute 231 raw"
+    },
+    {
+      "name": "smart_232_normalized",
+      "description": "SMART attribute 232 normalized"
+    },
+    {
+      "name": "smart_232_raw",
+      "description": "SMART attribute 232 raw"
+    },
+    {
+      "name": "smart_233_normalized",
+      "description": "SMART attribute 233 normalized"
+    },
+    {
+      "name": "smart_233_raw",
+      "description": "SMART attribute 233 raw"
+    },
+    {
+      "name": "smart_234_normalized",
+      "description": "SMART attribute 234 normalized"
+    },
+    {
+      "name": "smart_234_raw",
+      "description": "SMART attribute 234 raw"
+    },
+    {
+      "name": "smart_235_normalized",
+      "description": "SMART attribute 235 normalized"
+    },
+    {
+      "name": "smart_235_raw",
+      "description": "SMART attribute 235 raw"
+    },
+    {
+      "name": "smart_23_normalized",
+      "description": "SMART attribute 23 normalized"
+    },
+    {
+      "name": "smart_23_raw",
+      "description": "SMART attribute 23 raw"
+    },
+    {
+      "name": "smart_240_normalized",
+      "description": "SMART attribute 240 normalized"
+    },
+    {
+      "name": "smart_240_raw",
+      "description": "SMART attribute 240 raw"
+    },
+    {
+      "name": "smart_241_normalized",
+      "description": "SMART attribute 241 normalized"
+    },
+    {
+      "name": "smart_241_raw",
+      "description": "SMART attribute 241 raw"
+    },
+    {
+      "name": "smart_242_normalized",
+      "description": "SMART attribute 242 normalized"
+    },
+    {
+      "name": "smart_242_raw",
+      "description": "SMART attribute 242 raw"
+    },
+    {
+      "name": "smart_244_normalized",
+      "description": "SMART attribute 244 normalized"
+    },
+    {
+      "name": "smart_244_raw",
+      "description": "SMART attribute 244 raw"
+    },
+    {
+      "name": "smart_245_normalized",
+      "description": "SMART attribute 245 normalized"
+    },
+    {
+      "name": "smart_245_raw",
+      "description": "SMART attribute 245 raw"
+    },
+    {
+      "name": "smart_246_normalized",
+      "description": "SMART attribute 246 normalized"
+    },
+    {
+      "name": "smart_246_raw",
+      "description": "SMART attribute 246 raw"
+    },
+    {
+      "name": "smart_247_normalized",
+      "description": "SMART attribute 247 normalized"
+    },
+    {
+      "name": "smart_247_raw",
+      "description": "SMART attribute 247 raw"
+    },
+    {
+      "name": "smart_248_normalized",
+      "description": "SMART attribute 248 normalized"
+    },
+    {
+      "name": "smart_248_raw",
+      "description": "SMART attribute 248 raw"
+    },
+    {
+      "name": "smart_24_normalized",
+      "description": "SMART attribute 24 normalized"
+    },
+    {
+      "name": "smart_24_raw",
+      "description": "SMART attribute 24 raw"
+    },
+    {
+      "name": "smart_250_normalized",
+      "description": "SMART attribute 250 normalized"
+    },
+    {
+      "name": "smart_250_raw",
+      "description": "SMART attribute 250 raw"
+    },
+    {
+      "name": "smart_251_normalized",
+      "description": "SMART attribute 251 normalized"
+    },
+    {
+      "name": "smart_251_raw",
+      "description": "SMART attribute 251 raw"
+    },
+    {
+      "name": "smart_252_normalized",
+      "description": "SMART attribute 252 normalized"
+    },
+    {
+      "name": "smart_252_raw",
+      "description": "SMART attribute 252 raw"
+    },
+    {
+      "name": "smart_254_normalized",
+      "description": "SMART attribute 254 normalized"
+    },
+    {
+      "name": "smart_254_raw",
+      "description": "SMART attribute 254 raw"
+    },
+    {
+      "name": "smart_255_normalized",
+      "description": "SMART attribute 255 normalized"
+    },
+    {
+      "name": "smart_255_raw",
+      "description": "SMART attribute 255 raw"
+    },
+    {
+      "name": "smart_27_normalized",
+      "description": "SMART attribute 27 normalized"
+    },
+    {
+      "name": "smart_27_raw",
+      "description": "SMART attribute 27 raw"
+    },
+    {
+      "name": "smart_2_normalized",
+      "description": "SMART attribute 2 normalized"
+    },
+    {
+      "name": "smart_2_raw",
+      "description": "SMART attribute 2 raw"
+    },
+    {
+      "name": "smart_3_normalized",
+      "description": "SMART attribute 3 normalized"
+    },
+    {
+      "name": "smart_3_raw",
+      "description": "SMART attribute 3 raw"
+    },
+    {
+      "name": "smart_4_normalized",
+      "description": "SMART attribute 4 normalized"
+    },
+    {
+      "name": "smart_4_raw",
+      "description": "SMART attribute 4 raw"
+    },
+    {
+      "name": "smart_5_normalized",
+      "description": "SMART attribute 5 normalized"
+    },
+    {
+      "name": "smart_5_raw",
+      "description": "SMART attribute 5 raw"
+    },
+    {
+      "name": "smart_71_normalized",
+      "description": "SMART attribute 71 normalized"
+    },
+    {
+      "name": "smart_71_raw",
+      "description": "SMART attribute 71 raw"
+    },
+    {
+      "name": "smart_7_normalized",
+      "description": "SMART attribute 7 normalized"
+    },
+    {
+      "name": "smart_7_raw",
+      "description": "SMART attribute 7 raw"
+    },
+    {
+      "name": "smart_82_normalized",
+      "description": "SMART attribute 82 normalized"
+    },
+    {
+      "name": "smart_82_raw",
+      "description": "SMART attribute 82 raw"
+    },
+    {
+      "name": "smart_8_normalized",
+      "description": "SMART attribute 8 normalized"
+    },
+    {
+      "name": "smart_8_raw",
+      "description": "SMART attribute 8 raw"
+    },
+    {
+      "name": "smart_90_normalized",
+      "description": "SMART attribute 90 normalized"
+    },
+    {
+      "name": "smart_90_raw",
+      "description": "SMART attribute 90 raw"
+    },
+    {
+      "name": "smart_9_normalized",
+      "description": "SMART attribute 9 normalized"
+    },
+    {
+      "name": "smart_9_raw",
+      "description": "SMART attribute 9 raw"
+    }
+  ],
+  "mapping_description": "Backblaze Drive Stats daily observations for 2024. All SMART normalized and raw columns are treated as numeric_unknown due to lack of per-attribute semantic documentation; units unknown. One glob covers all quarterly folders; missing columns in any quarter will be NaN. Device ID from serial_number, date used as UTC day index."
+}

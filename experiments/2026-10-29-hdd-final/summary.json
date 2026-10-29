@@ -1,0 +1,382 @@
+{
+  "selected": "trial_004",
+  "trials": 13,
+  "agent_calls": 50,
+  "reported_tokens": 989281,
+  "test": {
+    "trial": "trial_004",
+    "model_sha256": "0e5b497e84bf87d25e64bec25c34b94d433620cc1a5813c24551975099147f68",
+    "best_step": 550,
+    "metrics": {
+      "protocol": "period_device_f1_v2",
+      "threshold": 0.987483024597168,
+      "TP": 348,
+      "FP": 1214,
+      "FN": 456,
+      "precision": 0.22279129321382843,
+      "recall": 0.43283582089552236,
+      "f1": 0.294167371090448,
+      "eligible_devices": 292103,
+      "eligible_fault_devices": 804,
+      "alarmed_devices": 1562,
+      "no_history_devices": 11,
+      "no_history_fault_devices": 10,
+      "fault_without_timely_scheduled_opportunity": 10,
+      "positive_without_scored_positive_day": 10,
+      "unknown_devices": 21069,
+      "unknown_alarm_devices": 19,
+      "excluded_late_entry_devices": 13911,
+      "excluded_preexisting_fault_devices": 3844,
+      "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+    },
+    "test_window": [
+      1729296000,
+      1735603201
+    ],
+    "operating_point_source": "Original v3.1 selection-window model and threshold, identical to later-VAL confirmation",
+    "lead_summary": {
+      "count": 348,
+      "median": 20.958333333333332,
+      "p25": 7.958333333333333,
+      "p75": 38.958333333333336,
+      "minimum": 0.9583333333333334,
+      "maximum": 68.95833333333333,
+      "buckets": {
+        "15_minutes_to_under_1_day": 14,
+        "1_to_under_7_days": 66,
+        "7_through_15_days": 60,
+        "over_15_days": 208
+      }
+    },
+    "prediction_stats": {
+      "score_sha256": "bf4bcc6ac9eb16312dc7eff8c3e1b6b6579b6aa1274a20957857f4f4f55dd63c",
+      "val_period_unweighted_bce": 0.2474319365051995,
+      "scored_rows": 21286119
+    },
+    "independent_blind_test": false,
+    "historical_test_exposure": "Not independently established as pristine; no fresh-blind-test claim",
+    "threshold_reselected": false,
+    "retrained": false,
+    "agent_feedback": false,
+    "seconds": 3982.794779613614
+  },
+  "confirmation": [
+    {
+      "trial": "trial_001",
+      "model_sha256": "fe8b131f922d49a8af86b296c5e3a085f86d273daedf4142c88e54a615f40818",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9869956374168396,
+        "TP": 177,
+        "FP": 836,
+        "FN": 249,
+        "precision": 0.17472852912142153,
+        "recall": 0.4154929577464789,
+        "f1": 0.24600416956219598,
+        "eligible_devices": 288251,
+        "eligible_fault_devices": 426,
+        "alarmed_devices": 1013,
+        "no_history_devices": 120,
+        "no_history_fault_devices": 13,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 13,
+        "unknown_devices": 34013,
+        "unknown_alarm_devices": 24,
+        "excluded_late_entry_devices": 5249,
+        "excluded_preexisting_fault_devices": 3414,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "confirmation_window": [
+        1726142400,
+        1729296000
+      ],
+      "threshold_reselected": false,
+      "test_opened": false,
+      "note": "Later VAL was withheld from this search; earlier historical VAL use means it is not a fresh independent test."
+    },
+    {
+      "trial": "trial_004",
+      "model_sha256": "0e5b497e84bf87d25e64bec25c34b94d433620cc1a5813c24551975099147f68",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.987483024597168,
+        "TP": 184,
+        "FP": 851,
+        "FN": 242,
+        "precision": 0.17777777777777778,
+        "recall": 0.431924882629108,
+        "f1": 0.2518822724161533,
+        "eligible_devices": 288251,
+        "eligible_fault_devices": 426,
+        "alarmed_devices": 1035,
+        "no_history_devices": 120,
+        "no_history_fault_devices": 13,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 13,
+        "unknown_devices": 34013,
+        "unknown_alarm_devices": 28,
+        "excluded_late_entry_devices": 5249,
+        "excluded_preexisting_fault_devices": 3414,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "confirmation_window": [
+        1726142400,
+        1729296000
+      ],
+      "threshold_reselected": false,
+      "test_opened": false,
+      "note": "Later VAL was withheld from this search; earlier historical VAL use means it is not a fresh independent test."
+    }
+  ],
+  "search_trials": [
+    {
+      "trial": "trial_001",
+      "status": "complete",
+      "selected": false,
+      "accepted": true,
+      "rule": "baseline",
+      "selection_f1": 0.2380038387715931,
+      "cv_f1": 0.25475893969044655,
+      "cv_TP": 716,
+      "cv_FP": 2555,
+      "cv_FN": 1634,
+      "cv_delta_f1": null,
+      "cv_interval_95": null,
+      "new_hits": null,
+      "lost_hits": null
+    },
+    {
+      "trial": "trial_002",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.24114356743318832,
+      "cv_f1": 0.2498011137629276,
+      "cv_TP": 628,
+      "cv_FP": 2050,
+      "cv_FN": 1722,
+      "cv_delta_f1": -0.00495782592751895,
+      "cv_interval_95": [
+        -0.014669223641552105,
+        0.005059811822301472
+      ],
+      "new_hits": 52,
+      "lost_hits": 140
+    },
+    {
+      "trial": "trial_003",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25100671140939596,
+      "cv_f1": 0.25986261040235525,
+      "cv_TP": 662,
+      "cv_FP": 2083,
+      "cv_FN": 1688,
+      "cv_delta_f1": 0.005103670711908703,
+      "cv_interval_95": [
+        -0.005385960181986791,
+        0.01597069856637192
+      ],
+      "new_hits": 104,
+      "lost_hits": 158
+    },
+    {
+      "trial": "trial_004",
+      "status": "complete",
+      "selected": true,
+      "accepted": true,
+      "rule": "cv_paired",
+      "selection_f1": 0.25654116145500955,
+      "cv_f1": 0.2795908426692645,
+      "cv_TP": 861,
+      "cv_FP": 2948,
+      "cv_FN": 1489,
+      "cv_delta_f1": 0.024831902978817932,
+      "cv_interval_95": [
+        0.015224289257712373,
+        0.034669737873948156
+      ],
+      "new_hits": 190,
+      "lost_hits": 45
+    },
+    {
+      "trial": "trial_005",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25654116145500955,
+      "cv_f1": 0.2795908426692645,
+      "cv_TP": 861,
+      "cv_FP": 2948,
+      "cv_FN": 1489,
+      "cv_delta_f1": 0.0,
+      "cv_interval_95": [
+        0.0,
+        0.0
+      ],
+      "new_hits": 0,
+      "lost_hits": 0
+    },
+    {
+      "trial": "trial_006",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25407608695652173,
+      "cv_f1": 0.28467888061203944,
+      "cv_TP": 707,
+      "cv_FP": 1910,
+      "cv_FN": 1643,
+      "cv_delta_f1": 0.005088037942774959,
+      "cv_interval_95": [
+        -0.00505101231430749,
+        0.014967885522688473
+      ],
+      "new_hits": 38,
+      "lost_hits": 192
+    },
+    {
+      "trial": "trial_007",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25772418990203466,
+      "cv_f1": 0.2827324478178368,
+      "cv_TP": 745,
+      "cv_FP": 2175,
+      "cv_FN": 1605,
+      "cv_delta_f1": 0.003141605148572313,
+      "cv_interval_95": [
+        -0.0050454401489365445,
+        0.011079237314555726
+      ],
+      "new_hits": 28,
+      "lost_hits": 144
+    },
+    {
+      "trial": "trial_008",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.2615723732549596,
+      "cv_f1": 0.2668977469670711,
+      "cv_TP": 693,
+      "cv_FP": 2150,
+      "cv_FN": 1657,
+      "cv_delta_f1": -0.012693095702193402,
+      "cv_interval_95": [
+        -0.023015841774210684,
+        -0.0027344231142685626
+      ],
+      "new_hits": 49,
+      "lost_hits": 217
+    },
+    {
+      "trial": "trial_009",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25515660809778457,
+      "cv_f1": 0.28005385651086745,
+      "cv_TP": 728,
+      "cv_FP": 2121,
+      "cv_FN": 1622,
+      "cv_delta_f1": 0.0004630138416029661,
+      "cv_interval_95": [
+        -0.007181394701857099,
+        0.00876025664301943
+      ],
+      "new_hits": 23,
+      "lost_hits": 156
+    },
+    {
+      "trial": "trial_010",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.26403641881638845,
+      "cv_f1": 0.27760683760683763,
+      "cv_TP": 812,
+      "cv_FP": 2688,
+      "cv_FN": 1538,
+      "cv_delta_f1": -0.0019840050624268524,
+      "cv_interval_95": [
+        -0.008634144296407461,
+        0.004289286385885789
+      ],
+      "new_hits": 32,
+      "lost_hits": 81
+    },
+    {
+      "trial": "trial_011",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.25381263616557737,
+      "cv_f1": 0.27300124091473144,
+      "cv_TP": 770,
+      "cv_FP": 2521,
+      "cv_FN": 1580,
+      "cv_delta_f1": -0.006589601754533048,
+      "cv_interval_95": [
+        -0.01344959942763978,
+        0.0008787092416784007
+      ],
+      "new_hits": 32,
+      "lost_hits": 123
+    },
+    {
+      "trial": "trial_012",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.26520681265206814,
+      "cv_f1": 0.27528426092160385,
+      "cv_TP": 690,
+      "cv_FP": 1973,
+      "cv_FN": 1660,
+      "cv_delta_f1": -0.004306581747660632,
+      "cv_interval_95": [
+        -0.01377632746347218,
+        0.005142220241477935
+      ],
+      "new_hits": 17,
+      "lost_hits": 188
+    },
+    {
+      "trial": "trial_013",
+      "status": "complete",
+      "selected": false,
+      "accepted": false,
+      "rule": "cv_paired",
+      "selection_f1": 0.2538517975055026,
+      "cv_f1": 0.2726655348047538,
+      "cv_TP": 803,
+      "cv_FP": 2737,
+      "cv_FN": 1547,
+      "cv_delta_f1": -0.006925307864510677,
+      "cv_interval_95": [
+        -0.01387488408445557,
+        -0.0005776780996165777
+      ],
+      "new_hits": 33,
+      "lost_hits": 91
+    }
+  ],
+  "source_runtime_commit": "e35150a021c52ed5605c4bb3a2c436b59113e8c0",
+  "test_used_for_selection": false,
+  "fresh_blind_test_claim": false,
+  "original_event_prefix_preserved": true,
+  "source_seals_verified": 115
+}

@@ -1,0 +1,22 @@
+{
+  "protocol": "period_device_f1_v2",
+  "threshold": 0.9811289310455322,
+  "TP": 233,
+  "FP": 1025,
+  "FN": 345,
+  "precision": 0.18521462639109698,
+  "recall": 0.4031141868512111,
+  "f1": 0.25381263616557737,
+  "eligible_devices": 289599,
+  "eligible_fault_devices": 578,
+  "alarmed_devices": 1258,
+  "no_history_devices": 152,
+  "no_history_fault_devices": 19,
+  "fault_without_timely_scheduled_opportunity": 19,
+  "positive_without_scored_positive_day": 19,
+  "unknown_devices": 29082,
+  "unknown_alarm_devices": 5,
+  "excluded_late_entry_devices": 9417,
+  "excluded_preexisting_fault_devices": 2829,
+  "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+}

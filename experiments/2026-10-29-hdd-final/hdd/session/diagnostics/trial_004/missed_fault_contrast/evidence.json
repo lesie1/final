@@ -1,0 +1,432 @@
+{
+  "kind": "missed_fault_contrast",
+  "question": "在 best trial_004 的 TRAIN 交叉验证中，按阈值漏报的低分故障设备(FN，n=1416)与健康设备(TN)之间，未进入当前特征的候选字段 smart_195_raw、smart_10_raw、smart_9_raw、smart_193_raw 是否存在可信的单变量差异，以指导最后一个 features 实验？",
+  "trial": "trial_004",
+  "contrast": {
+    "kind": "missed_fault_contrast",
+    "step": 400,
+    "threshold": 0.9899232983589172,
+    "cv_metrics": {
+      "step": 400,
+      "f1": 0.2795908426692645,
+      "TP": 861,
+      "FP": 2948,
+      "FN": 1489,
+      "precision": 0.22604358099238644,
+      "recall": 0.36638297872340425,
+      "threshold": 0.9899232983589172
+    },
+    "tp_units": 0,
+    "fp_units": 0,
+    "group_counts": {
+      "FN": 1489,
+      "TN": 1404855
+    },
+    "sampled_group_counts": {
+      "FN": 1000,
+      "TN": 1000
+    },
+    "features": [
+      {
+        "feature": "smart_165_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 25821750231040.0,
+        "negative_median": 1568284606464.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_167_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.0,
+        "separation": 0.5,
+        "positive_median": 11.0,
+        "negative_median": 35.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_169_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.0,
+        "separation": 0.5,
+        "positive_median": 52.0,
+        "negative_median": 105.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_180_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.0,
+        "separation": 0.5,
+        "positive_median": 40.0,
+        "negative_median": 50.0,
+        "positive_missing": 0.999,
+        "negative_missing": 0.995,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_230_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 100.0,
+        "negative_median": 17.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_230_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.0,
+        "separation": 0.5,
+        "positive_median": 16716701630464.0,
+        "negative_median": 18812174860288.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_235_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 550601785344.0,
+        "negative_median": 374362374144.0,
+        "positive_missing": 0.998,
+        "negative_missing": 0.995,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_244_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 100.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.997,
+        "negative_missing": 0.999,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_247_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 1145451392.0,
+        "negative_median": 400632640.0,
+        "positive_missing": 0.999,
+        "negative_missing": 0.997,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_248_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 1.0,
+        "separation": 0.5,
+        "positive_median": 1992131712.0,
+        "negative_median": 530537024.0,
+        "positive_missing": 0.999,
+        "negative_missing": 0.997,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_202_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.1,
+        "separation": 0.4,
+        "positive_median": 43.0,
+        "negative_median": 85.0,
+        "positive_missing": 0.999,
+        "negative_missing": 0.995,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_183_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.2412280701754386,
+        "separation": 0.25877192982456143,
+        "positive_median": 96.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.976,
+        "negative_missing": 0.981,
+        "auc_interval_95": [
+          0.127151686033265,
+          0.40404961885940155
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_183_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7587719298245614,
+        "separation": 0.25877192982456143,
+        "positive_median": 4.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.976,
+        "negative_missing": 0.981,
+        "auc_interval_95": [
+          0.5992168109668109,
+          0.8728483139667351
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_11_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.75,
+        "separation": 0.25,
+        "positive_median": 100.0,
+        "negative_median": 98.5,
+        "positive_missing": 0.994,
+        "negative_missing": 0.998,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_197_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7348323173325981,
+        "separation": 0.23483231733259813,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.079,
+        "negative_missing": 0.043,
+        "auc_interval_95": [
+          0.7175408816559458,
+          0.7530371362856892
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_168_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7333333333333333,
+        "separation": 0.23333333333333328,
+        "positive_median": 74.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.995,
+        "negative_missing": 0.994,
+        "auc_interval_95": [
+          0.43727678571428574,
+          1.0
+        ],
+        "credible": false
+      },
+      {
+        "feature": "fe_187_rolling_mean_7d",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7254434140632033,
+        "separation": 0.22544341406320334,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.71,
+        "negative_missing": 0.617,
+        "auc_interval_95": [
+          0.6991038905579781,
+          0.7560866638778936
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_187_expanding_mean",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.724254974340506,
+        "separation": 0.224254974340506,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.71,
+        "negative_missing": 0.617,
+        "auc_interval_95": [
+          0.6976389906957637,
+          0.755294523152701
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_187_normalized",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.27604482132041186,
+        "separation": 0.22395517867958814,
+        "positive_median": 100.0,
+        "negative_median": 100.0,
+        "positive_missing": 0.714,
+        "negative_missing": 0.619,
+        "auc_interval_95": [
+          0.2482639564245498,
+          0.30881495840877216
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_187_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7239551786795881,
+        "separation": 0.22395517867958814,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.714,
+        "negative_missing": 0.619,
+        "auc_interval_95": [
+          0.6911850415912278,
+          0.7517360435754502
+        ],
+        "credible": true
+      },
+      {
+        "feature": "fe_187_recent_nonzero_7d_count",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7217205365985414,
+        "separation": 0.2217205365985414,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.71,
+        "negative_missing": 0.617,
+        "auc_interval_95": [
+          0.6950058427407145,
+          0.7536700274653024
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_233_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.3,
+        "separation": 0.2,
+        "positive_median": 270.0,
+        "negative_median": 179905.5,
+        "positive_missing": 0.995,
+        "negative_missing": 0.992,
+        "auc_interval_95": [
+          0.0,
+          0.6683333333333328
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_16_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.7,
+        "separation": 0.19999999999999996,
+        "positive_median": 303.0,
+        "negative_median": 96.0,
+        "positive_missing": 0.998,
+        "negative_missing": 0.995,
+        "auc_interval_95": [
+          null,
+          null
+        ],
+        "credible": false
+      },
+      {
+        "feature": "smart_5_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6847979596495307,
+        "separation": 0.18479795964953072,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.054,
+        "negative_missing": 0.009,
+        "auc_interval_95": [
+          0.6676827129815709,
+          0.7001146340042576
+        ],
+        "credible": true
+      },
+      {
+        "feature": "smart_196_raw",
+        "auc_tp_vs_fp": null,
+        "auc_positive_vs_negative": 0.6672885649130539,
+        "separation": 0.16728856491305388,
+        "positive_median": 0.0,
+        "negative_median": 0.0,
+        "positive_missing": 0.339,
+        "negative_missing": 0.389,
+        "auc_interval_95": [
+          0.6497862143290015,
+          0.6859532626195574
+        ],
+        "credible": true
+      }
+    ],
+    "credible_features": [
+      "smart_183_normalized",
+      "smart_183_raw",
+      "smart_197_raw",
+      "fe_187_rolling_mean_7d",
+      "fe_187_expanding_mean",
+      "smart_187_normalized",
+      "smart_187_raw",
+      "fe_187_recent_nonzero_7d_count",
+      "smart_5_raw",
+      "smart_196_raw"
+    ],
+    "eligible_units": 1410153,
+    "error_counts": {
+      "TP": 861,
+      "FP": 2948,
+      "FN": 1489,
+      "TN": 1404855,
+      "fn_no_timely_clock": 25,
+      "fn_no_timely_score": 48,
+      "fn_scored_below_threshold": 1416,
+      "fn_with_outside_window_alarm": 0,
+      "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+    },
+    "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+  }
+}

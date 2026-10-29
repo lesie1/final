@@ -1,0 +1,18 @@
+{
+  "completed_at": "2026-10-29T17:46:41.619214+00:00",
+  "cache": "/root/autodl-tmp/hdd_final_test_20261029/cache_test",
+  "manifest_sha256": "bc324b4a716a8dd2b504c83b17d2f142569316270e7d460ba3e31dc100a525de",
+  "feature_count": 186,
+  "test_window": [
+    1729296000,
+    1735603201
+  ],
+  "source_receipts_verified": true,
+  "source_seals_unchanged": true,
+  "test_preprocessing_opened": true,
+  "test_scoring_opened": false,
+  "model_loaded": false,
+  "agent_received_test_information": false,
+  "elapsed_seconds": 23606.82595229149,
+  "next_step": "Freeze the search-selected model, recipe, boosting step and threshold after confirmation; only then run TEST inference without further selection."
+}

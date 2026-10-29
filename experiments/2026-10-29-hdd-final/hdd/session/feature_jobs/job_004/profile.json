@@ -1,0 +1,1960 @@
+{
+  "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+  "feature_names": [
+    "smart_10_normalized",
+    "smart_10_raw",
+    "smart_11_normalized",
+    "smart_11_raw",
+    "smart_12_normalized",
+    "smart_12_raw",
+    "smart_13_normalized",
+    "smart_13_raw",
+    "smart_15_normalized",
+    "smart_15_raw",
+    "smart_160_normalized",
+    "smart_160_raw",
+    "smart_161_normalized",
+    "smart_161_raw",
+    "smart_163_normalized",
+    "smart_163_raw",
+    "smart_164_normalized",
+    "smart_164_raw",
+    "smart_165_normalized",
+    "smart_165_raw",
+    "smart_166_normalized",
+    "smart_166_raw",
+    "smart_167_normalized",
+    "smart_167_raw",
+    "smart_168_normalized",
+    "smart_168_raw",
+    "smart_169_normalized",
+    "smart_169_raw",
+    "smart_16_normalized",
+    "smart_16_raw",
+    "smart_170_normalized",
+    "smart_170_raw",
+    "smart_171_normalized",
+    "smart_171_raw",
+    "smart_172_normalized",
+    "smart_172_raw",
+    "smart_173_normalized",
+    "smart_173_raw",
+    "smart_174_normalized",
+    "smart_174_raw",
+    "smart_175_normalized",
+    "smart_175_raw",
+    "smart_176_normalized",
+    "smart_176_raw",
+    "smart_177_normalized",
+    "smart_177_raw",
+    "smart_178_normalized",
+    "smart_178_raw",
+    "smart_179_normalized",
+    "smart_179_raw",
+    "smart_17_normalized",
+    "smart_17_raw",
+    "smart_180_normalized",
+    "smart_180_raw",
+    "smart_181_normalized",
+    "smart_181_raw",
+    "smart_182_normalized",
+    "smart_182_raw",
+    "smart_183_normalized",
+    "smart_183_raw",
+    "smart_184_normalized",
+    "smart_184_raw",
+    "smart_187_normalized",
+    "smart_187_raw",
+    "smart_188_normalized",
+    "smart_188_raw",
+    "smart_189_normalized",
+    "smart_189_raw",
+    "smart_18_normalized",
+    "smart_18_raw",
+    "smart_190_normalized",
+    "smart_190_raw",
+    "smart_191_normalized",
+    "smart_191_raw",
+    "smart_192_normalized",
+    "smart_192_raw",
+    "smart_193_normalized",
+    "smart_193_raw",
+    "smart_194_normalized",
+    "smart_194_raw",
+    "smart_195_normalized",
+    "smart_195_raw",
+    "smart_196_normalized",
+    "smart_196_raw",
+    "smart_197_normalized",
+    "smart_197_raw",
+    "smart_198_normalized",
+    "smart_198_raw",
+    "smart_199_normalized",
+    "smart_199_raw",
+    "smart_1_normalized",
+    "smart_1_raw",
+    "smart_200_normalized",
+    "smart_200_raw",
+    "smart_201_normalized",
+    "smart_201_raw",
+    "smart_202_normalized",
+    "smart_202_raw",
+    "smart_206_normalized",
+    "smart_206_raw",
+    "smart_210_normalized",
+    "smart_210_raw",
+    "smart_211_normalized",
+    "smart_211_raw",
+    "smart_212_normalized",
+    "smart_212_raw",
+    "smart_218_normalized",
+    "smart_218_raw",
+    "smart_220_normalized",
+    "smart_220_raw",
+    "smart_222_normalized",
+    "smart_222_raw",
+    "smart_223_normalized",
+    "smart_223_raw",
+    "smart_224_normalized",
+    "smart_224_raw",
+    "smart_225_normalized",
+    "smart_225_raw",
+    "smart_226_normalized",
+    "smart_226_raw",
+    "smart_22_normalized",
+    "smart_22_raw",
+    "smart_230_normalized",
+    "smart_230_raw",
+    "smart_231_normalized",
+    "smart_231_raw",
+    "smart_232_normalized",
+    "smart_232_raw",
+    "smart_233_normalized",
+    "smart_233_raw",
+    "smart_234_normalized",
+    "smart_234_raw",
+    "smart_235_normalized",
+    "smart_235_raw",
+    "smart_23_normalized",
+    "smart_23_raw",
+    "smart_240_normalized",
+    "smart_240_raw",
+    "smart_241_normalized",
+    "smart_241_raw",
+    "smart_242_normalized",
+    "smart_242_raw",
+    "smart_244_normalized",
+    "smart_244_raw",
+    "smart_245_normalized",
+    "smart_245_raw",
+    "smart_246_normalized",
+    "smart_246_raw",
+    "smart_247_normalized",
+    "smart_247_raw",
+    "smart_248_normalized",
+    "smart_248_raw",
+    "smart_24_normalized",
+    "smart_24_raw",
+    "smart_250_normalized",
+    "smart_250_raw",
+    "smart_251_normalized",
+    "smart_251_raw",
+    "smart_252_normalized",
+    "smart_252_raw",
+    "smart_254_normalized",
+    "smart_254_raw",
+    "smart_255_normalized",
+    "smart_255_raw",
+    "smart_27_normalized",
+    "smart_27_raw",
+    "smart_2_normalized",
+    "smart_2_raw",
+    "smart_3_normalized",
+    "smart_3_raw",
+    "smart_4_normalized",
+    "smart_4_raw",
+    "smart_5_normalized",
+    "smart_5_raw",
+    "smart_71_normalized",
+    "smart_71_raw",
+    "smart_7_normalized",
+    "smart_7_raw",
+    "smart_82_normalized",
+    "smart_82_raw",
+    "smart_8_normalized",
+    "smart_8_raw",
+    "smart_90_normalized",
+    "smart_90_raw",
+    "smart_9_normalized",
+    "smart_9_raw",
+    "fe_187_recent_nonzero_7d_count",
+    "fe_187_recent_increase_7d",
+    "fe_187_rolling_mean_7d",
+    "fe_187_expanding_mean"
+  ],
+  "interface_version": "causal_features_v2",
+  "column_summary": {
+    "smart_10_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_10_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 10
+    },
+    "smart_11_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_11_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_12_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_12_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 2.0,
+      "maximum": 29.0,
+      "mean": 12.176041,
+      "devices_with_values": 10
+    },
+    "smart_13_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_13_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_15_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_15_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_160_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_160_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_161_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_161_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_163_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_163_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_164_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_164_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_165_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_165_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_166_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_166_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_167_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_167_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_168_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_168_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_169_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_169_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_16_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_16_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_170_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_170_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_171_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_171_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_172_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_172_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_173_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_173_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_174_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_174_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_175_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_175_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_176_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_176_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_177_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_177_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_178_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_178_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_179_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_179_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_17_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_17_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_180_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_180_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_181_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_181_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_182_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_182_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_183_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_183_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_184_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 4
+    },
+    "smart_184_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 4
+    },
+    "smart_187_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 91.0,
+      "maximum": 100.0,
+      "mean": 97.785385,
+      "devices_with_values": 5
+    },
+    "smart_187_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 9.0,
+      "mean": 2.214612,
+      "devices_with_values": 5
+    },
+    "smart_188_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 5
+    },
+    "smart_188_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 5
+    },
+    "smart_189_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 1.0,
+      "maximum": 97.0,
+      "mean": 71.151825,
+      "devices_with_values": 4
+    },
+    "smart_189_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 3.0,
+      "maximum": 118.0,
+      "mean": 32.769405,
+      "devices_with_values": 4
+    },
+    "smart_18_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 219,
+      "missing_fraction": 0.91648,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 1
+    },
+    "smart_18_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 219,
+      "missing_fraction": 0.91648,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 1
+    },
+    "smart_190_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 64.0,
+      "maximum": 76.0,
+      "mean": 71.747948,
+      "devices_with_values": 5
+    },
+    "smart_190_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 24.0,
+      "maximum": 36.0,
+      "mean": 28.252054,
+      "devices_with_values": 5
+    },
+    "smart_191_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1530,
+      "missing_fraction": 0.41648,
+      "minimum": 1.0,
+      "maximum": 100.0,
+      "mean": 59.533985,
+      "devices_with_values": 7
+    },
+    "smart_191_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1530,
+      "missing_fraction": 0.41648,
+      "minimum": 0.0,
+      "maximum": 278674.0,
+      "mean": 93423.835938,
+      "devices_with_values": 7
+    },
+    "smart_192_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_192_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 2975.0,
+      "mean": 776.552368,
+      "devices_with_values": 10
+    },
+    "smart_193_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 99.0,
+      "maximum": 100.0,
+      "mean": 99.499313,
+      "devices_with_values": 10
+    },
+    "smart_193_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 14.0,
+      "maximum": 2975.0,
+      "mean": 1860.104248,
+      "devices_with_values": 10
+    },
+    "smart_194_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 24.0,
+      "maximum": 100.0,
+      "mean": 55.714222,
+      "devices_with_values": 10
+    },
+    "smart_194_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 23.0,
+      "maximum": 46.0,
+      "mean": 29.918152,
+      "devices_with_values": 10
+    },
+    "smart_195_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 64.0,
+      "maximum": 100.0,
+      "mean": 79.960045,
+      "devices_with_values": 4
+    },
+    "smart_195_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 876,
+      "missing_fraction": 0.6659,
+      "minimum": 144632.0,
+      "maximum": 243814944.0,
+      "mean": 121950600.0,
+      "devices_with_values": 4
+    },
+    "smart_196_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 5
+    },
+    "smart_196_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 5
+    },
+    "smart_197_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_197_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 8.0,
+      "mean": 0.409694,
+      "devices_with_values": 10
+    },
+    "smart_198_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_198_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 8.0,
+      "mean": 0.409694,
+      "devices_with_values": 10
+    },
+    "smart_199_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 200.0,
+      "mean": 179.972565,
+      "devices_with_values": 10
+    },
+    "smart_199_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 10
+    },
+    "smart_1_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 64.0,
+      "maximum": 100.0,
+      "mean": 90.015549,
+      "devices_with_values": 10
+    },
+    "smart_1_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 243814944.0,
+      "mean": 61158604.0,
+      "devices_with_values": 10
+    },
+    "smart_200_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 5
+    },
+    "smart_200_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 5
+    },
+    "smart_201_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_201_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_202_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_202_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_206_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_206_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_210_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_210_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_211_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_211_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_212_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_212_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_218_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_218_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_220_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_220_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 917505.0,
+      "maximum": 287440896.0,
+      "mean": 113260440.0,
+      "devices_with_values": 3
+    },
+    "smart_222_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 18.0,
+      "maximum": 77.0,
+      "mean": 53.668194,
+      "devices_with_values": 3
+    },
+    "smart_222_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 9510.0,
+      "maximum": 32891.0,
+      "mean": 18734.082031,
+      "devices_with_values": 3
+    },
+    "smart_223_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_223_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 3
+    },
+    "smart_224_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_224_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 3
+    },
+    "smart_225_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_225_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_226_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_226_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 531.0,
+      "maximum": 595.0,
+      "mean": 570.668213,
+      "devices_with_values": 3
+    },
+    "smart_22_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 438,
+      "missing_fraction": 0.83295,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 2
+    },
+    "smart_22_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 438,
+      "missing_fraction": 0.83295,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 2
+    },
+    "smart_230_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_230_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_231_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_231_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_232_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_232_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_233_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_233_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_234_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_234_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_235_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_235_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_23_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_23_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 3
+    },
+    "smart_240_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1749,
+      "missing_fraction": 0.33295,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 8
+    },
+    "smart_240_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1749,
+      "missing_fraction": 0.33295,
+      "minimum": 0.0,
+      "maximum": 60054.0,
+      "mean": 31336.966797,
+      "devices_with_values": 8
+    },
+    "smart_241_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 5
+    },
+    "smart_241_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 118506831872.0,
+      "maximum": 162082340864.0,
+      "mean": 126223228928.0,
+      "devices_with_values": 5
+    },
+    "smart_242_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 5
+    },
+    "smart_242_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 282312114176.0,
+      "maximum": 694608658432.0,
+      "mean": 552729444352.0,
+      "devices_with_values": 5
+    },
+    "smart_244_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_244_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_245_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_245_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_246_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_246_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_247_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_247_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_248_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_248_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_24_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 3
+    },
+    "smart_24_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 654,
+      "missing_fraction": 0.75057,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 3
+    },
+    "smart_250_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_250_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_251_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_251_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_252_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_252_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_254_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_254_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_255_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_255_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_27_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_27_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_2_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 1.0,
+      "maximum": 138.0,
+      "mean": 95.516487,
+      "devices_with_values": 5
+    },
+    "smart_2_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 0.0,
+      "maximum": 96.0,
+      "mean": 38.006409,
+      "devices_with_values": 5
+    },
+    "smart_3_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 82.0,
+      "maximum": 100.0,
+      "mean": 92.089165,
+      "devices_with_values": 10
+    },
+    "smart_3_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 8122.0,
+      "mean": 2459.828125,
+      "devices_with_values": 10
+    },
+    "smart_4_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_4_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 3.0,
+      "maximum": 29.0,
+      "mean": 12.676726,
+      "devices_with_values": 10
+    },
+    "smart_5_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 100.0,
+      "maximum": 100.0,
+      "mean": 100.0,
+      "devices_with_values": 10
+    },
+    "smart_5_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 193.0,
+      "mean": 22.271147,
+      "devices_with_values": 10
+    },
+    "smart_71_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_71_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_7_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 62.0,
+      "maximum": 100.0,
+      "mean": 92.785095,
+      "devices_with_values": 10
+    },
+    "smart_7_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 0.0,
+      "maximum": 999518464.0,
+      "mean": 244699648.0,
+      "devices_with_values": 10
+    },
+    "smart_82_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_82_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_8_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 100.0,
+      "maximum": 140.0,
+      "mean": 114.640106,
+      "devices_with_values": 5
+    },
+    "smart_8_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 1092,
+      "missing_fraction": 0.58352,
+      "minimum": 0.0,
+      "maximum": 18.0,
+      "mean": 6.618132,
+      "devices_with_values": 5
+    },
+    "smart_90_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_90_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 0,
+      "missing_fraction": 1.0,
+      "minimum": null,
+      "maximum": null,
+      "mean": null,
+      "devices_with_values": 0
+    },
+    "smart_9_normalized": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 18.0,
+      "maximum": 99.0,
+      "mean": 54.637402,
+      "devices_with_values": 10
+    },
+    "smart_9_raw": {
+      "sample_rows": 2622,
+      "finite_rows": 2187,
+      "missing_fraction": 0.1659,
+      "minimum": 11875.0,
+      "maximum": 60341.0,
+      "mean": 36387.917969,
+      "devices_with_values": 10
+    },
+    "fe_187_recent_nonzero_7d_count": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 7.0,
+      "mean": 1.956164,
+      "devices_with_values": 5
+    },
+    "fe_187_recent_increase_7d": {
+      "sample_rows": 2622,
+      "finite_rows": 1090,
+      "missing_fraction": 0.58429,
+      "minimum": 0.0,
+      "maximum": 9.0,
+      "mean": 0.089908,
+      "devices_with_values": 5
+    },
+    "fe_187_rolling_mean_7d": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 9.0,
+      "mean": 2.180737,
+      "devices_with_values": 5
+    },
+    "fe_187_expanding_mean": {
+      "sample_rows": 2622,
+      "finite_rows": 1095,
+      "missing_fraction": 0.58238,
+      "minimum": 0.0,
+      "maximum": 8.904109954833984,
+      "mean": 1.810587,
+      "devices_with_values": 5
+    }
+  },
+  "training_examples": [
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 217,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 219,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 217,
+      "median_gap_seconds": 86400.0
+    },
+    {
+      "rows": 217,
+      "median_gap_seconds": 86400.0
+    }
+  ],
+  "labels_visible": false,
+  "source": "Diverse training-only device prefixes across spread shards. Missing in sample does NOT mean missing in population."
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "在 best trial_004 的 TRAIN OOF 保留设备上，高分真故障(TP)与误报(FP)、漏报故障(FN)与健康(TN)分别有哪些特征快照差异；FN 中无及时时刻、无及时分数、低于阈值的具体分布如何？",
+  "reason": "best trial_004 的 CV 仍有 FP=2948、FN=1489，其中 fn_scored_below_threshold=1416；已尝试多个单特征程序和交互特征请求均未获得采纳，剩余试验预算仅 3，且尚未使用诊断预算。为避免继续盲目尝试，先获取错例与漏报的因果特征证据，再决定下一步实验方向。"
+}

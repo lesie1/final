@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "在 best trial_004 的 TRAIN OOF 单元中，哪些当前可用因果特征能在高分区区分真故障 TP 与误报 FP，并在低分区区分漏报 FN 与健康 TN？尤其关注尚未测试的 SMART 195/10/9/193，以及已有 SMART 原始特征的交互模式。",
+  "reason": "当前 best trial_004 的 CV 中 FP=2948、FN=1489，其中 fn_scored_below_threshold=1416，主要漏报来自低分故障。已测试的 SMART 5/197/187/196/188/7 单特征在 trial_003/006/007/009/010 中均未提升 CV F1。需要同时定位高分区误报与低分区漏报的可区分特征，为下一特征程序提供证据，避免继续盲试特征。"
+}

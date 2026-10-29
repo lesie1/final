@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_004",
+  "question": "SMART 7 raw 寻道错误率的持续高位与近期突增，能否在 best trial_004 的 TRAIN 交叉验证漏报设备中区分低分故障(FN)与健康(TN)，补充机械定位退化信号？",
+  "reason": "best trial_004 的 CV 中 FN=1489，其中 1416 为分数低于阈值；已试特征主要集中在介质重分配、不可纠正错误和命令超时，机械寻道类 H7 尚未测试。当前漏报主因是有及时分数但低于阈值，需要能召回低分故障的补充特征。",
+  "expected": "新特征提高低分故障设备的预测分数，CV 中新增命中数量大于丢失命中，且不显著恶化假阳性；配对 CV F1 区间下界有望超过 0。",
+  "falsification": "若新增特征后 CV 净命中未改善、丢失命中大于新增命中，或 FP 大幅上升导致 F1 区间跨 0 或为负，则说明该机械特征无增量，终止该方向。",
+  "hypothesis_id": "H7",
+  "target": "recall",
+  "exploration_reason": "缺少该单特征的先验诊断 AUC 证据，但 best trial_004 的漏报中 1416/1489 为低于阈值；现有成功特征以介质错误为主，机械定位故障模式可能覆盖不同漏报群体，使用 bounded exploration slot 训练评估。",
+  "job": "job_006"
+}

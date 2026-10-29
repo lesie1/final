@@ -1,0 +1,105 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Grown surface defects trigger spare-sector reallocation, consuming the spare pool and indicating media degradation.",
+      "basis": "Backblaze Drive Stats and published SMART studies identify SMART 5 raw reallocated sector count as one of the strongest failure predictors; normalized value declines as spare sectors are consumed.",
+      "fields": [
+        "smart_5_raw",
+        "smart_5_normalized"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Pre-failure devices do not show higher raw reallocated counts and lower normalized values than healthy devices at comparable lead times."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Unstable sectors await remapping, producing current pending sectors that may later become uncorrectable.",
+      "basis": "Backblaze data shows SMART 197 raw pending sector count above zero strongly increases failure probability.",
+      "fields": [
+        "smart_197_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have elevated smart_197_raw counts in the prediction window compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Uncorrectable read/write errors reflect media, head, or channel failure that cannot be recovered by ECC.",
+      "basis": "SMART 187 reported uncorrectable errors are widely associated with imminent HDD failure in reliability studies.",
+      "fields": [
+        "smart_187_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reported uncorrectable error counts are not higher in failing devices than healthy devices before failure."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Frequent remapping attempts indicate active defect growth, even if reallocated sector total remains moderate.",
+      "basis": "SMART 196 reallocated event count captures the number of remap operations and is a known failure precursor.",
+      "fields": [
+        "smart_196_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reallocated event counts do not differentiate failing from healthy devices within the lead window."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Drive unresponsiveness from firmware, head, or media issues manifests as command timeouts.",
+      "basis": "Operational experience shows accumulating SMART 188 command timeouts often precedes total drive failure.",
+      "fields": [
+        "smart_188_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show higher command timeout counts than healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Increased ECC recovery activity indicates marginal read channels and deteriorating media signal quality.",
+      "basis": "SMART 195 hardware ECC recovered counts rise when drives must correct many errors, a known degradation indicator.",
+      "fields": [
+        "smart_195_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Hardware ECC recovered counts are not elevated in failing devices after controlling for workload."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Actuator or servo instability causes seek errors before mechanical failure.",
+      "basis": "SMART 7 seek error rate is associated with positioning degradation, a common near-failure signature.",
+      "fields": [
+        "smart_7_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Seek error rate does not increase in failing devices relative to healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Spindle or motor difficulty causes repeated spin-up attempts.",
+      "basis": "SMART 10 spin retry count captures motor start problems, a mechanical failure precursor.",
+      "fields": [
+        "smart_10_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have higher spin retry counts than healthy devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Age-related wear increases failure probability after high power-on hours, though risk is not strictly monotonic.",
+      "basis": "HDD reliability follows a bathtub curve: infant mortality, then steady wear-out at high power-on hours.",
+      "fields": [
+        "smart_9_raw"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Failure risk is not elevated at extreme high power-on hours after controlling for drive model and cohort."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Repeated head load/unload cycles mechanically wear the actuator and ramp, increasing late-life failure risk.",
+      "basis": "Load/unload cycle count, especially on 2.5-inch drives, is a mechanical wear indicator.",
+      "fields": [
+        "smart_193_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show accumulated load cycle counts different from healthy devices at similar age."
+    }
+  ]
+}

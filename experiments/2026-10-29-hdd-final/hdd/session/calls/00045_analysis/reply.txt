@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "error_atlas",
+  "question": "smart_195_raw 硬件 ECC 恢复计数的累积高位与近期突增，能否在 trial_004 的 TRAIN 交叉验证中区分低分漏报故障设备(FN)与健康设备(TN)，并同时改善高分区真故障(TP)与误报(FP)的排序？",
+  "reason": "原 features 请求因 Feature-job budget exhausted 无法执行；在剩余动作中改为诊断，利用既有特征表示检查同一问题。error_atlas 同时给出 TP/FP 与 FN/TN 的单变量对比和漏报分解，可判断 smart_195_raw 是否有可区分证据，而不新增特征程序。"
+}

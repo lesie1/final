@@ -1,0 +1,11 @@
+CV fold 1/5: training on 264741 devices
+CV fold 1/5: scored 8 checkpoints x 5 periods (265s)
+CV fold 2/5: training on 264741 devices
+CV fold 2/5: scored 8 checkpoints x 5 periods (525s)
+CV fold 3/5: training on 264741 devices
+CV fold 3/5: scored 8 checkpoints x 5 periods (797s)
+CV fold 4/5: training on 264742 devices
+CV fold 4/5: scored 8 checkpoints x 5 periods (1053s)
+CV fold 5/5: training on 264743 devices
+CV fold 5/5: scored 8 checkpoints x 5 periods (1330s)
+CV_DONE best_step=350 f1=0.2801 fault_units=2350

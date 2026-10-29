@@ -1,0 +1,67 @@
+{
+  "id": "23f68c6e925bfb65e45c21640699de193197067cc2a6bd35a4cbaf895702ae44",
+  "spec": {
+    "parent": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+    "source": "def transform(frame):\n    raw = frame['smart_188_raw']\n    missing = raw.notna()\n    has_timeout = ((raw > 0) * 1).where(missing)\n    recent_nonzero = has_timeout.rolling('7D', min_periods=1).sum().where(missing)\n    recent_min = raw.rolling('7D', min_periods=1).min()\n    recent_increase = (raw - recent_min).where(missing)\n    rolling_mean = raw.rolling('7D', min_periods=1).mean().where(missing)\n    expanding_mean = raw.expanding(min_periods=1).mean().where(missing)\n    return pd.DataFrame({'fe_188_recent_nonzero_7d_count': recent_nonzero, 'fe_188_recent_increase_7d': recent_increase, 'fe_188_rolling_mean_7d': rolling_mean, 'fe_188_expanding_mean': expanding_mean}, index=frame.index)",
+    "features": [
+      "fe_188_recent_nonzero_7d_count",
+      "fe_188_recent_increase_7d",
+      "fe_188_rolling_mean_7d",
+      "fe_188_expanding_mean"
+    ]
+  },
+  "reason": "修复上一版 float 未定义：用 (raw>0)*1 生成数值标志，保持缺测 NaN。针对 H5 命令超时假说，用 7 日非零计数、相对 7 日近期最小值的突增、7 日均值和 expanding 均值捕捉近期反复超时与持续高位，服务低分漏报召回。",
+  "checks": [
+    {
+      "rows": 217,
+      "finite_values": 0
+    },
+    {
+      "rows": 219,
+      "finite_values": 0
+    },
+    {
+      "rows": 217,
+      "finite_values": 0
+    },
+    {
+      "rows": 219,
+      "finite_values": 0
+    },
+    {
+      "rows": 219,
+      "finite_values": 0
+    },
+    {
+      "rows": 219,
+      "finite_values": 876
+    },
+    {
+      "rows": 219,
+      "finite_values": 876
+    },
+    {
+      "rows": 219,
+      "finite_values": 876
+    },
+    {
+      "rows": 219,
+      "finite_values": 876
+    },
+    {
+      "rows": 219,
+      "finite_values": 876
+    },
+    {
+      "rows": 217,
+      "finite_values": 0
+    },
+    {
+      "rows": 217,
+      "finite_values": 0
+    }
+  ],
+  "sample_validation_seconds": 0.13492302224040031,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

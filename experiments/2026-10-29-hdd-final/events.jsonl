@@ -1,0 +1,68 @@
+{"at": "2026-10-29T11:11:15.636745+00:00", "event": "preparation_started", "user_authorized_parallel_preparation": true, "scoring_authorized_only_after_model_and_threshold_freeze": true, "cpu_affinity": [0, 1, 2, 3], "address_space_limit_gib": 8, "io_priority": "best-effort 7", "nice": 15, "computation": "Unmodified sealed data_ingest.normalize(final_test=True)"}
+{"at": "2026-10-29T11:11:15.675828+00:00", "event": "isolation_verified", "test_read_blocked": true, "trainval_read_allowed": true}
+{"at": "2026-10-29T11:11:17.039978+00:00", "event": "source_extraction_started", "files": 366, "raw_gib": 38.27}
+{"at": "2026-10-29T11:11:26.744291+00:00", "event": "source_extraction_progress", "done": 30, "total": 366}
+{"at": "2026-10-29T11:11:36.182324+00:00", "event": "source_extraction_progress", "done": 60, "total": 366}
+{"at": "2026-10-29T11:11:45.649708+00:00", "event": "source_extraction_progress", "done": 90, "total": 366}
+{"at": "2026-10-29T11:11:55.576331+00:00", "event": "source_extraction_progress", "done": 120, "total": 366}
+{"at": "2026-10-29T11:12:05.322559+00:00", "event": "source_extraction_progress", "done": 150, "total": 366}
+{"at": "2026-10-29T11:12:14.982770+00:00", "event": "source_extraction_progress", "done": 180, "total": 366}
+{"at": "2026-10-29T11:12:25.074041+00:00", "event": "source_extraction_progress", "done": 210, "total": 366}
+{"at": "2026-10-29T11:12:35.572143+00:00", "event": "source_extraction_progress", "done": 240, "total": 366}
+{"at": "2026-10-29T11:12:45.843906+00:00", "event": "source_extraction_progress", "done": 270, "total": 366}
+{"at": "2026-10-29T11:12:55.701252+00:00", "event": "source_extraction_progress", "done": 300, "total": 366}
+{"at": "2026-10-29T11:13:05.678637+00:00", "event": "source_extraction_progress", "done": 330, "total": 366}
+{"event": "infrastructure_restart", "at": 1793272394.0544016, "reason": "Account for reclaimable filesystem cache in memory guard; reuse hash-verified extracted files; training and normalization algorithm unchanged", "previous_pid": 670109}
+{"at": "2026-10-29T11:13:15.065236+00:00", "event": "preparation_started", "user_authorized_parallel_preparation": true, "scoring_authorized_only_after_model_and_threshold_freeze": true, "cpu_affinity": [0, 1, 2, 3], "address_space_limit_gib": 8, "io_priority": "best-effort 7", "nice": 15, "computation": "Unmodified sealed data_ingest.normalize(final_test=True)"}
+{"at": "2026-10-29T11:13:15.158300+00:00", "event": "isolation_verified", "test_read_blocked": true, "trainval_read_allowed": true}
+{"at": "2026-10-29T11:13:16.492403+00:00", "event": "source_extraction_started", "files": 366, "raw_gib": 38.27}
+{"at": "2026-10-29T11:13:19.291696+00:00", "event": "source_extraction_progress", "done": 30, "total": 366}
+{"at": "2026-10-29T11:13:22.059263+00:00", "event": "source_extraction_progress", "done": 60, "total": 366}
+{"at": "2026-10-29T11:13:24.819967+00:00", "event": "source_extraction_progress", "done": 90, "total": 366}
+{"at": "2026-10-29T11:13:27.732538+00:00", "event": "source_extraction_progress", "done": 120, "total": 366}
+{"at": "2026-10-29T11:13:30.617213+00:00", "event": "source_extraction_progress", "done": 150, "total": 366}
+{"at": "2026-10-29T11:13:33.510576+00:00", "event": "source_extraction_progress", "done": 180, "total": 366}
+{"at": "2026-10-29T11:13:36.556851+00:00", "event": "source_extraction_progress", "done": 210, "total": 366}
+{"at": "2026-10-29T11:13:39.567708+00:00", "event": "source_extraction_progress", "done": 240, "total": 366}
+{"at": "2026-10-29T11:13:42.499333+00:00", "event": "source_extraction_progress", "done": 270, "total": 366}
+{"at": "2026-10-29T11:13:45.388330+00:00", "event": "source_extraction_progress", "done": 300, "total": 366}
+{"at": "2026-10-29T11:13:48.327448+00:00", "event": "source_extraction_progress", "done": 330, "total": 366}
+{"at": "2026-10-29T11:13:52.832510+00:00", "event": "source_extraction_progress", "done": 360, "total": 366}
+{"at": "2026-10-29T11:13:54.916973+00:00", "event": "source_extraction_progress", "done": 366, "total": 366}
+{"at": "2026-10-29T11:18:51.600512+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 30, "ingest_files": 0, "metadata_rows": 8192482, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:23:51.671562+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 60, "ingest_files": 0, "metadata_rows": 16475795, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:28:58.117110+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 90, "ingest_files": 0, "metadata_rows": 24905362, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:34:11.859141+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 120, "ingest_files": 0, "metadata_rows": 33460493, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:39:24.796883+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 150, "ingest_files": 0, "metadata_rows": 42028220, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:44:36.698227+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 180, "ingest_files": 0, "metadata_rows": 50633340, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:49:51.921675+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 210, "ingest_files": 0, "metadata_rows": 59337644, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T11:55:07.728674+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 240, "ingest_files": 0, "metadata_rows": 68086775, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T12:00:27.198279+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 270, "ingest_files": 0, "metadata_rows": 76863832, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T12:05:47.151605+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 300, "ingest_files": 0, "metadata_rows": 85647176, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T12:11:10.045805+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 330, "ingest_files": 0, "metadata_rows": 94517834, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T12:16:37.423079+00:00", "event": "normalization_progress", "phase": "metadata", "metadata_files": 360, "ingest_files": 0, "metadata_rows": 103549121, "ingest_rows": 0, "written_devices": 0}
+{"at": "2026-10-29T12:23:09.230510+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 30, "metadata_rows": 105379761, "ingest_rows": 8192482, "written_devices": 0}
+{"at": "2026-10-29T12:28:35.229153+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 60, "metadata_rows": 105379761, "ingest_rows": 16475795, "written_devices": 0}
+{"at": "2026-10-29T12:34:17.620648+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 90, "metadata_rows": 105379761, "ingest_rows": 24905362, "written_devices": 0}
+{"at": "2026-10-29T12:35:30.279472+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T12:35:40.330450+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T12:40:00.454449+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T12:40:10.505508+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T12:40:17.238663+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 120, "metadata_rows": 105379761, "ingest_rows": 33460493, "written_devices": 0}
+{"at": "2026-10-29T12:44:26.545201+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T12:44:36.596582+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T12:46:07.628058+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 150, "metadata_rows": 105379761, "ingest_rows": 42028220, "written_devices": 0}
+{"at": "2026-10-29T12:48:46.753349+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T12:48:56.803688+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T12:51:59.134118+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 180, "metadata_rows": 105379761, "ingest_rows": 50633340, "written_devices": 0}
+{"at": "2026-10-29T12:57:43.564430+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 210, "metadata_rows": 105379761, "ingest_rows": 59337644, "written_devices": 0}
+{"at": "2026-10-29T13:03:27.886394+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 240, "metadata_rows": 105379761, "ingest_rows": 68086775, "written_devices": 0}
+{"at": "2026-10-29T13:09:10.419999+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 270, "metadata_rows": 105379761, "ingest_rows": 76863832, "written_devices": 0}
+{"at": "2026-10-29T13:14:53.705503+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 300, "metadata_rows": 105379761, "ingest_rows": 85647176, "written_devices": 0}
+{"at": "2026-10-29T14:01:13.759384+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 330, "metadata_rows": 105379761, "ingest_rows": 94517834, "written_devices": 0}
+{"at": "2026-10-29T14:07:15.989276+00:00", "event": "normalization_progress", "phase": "ingest", "metadata_files": 366, "ingest_files": 360, "metadata_rows": 105379761, "ingest_rows": 103549121, "written_devices": 0}
+{"at": "2026-10-29T14:55:30.553390+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T15:19:56.929480+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T15:23:56.796784+00:00", "event": "resource_pause", "reason": "Less than 10 GiB cgroup memory headroom"}
+{"at": "2026-10-29T17:39:12.456267+00:00", "event": "resource_resume"}
+{"at": "2026-10-29T17:46:41.619699+00:00", "event": "cache_ready", "manifest_sha256": "bc324b4a716a8dd2b504c83b17d2f142569316270e7d460ba3e31dc100a525de", "scoring_started": false}

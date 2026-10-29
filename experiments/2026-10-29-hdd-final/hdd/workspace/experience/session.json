@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "session": "session",
+  "domain": "hdd",
+  "dataset": "e73ad057b94d7ac57acd36edf1b026d46d95b5a317c730baa8a4d03cdd69f39f",
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  },
+  "metrics": {
+    "protocol": "period_device_f1_v2",
+    "threshold": 0.987483024597168,
+    "TP": 201,
+    "FP": 788,
+    "FN": 377,
+    "precision": 0.2032355915065723,
+    "recall": 0.3477508650519031,
+    "f1": 0.25654116145500955,
+    "eligible_devices": 289599,
+    "eligible_fault_devices": 578,
+    "alarmed_devices": 989,
+    "no_history_devices": 152,
+    "no_history_fault_devices": 19,
+    "fault_without_timely_scheduled_opportunity": 19,
+    "positive_without_scored_positive_day": 19,
+    "unknown_devices": 29082,
+    "unknown_alarm_devices": 2,
+    "excluded_late_entry_devices": 9417,
+    "excluded_preexisting_fault_devices": 2829,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "gain_from_own_baseline": 0.018537322683416457,
+  "semantics": "Backblaze Drive Stats daily observations for 2024. All SMART normalized and raw columns are treated as numeric_unknown due to lack of per-attribute semantic documentation; units unknown. One glob covers all quarterly folders; missing columns in any quarter will be NaN. Device ID from serial_number, date used as UTC day index.",
+  "feature_notes": [
+    "H2: SMART 197 pending sectors indicate unstable sectors awaiting remap. These four causal features capture recent sustained high pending-sector count (7-day mean), surge above the recent 7-day trough, immediate positive daily increase, and persistent non-zero days over the past week. They aim to separate fault-like growing/persistent pending-sector activity from isolated high-score false alarms and to make below-threshold missed faults more visible. Falsified if TRAIN CV shows no improvement in TP/FP or FN/TN separation over raw smart_197_raw alone.",
+    "H3：不可纠正错误数越高越可能故障。smart_187_raw 在 FN/TN 对比中 AUC≈0.78，说明漏报设备处于非零但当前低分区域；这些特征分别捕捉过去 7 天非零天数、7 天正向突增量（忽略计数器复位）、近期平均水平和生命周期累计均值。已修复上一版 NameError：不再使用 float 内置名，改用 bool 掩码保留缺失，再对 7 天窗口求和。若 FN/TN 分离度未提高、CV recall 未上升且误报未净改善，则说明单纯 smart_187 时序形态不足以解释当前漏报。",
+    "针对 H1：重分配扇区持续高位用 expanding max；近期突增用当前 raw 减去 7D 滚动最小值捕获 draw-up，另用正 daily jump 捕获快速跳变；归一化值下降用 7D 滚动最大值与当前 normalized 的差。这些特征服务低分 FN，目标是用另一物理机制提高 recall。若 CV 中 FN/TN 分离不升、低分故障分数未提高，则 H1 在该窗口下对当前漏报解释不足。",
+    "H4 检验：从 SMART 196 raw 提取最近 7 天重映射事件总量、峰值、非零天数和日增量，用活动性/频率表示替代已试的累计稳态字段。若该机制成立，这些特征应帮助提高低分故障单元的排序分数，改善 recall；若仍无改善，则说明当前 SMART 196 raw 表示不足以捕捉 H4。",
+    "修复上一版 float 未定义：用 (raw>0)*1 生成数值标志，保持缺测 NaN。针对 H5 命令超时假说，用 7 日非零计数、相对 7 日近期最小值的突增、7 日均值和 expanding 均值捕捉近期反复超时与持续高位，服务低分漏报召回。",
+    "针对 best trial_004 CV 漏报中 1416/1489 为低于阈值的低分故障，引入 SMART 7 raw 寻道错误率的机械定位信号：expansion mean 捕捉持续高位，7D rolling mean 捕捉近期水平，surge_ratio 捕捉近期相对历史突增，log1p 缩放原始计数量级。这些特征应提高低分故障设备分数，增加命中而不过多增加假阳性；若配对 CV recall 没有净提升或假阳性显著恶化则否定 H7。"
+  ],
+  "transfer_policy": "Candidate hyperparameters and semantic ideas only; never copy trees, thresholds or labels."
+}

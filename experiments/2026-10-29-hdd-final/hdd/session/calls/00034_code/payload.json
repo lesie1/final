@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "23f68c6e925bfb65e45c21640699de193197067cc2a6bd35a4cbaf895702ae44",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '23f68c6e925bfb65e45c21640699de193197067cc2a6bd35a4cbaf895702ae44', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: smart_188_raw 命令超时计数的持续高位与近期突增，能否区分 best trial_004 的漏报故障设备(FN)与健康设备(TN)，并帮助召回低分故障？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_004",
+    "hypothesis_id": "H5",
+    "question": "smart_188_raw 命令超时计数的持续高位与近期突增，能否区分 best trial_004 的漏报故障设备(FN)与健康设备(TN)，并帮助召回低分故障？",
+    "reason": "当前 best trial_004 在 TRAIN 交叉验证中仍有 FP=2948、FN=1489，其中 1416 个 FN 已有分数但低于阈值，说明主要漏报来自父模型未捕捉的低分故障模式。已尝试的 SMART 5/196/197/187 主要覆盖表面缺陷和重分配相关机制，尚未覆盖命令超时这类机械/固件响应异常。H5 假设驱动无响应与故障前兆相关，可能提供互补的召回信号。",
+    "expected": "故障前设备相对健康设备在预测窗口内呈现更高的 smart_188_raw 非零计数或近期突增；加入这些因果特征后，能在不明显恶化高分区误报的前提下召回部分低于阈值的故障单元。",
+    "falsification": "若设备分组交叉验证中新增特征未能提高 F1，或 missed_fault_contrast 显示 FN/TN 在 smart_188_raw 派生特征上的 AUC bootstrap 区间包含 0.5，则说明 H5 在当前数据表示下不能解释漏报，不应继续追加同类字段。",
+    "target": "recall",
+    "exploration_reason": "尚无 smart_188_raw 的单变量诊断证据，但 best trial_004 的 FN 中 1416/1489 属于已有分数但低于阈值，构成明确的漏报证据；已试特征集中在媒体缺陷，未覆盖机械/固件响应异常。使用本次有限的探索预算验证该互补假说，而不是继续盲调参数。",
+    "job": "job_005"
+  }
+}

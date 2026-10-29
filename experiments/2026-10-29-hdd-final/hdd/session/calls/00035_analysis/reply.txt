@@ -1,0 +1,1 @@
+{"action":"diagnose","parent":"trial_004","kind":"error_atlas","question":"在 best trial_004 的 TRAIN 交叉验证中，高分区 TP/FP 与漏报 FN/TN 分别由哪些因果特征区分？漏报单元在无及时预测时刻、无及时分数、分数低于阈值三类原因中的分布如何？","reason":"best trial_004 的 TRAIN CV 中 FP=2948、FN=1489，精度 0.226、召回 0.366；多个单特征对照未通过且未做过系统错例特征定位。error_atlas 可同时提供高分区误报和漏报的特征对比证据及漏报原因分解，用于决定下一步应针对假阳性还是漏报提出特征或参数。"}

@@ -1,0 +1,25 @@
+{
+  "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+  "changed_factors": [
+    "feature_program"
+  ],
+  "delta": {
+    "f1": 0.013002872637802865,
+    "precision": 0.01621137233947814,
+    "recall": 0.0017301038062284002,
+    "TP": 1,
+    "FP": -74,
+    "FN": -1
+  },
+  "new_hits": 40,
+  "lost_hits": 39,
+  "new_false_alarms": 223,
+  "removed_false_alarms": 297,
+  "model_identical": false,
+  "same_training_samples": true,
+  "conditional_paired_f1_interval_95": [
+    -0.008984304425274576,
+    0.03698130346094121
+  ],
+  "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+}

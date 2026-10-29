@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "params.max_depth": 6
+  },
+  "reason": "First propose one controlled parameter change as requested. Baseline uses max_depth=4; error_atlas shows credible but moderate univariate separations on SMART error counters, suggesting non-linear threshold interactions may need more tree depth. A single-factor change to max_depth=6 tests model capacity without altering features, sample weighting, labels, aggregation, or seed.",
+  "hypothesis": "Increasing max_depth from 4 to 6 allows the model to learn slightly more complex interactions among current SMART error-count features while preserving the same training sample, weights, and scoring schedule.",
+  "expected": "CV F1 improves relative to trial_001, with net hits not lost and acceptance interval lower bound above the configured bound.",
+  "falsification": "Paired CV bootstrap 95% interval lower bound is ≤ lower_bound or net hits are lost; alternatively, selection-window F1 is clearly worse beyond the screen margin."
+}

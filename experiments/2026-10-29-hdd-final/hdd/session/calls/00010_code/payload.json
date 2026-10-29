@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "d467349aad9fb33a67659259867b15b0a9aa031f23dbdbf4fd996ad73318172b",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'd467349aad9fb33a67659259867b15b0a9aa031f23dbdbf4fd996ad73318172b', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "hypothesis_id": "H2",
+    "question": "SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+    "target": "balanced",
+    "reason": "trial_001 仍有 FP=799、FN=392，F1=0.238；trial_002 仅提高 max_depth 后 CV 净命中减少（新增52/丢失140），说明继续增加模型容量不是当前优先方向。H2 的 pending sector 是已知强前兆，但 base 特征可能只有原始值，缺少近期动态和持续性表示；优先用特征实验测试该机制。",
+    "expected": "新特征在故障前窗口显示更高的 pending sector 原始计数、近期突增或滚动均值，且能在 TRAIN CV 中区分 TP/FP 或 FN/TN；下游对照实验的 CV F1 提升或至少净命中不下降。",
+    "falsification": "若新特征在 TRAIN CV 上对 TP/FP 和 FN/TN 的 AUC 区间均含 0.5，且加入特征后的对照实验 CV F1 未改善或净命中下降，则 H2 在当前窗口不可用。",
+    "exploration_reason": "trial_002 的 reason 提到 error_atlas 对 SMART 错误计数器存在中等单变量分离，但尚未显式构造 pending sector 的近期趋势；当前 FP/FN 双高，单一原始计数可能不足以捕捉阈值交互，拟使用一次探索预算验证 H2 的动态表示。",
+    "job": "job_001"
+  }
+}

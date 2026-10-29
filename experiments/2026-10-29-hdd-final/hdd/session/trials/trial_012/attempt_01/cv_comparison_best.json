@@ -1,0 +1,35 @@
+{
+  "delta_f1": -0.004306581747660632,
+  "interval_95": [
+    -0.01377632746347218,
+    0.005142220241477935
+  ],
+  "probability_better": 0.183,
+  "fault_units": 2350,
+  "new_hits": 17,
+  "lost_hits": 188,
+  "new_false_alarms": 115,
+  "removed_false_alarms": 1090,
+  "current": {
+    "step": 250,
+    "f1": 0.27528426092160385,
+    "TP": 690,
+    "FP": 1973,
+    "FN": 1660,
+    "precision": 0.25910627112279383,
+    "recall": 0.2936170212765957,
+    "threshold": 0.9934237003326416
+  },
+  "reference": {
+    "step": 400,
+    "f1": 0.2795908426692645,
+    "TP": 861,
+    "FP": 2948,
+    "FN": 1489,
+    "precision": 0.22604358099238644,
+    "recall": 0.36638297872340425,
+    "threshold": 0.9899232983589172
+  },
+  "note": "Paired device-cluster bootstrap keeps all periods of a device together; stratified by ever-fault status. Reused CV selection remains exploratory.",
+  "reference_trial": "trial_004"
+}

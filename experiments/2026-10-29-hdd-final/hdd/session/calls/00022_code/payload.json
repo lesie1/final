@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "db606b7e4ec758f6fcc8138a71d7c53e10f743e90f2f8db66c57b95b68be222b",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'db606b7e4ec758f6fcc8138a71d7c53e10f743e90f2f8db66c57b95b68be222b', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: SMART 5 raw 重分配扇区数的持续高位、近期突增以及归一化值下降，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_004",
+    "question": "SMART 5 raw 重分配扇区数的持续高位、近期突增以及归一化值下降，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+    "reason": "当前最佳 trial_004 在 TRAIN 交叉验证中仍有 1489 个漏报，其中 1416 个因分数低于阈值而漏报，说明低分故障模式尚未被模型捕捉。trial_005 的 parallel 分支与父模型结果完全一致，未能补充低分信号。H1 指向备用扇区消耗和介质退化，与已使用的 H2(smart_197)、H3(smart_187)机制不同，可能覆盖另一类低分故障设备。",
+    "expected": "故障前设备应表现出更高的 raw 重分配扇区数和更低的归一化值；新增因果特征能够提高低分故障设备的分数，从而增加 TP、减少 FN，并在 CV 中改善 F1 且净命中不下降。",
+    "falsification": "如果新增特征未能降低低于阈值的 FN，或导致净命中丢失、CV F1 不能提升，则 H1 在当前数据和表示下不成立。",
+    "hypothesis_id": "H1",
+    "target": "recall",
+    "exploration_reason": "当前最佳模型的主要矛盾是低分漏报故障，已有 H2/H3 特征只覆盖部分 SMART 错误计数。H1 的重分配扇区模式属于不同物理机制，即使单变量边际 AUC 不显著，也可能通过与现有特征的交互补回低分故障；本次使用 bounded session 探索预算。",
+    "job": "job_003"
+  }
+}

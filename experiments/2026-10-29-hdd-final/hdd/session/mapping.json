@@ -1,0 +1,1329 @@
+{
+  "observations": [
+    {
+      "glob": "data_Q*_2024/*.csv",
+      "id_column": "serial_number",
+      "time_column": "date",
+      "time_unit": "date",
+      "timezone": "UTC",
+      "filters": {},
+      "features": [
+        {
+          "name": "smart_1_normalized",
+          "column": "smart_1_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 1 normalized"
+        },
+        {
+          "name": "smart_1_raw",
+          "column": "smart_1_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 1 raw"
+        },
+        {
+          "name": "smart_2_normalized",
+          "column": "smart_2_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 2 normalized"
+        },
+        {
+          "name": "smart_2_raw",
+          "column": "smart_2_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 2 raw"
+        },
+        {
+          "name": "smart_3_normalized",
+          "column": "smart_3_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 3 normalized"
+        },
+        {
+          "name": "smart_3_raw",
+          "column": "smart_3_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 3 raw"
+        },
+        {
+          "name": "smart_4_normalized",
+          "column": "smart_4_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 4 normalized"
+        },
+        {
+          "name": "smart_4_raw",
+          "column": "smart_4_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 4 raw"
+        },
+        {
+          "name": "smart_5_normalized",
+          "column": "smart_5_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 5 normalized"
+        },
+        {
+          "name": "smart_5_raw",
+          "column": "smart_5_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 5 raw"
+        },
+        {
+          "name": "smart_7_normalized",
+          "column": "smart_7_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 7 normalized"
+        },
+        {
+          "name": "smart_7_raw",
+          "column": "smart_7_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 7 raw"
+        },
+        {
+          "name": "smart_8_normalized",
+          "column": "smart_8_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 8 normalized"
+        },
+        {
+          "name": "smart_8_raw",
+          "column": "smart_8_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 8 raw"
+        },
+        {
+          "name": "smart_9_normalized",
+          "column": "smart_9_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 9 normalized"
+        },
+        {
+          "name": "smart_9_raw",
+          "column": "smart_9_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 9 raw"
+        },
+        {
+          "name": "smart_10_normalized",
+          "column": "smart_10_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 10 normalized"
+        },
+        {
+          "name": "smart_10_raw",
+          "column": "smart_10_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 10 raw"
+        },
+        {
+          "name": "smart_11_normalized",
+          "column": "smart_11_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 11 normalized"
+        },
+        {
+          "name": "smart_11_raw",
+          "column": "smart_11_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 11 raw"
+        },
+        {
+          "name": "smart_12_normalized",
+          "column": "smart_12_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 12 normalized"
+        },
+        {
+          "name": "smart_12_raw",
+          "column": "smart_12_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 12 raw"
+        },
+        {
+          "name": "smart_13_normalized",
+          "column": "smart_13_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 13 normalized"
+        },
+        {
+          "name": "smart_13_raw",
+          "column": "smart_13_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 13 raw"
+        },
+        {
+          "name": "smart_15_normalized",
+          "column": "smart_15_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 15 normalized"
+        },
+        {
+          "name": "smart_15_raw",
+          "column": "smart_15_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 15 raw"
+        },
+        {
+          "name": "smart_16_normalized",
+          "column": "smart_16_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 16 normalized"
+        },
+        {
+          "name": "smart_16_raw",
+          "column": "smart_16_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 16 raw"
+        },
+        {
+          "name": "smart_17_normalized",
+          "column": "smart_17_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 17 normalized"
+        },
+        {
+          "name": "smart_17_raw",
+          "column": "smart_17_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 17 raw"
+        },
+        {
+          "name": "smart_18_normalized",
+          "column": "smart_18_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 18 normalized"
+        },
+        {
+          "name": "smart_18_raw",
+          "column": "smart_18_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 18 raw"
+        },
+        {
+          "name": "smart_22_normalized",
+          "column": "smart_22_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 22 normalized"
+        },
+        {
+          "name": "smart_22_raw",
+          "column": "smart_22_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 22 raw"
+        },
+        {
+          "name": "smart_23_normalized",
+          "column": "smart_23_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 23 normalized"
+        },
+        {
+          "name": "smart_23_raw",
+          "column": "smart_23_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 23 raw"
+        },
+        {
+          "name": "smart_24_normalized",
+          "column": "smart_24_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 24 normalized"
+        },
+        {
+          "name": "smart_24_raw",
+          "column": "smart_24_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 24 raw"
+        },
+        {
+          "name": "smart_27_normalized",
+          "column": "smart_27_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 27 normalized"
+        },
+        {
+          "name": "smart_27_raw",
+          "column": "smart_27_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 27 raw"
+        },
+        {
+          "name": "smart_71_normalized",
+          "column": "smart_71_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 71 normalized"
+        },
+        {
+          "name": "smart_71_raw",
+          "column": "smart_71_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 71 raw"
+        },
+        {
+          "name": "smart_82_normalized",
+          "column": "smart_82_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 82 normalized"
+        },
+        {
+          "name": "smart_82_raw",
+          "column": "smart_82_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 82 raw"
+        },
+        {
+          "name": "smart_90_normalized",
+          "column": "smart_90_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 90 normalized"
+        },
+        {
+          "name": "smart_90_raw",
+          "column": "smart_90_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 90 raw"
+        },
+        {
+          "name": "smart_160_normalized",
+          "column": "smart_160_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 160 normalized"
+        },
+        {
+          "name": "smart_160_raw",
+          "column": "smart_160_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 160 raw"
+        },
+        {
+          "name": "smart_161_normalized",
+          "column": "smart_161_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 161 normalized"
+        },
+        {
+          "name": "smart_161_raw",
+          "column": "smart_161_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 161 raw"
+        },
+        {
+          "name": "smart_163_normalized",
+          "column": "smart_163_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 163 normalized"
+        },
+        {
+          "name": "smart_163_raw",
+          "column": "smart_163_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 163 raw"
+        },
+        {
+          "name": "smart_164_normalized",
+          "column": "smart_164_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 164 normalized"
+        },
+        {
+          "name": "smart_164_raw",
+          "column": "smart_164_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 164 raw"
+        },
+        {
+          "name": "smart_165_normalized",
+          "column": "smart_165_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 165 normalized"
+        },
+        {
+          "name": "smart_165_raw",
+          "column": "smart_165_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 165 raw"
+        },
+        {
+          "name": "smart_166_normalized",
+          "column": "smart_166_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 166 normalized"
+        },
+        {
+          "name": "smart_166_raw",
+          "column": "smart_166_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 166 raw"
+        },
+        {
+          "name": "smart_167_normalized",
+          "column": "smart_167_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 167 normalized"
+        },
+        {
+          "name": "smart_167_raw",
+          "column": "smart_167_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 167 raw"
+        },
+        {
+          "name": "smart_168_normalized",
+          "column": "smart_168_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 168 normalized"
+        },
+        {
+          "name": "smart_168_raw",
+          "column": "smart_168_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 168 raw"
+        },
+        {
+          "name": "smart_169_normalized",
+          "column": "smart_169_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 169 normalized"
+        },
+        {
+          "name": "smart_169_raw",
+          "column": "smart_169_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 169 raw"
+        },
+        {
+          "name": "smart_170_normalized",
+          "column": "smart_170_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 170 normalized"
+        },
+        {
+          "name": "smart_170_raw",
+          "column": "smart_170_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 170 raw"
+        },
+        {
+          "name": "smart_171_normalized",
+          "column": "smart_171_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 171 normalized"
+        },
+        {
+          "name": "smart_171_raw",
+          "column": "smart_171_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 171 raw"
+        },
+        {
+          "name": "smart_172_normalized",
+          "column": "smart_172_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 172 normalized"
+        },
+        {
+          "name": "smart_172_raw",
+          "column": "smart_172_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 172 raw"
+        },
+        {
+          "name": "smart_173_normalized",
+          "column": "smart_173_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 173 normalized"
+        },
+        {
+          "name": "smart_173_raw",
+          "column": "smart_173_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 173 raw"
+        },
+        {
+          "name": "smart_174_normalized",
+          "column": "smart_174_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 174 normalized"
+        },
+        {
+          "name": "smart_174_raw",
+          "column": "smart_174_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 174 raw"
+        },
+        {
+          "name": "smart_175_normalized",
+          "column": "smart_175_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 175 normalized"
+        },
+        {
+          "name": "smart_175_raw",
+          "column": "smart_175_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 175 raw"
+        },
+        {
+          "name": "smart_176_normalized",
+          "column": "smart_176_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 176 normalized"
+        },
+        {
+          "name": "smart_176_raw",
+          "column": "smart_176_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 176 raw"
+        },
+        {
+          "name": "smart_177_normalized",
+          "column": "smart_177_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 177 normalized"
+        },
+        {
+          "name": "smart_177_raw",
+          "column": "smart_177_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 177 raw"
+        },
+        {
+          "name": "smart_178_normalized",
+          "column": "smart_178_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 178 normalized"
+        },
+        {
+          "name": "smart_178_raw",
+          "column": "smart_178_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 178 raw"
+        },
+        {
+          "name": "smart_179_normalized",
+          "column": "smart_179_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 179 normalized"
+        },
+        {
+          "name": "smart_179_raw",
+          "column": "smart_179_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 179 raw"
+        },
+        {
+          "name": "smart_180_normalized",
+          "column": "smart_180_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 180 normalized"
+        },
+        {
+          "name": "smart_180_raw",
+          "column": "smart_180_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 180 raw"
+        },
+        {
+          "name": "smart_181_normalized",
+          "column": "smart_181_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 181 normalized"
+        },
+        {
+          "name": "smart_181_raw",
+          "column": "smart_181_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 181 raw"
+        },
+        {
+          "name": "smart_182_normalized",
+          "column": "smart_182_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 182 normalized"
+        },
+        {
+          "name": "smart_182_raw",
+          "column": "smart_182_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 182 raw"
+        },
+        {
+          "name": "smart_183_normalized",
+          "column": "smart_183_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 183 normalized"
+        },
+        {
+          "name": "smart_183_raw",
+          "column": "smart_183_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 183 raw"
+        },
+        {
+          "name": "smart_184_normalized",
+          "column": "smart_184_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 184 normalized"
+        },
+        {
+          "name": "smart_184_raw",
+          "column": "smart_184_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 184 raw"
+        },
+        {
+          "name": "smart_187_normalized",
+          "column": "smart_187_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 187 normalized"
+        },
+        {
+          "name": "smart_187_raw",
+          "column": "smart_187_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 187 raw"
+        },
+        {
+          "name": "smart_188_normalized",
+          "column": "smart_188_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 188 normalized"
+        },
+        {
+          "name": "smart_188_raw",
+          "column": "smart_188_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 188 raw"
+        },
+        {
+          "name": "smart_189_normalized",
+          "column": "smart_189_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 189 normalized"
+        },
+        {
+          "name": "smart_189_raw",
+          "column": "smart_189_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 189 raw"
+        },
+        {
+          "name": "smart_190_normalized",
+          "column": "smart_190_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 190 normalized"
+        },
+        {
+          "name": "smart_190_raw",
+          "column": "smart_190_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 190 raw"
+        },
+        {
+          "name": "smart_191_normalized",
+          "column": "smart_191_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 191 normalized"
+        },
+        {
+          "name": "smart_191_raw",
+          "column": "smart_191_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 191 raw"
+        },
+        {
+          "name": "smart_192_normalized",
+          "column": "smart_192_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 192 normalized"
+        },
+        {
+          "name": "smart_192_raw",
+          "column": "smart_192_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 192 raw"
+        },
+        {
+          "name": "smart_193_normalized",
+          "column": "smart_193_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 193 normalized"
+        },
+        {
+          "name": "smart_193_raw",
+          "column": "smart_193_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 193 raw"
+        },
+        {
+          "name": "smart_194_normalized",
+          "column": "smart_194_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 194 normalized"
+        },
+        {
+          "name": "smart_194_raw",
+          "column": "smart_194_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 194 raw"
+        },
+        {
+          "name": "smart_195_normalized",
+          "column": "smart_195_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 195 normalized"
+        },
+        {
+          "name": "smart_195_raw",
+          "column": "smart_195_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 195 raw"
+        },
+        {
+          "name": "smart_196_normalized",
+          "column": "smart_196_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 196 normalized"
+        },
+        {
+          "name": "smart_196_raw",
+          "column": "smart_196_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 196 raw"
+        },
+        {
+          "name": "smart_197_normalized",
+          "column": "smart_197_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 197 normalized"
+        },
+        {
+          "name": "smart_197_raw",
+          "column": "smart_197_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 197 raw"
+        },
+        {
+          "name": "smart_198_normalized",
+          "column": "smart_198_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 198 normalized"
+        },
+        {
+          "name": "smart_198_raw",
+          "column": "smart_198_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 198 raw"
+        },
+        {
+          "name": "smart_199_normalized",
+          "column": "smart_199_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 199 normalized"
+        },
+        {
+          "name": "smart_199_raw",
+          "column": "smart_199_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 199 raw"
+        },
+        {
+          "name": "smart_200_normalized",
+          "column": "smart_200_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 200 normalized"
+        },
+        {
+          "name": "smart_200_raw",
+          "column": "smart_200_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 200 raw"
+        },
+        {
+          "name": "smart_201_normalized",
+          "column": "smart_201_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 201 normalized"
+        },
+        {
+          "name": "smart_201_raw",
+          "column": "smart_201_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 201 raw"
+        },
+        {
+          "name": "smart_202_normalized",
+          "column": "smart_202_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 202 normalized"
+        },
+        {
+          "name": "smart_202_raw",
+          "column": "smart_202_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 202 raw"
+        },
+        {
+          "name": "smart_206_normalized",
+          "column": "smart_206_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 206 normalized"
+        },
+        {
+          "name": "smart_206_raw",
+          "column": "smart_206_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 206 raw"
+        },
+        {
+          "name": "smart_210_normalized",
+          "column": "smart_210_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 210 normalized"
+        },
+        {
+          "name": "smart_210_raw",
+          "column": "smart_210_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 210 raw"
+        },
+        {
+          "name": "smart_211_normalized",
+          "column": "smart_211_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 211 normalized"
+        },
+        {
+          "name": "smart_211_raw",
+          "column": "smart_211_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 211 raw"
+        },
+        {
+          "name": "smart_212_normalized",
+          "column": "smart_212_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 212 normalized"
+        },
+        {
+          "name": "smart_212_raw",
+          "column": "smart_212_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 212 raw"
+        },
+        {
+          "name": "smart_218_normalized",
+          "column": "smart_218_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 218 normalized"
+        },
+        {
+          "name": "smart_218_raw",
+          "column": "smart_218_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 218 raw"
+        },
+        {
+          "name": "smart_220_normalized",
+          "column": "smart_220_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 220 normalized"
+        },
+        {
+          "name": "smart_220_raw",
+          "column": "smart_220_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 220 raw"
+        },
+        {
+          "name": "smart_222_normalized",
+          "column": "smart_222_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 222 normalized"
+        },
+        {
+          "name": "smart_222_raw",
+          "column": "smart_222_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 222 raw"
+        },
+        {
+          "name": "smart_223_normalized",
+          "column": "smart_223_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 223 normalized"
+        },
+        {
+          "name": "smart_223_raw",
+          "column": "smart_223_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 223 raw"
+        },
+        {
+          "name": "smart_224_normalized",
+          "column": "smart_224_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 224 normalized"
+        },
+        {
+          "name": "smart_224_raw",
+          "column": "smart_224_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 224 raw"
+        },
+        {
+          "name": "smart_225_normalized",
+          "column": "smart_225_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 225 normalized"
+        },
+        {
+          "name": "smart_225_raw",
+          "column": "smart_225_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 225 raw"
+        },
+        {
+          "name": "smart_226_normalized",
+          "column": "smart_226_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 226 normalized"
+        },
+        {
+          "name": "smart_226_raw",
+          "column": "smart_226_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 226 raw"
+        },
+        {
+          "name": "smart_230_normalized",
+          "column": "smart_230_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 230 normalized"
+        },
+        {
+          "name": "smart_230_raw",
+          "column": "smart_230_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 230 raw"
+        },
+        {
+          "name": "smart_231_normalized",
+          "column": "smart_231_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 231 normalized"
+        },
+        {
+          "name": "smart_231_raw",
+          "column": "smart_231_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 231 raw"
+        },
+        {
+          "name": "smart_232_normalized",
+          "column": "smart_232_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 232 normalized"
+        },
+        {
+          "name": "smart_232_raw",
+          "column": "smart_232_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 232 raw"
+        },
+        {
+          "name": "smart_233_normalized",
+          "column": "smart_233_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 233 normalized"
+        },
+        {
+          "name": "smart_233_raw",
+          "column": "smart_233_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 233 raw"
+        },
+        {
+          "name": "smart_234_normalized",
+          "column": "smart_234_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 234 normalized"
+        },
+        {
+          "name": "smart_234_raw",
+          "column": "smart_234_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 234 raw"
+        },
+        {
+          "name": "smart_235_normalized",
+          "column": "smart_235_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 235 normalized"
+        },
+        {
+          "name": "smart_235_raw",
+          "column": "smart_235_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 235 raw"
+        },
+        {
+          "name": "smart_240_normalized",
+          "column": "smart_240_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 240 normalized"
+        },
+        {
+          "name": "smart_240_raw",
+          "column": "smart_240_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 240 raw"
+        },
+        {
+          "name": "smart_241_normalized",
+          "column": "smart_241_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 241 normalized"
+        },
+        {
+          "name": "smart_241_raw",
+          "column": "smart_241_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 241 raw"
+        },
+        {
+          "name": "smart_242_normalized",
+          "column": "smart_242_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 242 normalized"
+        },
+        {
+          "name": "smart_242_raw",
+          "column": "smart_242_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 242 raw"
+        },
+        {
+          "name": "smart_244_normalized",
+          "column": "smart_244_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 244 normalized"
+        },
+        {
+          "name": "smart_244_raw",
+          "column": "smart_244_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 244 raw"
+        },
+        {
+          "name": "smart_245_normalized",
+          "column": "smart_245_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 245 normalized"
+        },
+        {
+          "name": "smart_245_raw",
+          "column": "smart_245_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 245 raw"
+        },
+        {
+          "name": "smart_246_normalized",
+          "column": "smart_246_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 246 normalized"
+        },
+        {
+          "name": "smart_246_raw",
+          "column": "smart_246_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 246 raw"
+        },
+        {
+          "name": "smart_247_normalized",
+          "column": "smart_247_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 247 normalized"
+        },
+        {
+          "name": "smart_247_raw",
+          "column": "smart_247_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 247 raw"
+        },
+        {
+          "name": "smart_248_normalized",
+          "column": "smart_248_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 248 normalized"
+        },
+        {
+          "name": "smart_248_raw",
+          "column": "smart_248_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 248 raw"
+        },
+        {
+          "name": "smart_250_normalized",
+          "column": "smart_250_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 250 normalized"
+        },
+        {
+          "name": "smart_250_raw",
+          "column": "smart_250_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 250 raw"
+        },
+        {
+          "name": "smart_251_normalized",
+          "column": "smart_251_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 251 normalized"
+        },
+        {
+          "name": "smart_251_raw",
+          "column": "smart_251_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 251 raw"
+        },
+        {
+          "name": "smart_252_normalized",
+          "column": "smart_252_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 252 normalized"
+        },
+        {
+          "name": "smart_252_raw",
+          "column": "smart_252_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 252 raw"
+        },
+        {
+          "name": "smart_254_normalized",
+          "column": "smart_254_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 254 normalized"
+        },
+        {
+          "name": "smart_254_raw",
+          "column": "smart_254_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 254 raw"
+        },
+        {
+          "name": "smart_255_normalized",
+          "column": "smart_255_normalized",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 255 normalized"
+        },
+        {
+          "name": "smart_255_raw",
+          "column": "smart_255_raw",
+          "kind": "numeric_unknown",
+          "unit": null,
+          "description": "SMART attribute 255 raw"
+        }
+      ]
+    }
+  ],
+  "failure": {
+    "mode": "indicator",
+    "column": "failure",
+    "positive_values": [
+      "1"
+    ],
+    "definition": "Binary indicator: 1 means the last operational day before a known failure; 0 means no failure recorded on that date (not proof of permanent health)."
+  },
+  "followup": {
+    "mode": "last_observation",
+    "basis": "Conservative follow-up ends at each device's last recorded observation. Device disappearance is not treated as failure or health."
+  },
+  "description": "Backblaze Drive Stats daily observations for 2024. All SMART normalized and raw columns are treated as numeric_unknown due to lack of per-attribute semantic documentation; units unknown. One glob covers all quarterly folders; missing columns in any quarter will be NaN. Device ID from serial_number, date used as UTC day index."
+}

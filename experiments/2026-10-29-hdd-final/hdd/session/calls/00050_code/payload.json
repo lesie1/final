@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 5,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 5, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "特征预算已耗尽，不能继续请求新特征。best trial_004 在 TRAIN CV 中 FP=2948、FN=1489，高于阈值的低分故障占 1416/1489，高分区误报多。当前 min_child_weight=50 可能阻止模型学习小样本、低基数的故障模式，降低该参数允许更细的叶节点划分，在保持设备分组 CV 选阈值的前提下可能提高召回并改善 F1。这是未试过的单因素参数对照。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_004",
+    "changes": {
+      "params.min_child_weight": 5
+    },
+    "reason": "特征预算已耗尽，不能继续请求新特征。best trial_004 在 TRAIN CV 中 FP=2948、FN=1489，高于阈值的低分故障占 1416/1489，高分区误报多。当前 min_child_weight=50 可能阻止模型学习小样本、低基数的故障模式，降低该参数允许更细的叶节点划分，在保持设备分组 CV 选阈值的前提下可能提高召回并改善 F1。这是未试过的单因素参数对照。",
+    "hypothesis": "降低 min_child_weight 可以捕获更多低样本量故障事件，提升 TRAIN CV 的 TP 和 recall；CV 阈值优化会限制 FP 增长，最终设备级 F1 提升。",
+    "expected": "与 trial_004 相比，配对 bootstrap 95% F1 区间下界 > 0 且净命中未丢失；TP 增加，FN 减少，FP 增加在阈值选择后可控。",
+    "falsification": "若 CV 配对 bootstrap 95% 区间跨过 0 或下界 <= 0，或净命中减少，则该参数调整未能改善设备级 F1。",
+    "recipe": {
+      "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 5,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

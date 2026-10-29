@@ -1,0 +1,4376 @@
+{
+  "task": "features",
+  "question": "SMART 7 raw 寻道错误率的持续高位与近期突增，能否在 best trial_004 的 TRAIN 交叉验证漏报设备中区分低分故障(FN)与健康(TN)，补充机械定位退化信号？",
+  "reason": "best trial_004 的 CV 中 FN=1489，其中 1416 为分数低于阈值；已试特征主要集中在介质重分配、不可纠正错误和命令超时，机械寻道类 H7 尚未测试。当前漏报主因是有及时分数但低于阈值，需要能召回低分故障的补充特征。",
+  "expected": "新特征提高低分故障设备的预测分数，CV 中新增命中数量大于丢失命中，且不显著恶化假阳性；配对 CV F1 区间下界有望超过 0。",
+  "parent": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+  "max_features": 4,
+  "profile": {
+    "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+    "feature_names": [
+      "smart_10_normalized",
+      "smart_10_raw",
+      "smart_11_normalized",
+      "smart_11_raw",
+      "smart_12_normalized",
+      "smart_12_raw",
+      "smart_13_normalized",
+      "smart_13_raw",
+      "smart_15_normalized",
+      "smart_15_raw",
+      "smart_160_normalized",
+      "smart_160_raw",
+      "smart_161_normalized",
+      "smart_161_raw",
+      "smart_163_normalized",
+      "smart_163_raw",
+      "smart_164_normalized",
+      "smart_164_raw",
+      "smart_165_normalized",
+      "smart_165_raw",
+      "smart_166_normalized",
+      "smart_166_raw",
+      "smart_167_normalized",
+      "smart_167_raw",
+      "smart_168_normalized",
+      "smart_168_raw",
+      "smart_169_normalized",
+      "smart_169_raw",
+      "smart_16_normalized",
+      "smart_16_raw",
+      "smart_170_normalized",
+      "smart_170_raw",
+      "smart_171_normalized",
+      "smart_171_raw",
+      "smart_172_normalized",
+      "smart_172_raw",
+      "smart_173_normalized",
+      "smart_173_raw",
+      "smart_174_normalized",
+      "smart_174_raw",
+      "smart_175_normalized",
+      "smart_175_raw",
+      "smart_176_normalized",
+      "smart_176_raw",
+      "smart_177_normalized",
+      "smart_177_raw",
+      "smart_178_normalized",
+      "smart_178_raw",
+      "smart_179_normalized",
+      "smart_179_raw",
+      "smart_17_normalized",
+      "smart_17_raw",
+      "smart_180_normalized",
+      "smart_180_raw",
+      "smart_181_normalized",
+      "smart_181_raw",
+      "smart_182_normalized",
+      "smart_182_raw",
+      "smart_183_normalized",
+      "smart_183_raw",
+      "smart_184_normalized",
+      "smart_184_raw",
+      "smart_187_normalized",
+      "smart_187_raw",
+      "smart_188_normalized",
+      "smart_188_raw",
+      "smart_189_normalized",
+      "smart_189_raw",
+      "smart_18_normalized",
+      "smart_18_raw",
+      "smart_190_normalized",
+      "smart_190_raw",
+      "smart_191_normalized",
+      "smart_191_raw",
+      "smart_192_normalized",
+      "smart_192_raw",
+      "smart_193_normalized",
+      "smart_193_raw",
+      "smart_194_normalized",
+      "smart_194_raw",
+      "smart_195_normalized",
+      "smart_195_raw",
+      "smart_196_normalized",
+      "smart_196_raw",
+      "smart_197_normalized",
+      "smart_197_raw",
+      "smart_198_normalized",
+      "smart_198_raw",
+      "smart_199_normalized",
+      "smart_199_raw",
+      "smart_1_normalized",
+      "smart_1_raw",
+      "smart_200_normalized",
+      "smart_200_raw",
+      "smart_201_normalized",
+      "smart_201_raw",
+      "smart_202_normalized",
+      "smart_202_raw",
+      "smart_206_normalized",
+      "smart_206_raw",
+      "smart_210_normalized",
+      "smart_210_raw",
+      "smart_211_normalized",
+      "smart_211_raw",
+      "smart_212_normalized",
+      "smart_212_raw",
+      "smart_218_normalized",
+      "smart_218_raw",
+      "smart_220_normalized",
+      "smart_220_raw",
+      "smart_222_normalized",
+      "smart_222_raw",
+      "smart_223_normalized",
+      "smart_223_raw",
+      "smart_224_normalized",
+      "smart_224_raw",
+      "smart_225_normalized",
+      "smart_225_raw",
+      "smart_226_normalized",
+      "smart_226_raw",
+      "smart_22_normalized",
+      "smart_22_raw",
+      "smart_230_normalized",
+      "smart_230_raw",
+      "smart_231_normalized",
+      "smart_231_raw",
+      "smart_232_normalized",
+      "smart_232_raw",
+      "smart_233_normalized",
+      "smart_233_raw",
+      "smart_234_normalized",
+      "smart_234_raw",
+      "smart_235_normalized",
+      "smart_235_raw",
+      "smart_23_normalized",
+      "smart_23_raw",
+      "smart_240_normalized",
+      "smart_240_raw",
+      "smart_241_normalized",
+      "smart_241_raw",
+      "smart_242_normalized",
+      "smart_242_raw",
+      "smart_244_normalized",
+      "smart_244_raw",
+      "smart_245_normalized",
+      "smart_245_raw",
+      "smart_246_normalized",
+      "smart_246_raw",
+      "smart_247_normalized",
+      "smart_247_raw",
+      "smart_248_normalized",
+      "smart_248_raw",
+      "smart_24_normalized",
+      "smart_24_raw",
+      "smart_250_normalized",
+      "smart_250_raw",
+      "smart_251_normalized",
+      "smart_251_raw",
+      "smart_252_normalized",
+      "smart_252_raw",
+      "smart_254_normalized",
+      "smart_254_raw",
+      "smart_255_normalized",
+      "smart_255_raw",
+      "smart_27_normalized",
+      "smart_27_raw",
+      "smart_2_normalized",
+      "smart_2_raw",
+      "smart_3_normalized",
+      "smart_3_raw",
+      "smart_4_normalized",
+      "smart_4_raw",
+      "smart_5_normalized",
+      "smart_5_raw",
+      "smart_71_normalized",
+      "smart_71_raw",
+      "smart_7_normalized",
+      "smart_7_raw",
+      "smart_82_normalized",
+      "smart_82_raw",
+      "smart_8_normalized",
+      "smart_8_raw",
+      "smart_90_normalized",
+      "smart_90_raw",
+      "smart_9_normalized",
+      "smart_9_raw",
+      "fe_187_recent_nonzero_7d_count",
+      "fe_187_recent_increase_7d",
+      "fe_187_rolling_mean_7d",
+      "fe_187_expanding_mean"
+    ],
+    "interface_version": "causal_features_v2",
+    "column_summary": {
+      "smart_10_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_10_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 10
+      },
+      "smart_11_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_11_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_12_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_12_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 2.0,
+        "maximum": 29.0,
+        "mean": 12.176041,
+        "devices_with_values": 10
+      },
+      "smart_13_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_13_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_15_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_15_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_160_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_160_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_161_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_161_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_163_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_163_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_164_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_164_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_165_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_165_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_166_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_166_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_167_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_167_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_168_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_168_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_169_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_169_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_16_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_16_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_170_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_170_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_171_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_171_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_172_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_172_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_173_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_173_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_174_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_174_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_175_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_175_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_176_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_176_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_177_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_177_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_178_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_178_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_179_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_179_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_17_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_17_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_180_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_180_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_181_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_181_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_182_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_182_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_183_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_183_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_184_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 4
+      },
+      "smart_184_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 4
+      },
+      "smart_187_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 91.0,
+        "maximum": 100.0,
+        "mean": 97.785385,
+        "devices_with_values": 5
+      },
+      "smart_187_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 2.214612,
+        "devices_with_values": 5
+      },
+      "smart_188_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 5
+      },
+      "smart_188_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 5
+      },
+      "smart_189_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 1.0,
+        "maximum": 97.0,
+        "mean": 71.151825,
+        "devices_with_values": 4
+      },
+      "smart_189_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 3.0,
+        "maximum": 118.0,
+        "mean": 32.769405,
+        "devices_with_values": 4
+      },
+      "smart_18_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 219,
+        "missing_fraction": 0.91648,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 1
+      },
+      "smart_18_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 219,
+        "missing_fraction": 0.91648,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 1
+      },
+      "smart_190_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 64.0,
+        "maximum": 76.0,
+        "mean": 71.747948,
+        "devices_with_values": 5
+      },
+      "smart_190_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 24.0,
+        "maximum": 36.0,
+        "mean": 28.252054,
+        "devices_with_values": 5
+      },
+      "smart_191_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1530,
+        "missing_fraction": 0.41648,
+        "minimum": 1.0,
+        "maximum": 100.0,
+        "mean": 59.533985,
+        "devices_with_values": 7
+      },
+      "smart_191_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1530,
+        "missing_fraction": 0.41648,
+        "minimum": 0.0,
+        "maximum": 278674.0,
+        "mean": 93423.835938,
+        "devices_with_values": 7
+      },
+      "smart_192_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_192_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 2975.0,
+        "mean": 776.552368,
+        "devices_with_values": 10
+      },
+      "smart_193_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 99.0,
+        "maximum": 100.0,
+        "mean": 99.499313,
+        "devices_with_values": 10
+      },
+      "smart_193_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 14.0,
+        "maximum": 2975.0,
+        "mean": 1860.104248,
+        "devices_with_values": 10
+      },
+      "smart_194_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 24.0,
+        "maximum": 100.0,
+        "mean": 55.714222,
+        "devices_with_values": 10
+      },
+      "smart_194_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 23.0,
+        "maximum": 46.0,
+        "mean": 29.918152,
+        "devices_with_values": 10
+      },
+      "smart_195_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 64.0,
+        "maximum": 100.0,
+        "mean": 79.960045,
+        "devices_with_values": 4
+      },
+      "smart_195_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 876,
+        "missing_fraction": 0.6659,
+        "minimum": 144632.0,
+        "maximum": 243814944.0,
+        "mean": 121950600.0,
+        "devices_with_values": 4
+      },
+      "smart_196_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 5
+      },
+      "smart_196_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 5
+      },
+      "smart_197_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_197_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 8.0,
+        "mean": 0.409694,
+        "devices_with_values": 10
+      },
+      "smart_198_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_198_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 8.0,
+        "mean": 0.409694,
+        "devices_with_values": 10
+      },
+      "smart_199_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 200.0,
+        "mean": 179.972565,
+        "devices_with_values": 10
+      },
+      "smart_199_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 10
+      },
+      "smart_1_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 64.0,
+        "maximum": 100.0,
+        "mean": 90.015549,
+        "devices_with_values": 10
+      },
+      "smart_1_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 243814944.0,
+        "mean": 61158604.0,
+        "devices_with_values": 10
+      },
+      "smart_200_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 5
+      },
+      "smart_200_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 5
+      },
+      "smart_201_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_201_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_202_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_202_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_206_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_206_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_210_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_210_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_211_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_211_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_212_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_212_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_218_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_218_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_220_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_220_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 917505.0,
+        "maximum": 287440896.0,
+        "mean": 113260440.0,
+        "devices_with_values": 3
+      },
+      "smart_222_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 18.0,
+        "maximum": 77.0,
+        "mean": 53.668194,
+        "devices_with_values": 3
+      },
+      "smart_222_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 9510.0,
+        "maximum": 32891.0,
+        "mean": 18734.082031,
+        "devices_with_values": 3
+      },
+      "smart_223_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_223_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 3
+      },
+      "smart_224_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_224_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 3
+      },
+      "smart_225_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_225_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_226_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_226_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 531.0,
+        "maximum": 595.0,
+        "mean": 570.668213,
+        "devices_with_values": 3
+      },
+      "smart_22_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 438,
+        "missing_fraction": 0.83295,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 2
+      },
+      "smart_22_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 438,
+        "missing_fraction": 0.83295,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 2
+      },
+      "smart_230_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_230_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_231_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_231_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_232_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_232_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_233_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_233_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_234_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_234_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_235_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_235_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_23_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_23_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 3
+      },
+      "smart_240_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1749,
+        "missing_fraction": 0.33295,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 8
+      },
+      "smart_240_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1749,
+        "missing_fraction": 0.33295,
+        "minimum": 0.0,
+        "maximum": 60054.0,
+        "mean": 31336.966797,
+        "devices_with_values": 8
+      },
+      "smart_241_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 5
+      },
+      "smart_241_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 118506831872.0,
+        "maximum": 162082340864.0,
+        "mean": 126223228928.0,
+        "devices_with_values": 5
+      },
+      "smart_242_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 5
+      },
+      "smart_242_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 282312114176.0,
+        "maximum": 694608658432.0,
+        "mean": 552729444352.0,
+        "devices_with_values": 5
+      },
+      "smart_244_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_244_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_245_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_245_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_246_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_246_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_247_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_247_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_248_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_248_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_24_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 3
+      },
+      "smart_24_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 654,
+        "missing_fraction": 0.75057,
+        "minimum": 0.0,
+        "maximum": 0.0,
+        "mean": 0.0,
+        "devices_with_values": 3
+      },
+      "smart_250_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_250_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_251_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_251_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_252_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_252_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_254_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_254_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_255_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_255_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_27_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_27_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_2_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 1.0,
+        "maximum": 138.0,
+        "mean": 95.516487,
+        "devices_with_values": 5
+      },
+      "smart_2_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 0.0,
+        "maximum": 96.0,
+        "mean": 38.006409,
+        "devices_with_values": 5
+      },
+      "smart_3_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 82.0,
+        "maximum": 100.0,
+        "mean": 92.089165,
+        "devices_with_values": 10
+      },
+      "smart_3_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 8122.0,
+        "mean": 2459.828125,
+        "devices_with_values": 10
+      },
+      "smart_4_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_4_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 3.0,
+        "maximum": 29.0,
+        "mean": 12.676726,
+        "devices_with_values": 10
+      },
+      "smart_5_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 100.0,
+        "maximum": 100.0,
+        "mean": 100.0,
+        "devices_with_values": 10
+      },
+      "smart_5_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 193.0,
+        "mean": 22.271147,
+        "devices_with_values": 10
+      },
+      "smart_71_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_71_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_7_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 62.0,
+        "maximum": 100.0,
+        "mean": 92.785095,
+        "devices_with_values": 10
+      },
+      "smart_7_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 0.0,
+        "maximum": 999518464.0,
+        "mean": 244699648.0,
+        "devices_with_values": 10
+      },
+      "smart_82_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_82_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_8_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 100.0,
+        "maximum": 140.0,
+        "mean": 114.640106,
+        "devices_with_values": 5
+      },
+      "smart_8_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 1092,
+        "missing_fraction": 0.58352,
+        "minimum": 0.0,
+        "maximum": 18.0,
+        "mean": 6.618132,
+        "devices_with_values": 5
+      },
+      "smart_90_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_90_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 0,
+        "missing_fraction": 1.0,
+        "minimum": null,
+        "maximum": null,
+        "mean": null,
+        "devices_with_values": 0
+      },
+      "smart_9_normalized": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 18.0,
+        "maximum": 99.0,
+        "mean": 54.637402,
+        "devices_with_values": 10
+      },
+      "smart_9_raw": {
+        "sample_rows": 2622,
+        "finite_rows": 2187,
+        "missing_fraction": 0.1659,
+        "minimum": 11875.0,
+        "maximum": 60341.0,
+        "mean": 36387.917969,
+        "devices_with_values": 10
+      },
+      "fe_187_recent_nonzero_7d_count": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 7.0,
+        "mean": 1.956164,
+        "devices_with_values": 5
+      },
+      "fe_187_recent_increase_7d": {
+        "sample_rows": 2622,
+        "finite_rows": 1090,
+        "missing_fraction": 0.58429,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 0.089908,
+        "devices_with_values": 5
+      },
+      "fe_187_rolling_mean_7d": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 9.0,
+        "mean": 2.180737,
+        "devices_with_values": 5
+      },
+      "fe_187_expanding_mean": {
+        "sample_rows": 2622,
+        "finite_rows": 1095,
+        "missing_fraction": 0.58238,
+        "minimum": 0.0,
+        "maximum": 8.904109954833984,
+        "mean": 1.810587,
+        "devices_with_values": 5
+      }
+    },
+    "training_examples": [
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 217,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 219,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 217,
+        "median_gap_seconds": 86400.0
+      },
+      {
+        "rows": 217,
+        "median_gap_seconds": 86400.0
+      }
+    ],
+    "labels_visible": false,
+    "source": "Diverse training-only device prefixes across spread shards. Missing in sample does NOT mean missing in population."
+  },
+  "feature_api": {
+    "version": "causal_features_v2",
+    "signature": "def transform(frame)",
+    "input": "One device, chronological numeric rows. No labels, device IDs or future rows. Select literal column names from profile.feature_names.",
+    "output": "pd.DataFrame of declared unique fe_ columns; preserve rows and index. Original columns are retained automatically.",
+    "series_methods": [
+      "abs",
+      "astype",
+      "clip",
+      "count",
+      "cummax",
+      "cummin",
+      "cumprod",
+      "cumsum",
+      "diff",
+      "ewm",
+      "expanding",
+      "ffill",
+      "fillna",
+      "isna",
+      "mask",
+      "max",
+      "mean",
+      "median",
+      "min",
+      "notna",
+      "quantile",
+      "replace",
+      "rolling",
+      "shift",
+      "std",
+      "sum",
+      "var",
+      "where"
+    ],
+    "numpy_functions": [
+      "abs",
+      "clip",
+      "exp",
+      "isfinite",
+      "isnan",
+      "log",
+      "log1p",
+      "maximum",
+      "minimum",
+      "sign",
+      "sqrt",
+      "where"
+    ],
+    "pandas_functions": [
+      "DataFrame"
+    ],
+    "past_helpers": {
+      "past.gap_seconds(frame)": "Series: current minus previous observation time in seconds; first value NaN.",
+      "past.observation_count(frame)": "Series: causal count 1,2,...,n; no measured-value missingness dependence."
+    },
+    "rules": [
+      "Only assignments to new local names and a final return. No loops, comprehensions, imports or arbitrary functions.",
+      "frame.index is permitted ONLY as index=frame.index in pd.DataFrame. For time gaps use past.gap_seconds(frame).",
+      "No frame.columns, to_series, dt, iloc, loc, values, pd.Series, pd.to_numeric or apply. Inputs are already numeric.",
+      "Use arithmetic operators / + - * instead of .div/.add/.sub/.mul. Use literal column names; never discover columns dynamically.",
+      "Reductions must directly follow rolling/expanding/ewm. Use trailing real-time rolling windows; center=True and negative shifts are forbidden.",
+      "Missing measurements stay unknown unless the hypothesis explicitly justifies a constant or forward fill. No infinities.",
+      "Zero finite values in a bounded sample is a coverage limitation, not evidence that the entire dataset is empty."
+    ],
+    "examples": [
+      {
+        "features": [
+          "fe_change"
+        ],
+        "source": "def transform(frame):\n    change = frame['metric'].diff(1)\n    return pd.DataFrame({'fe_change': change}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_gap",
+          "fe_count"
+        ],
+        "source": "def transform(frame):\n    gap = past.gap_seconds(frame)\n    count = past.observation_count(frame)\n    return pd.DataFrame({'fe_gap': gap, 'fe_count': count}, index=frame.index)"
+      },
+      {
+        "features": [
+          "fe_mean"
+        ],
+        "source": "def transform(frame):\n    avg = frame['metric'].rolling('7D', min_periods=1).mean()\n    return pd.DataFrame({'fe_mean': avg}, index=frame.index)"
+      }
+    ]
+  },
+  "semantic_mapping": {
+    "observations": [
+      {
+        "glob": "data_Q*_2024/*.csv",
+        "id_column": "serial_number",
+        "time_column": "date",
+        "time_unit": "date",
+        "timezone": "UTC",
+        "filters": {},
+        "features": [
+          {
+            "name": "smart_1_normalized",
+            "column": "smart_1_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 1 normalized"
+          },
+          {
+            "name": "smart_1_raw",
+            "column": "smart_1_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 1 raw"
+          },
+          {
+            "name": "smart_2_normalized",
+            "column": "smart_2_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 2 normalized"
+          },
+          {
+            "name": "smart_2_raw",
+            "column": "smart_2_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 2 raw"
+          },
+          {
+            "name": "smart_3_normalized",
+            "column": "smart_3_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 3 normalized"
+          },
+          {
+            "name": "smart_3_raw",
+            "column": "smart_3_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 3 raw"
+          },
+          {
+            "name": "smart_4_normalized",
+            "column": "smart_4_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 4 normalized"
+          },
+          {
+            "name": "smart_4_raw",
+            "column": "smart_4_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 4 raw"
+          },
+          {
+            "name": "smart_5_normalized",
+            "column": "smart_5_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 5 normalized"
+          },
+          {
+            "name": "smart_5_raw",
+            "column": "smart_5_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 5 raw"
+          },
+          {
+            "name": "smart_7_normalized",
+            "column": "smart_7_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 7 normalized"
+          },
+          {
+            "name": "smart_7_raw",
+            "column": "smart_7_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 7 raw"
+          },
+          {
+            "name": "smart_8_normalized",
+            "column": "smart_8_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 8 normalized"
+          },
+          {
+            "name": "smart_8_raw",
+            "column": "smart_8_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 8 raw"
+          },
+          {
+            "name": "smart_9_normalized",
+            "column": "smart_9_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 9 normalized"
+          },
+          {
+            "name": "smart_9_raw",
+            "column": "smart_9_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 9 raw"
+          },
+          {
+            "name": "smart_10_normalized",
+            "column": "smart_10_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 10 normalized"
+          },
+          {
+            "name": "smart_10_raw",
+            "column": "smart_10_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 10 raw"
+          },
+          {
+            "name": "smart_11_normalized",
+            "column": "smart_11_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 11 normalized"
+          },
+          {
+            "name": "smart_11_raw",
+            "column": "smart_11_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 11 raw"
+          },
+          {
+            "name": "smart_12_normalized",
+            "column": "smart_12_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 12 normalized"
+          },
+          {
+            "name": "smart_12_raw",
+            "column": "smart_12_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 12 raw"
+          },
+          {
+            "name": "smart_13_normalized",
+            "column": "smart_13_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 13 normalized"
+          },
+          {
+            "name": "smart_13_raw",
+            "column": "smart_13_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 13 raw"
+          },
+          {
+            "name": "smart_15_normalized",
+            "column": "smart_15_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 15 normalized"
+          },
+          {
+            "name": "smart_15_raw",
+            "column": "smart_15_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 15 raw"
+          },
+          {
+            "name": "smart_16_normalized",
+            "column": "smart_16_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 16 normalized"
+          },
+          {
+            "name": "smart_16_raw",
+            "column": "smart_16_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 16 raw"
+          },
+          {
+            "name": "smart_17_normalized",
+            "column": "smart_17_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 17 normalized"
+          },
+          {
+            "name": "smart_17_raw",
+            "column": "smart_17_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 17 raw"
+          },
+          {
+            "name": "smart_18_normalized",
+            "column": "smart_18_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 18 normalized"
+          },
+          {
+            "name": "smart_18_raw",
+            "column": "smart_18_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 18 raw"
+          },
+          {
+            "name": "smart_22_normalized",
+            "column": "smart_22_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 22 normalized"
+          },
+          {
+            "name": "smart_22_raw",
+            "column": "smart_22_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 22 raw"
+          },
+          {
+            "name": "smart_23_normalized",
+            "column": "smart_23_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 23 normalized"
+          },
+          {
+            "name": "smart_23_raw",
+            "column": "smart_23_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 23 raw"
+          },
+          {
+            "name": "smart_24_normalized",
+            "column": "smart_24_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 24 normalized"
+          },
+          {
+            "name": "smart_24_raw",
+            "column": "smart_24_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 24 raw"
+          },
+          {
+            "name": "smart_27_normalized",
+            "column": "smart_27_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 27 normalized"
+          },
+          {
+            "name": "smart_27_raw",
+            "column": "smart_27_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 27 raw"
+          },
+          {
+            "name": "smart_71_normalized",
+            "column": "smart_71_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 71 normalized"
+          },
+          {
+            "name": "smart_71_raw",
+            "column": "smart_71_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 71 raw"
+          },
+          {
+            "name": "smart_82_normalized",
+            "column": "smart_82_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 82 normalized"
+          },
+          {
+            "name": "smart_82_raw",
+            "column": "smart_82_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 82 raw"
+          },
+          {
+            "name": "smart_90_normalized",
+            "column": "smart_90_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 90 normalized"
+          },
+          {
+            "name": "smart_90_raw",
+            "column": "smart_90_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 90 raw"
+          },
+          {
+            "name": "smart_160_normalized",
+            "column": "smart_160_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 160 normalized"
+          },
+          {
+            "name": "smart_160_raw",
+            "column": "smart_160_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 160 raw"
+          },
+          {
+            "name": "smart_161_normalized",
+            "column": "smart_161_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 161 normalized"
+          },
+          {
+            "name": "smart_161_raw",
+            "column": "smart_161_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 161 raw"
+          },
+          {
+            "name": "smart_163_normalized",
+            "column": "smart_163_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 163 normalized"
+          },
+          {
+            "name": "smart_163_raw",
+            "column": "smart_163_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 163 raw"
+          },
+          {
+            "name": "smart_164_normalized",
+            "column": "smart_164_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 164 normalized"
+          },
+          {
+            "name": "smart_164_raw",
+            "column": "smart_164_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 164 raw"
+          },
+          {
+            "name": "smart_165_normalized",
+            "column": "smart_165_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 165 normalized"
+          },
+          {
+            "name": "smart_165_raw",
+            "column": "smart_165_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 165 raw"
+          },
+          {
+            "name": "smart_166_normalized",
+            "column": "smart_166_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 166 normalized"
+          },
+          {
+            "name": "smart_166_raw",
+            "column": "smart_166_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 166 raw"
+          },
+          {
+            "name": "smart_167_normalized",
+            "column": "smart_167_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 167 normalized"
+          },
+          {
+            "name": "smart_167_raw",
+            "column": "smart_167_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 167 raw"
+          },
+          {
+            "name": "smart_168_normalized",
+            "column": "smart_168_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 168 normalized"
+          },
+          {
+            "name": "smart_168_raw",
+            "column": "smart_168_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 168 raw"
+          },
+          {
+            "name": "smart_169_normalized",
+            "column": "smart_169_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 169 normalized"
+          },
+          {
+            "name": "smart_169_raw",
+            "column": "smart_169_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 169 raw"
+          },
+          {
+            "name": "smart_170_normalized",
+            "column": "smart_170_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 170 normalized"
+          },
+          {
+            "name": "smart_170_raw",
+            "column": "smart_170_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 170 raw"
+          },
+          {
+            "name": "smart_171_normalized",
+            "column": "smart_171_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 171 normalized"
+          },
+          {
+            "name": "smart_171_raw",
+            "column": "smart_171_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 171 raw"
+          },
+          {
+            "name": "smart_172_normalized",
+            "column": "smart_172_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 172 normalized"
+          },
+          {
+            "name": "smart_172_raw",
+            "column": "smart_172_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 172 raw"
+          },
+          {
+            "name": "smart_173_normalized",
+            "column": "smart_173_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 173 normalized"
+          },
+          {
+            "name": "smart_173_raw",
+            "column": "smart_173_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 173 raw"
+          },
+          {
+            "name": "smart_174_normalized",
+            "column": "smart_174_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 174 normalized"
+          },
+          {
+            "name": "smart_174_raw",
+            "column": "smart_174_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 174 raw"
+          },
+          {
+            "name": "smart_175_normalized",
+            "column": "smart_175_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 175 normalized"
+          },
+          {
+            "name": "smart_175_raw",
+            "column": "smart_175_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 175 raw"
+          },
+          {
+            "name": "smart_176_normalized",
+            "column": "smart_176_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 176 normalized"
+          },
+          {
+            "name": "smart_176_raw",
+            "column": "smart_176_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 176 raw"
+          },
+          {
+            "name": "smart_177_normalized",
+            "column": "smart_177_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 177 normalized"
+          },
+          {
+            "name": "smart_177_raw",
+            "column": "smart_177_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 177 raw"
+          },
+          {
+            "name": "smart_178_normalized",
+            "column": "smart_178_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 178 normalized"
+          },
+          {
+            "name": "smart_178_raw",
+            "column": "smart_178_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 178 raw"
+          },
+          {
+            "name": "smart_179_normalized",
+            "column": "smart_179_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 179 normalized"
+          },
+          {
+            "name": "smart_179_raw",
+            "column": "smart_179_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 179 raw"
+          },
+          {
+            "name": "smart_180_normalized",
+            "column": "smart_180_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 180 normalized"
+          },
+          {
+            "name": "smart_180_raw",
+            "column": "smart_180_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 180 raw"
+          },
+          {
+            "name": "smart_181_normalized",
+            "column": "smart_181_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 181 normalized"
+          },
+          {
+            "name": "smart_181_raw",
+            "column": "smart_181_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 181 raw"
+          },
+          {
+            "name": "smart_182_normalized",
+            "column": "smart_182_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 182 normalized"
+          },
+          {
+            "name": "smart_182_raw",
+            "column": "smart_182_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 182 raw"
+          },
+          {
+            "name": "smart_183_normalized",
+            "column": "smart_183_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 183 normalized"
+          },
+          {
+            "name": "smart_183_raw",
+            "column": "smart_183_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 183 raw"
+          },
+          {
+            "name": "smart_184_normalized",
+            "column": "smart_184_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 184 normalized"
+          },
+          {
+            "name": "smart_184_raw",
+            "column": "smart_184_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 184 raw"
+          },
+          {
+            "name": "smart_187_normalized",
+            "column": "smart_187_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 187 normalized"
+          },
+          {
+            "name": "smart_187_raw",
+            "column": "smart_187_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 187 raw"
+          },
+          {
+            "name": "smart_188_normalized",
+            "column": "smart_188_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 188 normalized"
+          },
+          {
+            "name": "smart_188_raw",
+            "column": "smart_188_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 188 raw"
+          },
+          {
+            "name": "smart_189_normalized",
+            "column": "smart_189_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 189 normalized"
+          },
+          {
+            "name": "smart_189_raw",
+            "column": "smart_189_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 189 raw"
+          },
+          {
+            "name": "smart_190_normalized",
+            "column": "smart_190_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 190 normalized"
+          },
+          {
+            "name": "smart_190_raw",
+            "column": "smart_190_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 190 raw"
+          },
+          {
+            "name": "smart_191_normalized",
+            "column": "smart_191_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 191 normalized"
+          },
+          {
+            "name": "smart_191_raw",
+            "column": "smart_191_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 191 raw"
+          },
+          {
+            "name": "smart_192_normalized",
+            "column": "smart_192_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 192 normalized"
+          },
+          {
+            "name": "smart_192_raw",
+            "column": "smart_192_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 192 raw"
+          },
+          {
+            "name": "smart_193_normalized",
+            "column": "smart_193_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 193 normalized"
+          },
+          {
+            "name": "smart_193_raw",
+            "column": "smart_193_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 193 raw"
+          },
+          {
+            "name": "smart_194_normalized",
+            "column": "smart_194_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 194 normalized"
+          },
+          {
+            "name": "smart_194_raw",
+            "column": "smart_194_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 194 raw"
+          },
+          {
+            "name": "smart_195_normalized",
+            "column": "smart_195_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 195 normalized"
+          },
+          {
+            "name": "smart_195_raw",
+            "column": "smart_195_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 195 raw"
+          },
+          {
+            "name": "smart_196_normalized",
+            "column": "smart_196_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 196 normalized"
+          },
+          {
+            "name": "smart_196_raw",
+            "column": "smart_196_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 196 raw"
+          },
+          {
+            "name": "smart_197_normalized",
+            "column": "smart_197_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 197 normalized"
+          },
+          {
+            "name": "smart_197_raw",
+            "column": "smart_197_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 197 raw"
+          },
+          {
+            "name": "smart_198_normalized",
+            "column": "smart_198_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 198 normalized"
+          },
+          {
+            "name": "smart_198_raw",
+            "column": "smart_198_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 198 raw"
+          },
+          {
+            "name": "smart_199_normalized",
+            "column": "smart_199_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 199 normalized"
+          },
+          {
+            "name": "smart_199_raw",
+            "column": "smart_199_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 199 raw"
+          },
+          {
+            "name": "smart_200_normalized",
+            "column": "smart_200_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 200 normalized"
+          },
+          {
+            "name": "smart_200_raw",
+            "column": "smart_200_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 200 raw"
+          },
+          {
+            "name": "smart_201_normalized",
+            "column": "smart_201_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 201 normalized"
+          },
+          {
+            "name": "smart_201_raw",
+            "column": "smart_201_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 201 raw"
+          },
+          {
+            "name": "smart_202_normalized",
+            "column": "smart_202_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 202 normalized"
+          },
+          {
+            "name": "smart_202_raw",
+            "column": "smart_202_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 202 raw"
+          },
+          {
+            "name": "smart_206_normalized",
+            "column": "smart_206_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 206 normalized"
+          },
+          {
+            "name": "smart_206_raw",
+            "column": "smart_206_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 206 raw"
+          },
+          {
+            "name": "smart_210_normalized",
+            "column": "smart_210_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 210 normalized"
+          },
+          {
+            "name": "smart_210_raw",
+            "column": "smart_210_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 210 raw"
+          },
+          {
+            "name": "smart_211_normalized",
+            "column": "smart_211_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 211 normalized"
+          },
+          {
+            "name": "smart_211_raw",
+            "column": "smart_211_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 211 raw"
+          },
+          {
+            "name": "smart_212_normalized",
+            "column": "smart_212_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 212 normalized"
+          },
+          {
+            "name": "smart_212_raw",
+            "column": "smart_212_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 212 raw"
+          },
+          {
+            "name": "smart_218_normalized",
+            "column": "smart_218_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 218 normalized"
+          },
+          {
+            "name": "smart_218_raw",
+            "column": "smart_218_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 218 raw"
+          },
+          {
+            "name": "smart_220_normalized",
+            "column": "smart_220_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 220 normalized"
+          },
+          {
+            "name": "smart_220_raw",
+            "column": "smart_220_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 220 raw"
+          },
+          {
+            "name": "smart_222_normalized",
+            "column": "smart_222_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 222 normalized"
+          },
+          {
+            "name": "smart_222_raw",
+            "column": "smart_222_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 222 raw"
+          },
+          {
+            "name": "smart_223_normalized",
+            "column": "smart_223_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 223 normalized"
+          },
+          {
+            "name": "smart_223_raw",
+            "column": "smart_223_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 223 raw"
+          },
+          {
+            "name": "smart_224_normalized",
+            "column": "smart_224_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 224 normalized"
+          },
+          {
+            "name": "smart_224_raw",
+            "column": "smart_224_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 224 raw"
+          },
+          {
+            "name": "smart_225_normalized",
+            "column": "smart_225_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 225 normalized"
+          },
+          {
+            "name": "smart_225_raw",
+            "column": "smart_225_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 225 raw"
+          },
+          {
+            "name": "smart_226_normalized",
+            "column": "smart_226_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 226 normalized"
+          },
+          {
+            "name": "smart_226_raw",
+            "column": "smart_226_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 226 raw"
+          },
+          {
+            "name": "smart_230_normalized",
+            "column": "smart_230_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 230 normalized"
+          },
+          {
+            "name": "smart_230_raw",
+            "column": "smart_230_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 230 raw"
+          },
+          {
+            "name": "smart_231_normalized",
+            "column": "smart_231_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 231 normalized"
+          },
+          {
+            "name": "smart_231_raw",
+            "column": "smart_231_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 231 raw"
+          },
+          {
+            "name": "smart_232_normalized",
+            "column": "smart_232_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 232 normalized"
+          },
+          {
+            "name": "smart_232_raw",
+            "column": "smart_232_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 232 raw"
+          },
+          {
+            "name": "smart_233_normalized",
+            "column": "smart_233_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 233 normalized"
+          },
+          {
+            "name": "smart_233_raw",
+            "column": "smart_233_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 233 raw"
+          },
+          {
+            "name": "smart_234_normalized",
+            "column": "smart_234_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 234 normalized"
+          },
+          {
+            "name": "smart_234_raw",
+            "column": "smart_234_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 234 raw"
+          },
+          {
+            "name": "smart_235_normalized",
+            "column": "smart_235_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 235 normalized"
+          },
+          {
+            "name": "smart_235_raw",
+            "column": "smart_235_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 235 raw"
+          },
+          {
+            "name": "smart_240_normalized",
+            "column": "smart_240_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 240 normalized"
+          },
+          {
+            "name": "smart_240_raw",
+            "column": "smart_240_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 240 raw"
+          },
+          {
+            "name": "smart_241_normalized",
+            "column": "smart_241_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 241 normalized"
+          },
+          {
+            "name": "smart_241_raw",
+            "column": "smart_241_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 241 raw"
+          },
+          {
+            "name": "smart_242_normalized",
+            "column": "smart_242_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 242 normalized"
+          },
+          {
+            "name": "smart_242_raw",
+            "column": "smart_242_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 242 raw"
+          },
+          {
+            "name": "smart_244_normalized",
+            "column": "smart_244_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 244 normalized"
+          },
+          {
+            "name": "smart_244_raw",
+            "column": "smart_244_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 244 raw"
+          },
+          {
+            "name": "smart_245_normalized",
+            "column": "smart_245_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 245 normalized"
+          },
+          {
+            "name": "smart_245_raw",
+            "column": "smart_245_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 245 raw"
+          },
+          {
+            "name": "smart_246_normalized",
+            "column": "smart_246_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 246 normalized"
+          },
+          {
+            "name": "smart_246_raw",
+            "column": "smart_246_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 246 raw"
+          },
+          {
+            "name": "smart_247_normalized",
+            "column": "smart_247_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 247 normalized"
+          },
+          {
+            "name": "smart_247_raw",
+            "column": "smart_247_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 247 raw"
+          },
+          {
+            "name": "smart_248_normalized",
+            "column": "smart_248_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 248 normalized"
+          },
+          {
+            "name": "smart_248_raw",
+            "column": "smart_248_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 248 raw"
+          },
+          {
+            "name": "smart_250_normalized",
+            "column": "smart_250_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 250 normalized"
+          },
+          {
+            "name": "smart_250_raw",
+            "column": "smart_250_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 250 raw"
+          },
+          {
+            "name": "smart_251_normalized",
+            "column": "smart_251_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 251 normalized"
+          },
+          {
+            "name": "smart_251_raw",
+            "column": "smart_251_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 251 raw"
+          },
+          {
+            "name": "smart_252_normalized",
+            "column": "smart_252_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 252 normalized"
+          },
+          {
+            "name": "smart_252_raw",
+            "column": "smart_252_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 252 raw"
+          },
+          {
+            "name": "smart_254_normalized",
+            "column": "smart_254_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 254 normalized"
+          },
+          {
+            "name": "smart_254_raw",
+            "column": "smart_254_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 254 raw"
+          },
+          {
+            "name": "smart_255_normalized",
+            "column": "smart_255_normalized",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 255 normalized"
+          },
+          {
+            "name": "smart_255_raw",
+            "column": "smart_255_raw",
+            "kind": "numeric_unknown",
+            "unit": null,
+            "description": "SMART attribute 255 raw"
+          }
+        ]
+      }
+    ],
+    "failure": {
+      "mode": "indicator",
+      "column": "failure",
+      "positive_values": [
+        "1"
+      ],
+      "definition": "Binary indicator: 1 means the last operational day before a known failure; 0 means no failure recorded on that date (not proof of permanent health)."
+    },
+    "followup": {
+      "mode": "last_observation",
+      "basis": "Conservative follow-up ends at each device's last recorded observation. Device disappearance is not treated as failure or health."
+    },
+    "description": "Backblaze Drive Stats daily observations for 2024. All SMART normalized and raw columns are treated as numeric_unknown due to lack of per-attribute semantic documentation; units unknown. One glob covers all quarterly folders; missing columns in any quarter will be NaN. Device ID from serial_number, date used as UTC day index."
+  },
+  "prior_experience": null,
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Grown surface defects trigger spare-sector reallocation, consuming the spare pool and indicating media degradation.",
+      "basis": "Backblaze Drive Stats and published SMART studies identify SMART 5 raw reallocated sector count as one of the strongest failure predictors; normalized value declines as spare sectors are consumed.",
+      "fields": [
+        "smart_5_raw",
+        "smart_5_normalized"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Pre-failure devices do not show higher raw reallocated counts and lower normalized values than healthy devices at comparable lead times."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Unstable sectors await remapping, producing current pending sectors that may later become uncorrectable.",
+      "basis": "Backblaze data shows SMART 197 raw pending sector count above zero strongly increases failure probability.",
+      "fields": [
+        "smart_197_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have elevated smart_197_raw counts in the prediction window compared with healthy devices."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Uncorrectable read/write errors reflect media, head, or channel failure that cannot be recovered by ECC.",
+      "basis": "SMART 187 reported uncorrectable errors are widely associated with imminent HDD failure in reliability studies.",
+      "fields": [
+        "smart_187_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reported uncorrectable error counts are not higher in failing devices than healthy devices before failure."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Frequent remapping attempts indicate active defect growth, even if reallocated sector total remains moderate.",
+      "basis": "SMART 196 reallocated event count captures the number of remap operations and is a known failure precursor.",
+      "fields": [
+        "smart_196_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Reallocated event counts do not differentiate failing from healthy devices within the lead window."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Drive unresponsiveness from firmware, head, or media issues manifests as command timeouts.",
+      "basis": "Operational experience shows accumulating SMART 188 command timeouts often precedes total drive failure.",
+      "fields": [
+        "smart_188_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show higher command timeout counts than healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Increased ECC recovery activity indicates marginal read channels and deteriorating media signal quality.",
+      "basis": "SMART 195 hardware ECC recovered counts rise when drives must correct many errors, a known degradation indicator.",
+      "fields": [
+        "smart_195_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Hardware ECC recovered counts are not elevated in failing devices after controlling for workload."
+    },
+    {
+      "id": "H7",
+      "mechanism": "Actuator or servo instability causes seek errors before mechanical failure.",
+      "basis": "SMART 7 seek error rate is associated with positioning degradation, a common near-failure signature.",
+      "fields": [
+        "smart_7_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Seek error rate does not increase in failing devices relative to healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Spindle or motor difficulty causes repeated spin-up attempts.",
+      "basis": "SMART 10 spin retry count captures motor start problems, a mechanical failure precursor.",
+      "fields": [
+        "smart_10_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have higher spin retry counts than healthy devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Age-related wear increases failure probability after high power-on hours, though risk is not strictly monotonic.",
+      "basis": "HDD reliability follows a bathtub curve: infant mortality, then steady wear-out at high power-on hours.",
+      "fields": [
+        "smart_9_raw"
+      ],
+      "expected_direction": "pattern",
+      "falsified_if": "Failure risk is not elevated at extreme high power-on hours after controlling for drive model and cohort."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Repeated head load/unload cycles mechanically wear the actuator and ramp, increasing late-life failure risk.",
+      "basis": "Load/unload cycle count, especially on 2.5-inch drives, is a mechanical wear indicator.",
+      "fields": [
+        "smart_193_raw"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show accumulated load cycle counts different from healthy devices at similar age."
+    }
+  ],
+  "hypothesis_id": "H7",
+  "error_evidence": [
+    {
+      "kind": "error_atlas",
+      "question": "在 best trial_004 的 TRAIN 留出设备上，按当前冻结阈值与聚合规则，比较漏报设备（FN，尤其占 1416/1489 的 scored_below_threshold）与正常设备（TN）在各已提供 SMART 数值列上的因果快照；同时比较高分区真故障（TP）与误报（FP）的可分特征；并复核 FN 的无及时调度、无及时分数、低于阈值分解，用于判断下一个特征应优先改善 recall 还是 precision。",
+      "trial": "trial_004",
+      "contrast": {
+        "kind": "error_atlas",
+        "error_counts": {
+          "TP": 861,
+          "FP": 2948,
+          "FN": 1489,
+          "TN": 1404855,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1416,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        },
+        "precision": {
+          "kind": "high_score_contrast",
+          "step": 400,
+          "threshold": 0.9899232983589172,
+          "cv_metrics": {
+            "step": 400,
+            "f1": 0.2795908426692645,
+            "TP": 861,
+            "FP": 2948,
+            "FN": 1489,
+            "precision": 0.22604358099238644,
+            "recall": 0.36638297872340425,
+            "threshold": 0.9899232983589172
+          },
+          "tp_units": 861,
+          "fp_units": 2948,
+          "group_counts": {
+            "TP": 861,
+            "FP": 2948
+          },
+          "sampled_group_counts": {
+            "TP": 861,
+            "FP": 1000
+          },
+          "features": [
+            {
+              "feature": "fe_187_recent_increase_7d",
+              "auc_tp_vs_fp": 0.7191621537235818,
+              "auc_positive_vs_negative": 0.7191621537235818,
+              "separation": 0.21916215372358183,
+              "positive_median": 25.0,
+              "negative_median": 7.0,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.6937583839170153,
+                0.748902582879678
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_90_raw",
+              "auc_tp_vs_fp": 0.6428571428571429,
+              "auc_positive_vs_negative": 0.6428571428571429,
+              "separation": 0.1428571428571429,
+              "positive_median": 532575944704.0,
+              "negative_median": 515396075520.0,
+              "positive_missing": 0.975609756097561,
+              "negative_missing": 0.99,
+              "auc_interval_95": [
+                0.4560372670807453,
+                0.8269090136054423
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_187_raw",
+              "auc_tp_vs_fp": 0.6365860617349081,
+              "auc_positive_vs_negative": 0.6365860617349081,
+              "separation": 0.13658606173490806,
+              "positive_median": 72.0,
+              "negative_median": 35.0,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.6063370234491454,
+                0.6706784236412965
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_187_normalized",
+              "auc_tp_vs_fp": 0.36680806623529033,
+              "auc_positive_vs_negative": 0.36680806623529033,
+              "separation": 0.13319193376470967,
+              "positive_median": 28.0,
+              "negative_median": 65.0,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.3330900222310085,
+                0.3957533601264781
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_220_raw",
+              "auc_tp_vs_fp": 0.5927869398634016,
+              "auc_positive_vs_negative": 0.5927869398634016,
+              "separation": 0.09278693986340159,
+              "positive_median": 19005442.0,
+              "negative_median": 1966082.0,
+              "positive_missing": 0.9198606271777003,
+              "negative_missing": 0.913,
+              "auc_interval_95": [
+                0.5077930507009636,
+                0.6791098200698716
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_187_rolling_mean_7d",
+              "auc_tp_vs_fp": 0.589751940655247,
+              "auc_positive_vs_negative": 0.589751940655247,
+              "separation": 0.08975194065524705,
+              "positive_median": 45.78571319580078,
+              "negative_median": 26.87142848968506,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.561677353619042,
+                0.626671208364353
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_197_raw",
+              "auc_tp_vs_fp": 0.5698093023255814,
+              "auc_positive_vs_negative": 0.5698093023255814,
+              "separation": 0.06980930232558136,
+              "positive_median": 45.0,
+              "negative_median": 24.0,
+              "positive_missing": 0.0011614401858304297,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5463716760270718,
+                0.5939063831703623
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_188_raw",
+              "auc_tp_vs_fp": 0.5675541822331801,
+              "auc_positive_vs_negative": 0.5675541822331801,
+              "separation": 0.0675541822331801,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.5422416022327493,
+                0.5951770354795016
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_1_normalized",
+              "auc_tp_vs_fp": 0.4330406504065041,
+              "auc_positive_vs_negative": 0.4330406504065041,
+              "separation": 0.06695934959349592,
+              "positive_median": 79.0,
+              "negative_median": 82.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.4099037734535346,
+                0.4531575391636657
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_198_raw",
+              "auc_tp_vs_fp": 0.5644117305458769,
+              "auc_positive_vs_negative": 0.5644117305458769,
+              "separation": 0.0644117305458769,
+              "positive_median": 16.0,
+              "negative_median": 8.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5414963566409465,
+                0.5877490647834555
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_5_raw",
+              "auc_tp_vs_fp": 0.563055168408827,
+              "auc_positive_vs_negative": 0.563055168408827,
+              "separation": 0.06305516840882697,
+              "positive_median": 156.0,
+              "negative_median": 72.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5384607122146686,
+                0.5911048366336584
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_1_raw",
+              "auc_tp_vs_fp": 0.5616202090592335,
+              "auc_positive_vs_negative": 0.5616202090592335,
+              "separation": 0.06162020905923349,
+              "positive_median": 76374944.0,
+              "negative_median": 42833216.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5392188710113072,
+                0.589782371269645
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_197_normalized",
+              "auc_tp_vs_fp": 0.44300581395348837,
+              "auc_positive_vs_negative": 0.44300581395348837,
+              "separation": 0.05699418604651163,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.0011614401858304297,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.432862954607394,
+                0.4548030239594603
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_198_normalized",
+              "auc_tp_vs_fp": 0.44332229965156794,
+              "auc_positive_vs_negative": 0.44332229965156794,
+              "separation": 0.05667770034843206,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.430557443373982,
+                0.4563921207862917
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_5_normalized",
+              "auc_tp_vs_fp": 0.44338850174216027,
+              "auc_positive_vs_negative": 0.44338850174216027,
+              "separation": 0.05661149825783973,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.4216301290779086,
+                0.4616275578920522
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_183_normalized",
+              "auc_tp_vs_fp": 0.4445061043285239,
+              "auc_positive_vs_negative": 0.4445061043285239,
+              "separation": 0.05549389567147611,
+              "positive_median": 95.0,
+              "negative_median": 96.0,
+              "positive_missing": 0.9210220673635308,
+              "negative_missing": 0.947,
+              "auc_interval_95": [
+                0.3588930613344191,
+                0.5433075738519092
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_183_raw",
+              "auc_tp_vs_fp": 0.5543840177580466,
+              "auc_positive_vs_negative": 0.5543840177580466,
+              "separation": 0.05438401775804658,
+              "positive_median": 5.0,
+              "negative_median": 4.0,
+              "positive_missing": 0.9210220673635308,
+              "negative_missing": 0.947,
+              "auc_interval_95": [
+                0.45281193727491,
+                0.639051602525068
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_195_raw",
+              "auc_tp_vs_fp": 0.5498506375227686,
+              "auc_positive_vs_negative": 0.5498506375227686,
+              "separation": 0.04985063752276864,
+              "positive_median": 146089288.0,
+              "negative_median": 124149328.0,
+              "positive_missing": 0.5749128919860628,
+              "negative_missing": 0.625,
+              "auc_interval_95": [
+                0.5139471992374229,
+                0.5826898534323636
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_187_recent_nonzero_7d_count",
+              "auc_tp_vs_fp": 0.4559893842658886,
+              "auc_positive_vs_negative": 0.4559893842658886,
+              "separation": 0.044010615734111413,
+              "positive_median": 7.0,
+              "negative_median": 7.0,
+              "positive_missing": 0.31939605110336816,
+              "negative_missing": 0.366,
+              "auc_interval_95": [
+                0.43003684274777604,
+                0.47915672184290525
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_9_normalized",
+              "auc_tp_vs_fp": 0.4655952380952381,
+              "auc_positive_vs_negative": 0.4655952380952381,
+              "separation": 0.03440476190476188,
+              "positive_median": 62.0,
+              "negative_median": 64.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.435611041288506,
+                0.4918641959129095
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_8_raw",
+              "auc_tp_vs_fp": 0.46723298559364135,
+              "auc_positive_vs_negative": 0.46723298559364135,
+              "separation": 0.03276701440635865,
+              "positive_median": 0.0,
+              "negative_median": 15.0,
+              "positive_missing": 0.6806039488966318,
+              "negative_missing": 0.634,
+              "auc_interval_95": [
+                0.42255534897715896,
+                0.5046121288279427
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_196_raw",
+              "auc_tp_vs_fp": 0.5316939890710383,
+              "auc_positive_vs_negative": 0.5316939890710383,
+              "separation": 0.031693989071038264,
+              "positive_median": 24.0,
+              "negative_median": 16.0,
+              "positive_missing": 0.6806039488966318,
+              "negative_missing": 0.634,
+              "auc_interval_95": [
+                0.4847873536581179,
+                0.5755169528168246
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_241_raw",
+              "auc_tp_vs_fp": 0.46885229639916676,
+              "auc_positive_vs_negative": 0.46885229639916676,
+              "separation": 0.031147703600833243,
+              "positive_median": 114484051968.0,
+              "negative_median": 115618631680.0,
+              "positive_missing": 0.31126596980255516,
+              "negative_missing": 0.354,
+              "auc_interval_95": [
+                0.43998180497403344,
+                0.5023462825177872
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_9_raw",
+              "auc_tp_vs_fp": 0.5305464576074332,
+              "auc_positive_vs_negative": 0.5305464576074332,
+              "separation": 0.03054645760743324,
+              "positive_median": 37729.0,
+              "negative_median": 35831.0,
+              "positive_missing": 0.0,
+              "negative_missing": 0.0,
+              "auc_interval_95": [
+                0.5064519123363219,
+                0.5559146759972831
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_2_raw",
+              "auc_tp_vs_fp": 0.4706060606060606,
+              "auc_positive_vs_negative": 0.4706060606060606,
+              "separation": 0.029393939393939417,
+              "positive_median": 0.0,
+              "negative_median": 56.0,
+              "positive_missing": 0.6806039488966318,
+              "negative_missing": 0.634,
+              "auc_interval_95": [
+                0.4244372064045979,
+                0.5084092555045088
+              ],
+              "credible": false
+            }
+          ],
+          "credible_features": [
+            "fe_187_recent_increase_7d",
+            "smart_187_raw",
+            "smart_187_normalized",
+            "smart_220_raw",
+            "fe_187_rolling_mean_7d",
+            "smart_197_raw",
+            "smart_188_raw",
+            "smart_1_normalized",
+            "smart_198_raw",
+            "smart_5_raw",
+            "smart_1_raw",
+            "smart_197_normalized",
+            "smart_198_normalized",
+            "smart_5_normalized",
+            "smart_195_raw",
+            "fe_187_recent_nonzero_7d_count",
+            "smart_9_normalized",
+            "smart_9_raw"
+          ],
+          "eligible_units": 1410153,
+          "error_counts": {
+            "TP": 861,
+            "FP": 2948,
+            "FN": 1489,
+            "TN": 1404855,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1416,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        },
+        "recall": {
+          "kind": "missed_fault_contrast",
+          "step": 400,
+          "threshold": 0.9899232983589172,
+          "cv_metrics": {
+            "step": 400,
+            "f1": 0.2795908426692645,
+            "TP": 861,
+            "FP": 2948,
+            "FN": 1489,
+            "precision": 0.22604358099238644,
+            "recall": 0.36638297872340425,
+            "threshold": 0.9899232983589172
+          },
+          "tp_units": 0,
+          "fp_units": 0,
+          "group_counts": {
+            "FN": 1489,
+            "TN": 1404855
+          },
+          "sampled_group_counts": {
+            "FN": 1000,
+            "TN": 1000
+          },
+          "features": [
+            {
+              "feature": "smart_165_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 25821750231040.0,
+              "negative_median": 1568284606464.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_167_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.0,
+              "separation": 0.5,
+              "positive_median": 11.0,
+              "negative_median": 35.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_169_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.0,
+              "separation": 0.5,
+              "positive_median": 52.0,
+              "negative_median": 105.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_180_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.0,
+              "separation": 0.5,
+              "positive_median": 40.0,
+              "negative_median": 50.0,
+              "positive_missing": 0.999,
+              "negative_missing": 0.995,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_230_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 100.0,
+              "negative_median": 17.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_230_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.0,
+              "separation": 0.5,
+              "positive_median": 16716701630464.0,
+              "negative_median": 18812174860288.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_235_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 550601785344.0,
+              "negative_median": 374362374144.0,
+              "positive_missing": 0.998,
+              "negative_missing": 0.995,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_244_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 100.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.997,
+              "negative_missing": 0.999,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_247_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 1145451392.0,
+              "negative_median": 400632640.0,
+              "positive_missing": 0.999,
+              "negative_missing": 0.997,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_248_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 1.0,
+              "separation": 0.5,
+              "positive_median": 1992131712.0,
+              "negative_median": 530537024.0,
+              "positive_missing": 0.999,
+              "negative_missing": 0.997,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_202_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.1,
+              "separation": 0.4,
+              "positive_median": 43.0,
+              "negative_median": 85.0,
+              "positive_missing": 0.999,
+              "negative_missing": 0.995,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_183_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.2412280701754386,
+              "separation": 0.25877192982456143,
+              "positive_median": 96.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.976,
+              "negative_missing": 0.981,
+              "auc_interval_95": [
+                0.127151686033265,
+                0.40404961885940155
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_183_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7587719298245614,
+              "separation": 0.25877192982456143,
+              "positive_median": 4.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.976,
+              "negative_missing": 0.981,
+              "auc_interval_95": [
+                0.5992168109668109,
+                0.8728483139667351
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_11_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.75,
+              "separation": 0.25,
+              "positive_median": 100.0,
+              "negative_median": 98.5,
+              "positive_missing": 0.994,
+              "negative_missing": 0.998,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_197_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7348323173325981,
+              "separation": 0.23483231733259813,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.079,
+              "negative_missing": 0.043,
+              "auc_interval_95": [
+                0.7175408816559458,
+                0.7530371362856892
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_168_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7333333333333333,
+              "separation": 0.23333333333333328,
+              "positive_median": 74.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.995,
+              "negative_missing": 0.994,
+              "auc_interval_95": [
+                0.43727678571428574,
+                1.0
+              ],
+              "credible": false
+            },
+            {
+              "feature": "fe_187_rolling_mean_7d",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7254434140632033,
+              "separation": 0.22544341406320334,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.71,
+              "negative_missing": 0.617,
+              "auc_interval_95": [
+                0.6991038905579781,
+                0.7560866638778936
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_187_expanding_mean",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.724254974340506,
+              "separation": 0.224254974340506,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.71,
+              "negative_missing": 0.617,
+              "auc_interval_95": [
+                0.6976389906957637,
+                0.755294523152701
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_187_normalized",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.27604482132041186,
+              "separation": 0.22395517867958814,
+              "positive_median": 100.0,
+              "negative_median": 100.0,
+              "positive_missing": 0.714,
+              "negative_missing": 0.619,
+              "auc_interval_95": [
+                0.2482639564245498,
+                0.30881495840877216
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_187_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7239551786795881,
+              "separation": 0.22395517867958814,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.714,
+              "negative_missing": 0.619,
+              "auc_interval_95": [
+                0.6911850415912278,
+                0.7517360435754502
+              ],
+              "credible": true
+            },
+            {
+              "feature": "fe_187_recent_nonzero_7d_count",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7217205365985414,
+              "separation": 0.2217205365985414,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.71,
+              "negative_missing": 0.617,
+              "auc_interval_95": [
+                0.6950058427407145,
+                0.7536700274653024
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_233_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.3,
+              "separation": 0.2,
+              "positive_median": 270.0,
+              "negative_median": 179905.5,
+              "positive_missing": 0.995,
+              "negative_missing": 0.992,
+              "auc_interval_95": [
+                0.0,
+                0.6683333333333328
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_16_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.7,
+              "separation": 0.19999999999999996,
+              "positive_median": 303.0,
+              "negative_median": 96.0,
+              "positive_missing": 0.998,
+              "negative_missing": 0.995,
+              "auc_interval_95": [
+                null,
+                null
+              ],
+              "credible": false
+            },
+            {
+              "feature": "smart_5_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.6847979596495307,
+              "separation": 0.18479795964953072,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.054,
+              "negative_missing": 0.009,
+              "auc_interval_95": [
+                0.6676827129815709,
+                0.7001146340042576
+              ],
+              "credible": true
+            },
+            {
+              "feature": "smart_196_raw",
+              "auc_tp_vs_fp": null,
+              "auc_positive_vs_negative": 0.6672885649130539,
+              "separation": 0.16728856491305388,
+              "positive_median": 0.0,
+              "negative_median": 0.0,
+              "positive_missing": 0.339,
+              "negative_missing": 0.389,
+              "auc_interval_95": [
+                0.6497862143290015,
+                0.6859532626195574
+              ],
+              "credible": true
+            }
+          ],
+          "credible_features": [
+            "smart_183_normalized",
+            "smart_183_raw",
+            "smart_197_raw",
+            "fe_187_rolling_mean_7d",
+            "fe_187_expanding_mean",
+            "smart_187_normalized",
+            "smart_187_raw",
+            "fe_187_recent_nonzero_7d_count",
+            "smart_5_raw",
+            "smart_196_raw"
+          ],
+          "eligible_units": 1410153,
+          "error_counts": {
+            "TP": 861,
+            "FP": 2948,
+            "FN": 1489,
+            "TN": 1404855,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1416,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          },
+          "note": "Exploratory TRAIN OOF evidence; device-cluster bootstrap, no multiple-testing correction. Features are the latest causal row at the best relevant decision time, not attribution of a pooled score. Fault decision times use outcomes for retrospective diagnosis only. Unscored units stay in counts; small groups or missing snapshots are insufficient evidence, not proof of absent signal."
+        }
+      }
+    }
+  ],
+  "target": "recall",
+  "exploration_reason": "缺少该单特征的先验诊断 AUC 证据，但 best trial_004 的漏报中 1416/1489 为低于阈值；现有成功特征以介质错误为主，机械定位故障模式可能覆盖不同漏报群体，使用 bounded exploration slot 训练评估。",
+  "error": null,
+  "previous_response": null
+}

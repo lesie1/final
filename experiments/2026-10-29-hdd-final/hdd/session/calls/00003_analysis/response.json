@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在TRAIN交叉验证留出设备上，哪些数值特征可区分高分TP与FP，以及哪些特征可区分FN与TN？",
+  "reason": "基线CV显示误报多（FP=2555），漏报也高（FN=1634，其中1561为分数低于阈值）。在提出特征前先获取两类错例的特征对比，避免无证据调参或盲目生成特征。"
+}

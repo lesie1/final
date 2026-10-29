@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    raw = frame['smart_187_raw']\n    nonzero = (raw > 0).mask(raw.isna())\n    nonzero_7d = nonzero.rolling('7D', min_periods=1).sum()\n    positive_change = raw.diff(1).clip(lower=0)\n    increase_7d = positive_change.rolling('7D', min_periods=1).sum()\n    mean_7d = raw.rolling('7D', min_periods=1).mean()\n    expanding_mean = raw.expanding(min_periods=1).mean()\n    return pd.DataFrame({\n        'fe_187_recent_nonzero_7d_count': nonzero_7d,\n        'fe_187_recent_increase_7d': increase_7d,\n        'fe_187_rolling_mean_7d': mean_7d,\n        'fe_187_expanding_mean': expanding_mean\n    }, index=frame.index)",
+  "features": [
+    "fe_187_recent_nonzero_7d_count",
+    "fe_187_recent_increase_7d",
+    "fe_187_rolling_mean_7d",
+    "fe_187_expanding_mean"
+  ],
+  "reason": "H3：不可纠正错误数越高越可能故障。smart_187_raw 在 FN/TN 对比中 AUC≈0.78，说明漏报设备处于非零但当前低分区域；这些特征分别捕捉过去 7 天非零天数、7 天正向突增量（忽略计数器复位）、近期平均水平和生命周期累计均值。已修复上一版 NameError：不再使用 float 内置名，改用 bool 掩码保留缺失，再对 7 天窗口求和。若 FN/TN 分离度未提高、CV recall 未上升且误报未净改善，则说明单纯 smart_187 时序形态不足以解释当前漏报。"
+}

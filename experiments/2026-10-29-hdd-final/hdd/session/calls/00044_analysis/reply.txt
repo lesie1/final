@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_004",
+  "question": "smart_195_raw 硬件 ECC 恢复计数的累积高位与近期突增，能否在 trial_004 的 TRAIN 交叉验证中区分低分漏报故障设备(FN)与健康设备(TN)，并同时改善高分区真故障(TP)与误报(FP)的排序？",
+  "reason": "best trial_004 仅使用 smart_187_raw，CV 仍有 1416 个故障单元因分数低于阈值而漏报，且 FP=2948。已单独测试 H1-H5/H7 相关 SMART 计数器均未被采纳；H6 smart_195_raw 尚未测试，其机制（ECC 恢复活动）与已用错误计数互补，可能捕获低分故障设备在阈值以下的可区分退化信号。当前没有单变量诊断证据，使用探索预算：这是本次独立研究的首个探索性特征请求，若失败则停止继续单计数器特征扩展。",
+  "expected": "新增特征不会只增加高分误报；在 TRAIN CV 中选择阈值上应提升 F1，且净命中不减少。故障设备在故障前应显示更高的 smart_195_raw 累积值或短期增量，使低分 FN 的分数上升而健康 TN 不显著上升。",
+  "falsification": "若配对 CV bootstrap 95% 区间下界 ≤ 0 或净命中丢失，或特征在高分 TP/FP、FN/TN 的 AUC 区间含 0.5，则判定该单一 ECC 恢复特征在当前 best 上无增量收益，不再继续 H6 方向。",
+  "hypothesis_id": "H6",
+  "target": "balanced",
+  "exploration_reason": "H6 未测试；已有 6 个单独 SMART 计数特征均未在 CV 上显著优于 best，但 H6 机制不同且前序错误计数特征 trial_004 曾显著提升基线。当前无 high_score_contrast/missed_fault_contrast 单变量 AUC 证据，使用一个探索槽位测试该未覆盖假设。"
+}

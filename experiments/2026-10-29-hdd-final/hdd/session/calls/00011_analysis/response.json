@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_003",
+  "kind": "error_atlas",
+  "question": "在 trial_003 的 TRAIN 交叉验证 OOF 上，请同时返回高分区 TP/FP 的因果特征对比，以及漏报 FN/TN 的因果特征快照；并拆解漏报中无及时时钟、无及时分数、低于阈值的比例，以判断下一步应优先恢复低分命中还是继续抑制高分区误报。",
+  "reason": "trial_003 的 SMART197 近期突增/持续高位特征在 selection 上减少 FP，但 CV 配对新命中 104、丢失命中 158，净丢命中，未达采纳。需要同时看两个错误群体，避免继续只压误报而进一步损失召回；error_atlas 一次性提供两组对比和漏报原因。"
+}

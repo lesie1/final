@@ -1,0 +1,20 @@
+{
+  "source": "/root/autodl-tmp/hdd_v2s_20261027/session",
+  "source_hashes": {
+    "/root/autodl-tmp/hdd_v2s_20261027/session/config.json": "a8c5869b105d040a5bf5860eae84c3637ceac3641419f8d6db4e14e61308b731",
+    "/root/autodl-tmp/hdd_v2s_20261027/session/mapping.json": "8dfad8b37cd987431bc656fa951811048df71f4a55f9e1239eec009c59678a62",
+    "/root/autodl-tmp/hdd_source_20261023/cache/manifest.json": "067847f9f24ee5783f2b42e6d837b014cf634919213170117ee7c8096c6ca3f5"
+  },
+  "raw_preprocessing_reused": true,
+  "model_weights_imported": false,
+  "test_opened": false,
+  "selection_period": [
+    1722988800,
+    1726142400
+  ],
+  "confirmation_period": [
+    1726142400,
+    1729296000
+  ],
+  "note": "Prior validation has exploratory history. Later VAL is kept outside this new Agent search, not claimed as a fresh independent test."
+}

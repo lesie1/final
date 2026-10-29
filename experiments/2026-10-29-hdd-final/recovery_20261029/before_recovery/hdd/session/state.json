@@ -1,0 +1,1573 @@
+{
+  "version": 1,
+  "status": "running",
+  "config_hash": "912462014473d2339910a3e3f642f0f6fb662c6326b060e8b6cf8174e3b42742",
+  "dataset": "e73ad057b94d7ac57acd36edf1b026d46d95b5a317c730baa8a4d03cdd69f39f",
+  "mapping_hash": "e548044abac280a41de930e8622cca35c9b2271b1ea6fa1ffe830b2a6e155ebc",
+  "calls": 50,
+  "tokens": 989281,
+  "trials": [
+    {
+      "id": "trial_001",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": null,
+      "reason": "baseline",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9869956374168396,
+        "TP": 186,
+        "FP": 799,
+        "FN": 392,
+        "precision": 0.18883248730964466,
+        "recall": 0.3217993079584775,
+        "f1": 0.2380038387715931,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 985,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 1,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.25475893969044655,
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "precision": 0.21889330479975544,
+          "recall": 0.3046808510638298,
+          "threshold": 0.9903090596199036
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 716,
+          "FP": 2555,
+          "FN": 1634,
+          "TN": 1405248,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1561,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": true,
+        "rule": "baseline",
+        "cv": {
+          "best_step": 400,
+          "metrics": {
+            "step": 400,
+            "f1": 0.25475893969044655,
+            "TP": 716,
+            "FP": 2555,
+            "FN": 1634,
+            "precision": 0.21889330479975544,
+            "recall": 0.3046808510638298,
+            "threshold": 0.9903090596199036
+          },
+          "fault_units": 2350,
+          "error_counts": {
+            "TP": 716,
+            "FP": 2555,
+            "FN": 1634,
+            "TN": 1405248,
+            "fn_no_timely_clock": 25,
+            "fn_no_timely_score": 48,
+            "fn_scored_below_threshold": 1561,
+            "fn_with_outside_window_alarm": 0,
+            "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+          }
+        }
+      }
+    },
+    {
+      "id": "trial_002",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "base",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 6,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "First propose one controlled parameter change as requested. Baseline uses max_depth=4; error_atlas shows credible but moderate univariate separations on SMART error counters, suggesting non-linear threshold interactions may need more tree depth. A single-factor change to max_depth=6 tests model capacity without altering features, sample weighting, labels, aggregation, or seed.",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9814440011978149,
+        "TP": 194,
+        "FP": 837,
+        "FN": 384,
+        "precision": 0.18816682832201745,
+        "recall": 0.3356401384083045,
+        "f1": 0.24114356743318832,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 1031,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 1,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "params.max_depth"
+        ],
+        "delta": {
+          "f1": 0.0031397286615952313,
+          "precision": -0.0006656589876272156,
+          "recall": 0.01384083044982698,
+          "TP": 8,
+          "FP": 38,
+          "FN": -8
+        },
+        "new_hits": 36,
+        "lost_hits": 28,
+        "new_false_alarms": 206,
+        "removed_false_alarms": 168,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.017990434832801896,
+          0.020959394098252707
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 150,
+        "metrics": {
+          "step": 150,
+          "f1": 0.2498011137629276,
+          "TP": 628,
+          "FP": 2050,
+          "FN": 1722,
+          "precision": 0.23450336071695296,
+          "recall": 0.2672340425531915,
+          "threshold": 0.9886009097099304
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 628,
+          "FP": 2050,
+          "FN": 1722,
+          "TN": 1405753,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1649,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.0031397286615952313,
+        "cv_delta_f1": -0.00495782592751895,
+        "cv_interval_95": [
+          -0.014669223641552105,
+          0.005059811822301472
+        ],
+        "probability_better": 0.149,
+        "new_hits": 52,
+        "lost_hits": 140,
+        "new_false_alarms": 312,
+        "removed_false_alarms": 817,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_003",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "d467349aad9fb33a67659259867b15b0a9aa031f23dbdbf4fd996ad73318172b",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9922163486480713,
+        "TP": 187,
+        "FP": 725,
+        "FN": 391,
+        "precision": 0.2050438596491228,
+        "recall": 0.3235294117647059,
+        "f1": 0.25100671140939596,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 912,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 3,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": 0.013002872637802865,
+          "precision": 0.01621137233947814,
+          "recall": 0.0017301038062284002,
+          "TP": 1,
+          "FP": -74,
+          "FN": -1
+        },
+        "new_hits": 40,
+        "lost_hits": 39,
+        "new_false_alarms": 223,
+        "removed_false_alarms": 297,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.008984304425274576,
+          0.03698130346094121
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.25986261040235525,
+          "TP": 662,
+          "FP": 2083,
+          "FN": 1688,
+          "precision": 0.24116575591985429,
+          "recall": 0.2817021276595745,
+          "threshold": 0.9945348501205444
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 662,
+          "FP": 2083,
+          "FN": 1688,
+          "TN": 1405720,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1615,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.013002872637802865,
+        "cv_delta_f1": 0.005103670711908703,
+        "cv_interval_95": [
+          -0.005385960181986791,
+          0.01597069856637192
+        ],
+        "probability_better": 0.813,
+        "new_hits": 104,
+        "lost_hits": 158,
+        "new_false_alarms": 517,
+        "removed_false_alarms": 989,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_004",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: smart_187_raw（无法纠正错误数）的非零持续高位与近期突增，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并同时改善高分区真故障(TP)与误报(FP)的排序？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.987483024597168,
+        "TP": 201,
+        "FP": 788,
+        "FN": 377,
+        "precision": 0.2032355915065723,
+        "recall": 0.3477508650519031,
+        "f1": 0.25654116145500955,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 989,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 2,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_001/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": 0.018537322683416457,
+          "precision": 0.01440310419692764,
+          "recall": 0.025951557093425615,
+          "TP": 15,
+          "FP": -11,
+          "FN": -15
+        },
+        "new_hits": 40,
+        "lost_hits": 25,
+        "new_false_alarms": 231,
+        "removed_false_alarms": 242,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          0.003165820304269043,
+          0.03611757418803168
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.2795908426692645,
+          "TP": 861,
+          "FP": 2948,
+          "FN": 1489,
+          "precision": 0.22604358099238644,
+          "recall": 0.36638297872340425,
+          "threshold": 0.9899232983589172
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 861,
+          "FP": 2948,
+          "FN": 1489,
+          "TN": 1404855,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1416,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": true,
+        "rule": "cv_paired",
+        "reference": "trial_001",
+        "selection_f1_gap": 0.018537322683416457,
+        "cv_delta_f1": 0.024831902978817932,
+        "cv_interval_95": [
+          0.015224289257712373,
+          0.034669737873948156
+        ],
+        "probability_better": 1.0,
+        "new_hits": 190,
+        "lost_hits": 45,
+        "new_false_alarms": 1081,
+        "removed_false_alarms": 688,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_005",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "parallel",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "当前 best trial_004 的 TRAIN 交叉验证漏报仍达 1489，其中 1416 个故障单元因分数低于阈值而漏报，说明主要矛盾在低分故障模式未被父模型捕捉。scope.parallel.allowed=true，允许在单阶段父模型上增加独立的全保留训练行浅层设备均衡分支，并通过逐行 max 融合补充父模型低分区的信号。该分支固定深度 2、设备均衡、sqrt 类别权重，不改动父分支与其他因素。",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.987483024597168,
+        "TP": 201,
+        "FP": 788,
+        "FN": 377,
+        "precision": 0.2032355915065723,
+        "recall": 0.3477508650519031,
+        "f1": 0.25654116145500955,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 989,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 2,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "rerank"
+        ],
+        "delta": {
+          "f1": 0.0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "TP": 0,
+          "FP": 0,
+          "FN": 0
+        },
+        "new_hits": 0,
+        "lost_hits": 0,
+        "new_false_alarms": 0,
+        "removed_false_alarms": 0,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          0.0,
+          0.0
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 50,
+        "metrics": {
+          "step": 50,
+          "f1": 0.2795908426692645,
+          "TP": 861,
+          "FP": 2948,
+          "FN": 1489,
+          "precision": 0.22604358099238644,
+          "recall": 0.36638297872340425,
+          "threshold": 0.9899232983589172
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 861,
+          "FP": 2948,
+          "FN": 1489,
+          "TN": 1404855,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1416,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": 0.0,
+        "cv_delta_f1": 0.0,
+        "cv_interval_95": [
+          0.0,
+          0.0
+        ],
+        "probability_better": 0.0,
+        "new_hits": 0,
+        "lost_hits": 0,
+        "new_false_alarms": 0,
+        "removed_false_alarms": 0,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_006",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "db606b7e4ec758f6fcc8138a71d7c53e10f743e90f2f8db66c57b95b68be222b",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 5 raw 重分配扇区数的持续高位、近期突增以及归一化值下降，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9895007014274597,
+        "TP": 187,
+        "FP": 707,
+        "FN": 391,
+        "precision": 0.20917225950782997,
+        "recall": 0.3235294117647059,
+        "f1": 0.25407608695652173,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 894,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 4,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": -0.002465074498487818,
+          "precision": 0.005936668001257667,
+          "recall": -0.024221453287197214,
+          "TP": -14,
+          "FP": -81,
+          "FN": 14
+        },
+        "new_hits": 26,
+        "lost_hits": 40,
+        "new_false_alarms": 142,
+        "removed_false_alarms": 223,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.0204299100101921,
+          0.014847161951894085
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.28467888061203944,
+          "TP": 707,
+          "FP": 1910,
+          "FN": 1643,
+          "precision": 0.2701566679403898,
+          "recall": 0.3008510638297872,
+          "threshold": 0.9945527911186218
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 707,
+          "FP": 1910,
+          "FN": 1643,
+          "TN": 1405893,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1570,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": -0.002465074498487818,
+        "cv_delta_f1": 0.005088037942774959,
+        "cv_interval_95": [
+          -0.00505101231430749,
+          0.014967885522688473
+        ],
+        "probability_better": 0.855,
+        "new_hits": 38,
+        "lost_hits": 192,
+        "new_false_alarms": 165,
+        "removed_false_alarms": 1203,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_007",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "99bfbb42cfa2533202a3cdd2d82ef30e639082baf3d6551654abf54b78245d8b",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 196 raw 重分配事件数及其近期突增/持续非零，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9919642210006714,
+        "TP": 171,
+        "FP": 578,
+        "FN": 407,
+        "precision": 0.22830440587449932,
+        "recall": 0.2958477508650519,
+        "f1": 0.25772418990203466,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 749,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 2,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": 0.001183028447025114,
+          "precision": 0.025068814367927017,
+          "recall": -0.05190311418685123,
+          "TP": -30,
+          "FP": -210,
+          "FN": 30
+        },
+        "new_hits": 12,
+        "lost_hits": 42,
+        "new_false_alarms": 47,
+        "removed_false_alarms": 257,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.013632854507289514,
+          0.017655362372932776
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.2827324478178368,
+          "TP": 745,
+          "FP": 2175,
+          "FN": 1605,
+          "precision": 0.2551369863013699,
+          "recall": 0.3170212765957447,
+          "threshold": 0.9932460188865662
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 745,
+          "FP": 2175,
+          "FN": 1605,
+          "TN": 1405628,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1532,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": 0.001183028447025114,
+        "cv_delta_f1": 0.003141605148572313,
+        "cv_interval_95": [
+          -0.0050454401489365445,
+          0.011079237314555726
+        ],
+        "probability_better": 0.786,
+        "new_hits": 28,
+        "lost_hits": 144,
+        "new_false_alarms": 174,
+        "removed_false_alarms": 947,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_008",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "device",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "当前 best trial_004 使用 sample 权重，在事件级样本上训练会使观测密集的健康设备主导梯度；其 CV 中 FP=2948、FN=1489，设备级 F1 仍受高假阳性限制。scope.allowed_changes 包含 base_weight，且尚未做过设备权重单因素对照。本次只将 base_weight 改为 device，保持特征、样本行、标签、评分与 seed 不变，检验等设备贡献是否能抑制高观测健康设备造成的假阳性并保留故障召回。",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9803266525268555,
+        "TP": 178,
+        "FP": 605,
+        "FN": 400,
+        "precision": 0.227330779054917,
+        "recall": 0.3079584775086505,
+        "f1": 0.2615723732549596,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 783,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 6,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "base_weight"
+        ],
+        "delta": {
+          "f1": 0.0050312117999500305,
+          "precision": 0.024095187548344693,
+          "recall": -0.039792387543252594,
+          "TP": -23,
+          "FP": -183,
+          "FN": 23
+        },
+        "new_hits": 28,
+        "lost_hits": 51,
+        "new_false_alarms": 150,
+        "removed_false_alarms": 333,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.011549670461029794,
+          0.02180024229782813
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 300,
+        "metrics": {
+          "step": 300,
+          "f1": 0.2668977469670711,
+          "TP": 693,
+          "FP": 2150,
+          "FN": 1657,
+          "precision": 0.24375659514597256,
+          "recall": 0.2948936170212766,
+          "threshold": 0.986815869808197
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 693,
+          "FP": 2150,
+          "FN": 1657,
+          "TN": 1405653,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1584,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": 0.0050312117999500305,
+        "cv_delta_f1": -0.012693095702193402,
+        "cv_interval_95": [
+          -0.023015841774210684,
+          -0.0027344231142685626
+        ],
+        "probability_better": 0.007,
+        "new_hits": 49,
+        "lost_hits": 217,
+        "new_false_alarms": 399,
+        "removed_false_alarms": 1197,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_009",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "23f68c6e925bfb65e45c21640699de193197067cc2a6bd35a4cbaf895702ae44",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: smart_188_raw 命令超时计数的持续高位与近期突增，能否区分 best trial_004 的漏报故障设备(FN)与健康设备(TN)，并帮助召回低分故障？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9909215569496155,
+        "TP": 167,
+        "FP": 564,
+        "FN": 411,
+        "precision": 0.22845417236662108,
+        "recall": 0.2889273356401384,
+        "f1": 0.25515660809778457,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 731,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 3,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": -0.0013845533572249824,
+          "precision": 0.025218580860048773,
+          "recall": -0.05882352941176472,
+          "TP": -34,
+          "FP": -224,
+          "FN": 34
+        },
+        "new_hits": 8,
+        "lost_hits": 42,
+        "new_false_alarms": 41,
+        "removed_false_alarms": 265,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.0172612679652612,
+          0.011938588220994844
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 350,
+        "metrics": {
+          "step": 350,
+          "f1": 0.28005385651086745,
+          "TP": 728,
+          "FP": 2121,
+          "FN": 1622,
+          "precision": 0.25552825552825553,
+          "recall": 0.3097872340425532,
+          "threshold": 0.9921303391456604
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 728,
+          "FP": 2121,
+          "FN": 1622,
+          "TN": 1405682,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1549,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": -0.0013845533572249824,
+        "cv_delta_f1": 0.0004630138416029661,
+        "cv_interval_95": [
+          -0.007181394701857099,
+          0.00876025664301943
+        ],
+        "probability_better": 0.54,
+        "new_hits": 23,
+        "lost_hits": 156,
+        "new_false_alarms": 127,
+        "removed_false_alarms": 954,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_010",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "892b69c26170650b9cdbd71408e750286898a3b0fe214d66e86ab89576b931ac",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 7 raw 寻道错误率的持续高位与近期突增，能否在 best trial_004 的 TRAIN 交叉验证漏报设备中区分低分故障(FN)与健康(TN)，补充机械定位退化信号？",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9904899597167969,
+        "TP": 174,
+        "FP": 566,
+        "FN": 404,
+        "precision": 0.23513513513513515,
+        "recall": 0.30103806228373703,
+        "f1": 0.26403641881638845,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 740,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 2,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "feature_program"
+        ],
+        "delta": {
+          "f1": 0.007495257361378904,
+          "precision": 0.03189954362856284,
+          "recall": -0.046712802768166084,
+          "TP": -27,
+          "FP": -222,
+          "FN": 27
+        },
+        "new_hits": 9,
+        "lost_hits": 36,
+        "new_false_alarms": 47,
+        "removed_false_alarms": 269,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.008129284509522982,
+          0.023827377857812193
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.27760683760683763,
+          "TP": 812,
+          "FP": 2688,
+          "FN": 1538,
+          "precision": 0.232,
+          "recall": 0.345531914893617,
+          "threshold": 0.9905057549476624
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 812,
+          "FP": 2688,
+          "FN": 1538,
+          "TN": 1405115,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1465,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": 0.007495257361378904,
+        "cv_delta_f1": -0.0019840050624268524,
+        "cv_interval_95": [
+          -0.008634144296407461,
+          0.004289286385885789
+        ],
+        "probability_better": 0.275,
+        "new_hits": 32,
+        "lost_hits": 81,
+        "new_false_alarms": 301,
+        "removed_false_alarms": 561,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_011",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.05,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Controller fallback after invalid analysis response",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.9811289310455322,
+        "TP": 233,
+        "FP": 1025,
+        "FN": 345,
+        "precision": 0.18521462639109698,
+        "recall": 0.4031141868512111,
+        "f1": 0.25381263616557737,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 1258,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 5,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "params.learning_rate"
+        ],
+        "delta": {
+          "f1": -0.002728525289432182,
+          "precision": -0.018020965115475324,
+          "recall": 0.055363321799307974,
+          "TP": 32,
+          "FP": 237,
+          "FN": -32
+        },
+        "new_hits": 40,
+        "lost_hits": 8,
+        "new_false_alarms": 295,
+        "removed_false_alarms": 58,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.015265097912022978,
+          0.010372263183887544
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 400,
+        "metrics": {
+          "step": 400,
+          "f1": 0.27300124091473144,
+          "TP": 770,
+          "FP": 2521,
+          "FN": 1580,
+          "precision": 0.23397143725311456,
+          "recall": 0.3276595744680851,
+          "threshold": 0.9896016716957092
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 770,
+          "FP": 2521,
+          "FN": 1580,
+          "TN": 1405282,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1507,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": -0.002728525289432182,
+        "cv_delta_f1": -0.006589601754533048,
+        "cv_interval_95": [
+          -0.01344959942763978,
+          0.0008787092416784007
+        ],
+        "probability_better": 0.039,
+        "new_hits": 32,
+        "lost_hits": 123,
+        "new_false_alarms": 250,
+        "removed_false_alarms": 677,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_012",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 50.0,
+          "learning_rate": 0.15,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "Controller fallback after invalid analysis response",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.987404465675354,
+        "TP": 218,
+        "FP": 848,
+        "FN": 360,
+        "precision": 0.2045028142589118,
+        "recall": 0.3771626297577855,
+        "f1": 0.26520681265206814,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 1066,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 3,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "params.learning_rate"
+        ],
+        "delta": {
+          "f1": 0.008665651197058588,
+          "precision": 0.0012672227523395085,
+          "recall": 0.02941176470588236,
+          "TP": 17,
+          "FP": 60,
+          "FN": -17
+        },
+        "new_hits": 29,
+        "lost_hits": 12,
+        "new_false_alarms": 174,
+        "removed_false_alarms": 114,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.006372153521990531,
+          0.022846021008973132
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      },
+      "cv": {
+        "best_step": 250,
+        "metrics": {
+          "step": 250,
+          "f1": 0.27528426092160385,
+          "TP": 690,
+          "FP": 1973,
+          "FN": 1660,
+          "precision": 0.25910627112279383,
+          "recall": 0.2936170212765957,
+          "threshold": 0.9934237003326416
+        },
+        "fault_units": 2350,
+        "error_counts": {
+          "TP": 690,
+          "FP": 1973,
+          "FN": 1660,
+          "TN": 1405830,
+          "fn_no_timely_clock": 25,
+          "fn_no_timely_score": 48,
+          "fn_scored_below_threshold": 1587,
+          "fn_with_outside_window_alarm": 0,
+          "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+        }
+      },
+      "acceptance": {
+        "accepted": false,
+        "rule": "cv_paired",
+        "reference": "trial_004",
+        "selection_f1_gap": 0.008665651197058588,
+        "cv_delta_f1": -0.004306581747660632,
+        "cv_interval_95": [
+          -0.01377632746347218,
+          0.005142220241477935
+        ],
+        "probability_better": 0.183,
+        "new_hits": 17,
+        "lost_hits": 188,
+        "new_false_alarms": 115,
+        "removed_false_alarms": 1090,
+        "fault_units": 2350
+      }
+    },
+    {
+      "id": "trial_013",
+      "status": "complete",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 5,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      },
+      "parent": "trial_004",
+      "reason": "特征预算已耗尽，不能继续请求新特征。best trial_004 在 TRAIN CV 中 FP=2948、FN=1489，高于阈值的低分故障占 1416/1489，高分区误报多。当前 min_child_weight=50 可能阻止模型学习小样本、低基数的故障模式，降低该参数允许更细的叶节点划分，在保持设备分组 CV 选阈值的前提下可能提高召回并改善 F1。这是未试过的单因素参数对照。",
+      "metrics": {
+        "protocol": "period_device_f1_v2",
+        "threshold": 0.990284264087677,
+        "TP": 173,
+        "FP": 612,
+        "FN": 405,
+        "precision": 0.22038216560509555,
+        "recall": 0.29930795847750863,
+        "f1": 0.2538517975055026,
+        "eligible_devices": 289599,
+        "eligible_fault_devices": 578,
+        "alarmed_devices": 785,
+        "no_history_devices": 152,
+        "no_history_fault_devices": 19,
+        "fault_without_timely_scheduled_opportunity": 19,
+        "positive_without_scored_positive_day": 19,
+        "unknown_devices": 29082,
+        "unknown_alarm_devices": 2,
+        "excluded_late_entry_devices": 9417,
+        "excluded_preexisting_fault_devices": 2829,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "model_reused_from": null,
+      "comparison": {
+        "reference": "/root/autodl-tmp/final_v31_20261028/hdd/session/trials/trial_004/attempt_01",
+        "changed_factors": [
+          "params.min_child_weight"
+        ],
+        "delta": {
+          "f1": -0.0026893639495069732,
+          "precision": 0.017146574098523243,
+          "recall": -0.048442906574394484,
+          "TP": -28,
+          "FP": -176,
+          "FN": 28
+        },
+        "new_hits": 4,
+        "lost_hits": 32,
+        "new_false_alarms": 45,
+        "removed_false_alarms": 221,
+        "model_identical": false,
+        "same_training_samples": true,
+        "conditional_paired_f1_interval_95": [
+          -0.015686915622893025,
+          0.011703776590964244
+        ],
+        "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+      }
+    }
+  ],
+  "best": "trial_004",
+  "pending": {
+    "action": "train",
+    "trial": "trial_013",
+    "decision": {
+      "action": "experiment",
+      "parent": "trial_004",
+      "changes": {
+        "params.min_child_weight": 5
+      },
+      "reason": "特征预算已耗尽，不能继续请求新特征。best trial_004 在 TRAIN CV 中 FP=2948、FN=1489，高于阈值的低分故障占 1416/1489，高分区误报多。当前 min_child_weight=50 可能阻止模型学习小样本、低基数的故障模式，降低该参数允许更细的叶节点划分，在保持设备分组 CV 选阈值的前提下可能提高召回并改善 F1。这是未试过的单因素参数对照。",
+      "hypothesis": "降低 min_child_weight 可以捕获更多低样本量故障事件，提升 TRAIN CV 的 TP 和 recall；CV 阈值优化会限制 FP 增长，最终设备级 F1 提升。",
+      "expected": "与 trial_004 相比，配对 bootstrap 95% F1 区间下界 > 0 且净命中未丢失；TP 增加，FN 减少，FP 增加在阈值选择后可控。",
+      "falsification": "若 CV 配对 bootstrap 95% 区间跨过 0 或下界 <= 0，或净命中减少，则该参数调整未能改善设备级 F1。",
+      "recipe": {
+        "feature_program": "b4fd43a30b6952efab2feb31cd67a82379039498f020b8ed9b5e2d2db9b723d9",
+        "feature_set": "base",
+        "sample_unit": "event",
+        "base_weight": "sample",
+        "label_horizon_days": 7,
+        "weight_policy": "ratio",
+        "prediction_interval_hours": 1,
+        "score_aggregation": "window_max",
+        "seed": 42,
+        "rerank": "none",
+        "rerank_gate": 0.5,
+        "params": {
+          "max_depth": 4,
+          "min_child_weight": 5,
+          "learning_rate": 0.1,
+          "reg_lambda": 1.0,
+          "reg_alpha": 0.0,
+          "gamma": 0.0,
+          "max_bin": 63,
+          "colsample_bytree": 0.7,
+          "max_delta_step": 0.0
+        }
+      }
+    }
+  },
+  "analyze_next": null,
+  "diagnostics": {
+    "trial_001": [
+      "error_atlas"
+    ],
+    "trial_003": [
+      "error_atlas"
+    ],
+    "trial_004": [
+      "error_atlas",
+      "missed_fault_contrast"
+    ]
+  },
+  "feature_jobs": 6,
+  "experience": null,
+  "experience_tried": true,
+  "last_failure": null
+}

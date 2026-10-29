@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-29T13:55:46.077779+00:00",
+  "status": "complete",
+  "error": null,
+  "export_exit": 0,
+  "trials": 13,
+  "best": "trial_004",
+  "steps": 2,
+  "test_opened": false,
+  "confirmation_is_independent_test": false,
+  "recovery": "/root/autodl-tmp/hdd_final_test_20261029/recovery_20261029",
+  "initial_failed_status": "/root/autodl-tmp/hdd_final_test_20261029/recovery_20261029/before_recovery/hdd/result_status.json",
+  "source_seals_verified": 115,
+  "calls": 50,
+  "tokens": 989281
+}

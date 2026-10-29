@@ -1,0 +1,9 @@
+{
+  "session": "/root/autodl-tmp/final_v31_20261028/hdd/session",
+  "max_trials": 13,
+  "calls": 120,
+  "tokens": 1500000,
+  "old_session": "/root/autodl-tmp/hdd_v2s_20261027/session",
+  "models_imported": false,
+  "test_opened": false
+}

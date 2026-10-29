@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_004",
+  "changes": {
+    "rerank": "parallel"
+  },
+  "reason": "当前 best trial_004 的 TRAIN 交叉验证漏报仍达 1489，其中 1416 个故障单元因分数低于阈值而漏报，说明主要矛盾在低分故障模式未被父模型捕捉。scope.parallel.allowed=true，允许在单阶段父模型上增加独立的全保留训练行浅层设备均衡分支，并通过逐行 max 融合补充父模型低分区的信号。该分支固定深度 2、设备均衡、sqrt 类别权重，不改动父分支与其他因素。",
+  "hypothesis": "全保留训练行上的浅层设备均衡分支能学习到与 deep 父模型互补的弱故障信号，尤其提升当前低于阈值的漏报单元召回，同时误报增加幅度可控，使 CV F1 提升。",
+  "expected": "CV F1 上升，新增命中数超过丢失命中数，paired bootstrap 95% 区间下界 > 0，并可能略微增加误报。",
+  "falsification": "CV paired F1 95% 区间下界 ≤ 0，或净命中未增加，或新增误报导致 F1 不升反降。"
+}

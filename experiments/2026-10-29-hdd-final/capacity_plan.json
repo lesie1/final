@@ -1,0 +1,9 @@
+{
+  "raw_bytes": 41095164596,
+  "source_files": 366,
+  "projected_rows": 114542085,
+  "estimated_sqlite_bytes": 118757233865,
+  "reserve_bytes": 42949672960,
+  "available_bytes": 197544972288,
+  "note": "Capacity estimate only; disk and memory guards remain active."
+}

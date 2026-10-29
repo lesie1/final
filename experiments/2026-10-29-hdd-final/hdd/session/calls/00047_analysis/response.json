@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_004",
+  "kind": "missed_fault_contrast",
+  "question": "在 best trial_004 的 TRAIN 交叉验证中，按阈值漏报的低分故障设备(FN，n=1416)与健康设备(TN)之间，未进入当前特征的候选字段 smart_195_raw、smart_10_raw、smart_9_raw、smart_193_raw 是否存在可信的单变量差异，以指导最后一个 features 实验？",
+  "reason": "剩余 trials=1，当前 best 的主要漏报集中在 fn_scored_below_threshold=1416；已尝试的 H1-H5、H7 特征未通过采纳检验。诊断预算尚未使用，先用 missed_fault_contrast 定位未使用候选字段在低分漏报群体中的证据，避免浪费最后一次试验。"
+}

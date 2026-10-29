@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_004",
+  "question": "在 best trial_004 已有 smart_187 持续高位/近期突增特征的基础上，新增 smart_5_raw（重分配扇区计数）与 fe_187 相关量的交互或组合特征，能否在保留当前 TP=861 的召回水平同时减少 CV 中 2948 个高分区误报，从而提升设备级 F1？",
+  "reason": "TRAIN OOF 证据显示两类信号可能互补：fe_187_recent_increase_7d 在 TP/FP 上 AUC=0.719（95% CI 0.694-0.749），smart_5_raw 在 FN/TN 上 AUC=0.685（95% CI 0.668-0.700），并在 TP/FP 上也有 0.563（95% CI 0.538-0.591）的可信分离。单独 smart_5 试验 trial_006 虽将 CV FP 从 2948 降至 1910，但 lost_hits=192，未能通过采纳。组合可能同时保留 smart_187 的召回并利用 smart_5 降低误报。",
+  "hypothesis_id": "H1",
+  "target": "interaction",
+  "expected": "新增交互或组合特征后，CV 中净命中不减少，且误报下降；与 trial_004 相比，配对 bootstrap 95% F1 区间下界 > 0。",
+  "falsification": "若新增特征导致 CV 净命中减少，或 F1 的配对 bootstrap 95% 区间跨过 0 / 下界不超过 0，则说明该组合未能同时改善 recall 与 precision。",
+  "exploration_reason": "smart_5_raw 与 fe_187 可能代表不同的退化机制：介质重分配与不可纠正错误。单一特征试验 smart_5 降低误报但丢失命中，而当前 smart_187 特征保留召回但仍有大量误报；两者在 TP/FP 与 FN/TN 方向均有可信单变量 AUC，因此值得用一次探索预算测试交互/组合效应。"
+}
