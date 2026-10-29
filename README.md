@@ -66,10 +66,9 @@ python tools/session_report.py --session <会话> --md summary.md
 
 - [复现指南](docs/reproduce.md)：要准备哪些数据、按什么顺序执行、输出在哪里
 - [接口参考](docs/interfaces.md)：命令行、Python API、LLM 接入、配置项、会话目录结构
-- [特征 Agent 的作用与整体流程图](docs/feature_agent.md)
+- [三个 Agent 的作用与整体流程图](docs/agents.md)
 - [框架与模块说明](docs/architecture.md)
 - [v3.2 采纳规则与 OOF 工作点](docs/v3_2_采纳规则与工作点.md)
-- [比赛要求与实现对照](docs/competition_requirements.md)
 - [Agent Skill](skills/device-failure-experiment-loop/SKILL.md) 与[共享实验方法](skills/device-failure-experiment-loop/references/experiment-method.md)
 - [版本历史文档](docs/history/)（v3 交接说明、v3.1 修复说明与验证）
 
