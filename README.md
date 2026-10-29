@@ -70,7 +70,7 @@ python tools/session_report.py --session <会话> --md summary.md
 - [接口参考](docs/interfaces.md)：命令行、Python API、LLM 接入、配置项、会话目录结构
 - [三个 Agent 的作用与整体流程图](docs/agents.md)
 - [框架与模块说明](docs/architecture.md)
-- [v3.2 采纳规则与 OOF 工作点](docs/v3_2_采纳规则与工作点.md)
+- [采纳规则与部署工作点](docs/acceptance_rule.md)：新模型凭什么取代最优模型、部署时用哪一轮和什么阈值，以及为什么这样设计
 - [Agent Skill](skills/device-failure-experiment-loop/SKILL.md) 与[共享实验方法](skills/device-failure-experiment-loop/references/experiment-method.md)
 
 v3.1 及更早的实验快照可在 git 提交 `4c27cf1` 中查看；v3 交接说明、v3.1 修复说明和 v3.1 验证报告可在提交 `9262e8f` 的 `docs/history/` 中查看。
