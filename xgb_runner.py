@@ -24,6 +24,10 @@ def cpu_model(model,threads):
     b.set_param(dict(device='cpu',nthread=threads));return b
 
 
+def full_model_wanted(c):
+    return c.get('acceptance')=='cv_paired' and c.get('operating_point','cv_oof')=='cv_oof'
+
+
 def reports(out,table,manifest,c,split,threshold,evaluation_id,recipe,frozen_points=None):
     primary=metrics(table,threshold)
     table.to_csv(out/f'devices_{split}.csv',index=False,encoding='utf-8-sig',float_format='%.17g')
@@ -76,6 +80,7 @@ def _run(c,recipe,out,test_model=None,parent_model=None,require_reuse=False,stag
     if reused:
         require(sha(Path(parent_model)/'model.ubj')==reused['model_sha256'],'Parent model changed')
         shutil.copy2(Path(parent_model)/'model.ubj',out/'model.ubj')
+        if (Path(parent_model)/'model_full.ubj').exists():shutil.copy2(Path(parent_model)/'model_full.ubj',out/'model_full.ubj')
         model=load_model(out/'model.ubj',c['num_threads'])
         tick=time.monotonic();table,stats=predict(model,c,recipe,m,'val');inference_seconds+=time.monotonic()-tick
         metric,grid=select(table);best=dict(step=reused['best_step'],metrics=metric,score_sha256=stats['score_sha256'])
@@ -108,9 +113,15 @@ def _run(c,recipe,out,test_model=None,parent_model=None,require_reuse=False,stag
             subsample=1.,scale_pos_weight=ratio,base_score=.5,seed=recipe['seed'],disable_default_eval_metric=1)
         model=xgb.Booster(params,cache=[dt]);best=None;stale=0;history=[]
         save(out/'resolved_parameters.json',params)
+        # Keep boosting past early stopping so every CV-selectable step exists in model_full.ubj.
+        extend=min(c['rounds'],c.get('cv_rounds',400)) if full_model_wanted(c) else 0
+        validating=True
         tick=time.monotonic()
         for step in range(1,c['rounds']+1):
             before=time.monotonic();model.update(dt,step-1);training_seconds+=time.monotonic()-before
+            if not validating:
+                if step>=extend:break
+                continue
             if step!=1 and step%c['eval_every'] and step!=c['rounds']:continue
             before=time.monotonic();cpu=cpu_model(model,c['num_threads'])
             print(f'Step {step}: validating {recipe["prediction_interval_hours"]}h schedule...',flush=True)
@@ -126,7 +137,10 @@ def _run(c,recipe,out,test_model=None,parent_model=None,require_reuse=False,stag
                 cpu.save_model(out/'model.ubj');grid.to_csv(out/'threshold_search_val.csv',index=False,float_format='%.17g')
             else:stale+=1
             print(f'Step {step}: device F1={metric["f1"]:.6f}; TP={metric["TP"]} FP={metric["FP"]} FN={metric["FN"]}; best={best["step"]}',flush=True)
-            if stale>=c['patience']:break
+            if stale>=c['patience']:
+                validating=False
+                if step>=extend:break
+        if extend:cpu_model(model,c['num_threads']).save_model(out/'model_full.ubj')
         actual=json.loads(model.save_config())['learner']['generic_param']['device']
         require(not c['device'].startswith('cuda') or actual.startswith('cuda'),'Unexpected CPU fallback')
         del dt;gc.collect()

@@ -19,6 +19,7 @@ from history_store import checked_manifest
 from comparison import paired, seal_evaluation
 from feature_contract import contract as feature_contract
 from worker_errors import WorkerFailure, ResourceLimitError
+from operating_point import choose
 
 
 def compact_error(folder, error):
@@ -298,9 +299,11 @@ class Loop:
 
         cv_paired: the baseline is always accepted. A challenger is first screened on the
         selection window; only if its selection F1 is not clearly worse than best's
-        (within screen_margin) does it get the costly CV run. It is accepted when the lower
-        end of the paired-bootstrap 95% interval of pooled CV F1 exceeds accept_lower_bound
-        and it lost no fault hits net (new_hits >= lost_hits).
+        (within screen_margin) does it get the costly CV run. With accept_test=probability
+        it is accepted when the paired device-cluster bootstrap gives P(better) >=
+        accept_probability and the pooled CV F1 gain exceeds accept_lower_bound.
+        accept_test=interval_95 keeps the earlier rule (95% lower bound > accept_lower_bound).
+        Net hits veto only when accept_require_net_hits is set.
         """
         best=self.s['best']
         if self.c.get('acceptance','selection_f1')=='selection_f1':
@@ -323,8 +326,11 @@ class Loop:
         from crossval import paired_cv
         p=paired_cv(mine,theirs,self.c['cv_bootstraps'])
         save(self.folder(t)/'cv_comparison_best.json',dict(p,reference_trial=best))
-        ok=p['interval_95'][0]>self.c['accept_lower_bound'] and p['new_hits']>=p['lost_hits']
-        return dict(accepted=bool(ok),rule='cv_paired',reference=best,selection_f1_gap=gap,
+        test=self.c.get('accept_test','probability')
+        if test=='interval_95':ok=p['interval_95'][0]>self.c['accept_lower_bound']
+        else:ok=p['probability_better']>=self.c.get('accept_probability',0.9) and p['delta_f1']>self.c['accept_lower_bound']
+        if self.c.get('accept_require_net_hits',False):ok=ok and p['new_hits']>=p['lost_hits']
+        return dict(accepted=bool(ok),rule='cv_paired',test=test,reference=best,selection_f1_gap=gap,
                     cv_delta_f1=p['delta_f1'],cv_interval_95=p['interval_95'],
                     probability_better=p['probability_better'],new_hits=p['new_hits'],lost_hits=p['lost_hits'],
                     new_false_alarms=p['new_false_alarms'],removed_false_alarms=p['removed_false_alarms'],
@@ -497,9 +503,14 @@ class Loop:
         payload['diagnostic_kinds']=['errors','coverage','score_distribution','feature_profiles','loss_curve','paired_devices','high_score_contrast','missed_fault_contrast','error_atlas']
         payload['feature_api']=feature_contract()
         if (self.root/'hypotheses.json').exists():payload['hypotheses']=read(self.root/'hypotheses.json')['hypotheses']
-        payload['acceptance_rule']=dict(rule=self.c.get('acceptance','selection_f1'),
+        test=self.c.get('accept_test','probability')
+        rule=('paired CV bootstrap P(better) >= %s and CV F1 gain > lower_bound'%self.c.get('accept_probability',0.9)
+              if test=='probability' else 'paired CV bootstrap 95%% lower bound > lower_bound')
+        if self.c.get('accept_require_net_hits',False):rule+=' and net hits are not lost'
+        payload['acceptance_rule']=dict(rule=self.c.get('acceptance','selection_f1'),test=test,
+            probability=self.c.get('accept_probability',0.9),
             lower_bound=self.c.get('accept_lower_bound'),screen_margin=self.c.get('screen_margin'),
-            explanation='best changes only when paired CV bootstrap 95% lower bound > lower_bound and net hits are not lost' if self.c.get('acceptance')=='cv_paired' else 'selection-window F1 gain')
+            explanation='best changes only when '+rule if self.c.get('acceptance')=='cv_paired' else 'selection-window F1 gain')
         payload['task_context']=dict(variant=self.c.get('search_variant'),instructions=self.c['instructions'],
             label_days=initial_plans()[0]['label_horizon_days'],maximum_lead_seconds=self.c['maximum_lead_seconds'],
             sampling_fixed=bool(self.c.get('sampling_reference')),selection_period=self.c.get('selection_window'),
@@ -567,7 +578,8 @@ def freeze(loop):
     entries=[]
     for name in selected:
         t=loop.trial(name);r=receipt(loop.folder(t));entries.append(dict(trial=name,model_sha256=r['model_sha256'],
-            recipe=r['recipe'],threshold=r['metrics']['threshold'],receipt_sha256=sha(loop.folder(t)/'complete.json')))
+            recipe=r['recipe'],threshold=r['metrics']['threshold'],receipt_sha256=sha(loop.folder(t)/'complete.json'),
+            operating_point=choose(loop.folder(t),loop.c.get('operating_point','selection_window'))))
     save(loop.root/'frozen.json',dict(models=entries,policy=policy(loop.c['domain']),
         mapping_hash=loop.s['mapping_hash'],config_hash=digest(loop.c)))
     loop.s['status']='frozen';loop.commit();return entries

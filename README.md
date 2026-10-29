@@ -97,6 +97,7 @@ python search_step.py --initialize-from /path/to/old_session --session /path/to/
 - [测试与真实样本验证](docs/validation.md)
 - [可机器读取的验证摘要](evidence/validation_summary.json)
 - [v3.1 修复说明](README_V3_1_修复说明.md)
+- [v3.2 采纳规则与 OOF 工作点（含重跑命令）](docs/v3_2_采纳规则与工作点.md)
 - [Agent skill](skills/device-failure-experiment-loop/SKILL.md)
 
 公开仓库提供源码、测试、方法文档和验证摘要；用户授权公开的实验审阅快照放在 `experiments/`，其中包含事件、调用记录、结果及指定模型。大型原始数据、特征缓存和完整续跑环境仍保留在实验服务器，排除项见各快照的导出清单。API 密钥和登录凭据不得提交。

@@ -16,11 +16,18 @@ DEFAULTS = dict(device='cuda:0',num_threads=8,memory_limit_gb=32,max_trials=24,
     # v2 evidence controls: CV on TRAIN decides acceptance; selection window only screens.
     cv_folds=5,cv_rounds=400,cv_bootstraps=1000,acceptance='cv_paired',
     accept_lower_bound=0.0,screen_margin=0.02,prescreen_features=True,score_workers=1,
+    # The 95% interval rule left every 13-trial search on its baseline: ~270 CV fault units
+    # cannot resolve a 2-point F1 gain. Probability rule: P(better)>=accept_probability and
+    # point CV gain > accept_lower_bound. Net hits are reported; F1 already prices FP and FN.
+    accept_test='probability',accept_probability=0.9,accept_require_net_hits=False,
+    # Deployment step/threshold come from pooled out-of-fold CV, not the few-fault selection window.
+    operating_point='cv_oof',
     rerank_allowed=False,rerank_min_rows=100,rerank_min_positive_devices=20,
     parallel_allowed=True,device_weight_allowed=True,prescreen_mode='balanced',
     feature_exploration_budget=2,contrast_max_units_per_group=1000)
 
 V2_KEYS=('cv_folds','cv_rounds','cv_bootstraps','acceptance','accept_lower_bound','screen_margin','prescreen_features','score_workers',
+         'accept_test','accept_probability','accept_require_net_hits','operating_point',
          'rerank_allowed','rerank_min_rows','rerank_min_positive_devices',
          'parallel_allowed','device_weight_allowed','prescreen_mode','feature_exploration_budget','contrast_max_units_per_group')
 
@@ -51,6 +58,10 @@ def validate_config(c):
     require(type(c.get('cv_folds',5)) is int and 2<=c.get('cv_folds',5)<=10,'cv_folds must be 2..10')
     require(type(c.get('cv_rounds',400)) is int and c.get('cv_rounds',400)>0,'Invalid cv_rounds')
     require(-1<=c.get('accept_lower_bound',0.)<=1 and 0<=c.get('screen_margin',.02)<=1,'Invalid acceptance bounds')
+    require(c.get('accept_test','probability') in ('probability','interval_95'),'accept_test must be probability or interval_95')
+    require(0.5<=c.get('accept_probability',0.9)<1,'accept_probability must be in [0.5, 1)')
+    require(type(c.get('accept_require_net_hits',False)) is bool,'Invalid accept_require_net_hits')
+    require(c.get('operating_point','cv_oof') in ('cv_oof','selection_window'),'operating_point must be cv_oof or selection_window')
     require(type(c.get('score_workers',1)) is int and 1<=c.get('score_workers',1)<=128,'score_workers must be 1..128')
     require(c.get('prescreen_mode','balanced') in ('balanced','strict_high'), 'Invalid prescreen_mode')
     require(type(c.get('feature_exploration_budget',2)) is int and 0<=c.get('feature_exploration_budget',2)<=10, 'Invalid exploration budget')
