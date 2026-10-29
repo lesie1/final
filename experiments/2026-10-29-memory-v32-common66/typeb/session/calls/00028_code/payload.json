@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 6,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 6, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "基线模型在 CV 漏报中有 21/27 个故障单元已有及时分数但低于阈值，说明模型对故障行的置信度不足。missed_fault_contrast 显示 read_ce_count、all_ce_count 等特征在 FN 与 TN 之间具有高 AUC（0.84、0.84），但直接加入这些特征（trial_003、trial_006）未带来提升，可能是基线 max_depth=4 不足以捕捉这些特征与现有 burst/DQ 等特征的交互关系。增加树深度是单因素控制，用于测试更复杂的交互能否提升低分故障单元的分数。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "params.max_depth": 6
+    },
+    "reason": "基线模型在 CV 漏报中有 21/27 个故障单元已有及时分数但低于阈值，说明模型对故障行的置信度不足。missed_fault_contrast 显示 read_ce_count、all_ce_count 等特征在 FN 与 TN 之间具有高 AUC（0.84、0.84），但直接加入这些特征（trial_003、trial_006）未带来提升，可能是基线 max_depth=4 不足以捕捉这些特征与现有 burst/DQ 等特征的交互关系。增加树深度是单因素控制，用于测试更复杂的交互能否提升低分故障单元的分数。",
+    "hypothesis": "增加模型复杂度（max_depth 从 4 到 6）能让模型在保持较高阈值的同时，更好地利用已有特征中的非线性组合，提高漏报故障单元的预测分数，从而提升 CV F1。",
+    "expected": "选择窗口 F1 不会明显下降，CV 中 FN 减少、TP 增加，CV F1 点估计相对于基线有小幅正向变化，且配对 bootstrap P(better) 可能达到 0.9 以上。",
+    "falsification": "若选择窗口 F1 较基线下降超过 screen_margin（0.02），或 CV F1 增益未超过 lower_bound（0）且 P(better) 低于 0.9，则不接受该实验。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 6,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

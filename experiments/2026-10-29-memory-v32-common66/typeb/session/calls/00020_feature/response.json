@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    denom_burst1 = frame['burst_count_1_1h'].where(frame['burst_count_1_1h'] > 0)\n    fe_burst1_recent_to_hour = frame['burst_count_1_15m'] / denom_burst1\n    prior_burst1 = frame['burst_count_1_1h'] - frame['burst_count_1_15m']\n    fe_burst1_recent_minus_prior = frame['burst_count_1_15m'] - prior_burst1\n    denom_error = frame['error_burst_count_1h'].where(frame['error_burst_count_1h'] > 0)\n    fe_error_burst_recent_to_hour = frame['error_burst_count_15m'] / denom_error\n    prior_error = frame['error_burst_count_1h'] - frame['error_burst_count_15m']\n    fe_error_burst_recent_minus_prior = frame['error_burst_count_15m'] - prior_error\n    return pd.DataFrame({'fe_burst1_recent_to_hour': fe_burst1_recent_to_hour, 'fe_burst1_recent_minus_prior': fe_burst1_recent_minus_prior, 'fe_error_burst_recent_to_hour': fe_error_burst_recent_to_hour, 'fe_error_burst_recent_minus_prior': fe_error_burst_recent_minus_prior}, index=frame.index)",
+  "features": [
+    "fe_burst1_recent_to_hour",
+    "fe_burst1_recent_minus_prior",
+    "fe_error_burst_recent_to_hour",
+    "fe_error_burst_recent_minus_prior"
+  ],
+  "reason": "H2：突发错误簇在缺陷激活时集中出现。用 burst_count_1 和 error_burst_count 的 15m/1h 比值及近期相对过去45m增量，构建交互特征，针对低分 FN（有分数但低于阈值）与 TN 的近期突增差异。若故障前这些值不高于健康行，则否定该特征假设。"
+}

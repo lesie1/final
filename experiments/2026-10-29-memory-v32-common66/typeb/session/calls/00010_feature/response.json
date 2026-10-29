@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    read_present_15m = frame['read_ce_count_15m'].notna().astype('float')\n    read_present_1h = frame['read_ce_count_1h'].notna().astype('float')\n    read_share_15m = frame['read_ce_count_15m'] / (frame['all_ce_count_15m'] + 1)\n    read_share_1h = frame['read_ce_count_1h'] / (frame['all_ce_count_1h'] + 1)\n    return pd.DataFrame({\n        'fe_read_ce_present_15m': read_present_15m,\n        'fe_read_ce_present_1h': read_present_1h,\n        'fe_read_ce_share_15m': read_share_15m,\n        'fe_read_ce_share_1h': read_share_1h\n    }, index=frame.index)",
+  "features": [
+    "fe_read_ce_present_15m",
+    "fe_read_ce_present_1h",
+    "fe_read_ce_share_15m",
+    "fe_read_ce_share_1h"
+  ],
+  "reason": "Tests H6 using error evidence: FN rows are less often missing read_ce fields than TN rows (22% vs 84%) and read_ce counts have credible FN/TN AUCs. The presence indicators make the missingness contrast explicit, while read_ce_share compares read-path CE activity with total CE activity, testing whether read-CE dominance separates missed faults from healthy rows and high-score TP from FP. Both are causally available at each timestamp."
+}

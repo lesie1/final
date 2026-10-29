@@ -1,0 +1,14 @@
+{
+  "forbidden_reads": [
+    "/root/autodl-tmp/smartmem_typea_20261026/data",
+    "/root/autodl-tmp/final_v31_20261028/final_test_20261029",
+    "/root/autodl-tmp/final_v31_20261028/rejected_comparison_20261029",
+    "/root/autodl-tmp/final_v31_20261028/typea_to_typeb_20261029"
+  ],
+  "readonly_roots": [
+    "/root/autodl-tmp/final_v31_20261028",
+    "/root/autodl-tmp/final_v31_20261028/typea/session",
+    "/root/autodl-tmp/typea_v2_20261027/raw_cache",
+    "/root/autodl-tmp/final_v32_20261029/runtime"
+  ]
+}

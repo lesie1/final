@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    life_cols = np.maximum(frame['raw_life_distinct_cols'], 1)\n    life_cells = np.maximum(frame['raw_life_distinct_cells'], 1)\n    recent_cols = frame['raw_7d_distinct_cols']\n    recent_cells = frame['raw_7d_distinct_cells']\n    recent_rows = np.maximum(frame['raw_7d_distinct_rows'], 1)\n    recent_col_share = recent_cols / life_cols\n    recent_cell_share = recent_cells / life_cells\n    recent_col_density = recent_cols / recent_rows\n    active_err = frame['error_dq_count_6h'] + frame['error_burst_count_6h']\n    spreading_activity = recent_col_share * np.log1p(active_err)\n    return pd.DataFrame({\n        'fe_recent_col_share': recent_col_share,\n        'fe_recent_cell_share': recent_cell_share,\n        'fe_recent_col_density': recent_col_density,\n        'fe_spreading_activity': spreading_activity\n    }, index=frame.index)",
+  "features": [
+    "fe_recent_col_share",
+    "fe_recent_cell_share",
+    "fe_recent_col_density",
+    "fe_spreading_activity"
+  ],
+  "reason": "H4 机制下，漏报设备在生命周期地址集中度高但现有模型未捕获其近期扩展模式。近 7 天 distinct cols/cells 相对生命周期的比值度量最近空间扩展速度；近 7 天 distinct cols 与 distinct rows 的比值度量行内列密度扩展；再用该比值与 error_dq_count_6h 和 error_burst_count_6h 的交互突出活跃扩散的局部缺陷，以区分正在扩散的故障前集中与长期稳定集中，并提高召回而不完全依赖单个高 AUC 静态字段。"
+}

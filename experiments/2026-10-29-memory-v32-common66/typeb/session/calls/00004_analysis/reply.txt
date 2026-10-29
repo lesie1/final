@@ -1,0 +1,10 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "hypothesis_id": "H6",
+  "question": "FN 与 TN 在 read CE 计数上已有高 AUC；新增 read CE 相对 all CE 的占比、read CE 的滚动 log 数量或近期 diff 趋势能否增强对即将故障设备的打分？",
+  "reason": "error_atlas 的 missed_fault_contrast 显示 read_ce_log_num_1h AUC 0.855 (95% CI 0.750-0.939)、read_ce_count_1h AUC 0.844 (0.739-0.937)，且 FN 中有 21/27 已有分数但低于阈值，说明这些设备在 read-path CE 上已表现出可用信号但模型未充分利用。新增组合/趋势特征可能提高这些样本的分数，改善 recall。",
+  "expected": "CV OOF 中 FN 的分数分布右移，更多漏报设备超过阈值；TP 增加且新增 FP 可控，CV F1 相对 baseline 提升。",
+  "falsification": "若特征实验在相同划分下 CV F1 不优于 trial_001，或新增 TP 不超过新增 FP，或 FN 分数无显著提高，则说明该 read CE 组合不能有效区分漏报与正常，继续沿用 baseline。",
+  "target": "recall"
+}

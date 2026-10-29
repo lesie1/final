@@ -1,0 +1,24 @@
+{
+  "files": {
+    "plan.json": "148d8fed75ccfe46778ea22e61398b7620f2cb04042f628ed9830502dcb0f6f9",
+    "candidate.py": "eda070bc615c3f54509b35500828f60511d1617b930864018ed191509d3e8592",
+    "sample_audit.json": "d377d52f09d85a9e18c7f85fcc4b2bd9843a891cd5167f6ea5927abe6019a355",
+    "resolved_parameters.json": "47da7567504759ae06e327448d0986e64897bd4009f2fdc40371c66bd3f18604",
+    "loss_history.json": "a3b820c48606408b62f9788bd89cdab94337a15b33017d28b3bf777f919f803e",
+    "model.ubj": "d3769aff61e19f84d5ff2878b0650be66fb710b279cb1fb0e71aa671fecd67ad",
+    "threshold_search_val.csv": "abbb128499e9b553af9cef28cfb5206d5e690570ffd72db972b2a17f8db9f852",
+    "model_full.ubj": "ea1618de8c0dded2431f79fedc982a73323f9d085ca4b7c6aa6507daaa5434ed",
+    "devices_val.csv": "2fc03823569dc157817a071bbfe9483a3b188ed824e642bf25d6e88adf605def",
+    "unknown_devices_val.csv": "ffbdf316bbfc174e4822d452cc13810be01e2c84dd3147354425640df966bf37",
+    "metrics_val.json": "a943a3fbd3ec33d8151258adb1e012070df7524b4ab099b55084cab3b15f3ee9",
+    "report_val.json": "5e0b739d35653bf8270eb7fe9fd826fb07fba6a6c69c82317c35eff5c728fe48",
+    "feature_importance.csv": "b49d27586eaebf6aa6d74c00f51bc9c4679eb96686cda8af005fbb572d9a5d8e",
+    "result.json": "cdce1866d6c30af94a106a46433052d9a2b9b67c2675187e2056bed01fe08d3c",
+    "scores_val/part-00000.parquet": "fe3ae6161f44e2f97d929ee3d618d01078adfdf7daa351e1ef46298786ed893d",
+    "scores_val/part-00001.parquet": "7566c6e5b71769ea63a242acca6975e7df70541679a3f311931bc71861e78b34",
+    "scores_val/part-00002.parquet": "8879c73ad1d90bd1dc82cafdfd662610b5aab45bb28a36f90fca2cb20c48b948",
+    "scores_val/part-00003.parquet": "3bd75e5e30c13e855c385e7ab5ec2ffae1535723bb363dc000838e6b5af93a09",
+    "scores_val/part-00004.parquet": "2cfd719c05f589cd0ca4f6b5a0fd84988e965b0bc66876a8670e1d4730278deb",
+    "scores_val/part-00005.parquet": "26aafff39aeb421ff7cb15d950f1942c1f9ed211985aa84bc9bd563f88483f2a"
+  }
+}

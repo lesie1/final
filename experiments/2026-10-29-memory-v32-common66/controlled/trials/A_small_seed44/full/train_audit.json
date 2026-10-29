@@ -1,0 +1,39 @@
+{
+  "components": [
+    {
+      "source": "typea",
+      "rows": 1679366,
+      "devices": 2825,
+      "positive_devices": 38,
+      "positive_rows": 5743,
+      "device_ids_sha256": "2ed7afba6c89294c50b0b4a6225d5a5cc61e3429ac3ce1d4fcfa8904cebd7c24",
+      "weighted_positive": 19.6313985279412,
+      "weighted_negative": 2805.3686219280207
+    }
+  ],
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0,
+    "eta": 0.1,
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "device": "cuda:0",
+    "nthread": 8,
+    "subsample": 1.0,
+    "scale_pos_weight": 142.90212783033076,
+    "base_score": 0.5,
+    "seed": 44,
+    "disable_default_eval_metric": 1
+  },
+  "rows": 1679366,
+  "features": 66,
+  "rounds": 400,
+  "fit_uses_only_train": true,
+  "base_weight": "one per included device"
+}

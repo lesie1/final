@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN 交叉验证留出设备中，超过阈值的高分单元里，哪些基线特征（尤其是 burst/DQ/CE 计数、空间模式）能区分真故障 TP 与误报 FP？",
+  "reason": "min_child_weight 从 50 降到 10 未改善，CV 中 FP 从 17 增至 25，全局参数调整不能解决误报。需要先在高分区定位可区分 TP/FP 的候选特征，再据此提出 features，避免盲目调参。"
+}

@@ -1,0 +1,20 @@
+TRAIN_SAMPLE_VALIDATED devices=12 shards=8 labels_visible=False
+FEATURE_SAMPLE_AND_CAUSALITY_PASSED program=a617ced0c73ee7f71dbf08dd5612e76e736768ab846deaf5de3f308fe4d79836
+FEATURE_VIEW_START program=a617ced0c73ee7f71dbf08dd5612e76e736768ab846deaf5de3f308fe4d79836 base cache preserved
+FEATURE_VIEW_PROGRESS devices=2324 rows=1618890 elapsed_seconds=30
+FEATURE_VIEW_PROGRESS devices=4703 rows=3309646 elapsed_seconds=60
+FEATURE_VIEW_PROGRESS devices=7208 rows=5020581 elapsed_seconds=90
+FEATURE_VIEW_PROGRESS devices=9706 rows=6681669 elapsed_seconds=120
+FEATURE_VIEW_PROGRESS devices=12033 rows=8400680 elapsed_seconds=150
+FEATURE_VIEW_PROGRESS devices=14371 rows=10244532 elapsed_seconds=180
+FEATURE_VIEW_PROGRESS devices=16912 rows=11798336 elapsed_seconds=210
+FEATURE_VIEW_PROGRESS devices=19410 rows=13459324 elapsed_seconds=240
+FEATURE_VIEW_PROGRESS devices=21854 rows=15193805 elapsed_seconds=270
+FEATURE_VIEW_PROGRESS devices=24206 rows=16890675 elapsed_seconds=301
+FEATURE_VIEW_PROGRESS devices=26662 rows=18548547 elapsed_seconds=331
+FEATURE_VIEW_PROGRESS devices=29126 rows=20179461 elapsed_seconds=361
+FEATURE_VIEW_PROGRESS devices=31574 rows=21942238 elapsed_seconds=391
+FEATURE_VIEW_PROGRESS devices=34027 rows=23523890 elapsed_seconds=421
+FEATURE_VIEW_PROGRESS devices=36420 rows=25191004 elapsed_seconds=452
+FEATURE_VIEW_PROGRESS devices=38757 rows=27113514 elapsed_seconds=482
+FEATURE_VIEW_PROGRESS devices=41161 rows=28814563 elapsed_seconds=513

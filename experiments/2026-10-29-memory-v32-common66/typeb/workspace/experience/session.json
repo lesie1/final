@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "session": "session",
+  "domain": "memory",
+  "dataset": "1908f199247e4fd2bd86ec93f034783b26955eedf2b4486c5ad4e25f5a1847ff",
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.8635445237159729,
+    "TP": 6,
+    "FP": 13,
+    "FN": 4,
+    "precision": 0.3157894736842105,
+    "recall": 0.6,
+    "f1": 0.41379310344827586,
+    "eligible_devices": 7136,
+    "eligible_fault_devices": 10,
+    "alarmed_devices": 19,
+    "no_history_devices": 5626,
+    "no_history_fault_devices": 0,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 0,
+    "unknown_devices": 0,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 0,
+    "excluded_preexisting_fault_devices": 39,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "gain_from_own_baseline": 0.0,
+  "semantics": "TypeB precomputed baseline features, 66 inputs from 15-minute and 1-hour historical windows, 7175 device files. Device ID from filename. No TypeA observations or labels mixed in.",
+  "feature_notes": [
+    "Tests H6 using error evidence: FN rows are less often missing read_ce fields than TN rows (22% vs 84%) and read_ce counts have credible FN/TN AUCs. The presence indicators make the missingness contrast explicit, while read_ce_share compares read-path CE activity with total CE activity, testing whether read-CE dominance separates missed faults from healthy rows and high-score TP from FP. Both are causally available at each timestamp.",
+    "H2：突发错误簇在缺陷激活时集中出现。用 burst_count_1 和 error_burst_count 的 15m/1h 比值及近期相对过去45m增量，构建交互特征，针对低分 FN（有分数但低于阈值）与 TN 的近期突增差异。若故障前这些值不高于健康行，则否定该特征假设。",
+    "H10 dynamic-expansion features: recent 15m share of 1h unique fault locations/error bits, plus recent error-bit excess over prior 45m. They target FN with timely but low scores, where baseline static counts may miss accelerating fault diffusion. If failing devices show faster recent growth, FN should score higher than TN; otherwise H10 is weakened.",
+    "检验 H11：error_burst_count 与 error_dq_count 的同时升高组合比单独字段更能区分已给分但低于阈值的漏报行与健康行。15m 乘积捕获近期共同严重性；1h 乘积提供较长背景；recent_ratio 捕获近期相对过去 1h 的联合抬升；log_product 缓解高计数量纲。若组合效应不显著，则这些特征不会在漏报行中一致高于健康行，CV F1 也不会改善。",
+    "基于 trial_001 漏报证据：fn_scored_below_threshold 在 CE/log 相关字段有方向，但单一 burst_count_*_15m 未带来 CV 提升。H2 认为跨突发大小的同时活跃更可能反映局部缺陷广度；用 .where 保留缺失并将布尔活跃转为 1.0 避免 float 未定义问题。新特征统计活跃突发类型数、按大小加权能量、大突发占比和每活跃类型平均能量，以检验是否比单一大小的计数更能区分漏报与健康行。",
+    "H10: 故障进展通常表现为唯一故障行/列扩展，同时出现中等突发簇。该特征把 fault_row_num_15m/fault_column_num_15m 的空间范围与 burst_count_3_15m/burst_count_4_15m 的突发强度相乘，限制在两者同时升高的行上，以保留 trial_009 的召回、减少单独空间增量引入的健康 FP。若 FN/TN 对比中交互特征无区分度，或加入后 CV 召回低于 trial_009 且 FP 未明显下降，则该机制被否定。"
+  ],
+  "transfer_policy": "Candidate hyperparameters and semantic ideas only; never copy trees, thresholds or labels."
+}

@@ -1,0 +1,11 @@
+2026-10-29T08:04:07Z control_started {"arm": "A_only", "seed": 42}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_only_seed42/full 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_only_seed42/full 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_only_seed42/full 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_only_seed42/full 400
+2026-10-29T08:04:34Z control_fold_complete {"arm": "A_only", "seed": 42, "fold": 0}
+2026-10-29T08:04:36Z control_fold_complete {"arm": "A_only", "seed": 42, "fold": 1}
+2026-10-29T08:04:37Z control_fold_complete {"arm": "A_only", "seed": 42, "fold": 2}
+2026-10-29T08:04:38Z control_fold_complete {"arm": "A_only", "seed": 42, "fold": 3}
+2026-10-29T08:04:39Z control_fold_complete {"arm": "A_only", "seed": 42, "fold": 4}
+2026-10-29T08:04:40Z control_complete {"arm": "A_only", "seed": 42, "operating_point": {"source": "B_train_oof", "model": "full/model_full.ubj", "model_sha256": "78a3ad4736f7d249b64645d2635546c98a35407bf57d50e9f801d534a91a4194", "step": 150, "threshold": 0.9936826229095459, "cv_metrics": {"step": 150, "f1": 0.14814814814814814, "TP": 4, "FP": 16, "FN": 30, "precision": 0.2, "recall": 0.11764705882352941, "threshold": 0.9936826229095459}, "oof_sha256": "9532875ea37ecead1792c7d5e52f3cc0a9fa602be5c30d8c18cf355f999f5ce3", "target": "typeb", "test_opened": false}}

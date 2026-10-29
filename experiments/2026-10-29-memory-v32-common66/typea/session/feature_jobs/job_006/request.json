@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_009",
+  "question": "在已有及时分数但低于阈值的漏报样本中，近期相邻 DQ 事件、多 beat 事件以及 DQ/beat 间隔是否与分散扩散特征互补，区分漏报故障与正常设备？具体地，故障前是否出现相邻 DQ/多 beat 事件在近期窗口的上升，同时伴随 fe_spread_error_intensity 或 fe_recent_new_pattern_rate 的升高？",
+  "reason": "error_atlas 证据指出 H7/H8 字段未被重点利用。high_score_contrast 中 raw_24h_multi_dq_events AUC 0.581 (95% CI 0.510-0.649) 可信，missed_fault_contrast 中 raw_life_max_err_bits AUC 0.743；trial_009 仅使用了 risky 事件，未直接使用 adjacent_dq/multi_beat/间隔特征。H8 假设认为相邻 DQ 和多 beat 错误显示更宽数据通路损坏，可能对分散扩散漏报提供独立信号。",
+  "expected": "新特征能提高低分故障的评分，使 CV 中 FN 减少、FP 增加可控，CV F1 超过 trial_009（0.1723），且相对于当前 best trial_008 的配对 bootstrap P(better)>=0.9。",
+  "falsification": "若 TRAIN 交叉验证显示新特征没有提高 FN/TN 分离，或 FP 显著增加导致 CV F1 未超过 trial_009，则 H8 在当前表示下不能改善漏报召回。",
+  "hypothesis_id": "H8",
+  "target": "recall",
+  "job": "job_006"
+}

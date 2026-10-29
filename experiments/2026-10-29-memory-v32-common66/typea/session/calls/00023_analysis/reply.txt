@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_007",
+  "kind": "high_score_contrast",
+  "question": "在 trial_007 的 TRAIN 交叉验证高分单元中，真故障 TP 与误报 FP 在哪些特征上存在可区分差异？例如近期 CE 活动、错误突发强度、地址/行列集中度、DQ/bit 扩展等，能否识别高分误报并用于减少 FP 而不增加 FN？",
+  "reason": "trial_007 在 device 权重父模型上增加 parallel 分支后与 trial_004 完全一致，CV F1=0.1550、P(better)=0.776 未达采纳标准；CV 混淆矩阵仍为 TP=52、FP=347、FN=220，误报仍是主要拖累。参数对照（max_depth 等）和 parallel 分支均未解决高分区 TP/FP 分离问题，应优先用 high_score_contrast 定位高分误报与真故障的可区分特征，为下一轮 features 提供证据。"
+}

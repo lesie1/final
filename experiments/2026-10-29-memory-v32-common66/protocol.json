@@ -1,0 +1,70 @@
+{
+  "version": "v32_common66_20261029",
+  "created_utc": "2026-10-29T02:40:53Z",
+  "search": {
+    "tasks": [
+      "typea",
+      "typeb"
+    ],
+    "max_trials_each": 13,
+    "policy": {
+      "accept_test": "probability",
+      "accept_probability": 0.9,
+      "accept_require_net_hits": false,
+      "operating_point": "cv_oof"
+    }
+  },
+  "controlled": {
+    "arms": [
+      "B_only",
+      "A_only",
+      "A_plus_B",
+      "A_small"
+    ],
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "max_trials": 12,
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "rounds": 400,
+    "eval_every": 50,
+    "folds": 5,
+    "fold_seed": 20261027,
+    "feature_policy": "Exact 66 TypeB names/order projected from A; preserve source values and NaNs; no added features.",
+    "sampling": "All mature TRAIN event rows; no legacy negative subsampling in any controlled arm.",
+    "weights": "Each included TRAIN device totals one base weight; positive class ratio recomputed from weighted TRAIN only.",
+    "small_A": "Sample A positive/nonpositive TRAIN devices to match B TRAIN device counts; preserve each selected device history. Three seeds, no validation-informed sampling.",
+    "cv": "Same B held-out devices and TRAIN periods in all arms. A-only models fit no B rows; B labels are used only for B-target OOF operating-point calibration. A+B fold fits all A and only non-held-out B.",
+    "operating_point": "Max pooled B TRAIN OOF device F1 across fixed steps; then fewer FP, earlier step; threshold frozen before later VAL or TEST.",
+    "scoring": "Primary B; also A and pooled counts at the same B-calibrated operating point. Report all seeds, no TEST winner selection."
+  },
+  "test_previously_exposed": true,
+  "independent_blind_test": false,
+  "source_label_policy": "Keep each source observed_start/end and failure metadata unchanged. Unknown follow-up never becomes negative.",
+  "publication": "New sessions, events, models, provenance and reports on GitHub; omit credentials, raw data and regenerable large caches; document exclusions."
+}

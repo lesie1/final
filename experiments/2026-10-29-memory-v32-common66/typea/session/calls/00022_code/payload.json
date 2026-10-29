@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'parallel', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "trial_004 仅将 base_weight 改为 device 后，CV F1 从最佳 trial_001 的 0.1412 提升到 0.1550，选择窗口 F1 从 0.1010 提升到 0.1863，但 P(better)=0.776 未达 0.9；其 CV 混淆矩阵为 TP=52/FP=347/FN=220，相比基线 FP 从 544 降到 347，但丢失了更多命中。trial_005 在 sample 权重父模型上增加 parallel 分支几乎没有变化（CV F1=0.1432，P(better)=0.62）。在 device 权重父模型上增加独立设备均衡浅层分支，可能恢复被误删的低分故障命中，同时保持父模型对高频设备误报的抑制。这是相对 trial_004 的单因素 parallel 对照。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_004",
+    "changes": {
+      "rerank": "parallel"
+    },
+    "reason": "trial_004 仅将 base_weight 改为 device 后，CV F1 从最佳 trial_001 的 0.1412 提升到 0.1550，选择窗口 F1 从 0.1010 提升到 0.1863，但 P(better)=0.776 未达 0.9；其 CV 混淆矩阵为 TP=52/FP=347/FN=220，相比基线 FP 从 544 降到 347，但丢失了更多命中。trial_005 在 sample 权重父模型上增加 parallel 分支几乎没有变化（CV F1=0.1432，P(better)=0.62）。在 device 权重父模型上增加独立设备均衡浅层分支，可能恢复被误删的低分故障命中，同时保持父模型对高频设备误报的抑制。这是相对 trial_004 的单因素 parallel 对照。",
+    "hypothesis": "设备均衡父模型已降低高频设备误报；在其上增加全 TRAIN 保留行训练的独立设备均衡分支，可通过 max 融合恢复低分故障命中，使 CV F1 超过 trial_004 的 0.1550，并可能满足 P(better)≥0.9。",
+    "expected": "CV F1 点估计 > 0.1550；相比 trial_004 的 new_hits 增加且 new_false_alarms 增幅可控；相比 best 的配对 bootstrap P(better)≥0.9。",
+    "falsification": "CV F1 未超过 0.1550，或新增误报抵消恢复的命中，或相比 best 的 P(better)<0.9，则 parallel 分支在 device 权重父模型上没有互补收益。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

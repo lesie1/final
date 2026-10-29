@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_009",
+  "kind": "high_score_contrast",
+  "question": "在 trial_009 的 TRAIN 分组交叉验证中，高于阈值的高分单元里，真故障(TP)与误报(FP)在近期新增模式/列速率、burst/risky 事件强度、地址/行分散度等特征上是否有可靠的单变量 AUC 差异？",
+  "reason": "trial_011 对 trial_009 增加 parallel 分支后 delta=0，未产生额外收益；trial_010 的归一化交互特征反而丢失 23 个命中。在继续请求特征或调整参数前，需要直接的高分 TP/FP 对比证据，定位哪些已有或可构造特征能减少高分误报、改善 precision，而不是重复相似特征。"
+}

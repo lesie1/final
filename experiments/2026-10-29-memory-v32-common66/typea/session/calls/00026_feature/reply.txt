@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    denom_cols = np.maximum(frame['raw_life_distinct_cols'], 1.0)\n    denom_events = np.maximum(frame['raw_life_events'], 1.0)\n    recent_col_share = frame['raw_life_new_cols_7d'] / denom_cols\n    recent_pattern_rate = frame['raw_life_new_patterns_7d'] / denom_events\n    spread = 1.0 - frame['raw_life_top_cell_share']\n    error_intensity = np.log1p(frame['error_dq_count_6h'] + frame['error_burst_count_6h'])\n    spread_error_interaction = spread * error_intensity\n    return pd.DataFrame({\n        'fe_recent_new_col_share': recent_col_share,\n        'fe_recent_new_pattern_rate': recent_pattern_rate,\n        'fe_top_cell_dispersion': spread,\n        'fe_spread_error_intensity': spread_error_interaction\n    }, index=frame.index)",
+  "features": [
+    "fe_recent_new_col_share",
+    "fe_recent_new_pattern_rate",
+    "fe_top_cell_dispersion",
+    "fe_spread_error_intensity"
+  ],
+  "reason": "H5: 近期新列/新模式扩散和 top-cell 集中度下降表示缺陷正在扩展而非稳定重复。missed_fault_contrast 显示 FN 的 raw_7d_distinct_cols/cells 和 new_patterns 更高，且 raw_life_top_cell_share 更低。前三个特征显式表达近期扩散与分散度；最后一个交互捕捉高分散度同时伴随 6h 内 DQ/burst 错误活跃，目标为提升分散扩散漏报召回。"
+}

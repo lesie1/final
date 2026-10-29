@@ -1,0 +1,720 @@
+{
+  "feature_program": "base",
+  "feature_names": [
+    "all_ce_count_15m",
+    "all_ce_count_1h",
+    "all_ce_log_num_15m",
+    "all_ce_log_num_1h",
+    "burst_count_1_15m",
+    "burst_count_1_1h",
+    "burst_count_2_15m",
+    "burst_count_2_1h",
+    "burst_count_3_15m",
+    "burst_count_3_1h",
+    "burst_count_4_15m",
+    "burst_count_4_1h",
+    "burst_count_5_15m",
+    "burst_count_5_1h",
+    "burst_count_6_15m",
+    "burst_count_6_1h",
+    "burst_count_7_15m",
+    "burst_count_7_1h",
+    "burst_count_8_15m",
+    "burst_count_8_1h",
+    "ce_storm_count_15m",
+    "ce_storm_count_1h",
+    "dq_count_1_15m",
+    "dq_count_1_1h",
+    "dq_count_2_15m",
+    "dq_count_2_1h",
+    "dq_count_3_15m",
+    "dq_count_3_1h",
+    "dq_count_4_15m",
+    "dq_count_4_1h",
+    "error_bit_count_15m",
+    "error_bit_count_1h",
+    "error_burst_count_15m",
+    "error_burst_count_1h",
+    "error_dq_count_15m",
+    "error_dq_count_1h",
+    "fault_column_num_15m",
+    "fault_column_num_1h",
+    "fault_mode_bank_15m",
+    "fault_mode_bank_1h",
+    "fault_mode_cell_15m",
+    "fault_mode_cell_1h",
+    "fault_mode_column_15m",
+    "fault_mode_column_1h",
+    "fault_mode_device_15m",
+    "fault_mode_device_1h",
+    "fault_mode_others_15m",
+    "fault_mode_others_1h",
+    "fault_mode_row_15m",
+    "fault_mode_row_1h",
+    "fault_row_num_15m",
+    "fault_row_num_1h",
+    "log_happen_frequency_15m",
+    "log_happen_frequency_1h",
+    "max_burst_interval_15m",
+    "max_burst_interval_1h",
+    "max_dq_interval_15m",
+    "max_dq_interval_1h",
+    "read_ce_count_15m",
+    "read_ce_count_1h",
+    "read_ce_log_num_15m",
+    "read_ce_log_num_1h",
+    "scrub_ce_count_15m",
+    "scrub_ce_count_1h",
+    "scrub_ce_log_num_15m",
+    "scrub_ce_log_num_1h"
+  ],
+  "interface_version": "causal_features_v2",
+  "column_summary": {
+    "all_ce_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 1.0,
+      "maximum": 301.0,
+      "mean": 49.333836,
+      "devices_with_values": 12
+    },
+    "all_ce_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 1.0,
+      "maximum": 307.0,
+      "mean": 111.54406,
+      "devices_with_values": 12
+    },
+    "all_ce_log_num_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 1.0,
+      "maximum": 72.0,
+      "mean": 4.863175,
+      "devices_with_values": 12
+    },
+    "all_ce_log_num_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 1.0,
+      "maximum": 135.0,
+      "mean": 14.725659,
+      "devices_with_values": 12
+    },
+    "burst_count_1_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 72.0,
+      "mean": 4.804628,
+      "devices_with_values": 12
+    },
+    "burst_count_1_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 135.0,
+      "mean": 14.639544,
+      "devices_with_values": 12
+    },
+    "burst_count_2_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 12.0,
+      "mean": 0.044989,
+      "devices_with_values": 12
+    },
+    "burst_count_2_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 15.0,
+      "mean": 0.051099,
+      "devices_with_values": 12
+    },
+    "burst_count_3_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_3_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_4_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_4_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_5_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_5_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_6_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_6_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_7_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_7_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_8_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "burst_count_8_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "devices_with_values": 12
+    },
+    "ce_storm_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 2.0,
+      "mean": 0.000993,
+      "devices_with_values": 12
+    },
+    "ce_storm_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 2.0,
+      "mean": 0.004059,
+      "devices_with_values": 12
+    },
+    "dq_count_1_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 72.0,
+      "mean": 3.617935,
+      "devices_with_values": 12
+    },
+    "dq_count_1_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 135.0,
+      "mean": 12.83619,
+      "devices_with_values": 12
+    },
+    "dq_count_2_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 61.0,
+      "mean": 1.216334,
+      "devices_with_values": 12
+    },
+    "dq_count_2_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 112.0,
+      "mean": 1.831549,
+      "devices_with_values": 12
+    },
+    "dq_count_3_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 10.0,
+      "mean": 0.014788,
+      "devices_with_values": 12
+    },
+    "dq_count_3_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 15.0,
+      "mean": 0.02189,
+      "devices_with_values": 12
+    },
+    "dq_count_4_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 2.0,
+      "mean": 0.000561,
+      "devices_with_values": 12
+    },
+    "dq_count_4_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 3.0,
+      "mean": 0.001015,
+      "devices_with_values": 12
+    },
+    "error_bit_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 128.0,
+      "mean": 6.138574,
+      "devices_with_values": 12
+    },
+    "error_bit_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 227.0,
+      "mean": 16.61269,
+      "devices_with_values": 12
+    },
+    "error_burst_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 72.0,
+      "mean": 4.894608,
+      "devices_with_values": 12
+    },
+    "error_burst_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 135.0,
+      "mean": 14.741742,
+      "devices_with_values": 12
+    },
+    "error_dq_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 128.0,
+      "mean": 6.097211,
+      "devices_with_values": 12
+    },
+    "error_dq_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 227.0,
+      "mean": 16.569017,
+      "devices_with_values": 12
+    },
+    "fault_column_num_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 6.0,
+      "mean": 0.379064,
+      "devices_with_values": 12
+    },
+    "fault_column_num_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 10.0,
+      "mean": 0.991645,
+      "devices_with_values": 12
+    },
+    "fault_mode_bank_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.203294,
+      "devices_with_values": 12
+    },
+    "fault_mode_bank_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.184966,
+      "devices_with_values": 12
+    },
+    "fault_mode_cell_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.525301,
+      "devices_with_values": 12
+    },
+    "fault_mode_cell_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.458616,
+      "devices_with_values": 12
+    },
+    "fault_mode_column_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.0261,
+      "devices_with_values": 12
+    },
+    "fault_mode_column_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.017918,
+      "devices_with_values": 12
+    },
+    "fault_mode_device_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.188874,
+      "devices_with_values": 12
+    },
+    "fault_mode_device_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.189759,
+      "devices_with_values": 12
+    },
+    "fault_mode_others_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.0541,
+      "devices_with_values": 12
+    },
+    "fault_mode_others_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.148137,
+      "devices_with_values": 12
+    },
+    "fault_mode_row_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.002332,
+      "devices_with_values": 12
+    },
+    "fault_mode_row_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "mean": 0.000604,
+      "devices_with_values": 12
+    },
+    "fault_row_num_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 4.0,
+      "mean": 0.031152,
+      "devices_with_values": 12
+    },
+    "fault_row_num_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 8.0,
+      "mean": 0.286279,
+      "devices_with_values": 12
+    },
+    "log_happen_frequency_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 12.5,
+      "maximum": 900.0,
+      "mean": 563.6745,
+      "devices_with_values": 12
+    },
+    "log_happen_frequency_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 26.66666603088379,
+      "maximum": 3600.0,
+      "mean": 1855.736084,
+      "devices_with_values": 12
+    },
+    "max_burst_interval_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 7.0,
+      "mean": 0.084906,
+      "devices_with_values": 12
+    },
+    "max_burst_interval_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 7.0,
+      "mean": 0.091663,
+      "devices_with_values": 12
+    },
+    "max_dq_interval_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 3.0,
+      "mean": 0.330944,
+      "devices_with_values": 12
+    },
+    "max_dq_interval_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 3.0,
+      "mean": 0.357087,
+      "devices_with_values": 12
+    },
+    "read_ce_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 158.0,
+      "mean": 7.996243,
+      "devices_with_values": 12
+    },
+    "read_ce_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 304.0,
+      "mean": 21.792799,
+      "devices_with_values": 12
+    },
+    "read_ce_log_num_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 33.0,
+      "mean": 1.772095,
+      "devices_with_values": 12
+    },
+    "read_ce_log_num_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 101.0,
+      "mean": 6.325979,
+      "devices_with_values": 12
+    },
+    "scrub_ce_count_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 292.0,
+      "mean": 1.780795,
+      "devices_with_values": 12
+    },
+    "scrub_ce_count_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 301.0,
+      "mean": 5.055373,
+      "devices_with_values": 12
+    },
+    "scrub_ce_log_num_15m": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 22.0,
+      "mean": 0.347459,
+      "devices_with_values": 12
+    },
+    "scrub_ce_log_num_1h": {
+      "sample_rows": 46322,
+      "finite_rows": 46322,
+      "missing_fraction": 0.0,
+      "minimum": 0.0,
+      "maximum": 29.0,
+      "mean": 0.800678,
+      "devices_with_values": 12
+    }
+  },
+  "training_examples": [
+    {
+      "rows": 2,
+      "median_gap_seconds": 66.0
+    },
+    {
+      "rows": 23,
+      "median_gap_seconds": 107125.0
+    },
+    {
+      "rows": 89,
+      "median_gap_seconds": 85814.0
+    },
+    {
+      "rows": 8192,
+      "median_gap_seconds": 902.0
+    },
+    {
+      "rows": 8192,
+      "median_gap_seconds": 913.0
+    },
+    {
+      "rows": 8192,
+      "median_gap_seconds": 900.0
+    },
+    {
+      "rows": 7591,
+      "median_gap_seconds": 939.0
+    },
+    {
+      "rows": 5466,
+      "median_gap_seconds": 919.0
+    },
+    {
+      "rows": 4234,
+      "median_gap_seconds": 960.0
+    },
+    {
+      "rows": 4231,
+      "median_gap_seconds": 950.0
+    },
+    {
+      "rows": 14,
+      "median_gap_seconds": 85814.0
+    },
+    {
+      "rows": 96,
+      "median_gap_seconds": 85957.0
+    }
+  ],
+  "labels_visible": false,
+  "source": "Diverse training-only device prefixes across spread shards. Missing in sample does NOT mean missing in population."
+}

@@ -1,0 +1,120 @@
+[
+  {
+    "trial": "trial_001",
+    "model_sha256": "fb93c381b7ec405fe5d469212f0cafdf82ca98c5065527dfee2a3b7143ae34a7",
+    "threshold": 0.9146937727928162,
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "operating_points": {
+      "deployed": {
+        "source": "cv_oof",
+        "model": "model_full.ubj",
+        "model_sha256": "3d2c13d5a9fc8e8bd8c90d2f1a03561a2283e7815ee891d4d861a591ddd73b8a",
+        "step": 250,
+        "threshold": 0.9146937727928162,
+        "cv_metrics": {
+          "step": 250,
+          "f1": 0.14123006833712984,
+          "TP": 62,
+          "FP": 544,
+          "FN": 210,
+          "precision": 0.10231023102310231,
+          "recall": 0.22794117647058823,
+          "threshold": 0.9146937727928162
+        },
+        "oof_sha256": "b198033fdf4d13032ef76cf5de48cbd06f34074c3b910a3889c1b54fe99e2fe2",
+        "fault_units": 272,
+        "note": "Threshold and step from pooled out-of-fold CV; applied to the full-TRAIN model at that step."
+      },
+      "selection_window": {
+        "source": "selection_window",
+        "model": "model.ubj",
+        "model_sha256": "fb93c381b7ec405fe5d469212f0cafdf82ca98c5065527dfee2a3b7143ae34a7",
+        "step": 50,
+        "threshold": 0.8296945095062256,
+        "reason": "Configured operating_point=selection_window"
+      }
+    }
+  },
+  {
+    "trial": "trial_008",
+    "model_sha256": "cfd64d80fd2c5d85bbbb19fab099775513182383860f2b800854b833284de3d3",
+    "threshold": 0.9307740926742554,
+    "recipe": {
+      "feature_program": "0e508b9d920307b71958129be58310de13b729cd3afa4ad1e04b359506764c52",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    },
+    "operating_points": {
+      "deployed": {
+        "source": "cv_oof",
+        "model": "model_full.ubj",
+        "model_sha256": "8a1b06def2c159d4bb096dfe8e3e2ffb90583348df6760a11ef1d46aa1fb3ad5",
+        "step": 250,
+        "threshold": 0.9307740926742554,
+        "cv_metrics": {
+          "step": 250,
+          "f1": 0.1622222222222222,
+          "TP": 73,
+          "FP": 555,
+          "FN": 199,
+          "precision": 0.11624203821656051,
+          "recall": 0.26838235294117646,
+          "threshold": 0.9307740926742554
+        },
+        "oof_sha256": "b13930a370787607c8bf0c3de6eca6922c34b8d3789fd6295a57137829d35e62",
+        "fault_units": 272,
+        "note": "Threshold and step from pooled out-of-fold CV; applied to the full-TRAIN model at that step."
+      },
+      "selection_window": {
+        "source": "selection_window",
+        "model": "model.ubj",
+        "model_sha256": "cfd64d80fd2c5d85bbbb19fab099775513182383860f2b800854b833284de3d3",
+        "step": 300,
+        "threshold": 0.9605705738067627,
+        "reason": "Configured operating_point=selection_window"
+      }
+    }
+  }
+]

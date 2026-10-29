@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 TRAIN 交叉验证中超过阈值的高分单元里，哪些特征（尤其地址集中度、CE 计数、burst 指标）能区分真故障 TP 与误报 FP？",
+  "reason": "trial_002 提高深度在验证窗口减少了 FP，但 CV 中丢失命中过多（new_hits 10, lost_hits 26），CV F1 下降 0.0186；需要在高分区定位误报与真故障的可分特征，为后续 features 动作提供可检验依据。当前 best 的 CV 有 544 FP 和 62 TP，高分区误报是精度低的主要原因。"
+}

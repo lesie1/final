@@ -1,0 +1,31 @@
+2026-10-29T08:09:01Z control_started {"arm": "A_plus_B", "seed": 43}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_0 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_0 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_0 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_0 400
+2026-10-29T08:09:33Z control_fold_complete {"arm": "A_plus_B", "seed": 43, "fold": 0}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_1 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_1 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_1 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_1 400
+2026-10-29T08:10:04Z control_fold_complete {"arm": "A_plus_B", "seed": 43, "fold": 1}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_2 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_2 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_2 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_2 400
+2026-10-29T08:10:35Z control_fold_complete {"arm": "A_plus_B", "seed": 43, "fold": 2}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_3 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_3 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_3 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_3 400
+2026-10-29T08:11:03Z control_fold_complete {"arm": "A_plus_B", "seed": 43, "fold": 3}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_4 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_4 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_4 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/cv/fold_4 400
+2026-10-29T08:11:32Z control_fold_complete {"arm": "A_plus_B", "seed": 43, "fold": 4}
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/full 100
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/full 200
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/full 300
+CONTROL_TRAIN /root/autodl-tmp/final_v32_20261029/controlled/trials/A_plus_B_seed43/full 400
+2026-10-29T08:12:00Z control_complete {"arm": "A_plus_B", "seed": 43, "operating_point": {"source": "B_train_oof", "model": "full/model_full.ubj", "model_sha256": "214515e777addf6502f183812c7aba08e92f08d49c3bf7d49952f323117d2c16", "step": 150, "threshold": 0.989682137966156, "cv_metrics": {"step": 150, "f1": 0.1694915254237288, "TP": 5, "FP": 20, "FN": 29, "precision": 0.2, "recall": 0.14705882352941177, "threshold": 0.989682137966156}, "oof_sha256": "9a82056a90863c690d43686a1f58f959293e69557327f8345dcc283a47d17ca8", "target": "typeb", "test_opened": false}}

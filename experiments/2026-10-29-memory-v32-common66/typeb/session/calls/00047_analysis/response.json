@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 best 的 TRAIN OOF 高分单元中，fault_mode_row_15m/fault_mode_column_15m 相对 fault_mode_bank_15m、fault_mode_device_15m、fault_mode_cell_15m、fault_mode_others_15m 的占比，以及 fault_mode_row/column 近15分钟相对1小时的变化，能否区分真故障（TP）与误报（FP），从而在不降低 recall 的前提下减少误报？",
+  "reason": "Feature-job budget exhausted，无法执行原 features 请求。剩余 1 次试验前，需要 bounded TRAIN OOF 证据确认 H9 的 fault_mode 分布在高分 TP/FP 间是否具有可区分性；该诊断无需新特征程序，且直接服务于原 precision 目标。"
+}

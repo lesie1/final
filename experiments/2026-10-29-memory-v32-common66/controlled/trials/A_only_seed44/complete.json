@@ -1,0 +1,25 @@
+{
+  "files": {
+    "recipe.json": "f0e74bdf67a7c9541982f80c4475088f2479d634e442f8f47715dfd93d8f120e",
+    "operating_point.json": "e709e282ea7e18d1445eb8e83fa67ddf294ee931dff6c5322e79e9f3c483c138",
+    "full/train_audit.json": "f6815081e11fbfb27d3edf071881c3b95233435af11034cd32f2fcbefb89ae76",
+    "full/model_full.ubj": "97fcbe3ce549b04a20b2804102ea7618b5495008e3f56aedd5ee997f1b7f31a7",
+    "full/fit_complete.json": "d53d7daface8b3a4cbf87f80d8232e6e1d2f0a20900fa9962feb21f703710c4d",
+    "cv/oof.parquet": "b5b946e434c10d91eccf6bee7e6d159d60b3c64ed7ad1a2b3619ebfcb4081c92",
+    "cv/oof_complete.json": "daed9dd3f39999203d3f656261ca36fe3a0a8a3758afb490565d42ea6906a62c",
+    "cv/fold_0/oof.parquet": "429bf9fd2b349c98ff172e57a8243a1ab161aa6ff1bba69298e6e7fd0bec7415",
+    "cv/fold_0/score_complete.json": "76087451b0d5df52f42bfbc0cf78965e3bbadfab9fa0e3f1655221c281ad68a7",
+    "cv/fold_1/oof.parquet": "630ad61cfc953ea7e3bb1ad8a9cfe14e727b86501d352d104e8b5ab0d1c78d0f",
+    "cv/fold_1/score_complete.json": "74d77532882ac007d6fccf30beca033ad5945df38f472e61f34d950e974dfc0f",
+    "cv/fold_2/oof.parquet": "d8521068c3a170d4e1b9532c1a79268741570f9a014ac5c58958c8093bc41931",
+    "cv/fold_2/score_complete.json": "cb47801ea2c56c8a76d8e1cd5e691c7e33bd50fdcbfe88106b4a48408ba7e5dd",
+    "cv/fold_3/oof.parquet": "8c976f1053d5b64a92db78ebebf657b6f4e53c6da40b8a6ebf9c2fa27d9d1705",
+    "cv/fold_3/score_complete.json": "f075eaee0ce096a21e7cade6970c6ead412dd149cf1758e555c2b20720dbb82a",
+    "cv/fold_4/oof.parquet": "ebd852eaec15ac5bb1e174789dcfbf35461c382a66e7da7689cfcf56f948684b",
+    "cv/fold_4/score_complete.json": "f8421ab900efefb90b3ff56f1d3d49edbfbbea6561974490a34bc08445e7766d"
+  },
+  "arm": "A_only",
+  "seed": 44,
+  "trained": true,
+  "test_opened": false
+}

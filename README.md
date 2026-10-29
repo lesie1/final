@@ -86,11 +86,13 @@ python search_step.py --initialize-from /path/to/old_session --session /path/to/
 - TRAIN 内 CV 按设备留出，设备的多个评价期整体参与配对重采样。训练设备可能含有与评分期重叠的时间数据，**不等同于严格的未来时间外推**。
 - CV 参与特征、步数和阈值选择，最优 CV 分数是搜索证据，不是独立测试结论。
 - 后段 VAL 确认须在搜索结束后进行；当前探索入口禁用 TEST。
-- TypeB 原始日志的语义核验、完整特征适配、A/B 联合训练和迁移测试尚未在本仓库宣称完成。光放大器真实跨域效果也未验证。
+- 已补充 [TypeA 现成模型用于 TypeB 的探索性测试](experiments/2026-10-29-typea-on-typeb/report.md)，并完成 [v3.2 搜索及共同 66 特征的 B-only、A-only、A+B、小规模 A 对照](experiments/2026-10-29-memory-v32-common66/report.md)。该固定方案下加入 A 未改善 B 的历史 TEST；这不证明样本数量是唯一原因。光放大器真实跨域效果仍未验证。
 - 模型复杂度/参数量、单次推理时延、Accuracy、无人干预比例和预设目标达标统计仍需补充。
 
 ## 文档与证据
 
+- [2026-10-29 v3.2：38 组实验、共同 66 特征对照及追加 TEST](experiments/2026-10-29-memory-v32-common66/README.md)
+- [2026-10-29 TypeA 模型用于 TypeB：报告、事件及测试证据](experiments/2026-10-29-typea-on-typeb/README.md)
 - [2026-10-29 TypeA / TypeB 实验 session、事件日志与补充测试报告](experiments/2026-10-29-memory-v31/README.md)
 - [框架与模块说明](docs/architecture.md)
 - [比赛要求、交付清单和实现状态](docs/competition_requirements.md)

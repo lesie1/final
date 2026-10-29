@@ -1,0 +1,15 @@
+{
+  "forbidden_reads": [
+    "/root/autodl-tmp/final_v32_20261029/typea/historical_test",
+    "/root/autodl-tmp/final_v32_20261029/typeb/historical_test",
+    "/root/autodl-tmp/final_v31_20261028/final_test_20261029",
+    "/root/autodl-tmp/final_v31_20261028/rejected_comparison_20261029",
+    "/root/autodl-tmp/final_v31_20261028/typea_to_typeb_20261029"
+  ],
+  "readonly_roots": [
+    "/root/autodl-tmp/final_v32_20261029/runtime",
+    "/root/autodl-tmp/final_v32_20261029/controlled/matrices",
+    "/root/autodl-tmp/final_v32_20261029/controlled/caches",
+    "/root/autodl-tmp/final_v31_20261028/typeb/workspace/sessions/20261028_211935_memory_8740df2e/cache"
+  ]
+}

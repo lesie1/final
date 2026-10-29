@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "rerank": "parallel"
+  },
+  "reason": "Baseline CV shows 27 FN, of which 21 have scores below the high threshold and 6 lack timely scores. A parallel device-balanced shallow XGBoost branch trained on all TRAIN rows and fused by max can provide complementary low-score coverage, potentially improving recall without excessive additional false alarms.",
+  "hypothesis": "An independent device-balanced shallow branch trained on all retained rows captures low-score fault patterns missed by the frozen parent model; max fusion improves overall F1 by recovering missed hits while limiting new false alarms.",
+  "expected": "CV F1 gain over parent, with new hits exceeding lost hits and a controlled increase in false alarms.",
+  "falsification": "If CV F1 does not improve or paired bootstrap P(better) < 0.9, the parallel branch is not accepted."
+}

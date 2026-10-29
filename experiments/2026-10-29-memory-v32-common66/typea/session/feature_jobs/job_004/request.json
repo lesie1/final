@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_008",
+  "question": "在高分 TP 与 FP 之间，能否用“近期新增模式速率 × 短时突发/risky 事件强度”识别真故障：真故障是否有更高的近期新增模式速率，且同时伴随更明显的近期 burst/risky 事件，而误报则主要是历史事件总量高但近期新异性和突发强度较低？",
+  "reason": "trial_008 的 high_score_contrast 显示，fe_recent_new_pattern_rate 是区分高分 TP/FP 的最强可信特征（AUC=0.640，区间[0.573,0.703]，TP 中位数 0.0104 vs FP 0.0024），但 raw_life_events 呈反向分离（AUC=0.401，TP 中位数 484 vs FP 965），提示误报集中在历史事件量大而近期新异性低的设备。同时 error_burst_count_15m、raw_24h_risky_events 等短时突发/风险特征也有正向可信分离（AUC≈0.576-0.589）。现有模型仍产生 FP=555、TP=73，说明这些单变量信号未被充分组合利用。请求构造将近期模式新异率按生命周期事件量归一化、并与短时突发/risky 强度相乘或交互的因果特征，以提升高分区间精度。",
+  "expected": "新特征在 TRAIN 交叉验证的高分 TP/FP 对比中具有高于单一特征的 AUC，且区间不含 0.5；训练后相对 trial_008 能减少误报并保持或提升召回，CV F1 有所提高。",
+  "falsification": "若新特征在高分 TP/FP 对比中 AUC 的可信区间包含 0.5，或在 CV 中相对 trial_008 未能降低 FP 且提升 F1，则该交互/归一化方向不能改善当前误报问题。",
+  "hypothesis_id": "H5",
+  "target": "precision",
+  "job": "job_004"
+}

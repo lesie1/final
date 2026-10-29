@@ -1,0 +1,177 @@
+2026-10-29T02:41:23Z scheduler_step_complete {"status": "running", "best": null, "test_opened": false}
+2026-10-29T02:52:44Z agent_call {"role": "code", "number": 1}
+2026-10-29T02:52:51Z training_started {"trial": "trial_001", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_001/attempt_01/execution.log"}
+Working (30s); log: /root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_001/attempt_01/execution.log
+2026-10-29T02:53:24Z cross_validation_started {"trial": "trial_001", "folds": 5}
+2026-10-29T02:53:38Z experiment_complete {"trial": "trial_001", "accepted": true, "rule": "baseline", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8635445237159729, "TP": 6, "FP": 13, "FN": 4, "precision": 0.3157894736842105, "recall": 0.6, "f1": 0.41379310344827586, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 19, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T02:53:38Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T02:55:14Z agent_call {"role": "feature", "number": 2}
+2026-10-29T02:56:20Z hypotheses_recorded {"count": 11}
+2026-10-29T02:56:20Z agent_call {"role": "analysis", "number": 3}
+2026-10-29T02:56:43Z decision_accepted {"action": "diagnose", "parent": "trial_001", "reason": "Baseline CV 显示 FP=17、FN=27，其中 21 个 FN 已有及时分数但低于阈值，说明模型未利用可分信号；需要错例对比证据而不是盲目调参。"}
+2026-10-29T02:56:43Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T02:57:07Z diagnostic_complete {"trial": "trial_001", "kind": "error_atlas", "path": "/root/autodl-tmp/final_v32_20261029/typeb/session/diagnostics/trial_001/error_atlas/evidence.json"}
+2026-10-29T02:57:07Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T02:58:34Z agent_call {"role": "analysis", "number": 4}
+2026-10-29T02:59:31Z response_repair {"role": "analysis", "attempt": 1, "error": "First propose one controlled parameter change"}
+2026-10-29T02:59:31Z agent_call {"role": "analysis", "number": 5}
+2026-10-29T03:00:13Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "Baseline min_child_weight=50 is high for the rare fault class. Error atlas shows 21/27 FN already have scores but fall below the high threshold; high min_child_weight may restrict useful splits and produce underconfident scores for fault rows. This is a single-factor control to test whether reducing split regularization improves recall without excessive false alarms."}
+2026-10-29T03:00:13Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:00:24Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:13:25Z agent_call {"role": "code", "number": 6}
+2026-10-29T03:13:36Z training_started {"trial": "trial_002", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_002/attempt_01/execution.log"}
+2026-10-29T03:14:05Z cross_validation_started {"trial": "trial_002", "folds": 5}
+2026-10-29T03:14:19Z experiment_complete {"trial": "trial_002", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8397595286369324, "TP": 6, "FP": 14, "FN": 4, "precision": 0.3, "recall": 0.6, "f1": 0.4, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 20, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T03:14:19Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:15:35Z agent_call {"role": "analysis", "number": 7}
+2026-10-29T03:16:19Z decision_accepted {"action": "diagnose", "parent": "trial_001", "reason": "min_child_weight 从 50 降到 10 未改善，CV 中 FP 从 17 增至 25，全局参数调整不能解决误报。需要先在高分区定位可区分 TP/FP 的候选特征，再据此提出 features，避免盲目调参。"}
+2026-10-29T03:16:19Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:16:37Z diagnostic_complete {"trial": "trial_001", "kind": "high_score_contrast", "path": "/root/autodl-tmp/final_v32_20261029/typeb/session/diagnostics/trial_001/high_score_contrast/evidence.json"}
+2026-10-29T03:16:37Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:17:45Z agent_call {"role": "analysis", "number": 8}
+2026-10-29T03:18:47Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "Error atlas already shows credible FN-vs-TN separation for read_ce_log_num_1h/15m and read_ce_count_1h/15m (AUC 0.855/0.815/0.844/0.814), while high-score contrast only had limited credible features. The base model uses raw counts but may not exploit the large missingness contrast (22% missing in FN vs 84% in TN) or read-CE interaction. Ask for causally available read-CE presence/missing indicators and count interactions rather than another parameter change."}
+2026-10-29T03:18:47Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:29:08Z agent_call {"role": "feature", "number": 9}
+2026-10-29T03:30:00Z feature_repair {"job": "job_001", "attempt": 1, "error": "Worker exit=1. See /root/autodl-tmp/final_v32_20261029/typeb/session/feature_jobs/job_001/execution.log"}
+2026-10-29T03:30:00Z agent_call {"role": "feature", "number": 10}
+2026-10-29T03:30:58Z feature_prescreen {"job": "job_001", "passed": true, "features": ["fe_read_ce_share_15m", "fe_read_ce_share_1h"]}
+2026-10-29T03:30:58Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:46:48Z agent_call {"role": "code", "number": 11}
+2026-10-29T03:47:00Z training_started {"trial": "trial_003", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_003/attempt_01/execution.log"}
+Working (30s); log: /root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_003/attempt_01/execution.log
+2026-10-29T03:47:38Z experiment_complete {"trial": "trial_003", "accepted": false, "rule": "screened_out", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.9152128100395203, "TP": 5, "FP": 11, "FN": 5, "precision": 0.3125, "recall": 0.5, "f1": 0.38461538461538464, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 16, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T03:47:38Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:50:18Z agent_call {"role": "analysis", "number": 12}
+2026-10-29T03:50:43Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T03:50:43Z agent_call {"role": "analysis", "number": 13}
+2026-10-29T03:51:20Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "Baseline CV shows 27 FN, of which 21 have scores below the high threshold and 6 lack timely scores. A parallel device-balanced shallow XGBoost branch trained on all TRAIN rows and fused by max can provide complementary low-score coverage, potentially improving recall without excessive additional false alarms."}
+2026-10-29T03:51:20Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T03:51:38Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:03:39Z agent_call {"role": "code", "number": 14}
+2026-10-29T04:03:48Z training_started {"trial": "trial_004", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_004/attempt_01/execution.log"}
+2026-10-29T04:04:15Z cross_validation_started {"trial": "trial_004", "folds": 5}
+2026-10-29T04:04:27Z experiment_complete {"trial": "trial_004", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8635445237159729, "TP": 6, "FP": 13, "FN": 4, "precision": 0.3157894736842105, "recall": 0.6, "f1": 0.41379310344827586, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 19, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T04:04:27Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:05:29Z agent_call {"role": "analysis", "number": 15}
+2026-10-29T04:06:02Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T04:06:02Z agent_call {"role": "analysis", "number": 16}
+2026-10-29T04:07:07Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "当前最佳 trial_001 使用 base_weight=sample，CV 中 TP=7、FN=27，其中 21 个故障单元分数低于阈值、6 个无及时分数。并行分支未带来变化，无法单独评估设备权重。作为单一因素对照，将每个训练设备总权重归一为1，可能提高稀有故障设备的训练贡献，改善欠分离行的分数。"}
+2026-10-29T04:07:07Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:07:19Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:21:10Z agent_call {"role": "code", "number": 17}
+2026-10-29T04:21:21Z training_started {"trial": "trial_005", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_005/attempt_01/execution.log"}
+2026-10-29T04:21:50Z cross_validation_started {"trial": "trial_005", "folds": 5}
+2026-10-29T04:22:04Z experiment_complete {"trial": "trial_005", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.9457294344902039, "TP": 5, "FP": 4, "FN": 5, "precision": 0.5555555555555556, "recall": 0.5, "f1": 0.5263157894736842, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 9, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T04:22:04Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:23:20Z agent_call {"role": "analysis", "number": 18}
+2026-10-29T04:23:35Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T04:23:35Z agent_call {"role": "analysis", "number": 19}
+2026-10-29T04:24:40Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "trial_001 CV 中 27 个 FN 有 21 个已有分数但低于阈值，参数、并行分支和设备权重对照均未提高 CV F1；需要针对低分故障行构造因果特征。假设 H2 认为突发错误簇在缺陷激活时集中出现，近期相对累计的突增应是故障前特征。"}
+2026-10-29T04:24:40Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:35:12Z agent_call {"role": "feature", "number": 20}
+2026-10-29T04:36:35Z feature_prescreen {"job": "job_002", "passed": true, "features": ["fe_burst1_recent_minus_prior", "fe_burst1_recent_to_hour", "fe_error_burst_recent_minus_prior", "fe_error_burst_recent_to_hour"]}
+2026-10-29T04:36:35Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:48:32Z agent_call {"role": "code", "number": 21}
+2026-10-29T04:48:47Z training_started {"trial": "trial_006", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_006/attempt_01/execution.log"}
+Working (30s); log: /root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_006/attempt_01/execution.log
+2026-10-29T04:49:21Z cross_validation_started {"trial": "trial_006", "folds": 5}
+2026-10-29T04:49:37Z experiment_complete {"trial": "trial_006", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.864118754863739, "TP": 6, "FP": 14, "FN": 4, "precision": 0.3, "recall": 0.6, "f1": 0.4, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 20, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T04:49:37Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:51:12Z agent_call {"role": "analysis", "number": 22}
+2026-10-29T04:51:32Z response_repair {"role": "analysis", "attempt": 1, "error": "Need a short reason"}
+2026-10-29T04:51:32Z agent_call {"role": "analysis", "number": 23}
+2026-10-29T04:51:41Z response_repair {"role": "analysis", "attempt": 2, "error": "Need a short reason"}
+2026-10-29T04:51:41Z agent_call {"role": "analysis", "number": 24}
+2026-10-29T04:51:48Z response_repair {"role": "analysis", "attempt": 3, "error": "Need a short reason"}
+2026-10-29T04:51:48Z controller_fallback {"error": "analysis response validation failed after bounded repair: Need a short reason", "changes": {"params.learning_rate": 0.05}}
+2026-10-29T04:51:48Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "Controller fallback after invalid analysis response"}
+2026-10-29T04:51:48Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T04:52:02Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:00:53Z agent_call {"role": "code", "number": 25}
+2026-10-29T05:01:04Z training_started {"trial": "trial_007", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_007/attempt_01/execution.log"}
+Working (30s); log: /root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_007/attempt_01/execution.log
+2026-10-29T05:01:38Z cross_validation_started {"trial": "trial_007", "folds": 5}
+2026-10-29T05:01:51Z experiment_complete {"trial": "trial_007", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8366407752037048, "TP": 6, "FP": 11, "FN": 4, "precision": 0.35294117647058826, "recall": 0.6, "f1": 0.4444444444444444, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 17, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T05:01:51Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:02:23Z agent_call {"role": "analysis", "number": 26}
+2026-10-29T05:02:46Z decision_accepted {"action": "diagnose", "parent": "trial_001", "reason": "最佳模型 trial_001 的 CV 中有 27 个 FN，其中 21 个已有及时分数但低于阈值，6 个无及时分数；已尝试 min_child_weight、learning_rate、device 权重、parallel 分支以及两个特征程序均未改善。应优先从漏报侧寻找可分离特征，而不是继续调参。该诊断将直接指导下一轮 features 动作。"}
+2026-10-29T05:02:46Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:03:06Z diagnostic_complete {"trial": "trial_001", "kind": "missed_fault_contrast", "path": "/root/autodl-tmp/final_v32_20261029/typeb/session/diagnostics/trial_001/missed_fault_contrast/evidence.json"}
+2026-10-29T05:03:06Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:04:13Z agent_call {"role": "analysis", "number": 27}
+2026-10-29T05:05:08Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "基线模型在 CV 漏报中有 21/27 个故障单元已有及时分数但低于阈值，说明模型对故障行的置信度不足。missed_fault_contrast 显示 read_ce_count、all_ce_count 等特征在 FN 与 TN 之间具有高 AUC（0.84、0.84），但直接加入这些特征（trial_003、trial_006）未带来提升，可能是基线 max_depth=4 不足以捕捉这些特征与现有 burst/DQ 等特征的交互关系。增加树深度是单因素控制，用于测试更复杂的交互能否提升低分故障单元的分数。"}
+2026-10-29T05:05:08Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:05:33Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:07:04Z agent_call {"role": "code", "number": 28}
+2026-10-29T05:07:13Z training_started {"trial": "trial_008", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_008/attempt_01/execution.log"}
+2026-10-29T05:07:38Z cross_validation_started {"trial": "trial_008", "folds": 5}
+2026-10-29T05:07:54Z experiment_complete {"trial": "trial_008", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.547614574432373, "TP": 6, "FP": 11, "FN": 4, "precision": 0.35294117647058826, "recall": 0.6, "f1": 0.4444444444444444, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 17, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T05:07:54Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:17:54Z agent_call {"role": "analysis", "number": 29}
+2026-10-29T05:19:07Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "CV 中 27 个漏报里 21 个已有及时分数但低于阈值，说明模型对这些行的置信度不足。missed_fault_contrast 曾显示 read_ce_count、all_ce_count 在 FN 与 TN 有较高 AUC（0.84），但直接加入这些计数特征（trial_003）未带来提升，可能因为基线模型未能捕获故障扩散的动态过程。H10 提出独特故障位置随故障进展增加；当前特征集中于 15m/1h 计数，缺少近期增量或占比的交互表示。构造增长特征可新增因果信息，可能提升低分故障行分数。"}
+2026-10-29T05:19:07Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:33:37Z agent_call {"role": "feature", "number": 30}
+2026-10-29T05:34:59Z feature_prescreen {"job": "job_003", "passed": true, "features": ["fe_error_bit_growth_recent", "fe_error_bit_recent_excess", "fe_fault_row_growth_recent"]}
+2026-10-29T05:34:59Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:35:46Z agent_call {"role": "code", "number": 31}
+2026-10-29T05:35:50Z training_started {"trial": "trial_009", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_009/attempt_01/execution.log"}
+2026-10-29T05:36:19Z cross_validation_started {"trial": "trial_009", "folds": 5}
+2026-10-29T05:36:33Z experiment_complete {"trial": "trial_009", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.830288827419281, "TP": 6, "FP": 12, "FN": 4, "precision": 0.3333333333333333, "recall": 0.6, "f1": 0.42857142857142855, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 18, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T05:36:33Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:36:56Z agent_call {"role": "analysis", "number": 32}
+2026-10-29T05:37:23Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T05:37:23Z agent_call {"role": "analysis", "number": 33}
+2026-10-29T05:38:22Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "现有最佳 trial_001 的 CV 漏报中 21/27 已有分数但低于阈值。历史原因中非正式提到 missed_fault_contrast 显示 read_ce_count、all_ce_count 在 FN 与 TN 之间具有高 AUC（0.84），但将这些字段直接加入模型的 trial_003 和 trial_006 均未提升；trial_009 使用 error_bit_count 增量也未提升。这说明单一 CE 字段可能不足以表达更严重的多比特或 DQ 路径错误模式。H11 假设提出 error_burst_count 和 error_dq_count 代表不可纠正或多比特完整性失败，它们的同时出现可能比单独的 CE 字段更接近真实故障签名。因此请求特征程序生成这些字段的交互特征（如乘积或近期增量），以验证组合效应能否提升低分故障单元的分数，同时避免直接使用已失败的单一字段。"}
+2026-10-29T05:38:22Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:39:37Z agent_call {"role": "feature", "number": 34}
+2026-10-29T05:40:21Z feature_prescreen {"job": "job_004", "passed": true, "features": ["fe_burst_dq_recent_ratio"]}
+2026-10-29T05:40:21Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T05:50:17Z agent_call {"role": "code", "number": 35}
+2026-10-29T05:50:36Z training_started {"trial": "trial_010", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_010/attempt_01/execution.log"}
+2026-10-29T05:51:06Z experiment_complete {"trial": "trial_010", "accepted": false, "rule": "screened_out", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8172661662101746, "TP": 6, "FP": 15, "FN": 4, "precision": 0.2857142857142857, "recall": 0.6, "f1": 0.3870967741935484, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 21, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T05:51:06Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:03:08Z agent_call {"role": "analysis", "number": 36}
+2026-10-29T06:04:00Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T06:04:00Z agent_call {"role": "analysis", "number": 37}
+2026-10-29T06:05:13Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "现有 missed_fault_contrast 显示错误相关字段在 FN/TN 有一定方向，但 trial_006 单一大小的比率/增量未带来 CV 提升。H2 认为多种突发大小同时活跃反映更广泛的局部缺陷激活；简单的单一大小或简单乘积可能未捕捉这种广度。"}
+2026-10-29T06:05:13Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:06:29Z agent_call {"role": "feature", "number": 38}
+2026-10-29T06:07:46Z feature_repair {"job": "job_005", "attempt": 1, "error": "Worker exit=1. See /root/autodl-tmp/final_v32_20261029/typeb/session/feature_jobs/job_005/execution.log"}
+2026-10-29T06:07:47Z agent_call {"role": "feature", "number": 39}
+Working (30s); log: /root/autodl-tmp/final_v32_20261029/typeb/session/feature_jobs/job_005/execution.log
+2026-10-29T06:09:35Z feature_prescreen {"job": "job_005", "passed": false, "features": []}
+2026-10-29T06:09:35Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:10:08Z agent_call {"role": "code", "number": 40}
+2026-10-29T06:10:28Z training_started {"trial": "trial_011", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_011/attempt_01/execution.log"}
+2026-10-29T06:10:58Z cross_validation_started {"trial": "trial_011", "folds": 5}
+2026-10-29T06:11:12Z experiment_complete {"trial": "trial_011", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8263239860534668, "TP": 6, "FP": 14, "FN": 4, "precision": 0.3, "recall": 0.6, "f1": 0.4, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 20, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T06:11:12Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:13:18Z agent_call {"role": "analysis", "number": 41}
+2026-10-29T06:14:04Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T06:14:04Z agent_call {"role": "analysis", "number": 42}
+2026-10-29T06:16:11Z decision_accepted {"action": "features", "parent": "trial_001", "reason": "trial_009 的空间增量特征将 CV TP 从 7 提升到 10，但 FP 从 17 增至 39，说明 fault_row/column 有召回价值但单独使用会抬高大量健康行。trial_010/011 的简单交互未改善。需要检测一个更强的物理交互：只有在空间故障范围扩大且同时出现中等突发簇的行才更接近进展性故障。当前 CV 仅 34 个故障单元，统计功效低，存在明确的组合效应理由。"}
+2026-10-29T06:16:11Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:26:50Z agent_call {"role": "feature", "number": 43}
+2026-10-29T06:28:53Z feature_prescreen {"job": "job_006", "passed": true, "features": ["fe_spatial_extent_15m"]}
+2026-10-29T06:28:53Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:44:11Z agent_call {"role": "code", "number": 44}
+2026-10-29T06:44:25Z training_started {"trial": "trial_012", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_012/attempt_01/execution.log"}
+2026-10-29T06:44:55Z cross_validation_started {"trial": "trial_012", "folds": 5}
+2026-10-29T06:45:11Z experiment_complete {"trial": "trial_012", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.7414336204528809, "TP": 6, "FP": 13, "FN": 4, "precision": 0.3157894736842105, "recall": 0.6, "f1": 0.41379310344827586, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 19, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T06:45:11Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:48:31Z agent_call {"role": "analysis", "number": 45}
+2026-10-29T06:49:35Z response_repair {"role": "analysis", "attempt": 1, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T06:49:35Z agent_call {"role": "analysis", "number": 46}
+2026-10-29T06:51:46Z response_repair {"role": "analysis", "attempt": 2, "error": "Feature-job budget exhausted"}
+2026-10-29T06:51:46Z agent_call {"role": "analysis", "number": 47}
+2026-10-29T06:52:46Z response_repair {"role": "analysis", "attempt": 3, "error": "Diagnostic already done or per-trial budget exhausted; use saved evidence"}
+2026-10-29T06:52:46Z controller_fallback {"error": "analysis response validation failed after bounded repair: Diagnostic already done or per-trial budget exhausted; use saved evidence", "changes": {"params.learning_rate": 0.15}}
+2026-10-29T06:52:46Z decision_accepted {"action": "experiment", "parent": "trial_001", "reason": "Controller fallback after invalid analysis response"}
+2026-10-29T06:52:46Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T06:53:01Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T07:02:42Z agent_call {"role": "code", "number": 48}
+2026-10-29T07:02:51Z training_started {"trial": "trial_013", "log": "/root/autodl-tmp/final_v32_20261029/typeb/session/trials/trial_013/attempt_01/execution.log"}
+2026-10-29T07:03:20Z cross_validation_started {"trial": "trial_013", "folds": 5}
+2026-10-29T07:03:34Z experiment_complete {"trial": "trial_013", "accepted": false, "rule": "cv_paired", "protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.8855158090591431, "TP": 6, "FP": 11, "FN": 4, "precision": 0.35294117647058826, "recall": 0.6, "f1": 0.4444444444444444, "eligible_devices": 7136, "eligible_fault_devices": 10, "alarmed_devices": 17, "no_history_devices": 5626, "no_history_fault_devices": 0, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 0, "unknown_devices": 0, "unknown_alarm_devices": 0, "excluded_late_entry_devices": 0, "excluded_preexisting_fault_devices": 39, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+2026-10-29T07:03:34Z scheduler_step_complete {"status": "running", "best": "trial_001", "test_opened": false}
+2026-10-29T07:04:42Z scheduler_step_complete {"status": "trial_budget_complete", "best": "trial_001", "test_opened": false}

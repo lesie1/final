@@ -1,0 +1,10 @@
+{
+  "pid": 327440,
+  "started_utc": "2026-10-29T07:25:04Z",
+  "task": "typeb",
+  "authorization": "User explicitly requested completed TypeB historical TEST evaluation before TypeA finishes.",
+  "script": "/root/autodl-tmp/final_v32_20261029/evaluate_search.py",
+  "log": "/root/autodl-tmp/final_v32_20261029/typeb/historical_test_early.log",
+  "test_previously_exposed": true,
+  "agent_feedback": false
+}

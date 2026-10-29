@@ -1,0 +1,67 @@
+{
+  "id": "b771d573bcb5e42c0ec751f254857542154a16f3fa137a36ced27a737ac385f1",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    recent_high_burst = frame['burst_count_4_1h'] + frame['burst_count_5_1h'] + frame['burst_count_6_1h'] + frame['burst_count_7_1h'] + frame['burst_count_8_1h']\n    high_burst_6h = frame['burst_count_4_6h'] + frame['burst_count_5_6h'] + frame['burst_count_6_6h'] + frame['burst_count_7_6h'] + frame['burst_count_8_6h']\n    fe_recent_high_burst_share = recent_high_burst / (1.0 + high_burst_6h)\n    fe_recent_storm_share = frame['ce_storm_count_1h'] / (1.0 + frame['ce_storm_count_6h'])\n    prior_events_7d_minus_6h = (frame['raw_7d_events'] - frame['raw_6h_events']).clip(0.0)\n    recent_ce_rate = frame['raw_6h_events'] / 6.0\n    prior_ce_rate = prior_events_7d_minus_6h / 162.0\n    fe_recent_ce_accel = recent_ce_rate / (1.0 + prior_ce_rate)\n    fe_recent_high_burst_log1p = np.log1p(recent_high_burst)\n    return pd.DataFrame({'fe_recent_high_burst_share': fe_recent_high_burst_share, 'fe_recent_storm_share': fe_recent_storm_share, 'fe_recent_ce_accel': fe_recent_ce_accel, 'fe_recent_high_burst_log1p': fe_recent_high_burst_log1p}, index=frame.index)",
+    "features": [
+      "fe_recent_high_burst_share",
+      "fe_recent_storm_share",
+      "fe_recent_ce_accel",
+      "fe_recent_high_burst_log1p"
+    ]
+  },
+  "reason": "检验 H3 时间爆发假设：真故障可能在故障前出现近期突发风暴加速，而高分误报可能只有历史突发但近期已平稳。fe_recent_high_burst_share 用最近 1h 高阶 burst 占最近 6h 高阶 burst 的比例，捕捉急性发作；fe_recent_storm_share 同理捕捉 CE storm 的近期集中；fe_recent_ce_accel 比较最近 6h CE 速率与前 7 天（扣除最近 6h）基线速率，识别近期加速；fe_recent_high_burst_log1p 保留近期高阶 burst 绝对强度。若误报与真故障在这些近期加速/集中度上无差异，则 H3 的时间爆发机制不成立。",
+  "checks": [
+    {
+      "rows": 1653,
+      "finite_values": 6612
+    },
+    {
+      "rows": 7,
+      "finite_values": 28
+    },
+    {
+      "rows": 29,
+      "finite_values": 116
+    },
+    {
+      "rows": 1091,
+      "finite_values": 4364
+    },
+    {
+      "rows": 144,
+      "finite_values": 576
+    },
+    {
+      "rows": 3163,
+      "finite_values": 12652
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 74,
+      "finite_values": 296
+    },
+    {
+      "rows": 2,
+      "finite_values": 8
+    }
+  ],
+  "sample_validation_seconds": 0.18760592490434647,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

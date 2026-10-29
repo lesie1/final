@@ -1,0 +1,138 @@
+{
+  "reports": [
+    {
+      "task": "typeb",
+      "trial": "trial_001",
+      "point": "deployed",
+      "operating_point": {
+        "source": "cv_oof",
+        "model": "model_full.ubj",
+        "model_sha256": "bba2b365f7b21efe5b19d94a07a93938efea4ee594f8287ca0955091a16e5bd0",
+        "step": 250,
+        "threshold": 0.9905097484588623,
+        "cv_metrics": {
+          "step": 250,
+          "f1": 0.2413793103448276,
+          "TP": 7,
+          "FP": 17,
+          "FN": 27,
+          "precision": 0.2916666666666667,
+          "recall": 0.20588235294117646,
+          "threshold": 0.9905097484588623
+        },
+        "oof_sha256": "713f039c99e647be605500530a52f9f2a206b4586c24c539a07839ff7dca1fce",
+        "fault_units": 34,
+        "note": "Threshold and step from pooled out-of-fold CV; applied to the full-TRAIN model at that step."
+      },
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.9905097484588623,
+        "TP": 0,
+        "FP": 4,
+        "FN": 12,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "eligible_devices": 7119,
+        "eligible_fault_devices": 12,
+        "alarmed_devices": 4,
+        "no_history_devices": 4949,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 1,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 56,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "lead_summary": {
+        "count": 0,
+        "median": null,
+        "p25": null,
+        "p75": null,
+        "minimum": null,
+        "maximum": null,
+        "buckets": {
+          "15_minutes_to_under_1_day": 0,
+          "1_to_under_7_days": 0,
+          "7_through_15_days": 0,
+          "over_15_days": 0
+        }
+      },
+      "prediction_stats": {
+        "score_sha256": "cf8ea845d5cc183f691548cc78ac9ef068dcffb2fd615513f006913239205336",
+        "val_period_unweighted_bce": 0.2766010859580366,
+        "scored_rows": 78320
+      },
+      "test_window": [
+        1714544640,
+        1717171200
+      ],
+      "threshold_reselected": false,
+      "independent_blind_test": false
+    },
+    {
+      "task": "typeb",
+      "trial": "trial_001",
+      "point": "selection_window",
+      "operating_point": {
+        "source": "selection_window",
+        "model": "model.ubj",
+        "model_sha256": "3fdb92ae9206f4c0ffdaf0eda989e4b011ddd44f25c1c7388601e7ca1874d1dd",
+        "step": 100,
+        "threshold": 0.8635445237159729,
+        "reason": "Configured operating_point=selection_window"
+      },
+      "metrics": {
+        "protocol": "memory_15m_7d_device_f1_v2",
+        "threshold": 0.8635445237159729,
+        "TP": 1,
+        "FP": 24,
+        "FN": 11,
+        "precision": 0.04,
+        "recall": 0.08333333333333333,
+        "f1": 0.05405405405405406,
+        "eligible_devices": 7119,
+        "eligible_fault_devices": 12,
+        "alarmed_devices": 25,
+        "no_history_devices": 4949,
+        "no_history_fault_devices": 0,
+        "fault_without_timely_scheduled_opportunity": 0,
+        "positive_without_scored_positive_day": 1,
+        "unknown_devices": 0,
+        "unknown_alarm_devices": 0,
+        "excluded_late_entry_devices": 0,
+        "excluded_preexisting_fault_devices": 56,
+        "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+      },
+      "lead_summary": {
+        "count": 1,
+        "median": 6.139722222222222,
+        "p25": 6.139722222222222,
+        "p75": 6.139722222222222,
+        "minimum": 6.139722222222222,
+        "maximum": 6.139722222222222,
+        "buckets": {
+          "15_minutes_to_under_1_day": 0,
+          "1_to_under_7_days": 1,
+          "7_through_15_days": 0,
+          "over_15_days": 0
+        }
+      },
+      "prediction_stats": {
+        "score_sha256": "be348b8831a8ee81e4439f69cf09221d8df4939dc609135a533e0ac9939fb62f",
+        "val_period_unweighted_bce": 0.2981802747264256,
+        "scored_rows": 78320
+      },
+      "test_window": [
+        1714544640,
+        1717171200
+      ],
+      "threshold_reselected": false,
+      "independent_blind_test": false
+    }
+  ],
+  "independent_blind_test": false,
+  "agent_feedback": false
+}

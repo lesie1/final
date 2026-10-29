@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "session": "session",
+  "domain": "memory",
+  "dataset": "7ea0a1085940a0a1bff801249a71b7d84eb23dec1109726c41c725a87464256d",
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 1.0,
+    "reg_alpha": 0.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  },
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.9605705738067627,
+    "TP": 10,
+    "FP": 48,
+    "FN": 41,
+    "precision": 0.1724137931034483,
+    "recall": 0.19607843137254902,
+    "f1": 0.1834862385321101,
+    "eligible_devices": 31194,
+    "eligible_fault_devices": 51,
+    "alarmed_devices": 58,
+    "no_history_devices": 10190,
+    "no_history_fault_devices": 4,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 4,
+    "unknown_devices": 27721,
+    "unknown_alarm_devices": 0,
+    "excluded_late_entry_devices": 5407,
+    "excluded_preexisting_fault_devices": 470,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "gain_from_own_baseline": 0.0824761375220091,
+  "semantics": "SmartMem TypeA, 99 original numeric features, filename stem is stable device ID. Two known incomplete-schema source files without failure tickets excluded and documented. No TypeB input. Original Unix timestamps unchanged. Follow-up is conservatively evidenced, not assumed complete.",
+  "feature_notes": [
+    "H4 机制下，漏报设备在生命周期地址集中度高但现有模型未捕获其近期扩展模式。近 7 天 distinct cols/cells 相对生命周期的比值度量最近空间扩展速度；近 7 天 distinct cols 与 distinct rows 的比值度量行内列密度扩展；再用该比值与 error_dq_count_6h 和 error_burst_count_6h 的交互突出活跃扩散的局部缺陷，以区分正在扩散的故障前集中与长期稳定集中，并提高召回而不完全依赖单个高 AUC 静态字段。",
+    "检验 H3 时间爆发假设：真故障可能在故障前出现近期突发风暴加速，而高分误报可能只有历史突发但近期已平稳。fe_recent_high_burst_share 用最近 1h 高阶 burst 占最近 6h 高阶 burst 的比例，捕捉急性发作；fe_recent_storm_share 同理捕捉 CE storm 的近期集中；fe_recent_ce_accel 比较最近 6h CE 速率与前 7 天（扣除最近 6h）基线速率，识别近期加速；fe_recent_high_burst_log1p 保留近期高阶 burst 绝对强度。若误报与真故障在这些近期加速/集中度上无差异，则 H3 的时间爆发机制不成立。",
+    "H5: 近期新列/新模式扩散和 top-cell 集中度下降表示缺陷正在扩展而非稳定重复。missed_fault_contrast 显示 FN 的 raw_7d_distinct_cols/cells 和 new_patterns 更高，且 raw_life_top_cell_share 更低。前三个特征显式表达近期扩散与分散度；最后一个交互捕捉高分散度同时伴随 6h 内 DQ/burst 错误活跃，目标为提升分散扩散漏报召回。",
+    "检验 H5：真故障应有更高的近期新异性，同时伴随短时突发/risky 事件；误报则历史事件总量高但近期新异性与突发强度低。将 fe_recent_new_pattern_rate 按 raw_life_events 归一化，降低历史事件量大的误报；再分别乘 raw_6h_risky_events、raw_24h_risky_events、error_burst_count_15m，放大近期新异与短时突发强度的联合信号。若 TP 在这些交互特征上系统性高于 FP，则支持该机制；若与单变量相比区间仍含 0.5，则否定该交互假设。",
+    "检验 H5：近期新列/新模式占比与地址/列扩散强度同时升高才代表正在扩展的缺陷。乘积特征提高分散扩散漏报的分数；除以 log1p(raw_life_events) 抑制历史事件总量高导致的高分误报。若这些组合不能提高设备分组 CV 召回/F1 或重新抬高 FP，则假设被否定。",
+    "H8: adjacent DQ and multi-beat events indicate wider data-path damage. For missed-fault recall, these features measure the share of adjacent-DQ and multi-beat events in the recent 24h window, then interact them with fe_spread_error_intensity and fe_recent_new_pattern_rate to test co-occurrence with dispersion/new-pattern signals. They complement existing counts and are expected to be higher in failing devices; if they do not improve FN vs TN separation or model F1, the hypothesis is not supported."
+  ],
+  "transfer_policy": "Candidate hyperparameters and semantic ideas only; never copy trees, thresholds or labels."
+}
