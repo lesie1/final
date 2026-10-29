@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    ce15 = frame['all_ce_count_15m']\n    ce1h = frame['all_ce_count_1h']\n    base15 = ce15.rolling('6h', min_periods=1).mean().shift(1)\n    base1h = ce1h.rolling('6h', min_periods=1).mean().shift(1)\n    fe_ce_15m_diff_6h = ce15 - base15\n    fe_ce_1h_diff_6h = ce1h - base1h\n    fe_ce_15m_rel_6h = fe_ce_15m_diff_6h / np.maximum(base15, 1.0)\n    fe_ce_1h_rel_6h = fe_ce_1h_diff_6h / np.maximum(base1h, 1.0)\n    return pd.DataFrame({'fe_ce_15m_diff_6h': fe_ce_15m_diff_6h, 'fe_ce_1h_diff_6h': fe_ce_1h_diff_6h, 'fe_ce_15m_rel_6h': fe_ce_15m_rel_6h, 'fe_ce_1h_rel_6h': fe_ce_1h_rel_6h}, index=frame.index)",
+  "features": [
+    "fe_ce_15m_diff_6h",
+    "fe_ce_1h_diff_6h",
+    "fe_ce_15m_rel_6h",
+    "fe_ce_1h_rel_6h"
+  ],
+  "reason": "针对 trial_001 中 21/27 的 scored below threshold FN：这些设备在 read/all CE 绝对计数上较 TN 有方向性但模型分数不足。新特征不重复绝对计数，而是计算当前 all_ce_count 的 15m/1h 计数相对其前一观测后 6h 滚动基线的绝对与相对偏差，捕捉 H1 的 CE 加速。若 H1 成立，FN 在故障前这些突增特征更高；若 OOF 中这些特征未能提升漏报分数或显著增加 FP，则否定 CE 加速增量。"
+}

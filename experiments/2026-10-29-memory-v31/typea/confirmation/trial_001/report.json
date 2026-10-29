@@ -1,0 +1,33 @@
+{
+  "trial": "trial_001",
+  "model_sha256": "fb93c381b7ec405fe5d469212f0cafdf82ca98c5065527dfee2a3b7143ae34a7",
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.8296945095062256,
+    "TP": 11,
+    "FP": 144,
+    "FN": 29,
+    "precision": 0.07096774193548387,
+    "recall": 0.275,
+    "f1": 0.11282051282051282,
+    "eligible_devices": 32015,
+    "eligible_fault_devices": 40,
+    "alarmed_devices": 155,
+    "no_history_devices": 9696,
+    "no_history_fault_devices": 1,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 2,
+    "unknown_devices": 28770,
+    "unknown_alarm_devices": 8,
+    "excluded_late_entry_devices": 3460,
+    "excluded_preexisting_fault_devices": 547,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "confirmation_window": [
+    1713231360,
+    1714544640
+  ],
+  "threshold_reselected": false,
+  "test_opened": false,
+  "note": "Later VAL was withheld from this search; earlier historical VAL use means it is not a fresh independent test."
+}

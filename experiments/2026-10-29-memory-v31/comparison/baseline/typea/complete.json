@@ -1,0 +1,12 @@
+{
+  "files": {
+    "report_test.json": "6f385b95a78919fc59733621ba10a7d24b7af21077fd6000fe4eb7bb33ab2700",
+    "devices_test.csv": "14553e749ae0cde829d50ea726c3d8de70f509edff3c850540138a6405293050",
+    "unknown_devices_test.csv": "2db576eb0a9201970e675cc744b5f702ec1314e7187c2b6c49ed3b47eefa45fb",
+    "input_audit.json": "5e882737745395134bd749b8d021af545ac53a2afbfcc6937aca3612d206a899",
+    "inference_config.json": "88661fde927372851546e050acdb01f9b03d248d1c8946fe00acedd7a87356dc"
+  },
+  "frozen_sha256": "ac44b0c682b7e1bd44220013b5c332658660dd613bf3c3cd59bc11031b665901",
+  "source_search_preserved": true,
+  "release_code_unchanged": true
+}

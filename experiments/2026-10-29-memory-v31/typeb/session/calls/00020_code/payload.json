@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 TRAIN OOF 漏报故障设备中，是否在故障前出现 burst/DQ 最大间隔相对自身 7 天滚动基线的持续下降（事件间隔缩短、不稳定性加速），而正常设备没有这种趋势？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "hypothesis_id": "H6",
+    "question": "在 TRAIN OOF 漏报故障设备中，是否在故障前出现 burst/DQ 最大间隔相对自身 7 天滚动基线的持续下降（事件间隔缩短、不稳定性加速），而正常设备没有这种趋势？",
+    "reason": "Saved CV evidence shows FN=27 with 21 scored below threshold, so the main missed-fault population already has a score but is under threshold. Trial_003 tested generic CE-count surge relative to baseline and was screened out at selection; H6 tests a distinct temporal-clustering signal via max_burst_interval_1h/15m and max_dq_interval_1h/15m, not a raw count surge. One exploration slot remains (used 1/2).",
+    "expected": "A feature encoding rolling decrease in burst/DQ max interval relative to each device's own 7-day baseline should be higher/positive among FN fault rows than TN rows in TRAIN OOF, giving the single-stage model a recall lift on low-score fault rows.",
+    "falsification": "The feature shows no exploratory separation between FN and TN in TRAIN OOF (AUC interval crosses 0.5), or the controlled feature experiment fails to improve selection/CV F1 and does not lift any missed faults.",
+    "target": "recall",
+    "exploration_reason": "No saved high/missed contrast diagnostic is available; the saved FN/TN count provides missed-fault evidence but no univariate feature evidence. H6 temporal acceleration is an interaction/trend not directly represented by the existing raw max-interval features; this is a bounded recall exploration using the remaining slot.",
+    "job": "job_002"
+  }
+}

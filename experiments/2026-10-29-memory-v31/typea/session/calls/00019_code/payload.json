@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "f0fd194cea3f01bec5d95d52e705f7777bc83e44690b3bc46f54794a34eddd9e",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'f0fd194cea3f01bec5d95d52e705f7777bc83e44690b3bc46f54794a34eddd9e', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在漏报设备（FN）与健康设备（TN）之间，近期新出现错误地址占生命周期地址空间的比例（例如 raw_life_new_cols_7d / max(raw_life_distinct_cols,1) 的因果派生特征）能否比绝对计数更稳定地区分二者？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在漏报设备（FN）与健康设备（TN）之间，近期新出现错误地址占生命周期地址空间的比例（例如 raw_life_new_cols_7d / max(raw_life_distinct_cols,1) 的因果派生特征）能否比绝对计数更稳定地区分二者？",
+    "reason": "trial_004 已保存的 missed_fault_contrast 显示 raw_life_distinct_cols/cells 在 FN 与 TN 间有约 0.804 的单变量分离，且 CV 中 197/210 漏报属于已有分数但低于阈值，主模型未充分利用绝对扩散度。本特征请求验证 H10 的近期扩散占比表征。",
+    "expected": "若 H10 成立，FN 的近期新地址占比应高于 TN，单变量 AUC bootstrap 区间不含 0.5；加入该特征后 CV 漏报命中增加且新增误报少于新增命中。",
+    "falsification": "若该占比在 FN/TN 上无稳定分离，或训练后召回未提高、FP 显著增加，则此归一化扩展不能作为有效主信号。",
+    "hypothesis_id": "H10",
+    "target": "recall",
+    "exploration_reason": "已保存诊断只覆盖绝对生命周期扩散计数，未验证近期新地址占比这一归一化交互；当前 FN 主导，需要探索低覆盖但因果一致的比率特征。",
+    "job": "job_003"
+  }
+}

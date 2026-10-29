@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "基线按事件样本加权，事件频繁的健康设备可能主导训练，与设备级 F1 目标不一致。scope 允许单因素设备权重对照，且当前 CV 假阳性很多，先检验权重是否带来稳定改善。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "base_weight": "device"
+    },
+    "reason": "基线按事件样本加权，事件频繁的健康设备可能主导训练，与设备级 F1 目标不一致。scope 允许单因素设备权重对照，且当前 CV 假阳性很多，先检验权重是否带来稳定改善。",
+    "hypothesis": "按设备等权训练可以降低高事件量健康设备的假阳性倾向，同时保持故障设备召回，从而提升设备级 F1。",
+    "expected": "CV F1 相对基线提升，FP 减少，且净命中不丢失；若满足接受规则可成为新的 best。",
+    "falsification": "若 CV F1 的配对 bootstrap 区间下界未高于 0、净命中丢失，或 FP 没有明显减少，则不认为设备权重收益成立。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

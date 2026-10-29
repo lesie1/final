@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 10.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 10.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "trial_006 的 burst/DQ 最大间隔特征将 CV TP 从 7 提高到 11，但同时把 CV FP 从 17 增加到 41，新增 24 个误报；这提示当前 reg_lambda=1.0 不足以抑制新特征在高事件量健康设备上的噪声分裂。仅提高 L2 正则，单因素对照。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_006",
+    "changes": {
+      "params.reg_lambda": 10.0
+    },
+    "reason": "trial_006 的 burst/DQ 最大间隔特征将 CV TP 从 7 提高到 11，但同时把 CV FP 从 17 增加到 41，新增 24 个误报；这提示当前 reg_lambda=1.0 不足以抑制新特征在高事件量健康设备上的噪声分裂。仅提高 L2 正则，单因素对照。",
+    "hypothesis": "提高 L2 正则可以降低 trial_006 对高事件量健康设备的过拟合，减少误报，同时保留大部分由 burst/DQ 间隔特征带来的新命中。",
+    "expected": "CV F1 相对 trial_006 提升，新增误报数量下降，TP 不显著下降。",
+    "falsification": "若 CV paired bootstrap 区间下界未超过 0、净命中减少，或 FP 仍高于基线 trial_001 且无 F1 改善，则否证该正则化方向。",
+    "recipe": {
+      "feature_program": "1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 10.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

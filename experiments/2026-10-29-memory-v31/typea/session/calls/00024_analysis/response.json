@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN OOF 中，超过阈值 0.9146937727928162 的高分单元里，TP（N=62）与 FP（N=544）在 CE 计数、burst/storm、地址扩散和近期新增模式等因果特征上的 AUC 及 95% bootstrap 区间如何？",
+  "reason": "best 仍为 trial_001，其 TRAIN OOF 中 FP=544 远高于 TP=62，高分区误报是 F1 的主要约束；此前针对漏报设备的特征试验未稳定提升 CV F1，但尚未正式查看高分 TP/FP 对比证据。先用 high_score_contrast 定位高分单元内能区分真故障与误报的特征，为下一次 features 提供可检验方向。"
+}

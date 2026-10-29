@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_002",
+  "changes": {
+    "rerank": "parallel"
+  },
+  "reason": "trial_002 将 base_weight 改为 device 后，选择窗口 F1 从 0.101 升至 0.186，CV F1 0.155 高于基线 0.141，但净命中丢失（new_hits 18, lost_hits 28），未被采纳。其 CV 误报较少但召回较低，207/220 个 FN 仍是有分数但低于阈值。scope.parallel 允许在全部 TRAIN 行上训练一个独立设备均衡浅层分支，并与主模型逐行 max 融合，适合在不重新训练主模型的情况下抢救低分漏报。该实验以 trial_002 作为单阶段 parent，仅改变 rerank 因素。",
+  "hypothesis": "在 device 权重主模型基础上增加独立浅层分支，可以恢复部分被主模型压低分数的真故障命中，同时新增误报相对可控，从而在 CV 中相对当前 best 提高设备级 F1。",
+  "expected": "CV 召回上升，新增命中数超过丢失命中数，新增误报有限，paired CV F1 95% 区间下界 > 0；若通过，best 可能更新。",
+  "falsification": "若 CV 配对 bootstrap 95% 区间下界未超过 0，或净命中未增加，或新增误报过多导致 CV F1 不升，则不能认为 parallel 分支在 device 权重 parent 上有稳定增益。"
+}

@@ -91,6 +91,7 @@ python search_step.py --initialize-from /path/to/old_session --session /path/to/
 
 ## 文档与证据
 
+- [2026-10-29 TypeA / TypeB 实验 session、事件日志与补充测试报告](experiments/2026-10-29-memory-v31/README.md)
 - [框架与模块说明](docs/architecture.md)
 - [比赛要求、交付清单和实现状态](docs/competition_requirements.md)
 - [测试与真实样本验证](docs/validation.md)
@@ -98,4 +99,4 @@ python search_step.py --initialize-from /path/to/old_session --session /path/to/
 - [v3.1 修复说明](README_V3_1_修复说明.md)
 - [Agent skill](skills/device-failure-experiment-loop/SKILL.md)
 
-公开仓库提供源码、测试、方法文档和脱敏验证摘要。真实设备数据、运行 session、模型权重、API 密钥及完整现场日志需在有权限的实验环境或正式提交渠道管理。
+公开仓库提供源码、测试、方法文档和验证摘要；用户授权公开的实验审阅快照放在 `experiments/`，其中包含事件、调用记录、结果及指定模型。大型原始数据、特征缓存和完整续跑环境仍保留在实验服务器，排除项见各快照的导出清单。API 密钥和登录凭据不得提交。

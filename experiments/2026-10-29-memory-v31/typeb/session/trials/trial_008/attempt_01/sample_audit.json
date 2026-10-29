@@ -1,0 +1,22 @@
+{
+  "sampling": {},
+  "training_samples": 317553,
+  "positive_samples": 2461,
+  "sample_membership_sha256": "137896c61842dcb53128990f0845a9959ee14efbad7b5b882cb66f6a61c6fa1f",
+  "training_devices": 2825,
+  "positive_devices": 38,
+  "candidate_samples_in_train_interval": 347757,
+  "eligible_no_history_samples": 0,
+  "excluded_maturity_or_lead_samples": 30204,
+  "weighted_class_ratio": 102.029116896144,
+  "positive_weight": 102.029116896144,
+  "estimated_matrix_ram_gib": 0.42744656652212143,
+  "base_weight_audit": {
+    "normalization": "retained_training_device_mass",
+    "retained_devices": 2825,
+    "min_device_mass": 0.9999999436113285,
+    "max_device_mass": 1.0000000577419996,
+    "sampling_corrections_preserved": true
+  },
+  "weight_definition": "each retained training device total base weight = 1; within-device sampling corrections preserved"
+}

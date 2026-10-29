@@ -1,0 +1,134 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Correctable error (CE) rate accelerates before uncorrectable/device fault due to weakening cells.",
+      "basis": "DRAM field studies show CEs often rise prior to hard failures; repeated corrected errors indicate marginal cells.",
+      "fields": [
+        "all_ce_count_1h",
+        "all_ce_count_15m",
+        "read_ce_count_1h",
+        "read_ce_count_15m",
+        "scrub_ce_count_1h",
+        "scrub_ce_count_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show elevated 1h or 15m CE counts relative to healthy devices in TRAIN evidence."
+    },
+    {
+      "id": "H2",
+      "mechanism": "CEs constrained to a single DQ bit indicate a persistent weak bit/column rather than random noise.",
+      "basis": "DQ-specific failures point to a bad bitline or sense amplifier; single-DQ dominance is a known fault signature.",
+      "fields": [
+        "dq_count_1_1h",
+        "dq_count_1_15m",
+        "dq_count_2_1h",
+        "dq_count_2_15m",
+        "dq_count_3_1h",
+        "dq_count_3_15m",
+        "dq_count_4_1h",
+        "dq_count_4_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices have similar or lower single-DQ counts than healthy devices; no DQ concentration appears."
+    },
+    {
+      "id": "H3",
+      "mechanism": "Burst errors with larger burst counts reflect spatial multi-bit damage along a row or column.",
+      "basis": "DRAM row/column faults can produce multi-bit bursts; larger burst count indicates wider damaged region.",
+      "fields": [
+        "burst_count_1_1h",
+        "burst_count_1_15m",
+        "burst_count_2_1h",
+        "burst_count_2_15m",
+        "burst_count_3_1h",
+        "burst_count_3_15m",
+        "burst_count_4_1h",
+        "burst_count_4_15m",
+        "burst_count_5_1h",
+        "burst_count_5_15m",
+        "burst_count_6_1h",
+        "burst_count_6_15m",
+        "burst_count_7_1h",
+        "burst_count_7_15m",
+        "burst_count_8_1h",
+        "burst_count_8_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Burst-count distributions for failing devices do not shift toward larger burst sizes."
+    },
+    {
+      "id": "H4",
+      "mechanism": "Row/column faults are more predictive of device replacement than random cell faults.",
+      "basis": "Row and column faults affect many addresses and can disable large memory regions; field maintenance often flags repetitive row/column errors.",
+      "fields": [
+        "fault_mode_row_1h",
+        "fault_mode_row_15m",
+        "fault_mode_column_1h",
+        "fault_mode_column_15m",
+        "fault_row_num_1h",
+        "fault_row_num_15m",
+        "fault_column_num_1h",
+        "fault_column_num_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not exhibit elevated row/column fault counts compared with healthy devices."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Bank-level faults indicate a more severe structural defect than cell-level faults.",
+      "basis": "Bank-level errors suggest shared circuitry failure and can affect larger memory regions.",
+      "fields": [
+        "fault_mode_bank_1h",
+        "fault_mode_bank_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Bank fault counts do not distinguish failing from healthy devices."
+    },
+    {
+      "id": "H6",
+      "mechanism": "Shorter inter-burst or inter-DQ intervals signal accelerating instability rather than isolated random errors.",
+      "basis": "Decreasing time between errors suggests a progressive physical defect; isolated errors are more likely environmental.",
+      "fields": [
+        "max_burst_interval_1h",
+        "max_burst_interval_15m",
+        "max_dq_interval_1h",
+        "max_dq_interval_15m"
+      ],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices have longer or similar maximum intervals than healthy devices, showing no temporal clustering."
+    },
+    {
+      "id": "H7",
+      "mechanism": "CE storms (sudden bursts of many CEs) precede hard failures.",
+      "basis": "Storm events indicate a rapid degradation phase and are commonly observed before memory faults.",
+      "fields": [
+        "ce_storm_count_1h",
+        "ce_storm_count_15m",
+        "error_burst_count_1h",
+        "error_burst_count_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have more frequent CE storm or error-burst events."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Log-transformed CE counts capture saturation or wide dynamic range better than raw counts.",
+      "basis": "Log transformation can reveal multiplicative increases in error activity when raw counts are sparse but meaningful.",
+      "fields": [
+        "all_ce_log_num_1h",
+        "all_ce_log_num_15m",
+        "read_ce_log_num_1h",
+        "read_ce_log_num_15m",
+        "scrub_ce_log_num_1h",
+        "scrub_ce_log_num_15m",
+        "log_happen_frequency_1h",
+        "log_happen_frequency_15m"
+      ],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Log-transformed CE features do not show stronger separation than raw counts in TRAIN diagnostics."
+    }
+  ],
+  "labels_visible": false,
+  "source": "field semantics only"
+}

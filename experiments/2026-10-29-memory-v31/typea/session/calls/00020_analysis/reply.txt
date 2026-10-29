@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 best 模型 trial_001 的 TRAIN OOF 中，高分 TP 与 FP、FN 与 TN 分别在近期新地址/模式相关特征和 burst/DQ 结构特征上的 AUC 及 bootstrap 区间如何？哪些特征在任一对比中区间不含 0.5？",
+  "reason": "trial_003/005/006 三个特征对照均未提高 CV F1，trial_006 丢失 22 个命中。需要用同一诊断同时查看两类错例的特征分离证据，避免再基于弱或未验证的单变量线索提出特征。"
+}

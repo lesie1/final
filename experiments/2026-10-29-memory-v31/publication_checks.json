@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-29",
+  "export_sha256": "7a82477be9942577a3a586c5a31ef7729d4bcaacb3a3d5c7333b880b59928956",
+  "evidence_archive_sha256": "2395d5718cd621019e4e96c806030073dda799de631ed7ea863d7baa8421a554",
+  "checks": [
+    "api_key",
+    "github_token",
+    "private_key",
+    "url_credentials",
+    "authorization_token",
+    "excluded_brand"
+  ],
+  "detected_matches": 0,
+  "original_event_files_identical": true
+}

@@ -1,0 +1,10 @@
+{
+  "source": "def transform(frame):\n    total = frame['raw_7d_events']\n    new_share = frame['raw_life_new_patterns_7d'] / total.where(total > 0)\n    dq_share = frame['raw_7d_multi_dq_events'] / total.where(total > 0)\n    product = new_share * dq_share\n    log_product = np.log1p(product)\n    return pd.DataFrame({'fe_new_pattern_share_7d': new_share, 'fe_multi_dq_share_7d': dq_share, 'fe_newpat_multidq_share_product': product, 'fe_log_newpat_multidq_share_product': log_product}, index=frame.index)",
+  "features": [
+    "fe_new_pattern_share_7d",
+    "fe_multi_dq_share_7d",
+    "fe_newpat_multidq_share_product",
+    "fe_log_newpat_multidq_share_product"
+  ],
+  "reason": "H10 active spatial spread: raw_life_new_patterns_7d and raw_7d_multi_dq_events are credible TP/FP features but individually insufficient. Normalize both by raw_7d_events and multiply to capture concurrent new-pattern spread with multi-DQ events beyond total volume; log1p stabilizes scale. Missing or zero total events remain NaN, not falsely zero."
+}

@@ -1,0 +1,84 @@
+{
+  "hypotheses": [
+    {
+      "id": "H1",
+      "mechanism": "Elevated correctable-error volume and frequency reflect accumulating degraded cells/rows before a hard failure.",
+      "basis": "Prior DRAM failure studies and field telemetry: CE rate often escalates before uncorrectable faults.",
+      "fields": ["all_ce_count_1h", "all_ce_count_6h", "log_happen_frequency_6h", "raw_24h_events", "raw_7d_events"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show elevated CE event counts or log occurrence frequency compared with healthy devices after accounting for exposure time."
+    },
+    {
+      "id": "H2",
+      "mechanism": "Persistent weak cells/rows generate repeated multi-event CE bursts in a short window.",
+      "basis": "Field failure analysis: multi-event bursts indicate repeated failures at the same weak structure.",
+      "fields": ["burst_count_3_1h", "burst_count_4_1h", "burst_count_5_1h", "burst_count_6_1h", "burst_count_7_1h", "burst_count_8_1h", "error_burst_count_6h"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not have higher counts of multi-event bursts than healthy devices with comparable total CE volume."
+    },
+    {
+      "id": "H3",
+      "mechanism": "CE storms represent intermittent massive bursts from unstable wordlines or row activation, preceding field failure.",
+      "basis": "Operational memory reliability experience: storm-like CE bursts often indicate weak row or wordline structures.",
+      "fields": ["ce_storm_count_15m", "ce_storm_count_1h", "ce_storm_count_6h"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Storm counts are not higher in failing devices than healthy devices, or the difference disappears after controlling for total CE count."
+    },
+    {
+      "id": "H4",
+      "mechanism": "CEs with more erroneous bits indicate multi-cell damage or reduced redundancy, which is more likely to progress to failure.",
+      "basis": "DRAM error studies: multi-bit CE patterns are linked to row/column damage and weaker fault tolerance.",
+      "fields": ["error_bit_count_6h", "raw_6h_max_err_bits", "raw_24h_max_err_bits", "raw_life_max_err_bits"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show larger maximum or aggregate erroneous-bit counts per CE than healthy devices."
+    },
+    {
+      "id": "H5",
+      "mechanism": "Errors spanning multiple or adjacent DQ lanes suggest shared bus/TSV or column circuitry damage, increasing failure risk.",
+      "basis": "Public DRAM reliability studies: adjacent and multi-DQ lane errors are associated with structural defects rather than isolated cell noise.",
+      "fields": ["raw_6h_multi_dq_events", "raw_6h_adjacent_dq_events", "raw_24h_multi_dq_events", "raw_24h_adjacent_dq_events", "raw_24h_max_dq_count"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-DQ or adjacent-DQ event counts are not higher in failing devices than healthy devices with similar CE volume."
+    },
+    {
+      "id": "H6",
+      "mechanism": "A smaller minimum DQ interval in multi-lane CEs indicates adjacent-lane failure, a more severe spatial defect.",
+      "basis": "DRAM architecture: adjacent erroneous DQ lanes often share column or bus resources and indicate a wider defect.",
+      "fields": ["raw_6h_min_dq_interval", "raw_24h_min_dq_interval"],
+      "expected_direction": "lower_in_failing",
+      "falsified_if": "Failing devices do not have smaller minimum DQ lane gaps among multi-lane CEs than healthy devices."
+    },
+    {
+      "id": "H7",
+      "mechanism": "CEs spanning multiple beats indicate column decoder or burst-length circuitry issues, which are more likely to lead to field failure.",
+      "basis": "DRAM operational experience: multi-beat errors reflect peripheral circuit degradation beyond a single storage cell.",
+      "fields": ["raw_6h_multi_beat_events", "raw_24h_multi_beat_events", "raw_6h_max_beat_count", "raw_24h_max_beat_count", "raw_6h_max_beat_interval"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Multi-beat event counts or maximum beat span are not higher in failing devices than healthy devices."
+    },
+    {
+      "id": "H8",
+      "mechanism": "Failing devices show stronger spatial concentration of CEs at a top cell or recurrent row/column pattern, indicating localized physical damage.",
+      "basis": "Failure analysis: localized defects tend to repeatedly strike the same address, while healthy soft errors are more diffuse.",
+      "fields": ["raw_life_top_cell_share", "raw_life_max_cols_per_row", "raw_life_max_rows_per_col"],
+      "expected_direction": "pattern",
+      "falsified_if": "Address concentration and same-row/column recurrence distributions are indistinguishable between failing and healthy devices."
+    },
+    {
+      "id": "H9",
+      "mechanism": "Errors confined to few chips, banks, or ranks indicate localized component wear-out rather than random background soft errors.",
+      "basis": "Field memory reliability: bank/chip/rank localization is often observed before wear-out related failures.",
+      "fields": ["raw_life_distinct_chips", "raw_life_distinct_banks", "raw_life_distinct_ranks", "raw_24h_distinct_chips", "raw_24h_distinct_banks"],
+      "expected_direction": "pattern",
+      "falsified_if": "Failing devices do not differ from healthy devices in chip/bank/rank diversity after adjusting for total CE volume."
+    },
+    {
+      "id": "H10",
+      "mechanism": "Recent appearance of new rows, columns, or error-bit patterns indicates active spatial spread and ongoing degradation.",
+      "basis": "Proactive failure detection literature: new fault locations and patterns reflect expanding damage, not stable benign errors.",
+      "fields": ["raw_life_new_rows_7d", "raw_life_new_cols_7d", "raw_life_new_patterns_7d"],
+      "expected_direction": "higher_in_failing",
+      "falsified_if": "Failing devices do not show more newly appeared rows, columns, or error patterns in the last 7 days than healthy devices."
+    }
+  ]
+}

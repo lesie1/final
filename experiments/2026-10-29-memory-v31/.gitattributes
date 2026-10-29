@@ -1,0 +1,2 @@
+# Preserve exact bytes so the exported source SHA-256 values remain verifiable.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

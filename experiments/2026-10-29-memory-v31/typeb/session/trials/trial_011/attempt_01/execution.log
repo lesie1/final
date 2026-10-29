@@ -1,0 +1,5 @@
+Parallel step 1: F1=0.428571 TP=6 FP=12 FN=4
+Parallel step 50: F1=0.428571 TP=6 FP=12 FN=4
+Parallel step 100: F1=0.416667 TP=5 FP=9 FN=5
+Parallel step 150: F1=0.400000 TP=5 FP=10 FN=5
+Parallel step 200: F1=0.413793 TP=6 FP=13 FN=4

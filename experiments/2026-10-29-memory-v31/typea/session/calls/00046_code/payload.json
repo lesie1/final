@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 1.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 1.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "trial_010 在 device 权重下将 min_child_weight 从 50 降到 10，使 CV TP 从 52 增至 69、FN 从 220 降至 203，但仍有 190/203 个 FN 属于有及时分数但低于阈值。继续降低 min_child_weight 允许模型对少数故障相关模式形成更细分裂，可能进一步抢救低分漏报。由于 feature-job 预算已耗尽，上一轮 features 请求未执行，因此用剩余试验做单因素参数对照。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_010",
+    "changes": {
+      "params.min_child_weight": 1.0
+    },
+    "reason": "trial_010 在 device 权重下将 min_child_weight 从 50 降到 10，使 CV TP 从 52 增至 69、FN 从 220 降至 203，但仍有 190/203 个 FN 属于有及时分数但低于阈值。继续降低 min_child_weight 允许模型对少数故障相关模式形成更细分裂，可能进一步抢救低分漏报。由于 feature-job 预算已耗尽，上一轮 features 请求未执行，因此用剩余试验做单因素参数对照。",
+    "hypothesis": "更小的 min_child_weight 能提升低分故障设备的召回，同时 device 权重继续抑制高事件量健康设备的假阳性，从而净命中增加且 CV F1 提高。",
+    "expected": "CV F1 高于 trial_010 的 0.1627，TP 增加，FN 减少，且新增命中大于丢失命中；配对 bootstrap 95% 区间下界有望超过 0。",
+    "falsification": "若新增误报过多导致 CV F1 下降，或净命中未增加、配对区间仍跨 0，则假设不成立。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "device",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "none",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 1.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

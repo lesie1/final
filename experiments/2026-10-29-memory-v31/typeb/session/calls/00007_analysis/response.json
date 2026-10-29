@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 TRAIN 交叉验证留出设备上，当前 best trial_001 的高分单元中 TP 与 FP 在哪些因果特征上可区分；FN 与 TN 的因果特征快照有何差异，并将 FN 分解为无及时分数与分数低于阈值。",
+  "reason": "trial_002 仅提高 max_depth 未通过 CV 接受，且新增 FP 较多。现有 CV 计数显示 best 有 17 个 FP、27 个 FN，其中 21 个为分数低于阈值。在提出特征前需要 error_atlas 同时获得高分误报和漏报的特征证据，确定哪类错误更可能由现有字段的可区分行为解释。"
+}

@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_010",
+  "kind": "high_score_contrast",
+  "question": "在 trial_010 的 TRAIN 交叉验证留出设备中，高于阈值的高分单元里，哪些特征能区分真故障（TP）与误报（FP）？请重点报告空间地址扩散（raw_life_distinct_cells/cols、raw_life_top_cell_share）、burst/storm 计数、多 DQ/beat 事件及 chip/bank/rank 多样性的 AUC 和 bootstrap 区间。",
+  "reason": "当前 best 在 CV 中 FP=544/TP=62，trial_010 在设备权重和 min_child_weight=10 下将 FP 降到 507/TP=69，但检视窗口仍以误报为主；已有特征实验多通过降低 FP 提升 precision，但伴随召回损失。需要在其高分区域找到能稳定区分 TP/FP 的特征，再决定最后一次特征实验，避免浪费剩余 trial。"
+}

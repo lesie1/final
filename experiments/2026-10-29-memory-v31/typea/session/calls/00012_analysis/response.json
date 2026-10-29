@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "high_score_contrast",
+  "question": "在 trial_001 的 TRAIN 留出设备上，超过阈值的高分单元中，哪些因果特征能区分真故障（TP）与误报（FP）？特别检查 CE 量级、突发模式、地址扩散/集中度等特征在高分误报上的单变量 AUC。",
+  "reason": "最佳基线 trial_001 的验证精度仅 0.068（FP 137），CV 中 FP 也达 544。trial_002 设备权重虽降低 FP 但丢失命中，trial_004 并行分支未被采纳。需要先定位高分区误报与真故障的可分特征，再据此提出特征实验，而不是继续试参数。"
+}

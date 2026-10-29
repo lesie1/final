@@ -1,0 +1,32 @@
+{
+  "freeze_sha256": "c8e5d17583bc7e067a513bbf5b5642ba02a12e8d8f1162a07b2a9a542b96fe59",
+  "cache": "/root/autodl-tmp/typea_v2_frozen_test_20261028/out/raw_cache_test",
+  "manifest_sha256": "25f99d48f53ff0c27b36165fb910e0f713f4e1eb888d5b02d5a9713f645ae8f6",
+  "feature_count": 164,
+  "recipe": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "threshold": 0.8278969526290894,
+  "model_sha256": "cf254f22d743e1d5548330618edc52cc31c3d5895ccd858aaa406ac2f4141306"
+}

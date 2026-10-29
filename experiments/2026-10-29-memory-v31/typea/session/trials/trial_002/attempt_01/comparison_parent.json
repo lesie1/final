@@ -1,0 +1,25 @@
+{
+  "reference": "/root/autodl-tmp/final_v31_20261028/typea/session/trials/trial_001/attempt_01",
+  "changed_factors": [
+    "base_weight"
+  ],
+  "delta": {
+    "f1": 0.08532530271660706,
+    "precision": 0.0683364254792826,
+    "recall": 0.09803921568627452,
+    "TP": 5,
+    "FP": -42,
+    "FN": -5
+  },
+  "new_hits": 7,
+  "lost_hits": 2,
+  "new_false_alarms": 36,
+  "removed_false_alarms": 78,
+  "model_identical": false,
+  "same_training_samples": true,
+  "conditional_paired_f1_interval_95": [
+    0.01983784893267653,
+    0.1453951956930731
+  ],
+  "uncertainty_note": "Descriptive paired bootstrap at selected validation thresholds. Does not correct adaptive search or threshold selection; not a generalization guarantee."
+}

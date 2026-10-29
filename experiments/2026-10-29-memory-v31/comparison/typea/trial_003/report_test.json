@@ -1,0 +1,125 @@
+{
+  "task": "typea",
+  "trial": "trial_003",
+  "model_sha256": "5cc6e5d759a1498db0fd302a32e4b5b42634eb0a0441af6e5060d69424111f0f",
+  "metrics": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.9632896780967712,
+    "TP": 11,
+    "FP": 62,
+    "FN": 90,
+    "precision": 0.1506849315068493,
+    "recall": 0.10891089108910891,
+    "f1": 0.12643678160919541,
+    "eligible_devices": 34008,
+    "eligible_fault_devices": 101,
+    "alarmed_devices": 73,
+    "no_history_devices": 10398,
+    "no_history_fault_devices": 3,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 3,
+    "unknown_devices": 26391,
+    "unknown_alarm_devices": 4,
+    "excluded_late_entry_devices": 3779,
+    "excluded_preexisting_fault_devices": 614,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "validation": {
+    "protocol": "memory_15m_7d_device_f1_v2",
+    "threshold": 0.9632896780967712,
+    "TP": 6,
+    "FP": 47,
+    "FN": 45,
+    "precision": 0.11320754716981132,
+    "recall": 0.11764705882352941,
+    "f1": 0.11538461538461539,
+    "eligible_devices": 31194,
+    "eligible_fault_devices": 51,
+    "alarmed_devices": 53,
+    "no_history_devices": 10190,
+    "no_history_fault_devices": 4,
+    "fault_without_timely_scheduled_opportunity": 0,
+    "positive_without_scored_positive_day": 4,
+    "unknown_devices": 27721,
+    "unknown_alarm_devices": 2,
+    "excluded_late_entry_devices": 5407,
+    "excluded_preexisting_fault_devices": 470,
+    "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."
+  },
+  "cv": {
+    "step": 100,
+    "f1": 0.13584905660377358,
+    "TP": 72,
+    "FP": 716,
+    "FN": 200,
+    "precision": 0.09137055837563451,
+    "recall": 0.2647058823529412,
+    "threshold": 0.8637925386428833
+  },
+  "comparison_vs_trial_001": {
+    "new_hits": 3,
+    "lost_hits": 16,
+    "new_false_alarms": 13,
+    "removed_false_alarms": 121,
+    "new_hit_device_ids": [
+      26678,
+      46582,
+      52274
+    ],
+    "lost_hit_device_ids": [
+      3390,
+      7854,
+      10275,
+      10661,
+      18117,
+      18575,
+      21769,
+      24475,
+      40571,
+      40663,
+      40925,
+      42584,
+      47573,
+      56292,
+      59300,
+      63569
+    ],
+    "same_cohort": true,
+    "delta": {
+      "f1": -0.036275082797584235,
+      "precision": 0.026973591300663735,
+      "recall": -0.12871287128712872,
+      "TP": -13,
+      "FP": -108,
+      "FN": 13
+    }
+  },
+  "lead_summary": {
+    "count": 11,
+    "median": 5.805486111111111,
+    "p25": 1.4549363425925925,
+    "p75": 6.584537037037037,
+    "minimum": 0.03868055555555556,
+    "maximum": 6.985856481481481,
+    "buckets": {
+      "15_minutes_to_under_1_day": 2,
+      "1_to_under_7_days": 9,
+      "7_through_15_days": 0,
+      "over_15_days": 0
+    }
+  },
+  "prediction_stats": {
+    "score_sha256": "f7136e055f76d3d4d033e960861f2bdcd6b0da844cf79301901608a1a56efd5f",
+    "val_period_unweighted_bce": 0.07066641833429226,
+    "scored_rows": 3020079
+  },
+  "threshold_reselected": false,
+  "retrained": false,
+  "api_calls": 0,
+  "independent_blind_test": false,
+  "test_window": [
+    1714544640,
+    1717171200
+  ],
+  "seconds": 81.26948291063309
+}

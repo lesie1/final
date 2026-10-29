@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_010",
+  "kind": "high_score_contrast",
+  "question": "在 trial_010 的 TRAIN 交叉验证高分单元中，哪些已有特征能区分真故障（TP）与误报（FP）？特别关注 CE burst/storm、multi-DQ/multi-beat、地址扩散和近期新增模式等列的 AUC 与 bootstrap 区间。",
+  "reason": "trial_010 的 CV 为 TP 69、FP 507，选择窗口 FP 86；继续增加 max_depth 后 trial_011 选择 F1 下降且 CV 净命中丢失。当前参数对照无效，误报仍多，需要先定位高分区域中真故障与误报的可区分特征，为下一轮特征请求提供证据，避免继续盲目调参。"
+}

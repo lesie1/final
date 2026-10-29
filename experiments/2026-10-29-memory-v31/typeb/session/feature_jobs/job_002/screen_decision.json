@@ -1,0 +1,5 @@
+{
+  "train": true,
+  "route": "exploration",
+  "reason": "No saved high/missed contrast diagnostic is available; the saved FN/TN count provides missed-fault evidence but no univariate feature evidence. H6 temporal acceleration is an interaction/trend not directly represented by the existing raw max-interval features; this is a bounded recall exploration using the remaining slot."
+}

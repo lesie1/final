@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_006",
+  "kind": "high_score_contrast",
+  "question": "在 trial_006 TRAIN OOF 高分单元（分数≥0.9566）中，哪些特征能将真故障 TP=11 与误报 FP=41 区分开？尤其 burst/DQ 最大间隔及其基线特征是否在健康高事件量设备上出现类似或更高取值，导致误报？",
+  "reason": "trial_006 特征模型将 CV TP 从 7 提升到 11，但 CV FP 从 17 增至 41，新增 24 个误报；后续仅调 reg_lambda、min_child_weight、base_weight 均未在 CV 上改善且未超过 best。需要比较高分 TP/FP 在各特征上的 AUC 和 bootstrap 区间，定位可用于减少误报而不丢命中（或至少净收益）的候选特征。"
+}

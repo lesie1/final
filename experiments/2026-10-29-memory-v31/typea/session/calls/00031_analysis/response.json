@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_002",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_002 的 TRAIN 设备分组交叉验证中，比较 207 个“已有分数但低于阈值”的漏报（FN）与健康设备（TN），哪些现有特征（尤其是 H4 的 error_bit/max_err_bits、H6 的 min_dq_interval、H9 的 chip/bank/rank diversity、H8 的 top_cell_share）在单变量上能显著区分二者？请给出 AUC 及 bootstrap 区间，并说明低分漏报设备在这些特征上是否呈现故障方向。",
+  "reason": "trial_009 在 trial_002 基础上增加 parallel 后选择窗口与 CV 完全相同，说明 parallel 未提升低分漏报。trial_002 的 CV 有 207/220 个 FN 属于 scored below threshold，需要定位哪些因果特征可以安全地上调这些设备；当前尚未对 device 加权父模型的 FN/TN 做正式 missed_fault_contrast。"
+}

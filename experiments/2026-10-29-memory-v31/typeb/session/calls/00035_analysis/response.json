@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_009",
+  "changes": {
+    "rerank": "parallel"
+  },
+  "reason": "trial_009 的 CV 中 FN=26，其中 fn_scored_below_threshold=20，主要问题是已有分数但低于阈值。并行分支可在全部 TRAIN 行上训练独立设备均衡浅层 XGBoost，并与 trial_009 主模型逐行 max 融合，可能提升低分故障单元而不冻结主模型。此前 parallel 在 base 父模型上无变化，但 trial_009 使用 burst/DQ 特征且 L2 正则更强，风险结构不同，值得单因素试验其互补性。",
+  "hypothesis": "设备均衡的独立浅层分支能够捕捉主模型未充分利用的低分故障模式，且与正则化主模型 max 融合后新增命中收益大于新增误报。",
+  "expected": "CV TP 较 trial_009 增加，至少部分恢复 scored below threshold 的漏报；同时 CV FP 增量可控，配对 F1 区间下界有机会升高。",
+  "falsification": "若 CV 配对 bootstrap 的 F1 区间跨过或低于 0，或净命中未增加、新增 FP 抵消新增 TP，则不能证明该并行分支对 trial_009 有互补收益。"
+}

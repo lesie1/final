@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_006",
+  "changes": {
+    "base_weight": "device"
+  },
+  "reason": "trial_006 的 burst/DQ 最大间隔特征将 CV TP 从 7 提升到 11、recall 从 0.2059 提升到 0.3235，但同时 CV FP 从 17 增至 41，新增 24 个误报；这说明新增特征在高事件量健康设备上放大了噪声。trial_004 已单独在 base 特征上验证 device 权重失败，但 base 特征和 trial_006 的风险结构不同，不能直接外推。现仅对 trial_006 做 base_weight 单因素对照，保持特征、参数、阈值和重排序不变，检验设备等权是否能压缩高事件量健康设备带来的误报，同时保留新增命中。",
+  "hypothesis": "在 trial_006 的 burst/DQ 间隔特征空间中，事件样本权重会让高事件量健康设备过多影响分裂；改为设备等权能减少这些设备主导的 FP，提高 precision 和 CV F1，且不损失 trial_006 已获得的新增 TP。",
+  "expected": "CV TP 保持至少 11 个，FP 明显低于 41，precision 改善；相对于 trial_006 的 CV F1 有正增长，且配对 bootstrap 95% 区间下界 > 0，净命中未减少。",
+  "falsification": "若 CV 新增 TP 丢失、FP 没有明显下降，或 CV F1 配对 bootstrap 区间跨过 0/低于 0，则设备等权在 trial_006 特征空间无效，应转向基于已保存证据的其他特征或停止。"
+}

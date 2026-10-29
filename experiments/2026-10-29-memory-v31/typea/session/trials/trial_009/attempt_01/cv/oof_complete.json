@@ -1,0 +1,165 @@
+{
+  "key": "c6f4d73b0b309d2f0c8eb6089b387bf77919b2641bdbd7089a230130479e938f",
+  "recipe": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "periods": [
+    [
+      1705351680,
+      1706664960
+    ],
+    [
+      1706664960,
+      1707978240
+    ],
+    [
+      1707978240,
+      1709291520
+    ],
+    [
+      1709291520,
+      1710604800
+    ],
+    [
+      1710604800,
+      1711918080
+    ]
+  ],
+  "folds": 5,
+  "rounds": 400,
+  "seconds": 258.57514787465334,
+  "oof_sha256": "03671713eb77e577109ad4ca1490194df97eed083182d18f7fb3cbf14cff86b1",
+  "parallel": {
+    "fusion": "max",
+    "all_training_rows": true,
+    "primary_step": 200,
+    "note": "Both fits exclude the held-out devices. Reused CV selects steps/thresholds; exploratory, not a fresh final test."
+  },
+  "best_step": 50,
+  "cv_metrics": {
+    "step": 50,
+    "f1": 0.15499254843517138,
+    "TP": 52,
+    "FP": 347,
+    "FN": 220,
+    "precision": 0.13032581453634084,
+    "recall": 0.19117647058823528,
+    "threshold": 0.9478608965873718
+  },
+  "error_counts": {
+    "TP": 52,
+    "FP": 347,
+    "FN": 220,
+    "TN": 129263,
+    "fn_no_timely_clock": 1,
+    "fn_no_timely_score": 12,
+    "fn_scored_below_threshold": 207,
+    "fn_with_outside_window_alarm": 8,
+    "note": "Outside-window alarms overlap FN categories and also count as FP. Missing timely scores do not prove no raw data."
+  },
+  "curve": [
+    {
+      "step": 50,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 100,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 150,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 200,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 250,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 300,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 350,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    },
+    {
+      "step": 400,
+      "f1": 0.15499254843517138,
+      "TP": 52,
+      "FP": 347,
+      "FN": 220,
+      "precision": 0.13032581453634084,
+      "recall": 0.19117647058823528,
+      "threshold": 0.9478608965873718
+    }
+  ],
+  "fault_units": 272,
+  "eligible_units": 129874
+}

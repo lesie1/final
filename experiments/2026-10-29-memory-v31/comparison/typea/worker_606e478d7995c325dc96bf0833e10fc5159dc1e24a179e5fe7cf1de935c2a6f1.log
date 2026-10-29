@@ -1,0 +1,26 @@
+typea 606e478d materializing_frozen_test_features {}
+FEATURE_VIEW_START program=606e478d7995c325dc96bf0833e10fc5159dc1e24a179e5fe7cf1de935c2a6f1 base cache preserved
+FEATURE_VIEW_PROGRESS devices=1868 rows=1532720 elapsed_seconds=30
+FEATURE_VIEW_PROGRESS devices=3946 rows=3329914 elapsed_seconds=60
+FEATURE_VIEW_PROGRESS devices=6109 rows=4993274 elapsed_seconds=90
+FEATURE_VIEW_PROGRESS devices=8210 rows=6694250 elapsed_seconds=120
+FEATURE_VIEW_PROGRESS devices=10346 rows=8379406 elapsed_seconds=150
+FEATURE_VIEW_PROGRESS devices=12416 rows=10146482 elapsed_seconds=180
+FEATURE_VIEW_PROGRESS devices=14450 rows=12013403 elapsed_seconds=210
+FEATURE_VIEW_PROGRESS devices=16630 rows=13771089 elapsed_seconds=240
+FEATURE_VIEW_PROGRESS devices=18796 rows=15408903 elapsed_seconds=270
+FEATURE_VIEW_PROGRESS devices=20763 rows=17032946 elapsed_seconds=300
+FEATURE_VIEW_PROGRESS devices=22748 rows=18667293 elapsed_seconds=330
+FEATURE_VIEW_PROGRESS devices=24885 rows=20395794 elapsed_seconds=360
+FEATURE_VIEW_PROGRESS devices=26928 rows=22243486 elapsed_seconds=391
+FEATURE_VIEW_PROGRESS devices=29075 rows=23784163 elapsed_seconds=421
+FEATURE_VIEW_PROGRESS devices=31180 rows=25464279 elapsed_seconds=451
+FEATURE_VIEW_PROGRESS devices=33408 rows=27153637 elapsed_seconds=481
+FEATURE_VIEW_PROGRESS devices=35490 rows=28889310 elapsed_seconds=511
+FEATURE_VIEW_PROGRESS devices=37669 rows=30554355 elapsed_seconds=541
+FEATURE_VIEW_PROGRESS devices=39730 rows=32268028 elapsed_seconds=571
+FEATURE_VIEW_PROGRESS devices=41694 rows=34197304 elapsed_seconds=601
+FEATURE_VIEW_PROGRESS devices=43881 rows=35987425 elapsed_seconds=631
+typea 606e478d predicting {'trial': 'trial_008'}
+RESULT typea trial_008 {"protocol": "memory_15m_7d_device_f1_v2", "threshold": 0.9392381310462952, "TP": 17, "FP": 132, "FN": 84, "precision": 0.11409395973154363, "recall": 0.16831683168316833, "f1": 0.136, "eligible_devices": 34008, "eligible_fault_devices": 101, "alarmed_devices": 149, "no_history_devices": 10398, "no_history_fault_devices": 3, "fault_without_timely_scheduled_opportunity": 0, "positive_without_scored_positive_day": 3, "unknown_devices": 26391, "unknown_alarm_devices": 4, "excluded_late_entry_devices": 3779, "excluded_preexisting_fault_devices": 614, "metric_scope": "Local device F1 with frozen task lead interval. Alarmed fault with no in-window hit counts FP and FN. Unknown follow-up excluded and reported separately."}
+typea 606e478d complete {}

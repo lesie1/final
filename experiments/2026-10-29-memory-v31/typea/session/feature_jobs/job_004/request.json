@@ -1,0 +1,12 @@
+{
+  "action": "features",
+  "parent": "trial_001",
+  "question": "在 TRAIN OOF 漏报设备（FN）与健康设备（TN）之间，将生命周期地址扩散密度 raw_life_distinct_cells / max(raw_life_distinct_cols,1) 以及该密度的近 7 天变化（例如 diff 后 rolling('7D').mean() 或 raw_life_new_cols_7d 与 raw_life_distinct_cells 的交互）纳入特征，能否比现有 raw_life_distinct_cols/cells 更稳定地区分二者，并提高低分漏报设备的召回？",
+  "reason": "Saved missed_fault_contrast evidence from trial_004: raw_life_distinct_cols and raw_life_distinct_cells had FN/TN AUC约0.804，但主模型未把低分漏报设备提到阈值以上。将该地址扩散证据转化为密度/近期扩散交互表示，是假设驱动的召回导向特征请求。",
+  "expected": "FN 设备在生命周期的每列错误 cell 密度上更高或近期密度上升，特征筛查 FN/TN AUC 区间不含 0.5，且下游模型在 CV 中提高召回且不丢失净命中。",
+  "falsification": "派生特征的 FN/TN AUC bootstrap 区间包含 0.5，或训练后 CV 相对 trial_001 丢失净命中且 F1 区间下界不超过 0。",
+  "hypothesis_id": "H8",
+  "target": "recall",
+  "exploration_reason": "raw_life_distinct_cols/cells 单变量已有 evidence，但其比值/时间变化可能反映交互效应；若派生单变量筛查证据不足，申请使用 1 个 exploration slot 验证该交互。",
+  "job": "job_004"
+}

@@ -1,0 +1,272 @@
+{
+  "task": "hypotheses",
+  "domain": "memory",
+  "instructions": "Domain-adapted evidence loop: separate false alarms, missed faults and coverage; allow bounded interaction/recall feature exploration, single-factor device weights and optional independent parallel branch. Reuse the source sampling policy and fixed evaluation. New source/representation requires a new cache/session. TEST stays outside search. TypeB only. Use supplied baseline features; do not infer healthy labels beyond May 2024.",
+  "fields": [
+    {
+      "name": "all_ce_count_15m",
+      "description": "Precomputed baseline statistic all_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "all_ce_count_1h",
+      "description": "Precomputed baseline statistic all_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "all_ce_log_num_15m",
+      "description": "Precomputed baseline statistic all_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "all_ce_log_num_1h",
+      "description": "Precomputed baseline statistic all_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_1_15m",
+      "description": "Precomputed baseline statistic burst_count=1_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_1_1h",
+      "description": "Precomputed baseline statistic burst_count=1_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_2_15m",
+      "description": "Precomputed baseline statistic burst_count=2_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_2_1h",
+      "description": "Precomputed baseline statistic burst_count=2_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_3_15m",
+      "description": "Precomputed baseline statistic burst_count=3_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_3_1h",
+      "description": "Precomputed baseline statistic burst_count=3_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_4_15m",
+      "description": "Precomputed baseline statistic burst_count=4_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_4_1h",
+      "description": "Precomputed baseline statistic burst_count=4_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_5_15m",
+      "description": "Precomputed baseline statistic burst_count=5_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_5_1h",
+      "description": "Precomputed baseline statistic burst_count=5_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_6_15m",
+      "description": "Precomputed baseline statistic burst_count=6_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_6_1h",
+      "description": "Precomputed baseline statistic burst_count=6_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_7_15m",
+      "description": "Precomputed baseline statistic burst_count=7_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_7_1h",
+      "description": "Precomputed baseline statistic burst_count=7_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_8_15m",
+      "description": "Precomputed baseline statistic burst_count=8_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "burst_count_8_1h",
+      "description": "Precomputed baseline statistic burst_count=8_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "ce_storm_count_15m",
+      "description": "Precomputed baseline statistic ce_storm_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "ce_storm_count_1h",
+      "description": "Precomputed baseline statistic ce_storm_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_1_15m",
+      "description": "Precomputed baseline statistic dq_count=1_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_1_1h",
+      "description": "Precomputed baseline statistic dq_count=1_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_2_15m",
+      "description": "Precomputed baseline statistic dq_count=2_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_2_1h",
+      "description": "Precomputed baseline statistic dq_count=2_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_3_15m",
+      "description": "Precomputed baseline statistic dq_count=3_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_3_1h",
+      "description": "Precomputed baseline statistic dq_count=3_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_4_15m",
+      "description": "Precomputed baseline statistic dq_count=4_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "dq_count_4_1h",
+      "description": "Precomputed baseline statistic dq_count=4_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_bit_count_15m",
+      "description": "Precomputed baseline statistic error_bit_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_bit_count_1h",
+      "description": "Precomputed baseline statistic error_bit_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_burst_count_15m",
+      "description": "Precomputed baseline statistic error_burst_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_burst_count_1h",
+      "description": "Precomputed baseline statistic error_burst_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_dq_count_15m",
+      "description": "Precomputed baseline statistic error_dq_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "error_dq_count_1h",
+      "description": "Precomputed baseline statistic error_dq_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_column_num_15m",
+      "description": "Precomputed baseline statistic fault_column_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_column_num_1h",
+      "description": "Precomputed baseline statistic fault_column_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_bank_15m",
+      "description": "Precomputed baseline statistic fault_mode_bank_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_bank_1h",
+      "description": "Precomputed baseline statistic fault_mode_bank_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_cell_15m",
+      "description": "Precomputed baseline statistic fault_mode_cell_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_cell_1h",
+      "description": "Precomputed baseline statistic fault_mode_cell_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_column_15m",
+      "description": "Precomputed baseline statistic fault_mode_column_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_column_1h",
+      "description": "Precomputed baseline statistic fault_mode_column_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_device_15m",
+      "description": "Precomputed baseline statistic fault_mode_device_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_device_1h",
+      "description": "Precomputed baseline statistic fault_mode_device_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_others_15m",
+      "description": "Precomputed baseline statistic fault_mode_others_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_others_1h",
+      "description": "Precomputed baseline statistic fault_mode_others_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_row_15m",
+      "description": "Precomputed baseline statistic fault_mode_row_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_mode_row_1h",
+      "description": "Precomputed baseline statistic fault_mode_row_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_row_num_15m",
+      "description": "Precomputed baseline statistic fault_row_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "fault_row_num_1h",
+      "description": "Precomputed baseline statistic fault_row_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "log_happen_frequency_15m",
+      "description": "Precomputed baseline statistic log_happen_frequency_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "log_happen_frequency_1h",
+      "description": "Precomputed baseline statistic log_happen_frequency_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "max_burst_interval_15m",
+      "description": "Precomputed baseline statistic max_burst_interval_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "max_burst_interval_1h",
+      "description": "Precomputed baseline statistic max_burst_interval_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "max_dq_interval_15m",
+      "description": "Precomputed baseline statistic max_dq_interval_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "max_dq_interval_1h",
+      "description": "Precomputed baseline statistic max_dq_interval_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "read_ce_count_15m",
+      "description": "Precomputed baseline statistic read_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "read_ce_count_1h",
+      "description": "Precomputed baseline statistic read_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "read_ce_log_num_15m",
+      "description": "Precomputed baseline statistic read_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "read_ce_log_num_1h",
+      "description": "Precomputed baseline statistic read_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "scrub_ce_count_15m",
+      "description": "Precomputed baseline statistic scrub_ce_count_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "scrub_ce_count_1h",
+      "description": "Precomputed baseline statistic scrub_ce_count_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "scrub_ce_log_num_15m",
+      "description": "Precomputed baseline statistic scrub_ce_log_num_15m; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    },
+    {
+      "name": "scrub_ce_log_num_1h",
+      "description": "Precomputed baseline statistic scrub_ce_log_num_1h; suffix denotes historical aggregation window. Supplied values retained unchanged."
+    }
+  ],
+  "mapping_description": "TypeB precomputed baseline features, 66 inputs from 15-minute and 1-hour historical windows, 7175 device files. Device ID from filename. No TypeA observations or labels mixed in."
+}

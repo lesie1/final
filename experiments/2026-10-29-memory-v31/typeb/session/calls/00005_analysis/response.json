@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "params.max_depth": 6
+  },
+  "reason": "Baseline max_depth=4 的 CV 中 27 个漏报里有 21 个属于 scored below threshold，提示模型可能欠拟合，未充分利用 CE 计数/log 频度等已显示的故障前信号。先做单因素参数对照，将 max_depth 从 4 提高到 6，观察是否能捕捉更复杂的时序交互并提高召回。",
+  "hypothesis": "提高树深度可增强对 CE 计数、突发模式及其交互的拟合能力，从而减少漏报，提升 TRAIN 设备分组 CV 的 F1，尤其是减少 scored below threshold 的 FN。",
+  "expected": "与 trial_001 相比，CV F1 提高，FN 数量下降，且净命中不减少；若精度下降但新增命中足以弥补，CV F1 仍应改善。",
+  "falsification": "若 CV F1 未改善、净命中减少，或新增命中的同时高分误报大幅上升导致 F1 不升反降，则说明单纯增加深度不能改善该表示。"
+}

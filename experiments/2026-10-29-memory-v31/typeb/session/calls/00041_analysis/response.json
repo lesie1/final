@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_012",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_012 的 TRAIN 设备分组 OOF 中，20 个 scored_below_threshold 漏报与 TN 之间，哪些因果特征（尤其是 burst/DQ 间隔、CE 计数、fault_mode_*）具有可信 AUC 分离？是否存在交互或低覆盖导致现有特征未将漏报设备推到阈值以上？",
+  "reason": "trial_012 CV 显示 FN=26，其中 fn_scored_below_threshold=20、fn_no_timely_score=6，覆盖不是主要瓶颈。已有参数和 burst/DQ 间隔特征未能通过 CV 采纳，且 high_score_contrast 在高分 TP/FP 无可信单变量特征。需要正式获取漏报与正常设备的因果特征对比，判断是否还有可训练特征方向；诊断预算未用，且不对 TEST 做选择。"
+}

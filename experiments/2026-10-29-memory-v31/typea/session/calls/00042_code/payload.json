@@ -1,0 +1,41 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "67425259eda7283a4fa7f6bce362f43f2c2e53462cfadf8a8a12086cf1e291c5",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "device",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 10,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '67425259eda7283a4fa7f6bce362f43f2c2e53462cfadf8a8a12086cf1e291c5', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'device', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 10, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在 trial_010 的 TRAIN 漏报设备（有及时分数但低于阈值）中，生命周期最大单 cell 占比 raw_life_top_cell_share 与总地址扩散量 raw_life_distinct_cells 的交互（例如高扩散但低集中度、或高集中度伴随近期新增）能否比当前单变量地址扩散特征更好地区分 FN 与 TN，并提高低分漏报设备的召回？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_010",
+    "question": "在 trial_010 的 TRAIN 漏报设备（有及时分数但低于阈值）中，生命周期最大单 cell 占比 raw_life_top_cell_share 与总地址扩散量 raw_life_distinct_cells 的交互（例如高扩散但低集中度、或高集中度伴随近期新增）能否比当前单变量地址扩散特征更好地区分 FN 与 TN，并提高低分漏报设备的召回？",
+    "reason": "trial_010 的 CV 误报较多且 190/203 FN 属于有分数但低于阈值；missed_fault_contrast 已显示 raw_life_distinct_cells/cols 强，但模型未能把这些设备提过阈值。H8 假设表明空间集中度（top cell share, max_cols_per_row, max_rows_per_col）反映局部物理损伤，尚未被现有特征程序使用；加入集中度交互可能形成更细的规则。",
+    "expected": "新特征在 FN/TN 对比中 AUC 提升，并使特征对照实验的 CV F1 高于 parent，且净命中不是负数，尤其增加低分漏报设备得分。",
+    "falsification": "若新特征在 FN/TN 上的单变量 AUC 区间含 0.5，或特征对照实验的 CV F1 不高于 trial_010、净命中丢失，则假设被拒绝或需要换方向。",
+    "hypothesis_id": "H8",
+    "target": "recall",
+    "exploration_reason": "虽然 H8 有机制依据，但尚无 high_score_contrast/missed_fault_contrast 直接显示 top_cell_share 等的区分力；当前漏报集中在低分区域，需要探索集中度与扩散量的组合表示，希望提高召回。",
+    "job": "job_006"
+  }
+}

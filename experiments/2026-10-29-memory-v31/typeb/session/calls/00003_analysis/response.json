@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 TRAIN 留出设备上，高分误报(FP)与真故障(TP)在 CE 计数、DQ 集中度、burst 规模、row/column/bank 模式、时间间隔和风暴特征上是否有方向性分离；漏报(FN)与正常(TN)在哪些特征上表现接近或可区分？漏报主要由低于阈值还是缺少及时分数构成？",
+  "reason": "基线 CV 仅 TP=7/34，FP=17，FN=27，其中 21 个漏报是已有分数但低于阈值，6 个无及时分数。需要同时定位高分区误报和低分区漏报的可区分特征，作为下一步 features 的证据。"
+}

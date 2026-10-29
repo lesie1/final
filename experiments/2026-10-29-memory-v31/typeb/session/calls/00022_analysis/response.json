@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_006",
+  "kind": "missed_fault_contrast",
+  "question": "在 trial_006 的 TRAIN OOF 漏报单元中，哪些故障前因果特征或短窗口趋势能区分未被模型识别的 FN 与 TN？特别检查 fault_mode_device_1h、burst_count_8_1h 等高分证据特征在 FN 中是否过低，以及是否存在持续性/交互模式未被现有特征捕获。",
+  "reason": "当前 best 仍为 trial_001，CV recall=0.2059，FN=27；trial_006 的 CV recall=0.3235、FN=23，主要漏报仍是 scored below threshold（17/23）。现有 high_score_contrast 只比较高分 TP/FP，不能解释低分 FN。按流程应先检查 missed-fault 特征与交互，定位漏报是缺少区分性特征还是阈值问题，再决定下一步 features/参数，避免盲目调参。"
+}

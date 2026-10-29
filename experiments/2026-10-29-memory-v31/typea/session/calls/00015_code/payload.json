@@ -1,0 +1,40 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "845f3d54bbb5a4c3706987bfdc299e95b3db2f935ff60715a06278fcdf3f0b42",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "none",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': '845f3d54bbb5a4c3706987bfdc299e95b3db2f935ff60715a06278fcdf3f0b42', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'none', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "Feature-only contrast: 在高分 TP/FP 样本中，近期新错误模式数 raw_life_new_patterns_7d 与多 DQ 事件 raw_7d_multi_dq_events 的联合增强（如按总事件归一化后的乘积）能否比单变量更稳定地区分真故障与误报？",
+  "decision": {
+    "action": "features",
+    "parent": "trial_001",
+    "question": "在高分 TP/FP 样本中，近期新错误模式数 raw_life_new_patterns_7d 与多 DQ 事件 raw_7d_multi_dq_events 的联合增强（如按总事件归一化后的乘积）能否比单变量更稳定地区分真故障与误报？",
+    "reason": "trial_001 的 high_score_contrast 显示 raw_life_new_patterns_7d（AUC 0.602，95% 区间 0.528-0.682）和 raw_7d_multi_dq_events（AUC 0.599，95% 区间 0.521-0.676）在高分 TP vs FP 中可信；但单独在 base 模型中未能压住大量误报，组合特征可能捕捉“新模式扩散且多 DQ 并发”的叠加风险。",
+    "hypothesis_id": "H10",
+    "target": "precision",
+    "expected": "新增交互特征在高分区 TP/FP 上替代或超过原始变量的单变量 AUC，并使 CV 精确率提升、F1 提高。",
+    "falsification": "CV 配对 bootstrap 区间跨 0，或新增交互特征在高分 TP/FP 上的 AUC 不高于原始特征组合，说明该联合表达未能改善误报区分。",
+    "job": "job_002"
+  }
+}

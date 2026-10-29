@@ -1,0 +1,67 @@
+{
+  "id": "3437230bf2b3f5807e0eaa63d63224580f20afa2f3c4daf6fded8843d742bd8e",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    denom_cols = frame['raw_life_distinct_cols'].where(frame['raw_life_distinct_cols'] > 0)\n    denom_rows = frame['raw_life_distinct_rows'].where(frame['raw_life_distinct_rows'] > 0)\n    denom_events = frame['raw_life_events'].where(frame['raw_life_events'] > 0)\n    fe_new_col_share = frame['raw_life_new_cols_7d'] / denom_cols\n    fe_new_row_share = frame['raw_life_new_rows_7d'] / denom_rows\n    fe_new_pattern_col_intensity = frame['raw_life_new_patterns_7d'] / denom_cols\n    fe_new_pattern_event_intensity = frame['raw_life_new_patterns_7d'] / denom_events\n    return pd.DataFrame({'fe_new_col_share': fe_new_col_share, 'fe_new_row_share': fe_new_row_share, 'fe_new_pattern_col_intensity': fe_new_pattern_col_intensity, 'fe_new_pattern_event_intensity': fe_new_pattern_event_intensity}, index=frame.index)",
+    "features": [
+      "fe_new_col_share",
+      "fe_new_row_share",
+      "fe_new_pattern_col_intensity",
+      "fe_new_pattern_event_intensity"
+    ]
+  },
+  "reason": "H10：近期新增列/行/模式占生命周期空间的相对比例应比绝对计数更能捕捉正在扩散的故障模式。error_atlas 显示 FN vs TN 中 raw_life_distinct_cols/cells 的 AUC 约 0.79-0.80，raw_life_new_cols_7d 也 credible；这些比值消除设备寿命和总事件规模的混淆。目标为 recall，期望提升 FN 尤其 scored_below_threshold 漏报单位得分；若加入后 FN/TN 无差异或漏报得分不改善，则否定该组合假设。",
+  "checks": [
+    {
+      "rows": 1653,
+      "finite_values": 6612
+    },
+    {
+      "rows": 7,
+      "finite_values": 28
+    },
+    {
+      "rows": 29,
+      "finite_values": 116
+    },
+    {
+      "rows": 1091,
+      "finite_values": 4364
+    },
+    {
+      "rows": 144,
+      "finite_values": 576
+    },
+    {
+      "rows": 3163,
+      "finite_values": 12652
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 74,
+      "finite_values": 296
+    },
+    {
+      "rows": 2,
+      "finite_values": 8
+    }
+  ],
+  "sample_validation_seconds": 0.15614361315965652,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}

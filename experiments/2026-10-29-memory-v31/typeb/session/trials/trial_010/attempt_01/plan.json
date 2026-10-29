@@ -1,0 +1,24 @@
+{
+  "feature_program": "1ff7e58836b6a2a6ed0fe7ec242464c8d2e40203a685c237aa1b0b137475e27b",
+  "feature_set": "base",
+  "sample_unit": "event",
+  "base_weight": "sample",
+  "label_horizon_days": 7,
+  "weight_policy": "ratio",
+  "prediction_interval_hours": 1,
+  "score_aggregation": "window_max",
+  "seed": 42,
+  "rerank": "none",
+  "rerank_gate": 0.5,
+  "params": {
+    "max_depth": 4,
+    "min_child_weight": 50.0,
+    "learning_rate": 0.1,
+    "reg_lambda": 10.0,
+    "reg_alpha": 1.0,
+    "gamma": 0.0,
+    "max_bin": 63,
+    "colsample_bytree": 0.7,
+    "max_delta_step": 0.0
+  }
+}

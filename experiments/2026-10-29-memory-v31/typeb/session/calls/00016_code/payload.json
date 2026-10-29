@@ -1,0 +1,64 @@
+{
+  "task": "training",
+  "accepted_plan": {
+    "feature_program": "base",
+    "feature_set": "base",
+    "sample_unit": "event",
+    "base_weight": "sample",
+    "label_horizon_days": 7,
+    "weight_policy": "ratio",
+    "prediction_interval_hours": 1,
+    "score_aggregation": "window_max",
+    "seed": 42,
+    "rerank": "parallel",
+    "rerank_gate": 0.5,
+    "params": {
+      "max_depth": 4,
+      "min_child_weight": 50.0,
+      "learning_rate": 0.1,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.0,
+      "gamma": 0.0,
+      "max_bin": 63,
+      "colsample_bytree": 0.7,
+      "max_delta_step": 0.0
+    }
+  },
+  "source_example": "def run(ctx):\n    return ctx.run({'feature_program': 'base', 'feature_set': 'base', 'sample_unit': 'event', 'base_weight': 'sample', 'label_horizon_days': 7, 'weight_policy': 'ratio', 'prediction_interval_hours': 1, 'score_aggregation': 'window_max', 'seed': 42, 'rerank': 'parallel', 'rerank_gate': 0.5, 'params': {'max_depth': 4, 'min_child_weight': 50.0, 'learning_rate': 0.1, 'reg_lambda': 1.0, 'reg_alpha': 0.0, 'gamma': 0.0, 'max_bin': 63, 'colsample_bytree': 0.7, 'max_delta_step': 0.0}})\n",
+  "reason": "TRAIN OOF 诊断显示 baseline CV 中 FN=27，其中 fn_scored_below_threshold=21，即主要漏报是已有模型分数但低于阈值，而不是缺少及时分数。单阶段模型 trial_001 CV f1=0.2414，recall=0.2059。并行分支允许在全训练行上独立训练设备均衡浅层 XGBoost，并与父模型逐行 max 融合，可能对低分故障单元补充分数。此前 trial_004 设备权重单因素对照失败，但 parallel 是预先声明的组合分支，不是把收益单独归于设备权重。父分支冻结，保持其他因素不变。",
+  "decision": {
+    "action": "experiment",
+    "parent": "trial_001",
+    "changes": {
+      "rerank": "parallel"
+    },
+    "reason": "TRAIN OOF 诊断显示 baseline CV 中 FN=27，其中 fn_scored_below_threshold=21，即主要漏报是已有模型分数但低于阈值，而不是缺少及时分数。单阶段模型 trial_001 CV f1=0.2414，recall=0.2059。并行分支允许在全训练行上独立训练设备均衡浅层 XGBoost，并与父模型逐行 max 融合，可能对低分故障单元补充分数。此前 trial_004 设备权重单因素对照失败，但 parallel 是预先声明的组合分支，不是把收益单独归于设备权重。父分支冻结，保持其他因素不变。",
+    "hypothesis": "独立设备均衡浅层分支可以学习到父模型在低分区域未充分利用的故障相关信号，并通过 max 融合提升 scored below threshold 的低分真实故障单元的及时分数，从而提高召回。",
+    "expected": "CV 中新增命中数 >0，且净命中不减少；可能增加一些 FP，但若新增命中足够抵消，CV 配对 bootstrap 95% F1 区间下界 >0。",
+    "falsification": "若 CV paired bootstrap 95% 区间下界 <=0 或净命中未增加；或者新增 FP 过多导致 CV F1 明显下降，则不采纳该 parallel 实验。",
+    "recipe": {
+      "feature_program": "base",
+      "feature_set": "base",
+      "sample_unit": "event",
+      "base_weight": "sample",
+      "label_horizon_days": 7,
+      "weight_policy": "ratio",
+      "prediction_interval_hours": 1,
+      "score_aggregation": "window_max",
+      "seed": 42,
+      "rerank": "parallel",
+      "rerank_gate": 0.5,
+      "params": {
+        "max_depth": 4,
+        "min_child_weight": 50.0,
+        "learning_rate": 0.1,
+        "reg_lambda": 1.0,
+        "reg_alpha": 0.0,
+        "gamma": 0.0,
+        "max_bin": 63,
+        "colsample_bytree": 0.7,
+        "max_delta_step": 0.0
+      }
+    }
+  }
+}

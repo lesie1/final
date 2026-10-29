@@ -1,0 +1,11 @@
+{
+  "action": "experiment",
+  "parent": "trial_001",
+  "changes": {
+    "base_weight": "device"
+  },
+  "reason": "已保存证据显示 baseline CV 中 FP=17、precision=0.2917；trial_002 提高 max_depth 后 CV FP 升至 51，trial_003 的特征对照在选择窗口新增 3 个 FP。当前 sample 权重可能让高事件量健康设备主导训练并产生误报。先做单因素 base_weight=device 对照，保持其他配置与 trial_001 一致，检验设备等权是否能改善误报与 F1。",
+  "hypothesis": "事件级 sample 权重使高活跃健康设备对损失贡献过大，模型偏向这些设备而产生误报；按设备等权归一化后，训练会平衡各设备贡献，可能减少高活跃健康设备的误报，同时不会丢失已命中的故障设备。",
+  "expected": "选择窗口 F1 不明显低于 trial_001；CV 中 FP 相对 trial_001 的 17 下降，paired bootstrap 95% 区间下界大于 0，且净命中未丢失。",
+  "falsification": "若选择窗口 F1 低于 best 超过 screen_margin，或因 FP 未下降且 CV 区间跨越 0 而无法通过接受规则，则拒绝该单因素权重对照；不把后续可能的并行分支收益归因于设备权重。"
+}

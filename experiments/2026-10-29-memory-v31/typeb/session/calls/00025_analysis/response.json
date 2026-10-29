@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_001",
+  "kind": "error_atlas",
+  "question": "在 TRAIN 设备分组交叉验证中，最佳模型 trial_001 漏报 27 个，其中 21 个属于已有分数但低于阈值；同时有 17 个误报。需要同时查看 FN 与 TN、TP 与 FP 在 CE/DQ/burst/间隔等特征上的快照差异，并复核漏报原因分解，以确定下一轮应优先做召回特征、误报特征还是覆盖诊断。",
+  "reason": "已完成的参数、设备权重、并行分支和两个特征对照均未改善 CV F1；baseline 的漏报集中在 scored below threshold，而 FP 也较多。为避免继续盲目调参，先用 error_atlas 同时定位漏报与误报的可区分证据。"
+}

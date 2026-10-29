@@ -1,0 +1,7 @@
+{
+  "action": "diagnose",
+  "parent": "trial_011",
+  "kind": "high_score_contrast",
+  "question": "在 trial_011（与 trial_009 相同的 CV 高分报警单元中），哪些因果特征能把真故障 TP 与误报 FP 分开？特别关注 CE 计数、burst/DQ 间隔、bank/row/column 计数等特征的 AUC 及 bootstrap 区间。",
+  "reason": "当前 CV 中 TP=8、FP=23、precision=0.258，参数正则化和 parallel 分支均未带来可接受的 F1 提升。需要高分 TP/FP 对比证据来定位可减少误报的特征方向，避免继续盲目调参；FN 虽然较多，但大部分是已有分数但低于阈值，先处理高分区误报更可能改善 F1 且不影响召回。"
+}

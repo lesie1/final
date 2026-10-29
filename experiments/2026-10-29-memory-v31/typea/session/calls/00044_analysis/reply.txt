@@ -1,0 +1,11 @@
+{
+  "action": "features",
+  "parent": "trial_010",
+  "question": "在 trial_010 的 TRAIN 漏报设备（有及时分数但低于阈值）中，近期新出现错误地址列占比（raw_life_new_cols_7d 相对生命周期去重列数）与生命周期最大单 cell 占比（raw_life_top_cell_share）的交互（例如高近期新增且高空间集中）能否比现有单变量或已尝试的 top_cell_share*distinct_cells 交互更稳定地区分 FN 与 TN？",
+  "reason": "历史 missed_fault_contrast 证据（trial_004 reason 引用）显示 raw_life_distinct_cols/cells 在 FN 与 TN 间的单变量 AUC 约 0.804，但 trial_012 的 top_cell_share*distinct_cells 交互未提高 CV F1。近期新增地址（H10 字段）与空间集中度（H8 字段）的组合可能捕捉到更强的故障前扩散模式，当前探索预算允许，故提出此特征研究。",
+  "expected": "新增交互特征能提高 FN 与 TN 的区分度，从而提升低分漏报设备的分数，在不显著增加误报的情况下增加召回。",
+  "falsification": "若该交互特征在 FN 与 TN 的 bootstrap AUC 区间包含 0.5，或训练后 CV 召回未提升且 precision 下降明显，则假设被否定。",
+  "hypothesis_id": "H10",
+  "target": "recall",
+  "exploration_reason": "已有单变量证据指向空间扩散特征（AUC 约 0.8），但单纯加入 top_cell_share*distinct_cells 交互未带来 CV 改善；可能存在更精细的组合效应（近期新增与空间集中），且 scope.feature_screen.mode=balanced、exploration_budget 尚有 2 次未使用，故作此有根据的探索。"
+}

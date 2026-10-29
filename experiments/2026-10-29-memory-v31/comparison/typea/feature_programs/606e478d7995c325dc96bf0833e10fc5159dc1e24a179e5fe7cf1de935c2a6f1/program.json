@@ -1,0 +1,67 @@
+{
+  "id": "606e478d7995c325dc96bf0833e10fc5159dc1e24a179e5fe7cf1de935c2a6f1",
+  "spec": {
+    "parent": "base",
+    "source": "def transform(frame):\n    denom6 = np.maximum(frame['raw_6h_events'], 1.0)\n    share6 = frame['raw_6h_multi_beat_events'] / denom6\n    denom24 = np.maximum(frame['raw_24h_events'], 1.0)\n    share24 = frame['raw_24h_multi_beat_events'] / denom24\n    span6 = frame['raw_6h_max_beat_interval'] * share6\n    span24 = frame['raw_24h_max_beat_interval'] * share24\n    return pd.DataFrame({'fe_6h_multi_beat_share': share6, 'fe_24h_multi_beat_share': share24, 'fe_6h_beat_span_weighted': span6, 'fe_24h_beat_span_weighted': span24}, index=frame.index)",
+    "features": [
+      "fe_6h_multi_beat_share",
+      "fe_24h_multi_beat_share",
+      "fe_6h_beat_span_weighted",
+      "fe_24h_beat_span_weighted"
+    ]
+  },
+  "reason": "H7 多 beat CE 事件占比按最近 6h/24h CE 事件数归一化，避免总 CE 量混淆；再用占比加权最大 beat 间隔，衡量近期多 beat 事件严重程度。target=recall，用于在 FN/TN 和低分漏报设备中补充可检验信号。",
+  "checks": [
+    {
+      "rows": 1653,
+      "finite_values": 6612
+    },
+    {
+      "rows": 7,
+      "finite_values": 28
+    },
+    {
+      "rows": 29,
+      "finite_values": 116
+    },
+    {
+      "rows": 1091,
+      "finite_values": 4364
+    },
+    {
+      "rows": 144,
+      "finite_values": 551
+    },
+    {
+      "rows": 3163,
+      "finite_values": 12652
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 8192,
+      "finite_values": 32768
+    },
+    {
+      "rows": 74,
+      "finite_values": 148
+    },
+    {
+      "rows": 50,
+      "finite_values": 100
+    }
+  ],
+  "sample_validation_seconds": 0.17211054265499115,
+  "labels_visible": false,
+  "limitation": "Causal API restrictions plus sampled prefix checks; runtime resource budgets also apply"
+}
