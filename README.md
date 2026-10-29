@@ -40,7 +40,7 @@
 │   └── session_report.py   # 比赛指标汇总：轮数、token、自动化程度、模型复杂度、时延
 ├── examples/              # 映射与运行配置示例
 ├── results/               # 最终实验结果（session、模型、确认与测试评估）
-└── docs/                  # 复现指南、接口参考、架构、比赛要求、版本历史
+└── docs/                  # 复现指南、接口参考、三个 Agent 的说明、架构
 ```
 
 根目录的 `.py`、`prompts/` 和 `skills/.../experiment-method.md` 都受**代码封印**（`code_seal.json`）保护：改动其中任何一个文件，已有会话都会拒绝继续运行。新增的工具放在 `tools/` 这样的子目录中，不会影响封印。
@@ -70,10 +70,9 @@ python tools/session_report.py --session <会话> --md summary.md
 - [接口参考](docs/interfaces.md)：命令行、Python API、LLM 接入、配置项、会话目录结构
 - [三个 Agent 的作用与整体流程图](docs/agents.md)
 - [框架与模块说明](docs/architecture.md)
-- [v3.2 采纳规则与 OOF 工作点](docs/v3_2_采纳规则与工作点.md)
+- [采纳规则与部署工作点](docs/acceptance_rule.md)：新模型凭什么取代最优模型、部署时用哪一轮和什么阈值，以及为什么这样设计
 - [Agent Skill](skills/device-failure-experiment-loop/SKILL.md) 与[共享实验方法](skills/device-failure-experiment-loop/references/experiment-method.md)
-- [版本历史文档](docs/history/)（v3 交接说明、v3.1 修复说明与验证）
 
-v3.1 及更早的实验快照已从当前目录移除，可在 git 提交 `4c27cf1` 中查看。
+v3.1 及更早的实验快照可在 git 提交 `4c27cf1` 中查看；v3 交接说明、v3.1 修复说明和 v3.1 验证报告可在提交 `9262e8f` 的 `docs/history/` 中查看。
 
 仓库不包含原始数据、大型特征缓存、API 密钥和服务器上的完整续跑环境。
