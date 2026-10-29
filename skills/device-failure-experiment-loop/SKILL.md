@@ -11,6 +11,6 @@ Use the current session's scope, field descriptions, receipts and diagnostic bud
 
 Complete a change only when its accepted plan is executable, evidence is saved, old results remain traceable and independent evaluation boundaries remain intact. Distinguish structural compatibility across memory/HDD/generic inputs from demonstrated predictive improvement on actual datasets.
 
-For v3 handoff and cache migration read [the package handoff](../../docs/history/README_V3_中文.md). Changed program bytes require a new session; the old code seal is never rewritten to make an old run appear compatible.
+For setting up a new dataset, the order of steps and where outputs go, read [the reproduction guide](../../docs/reproduce.md). Changed program bytes require a new session; the old code seal is never rewritten to make an old run appear compatible.
 
-For fresh inputs, frozen-sample device-weight controls, or a failed worker, read [the v3.1 repair notes](../../docs/history/README_V3_1_修复说明.md) and the execution rules in the shared method. A resource classification requires an explicit resource failure; directory names are not evidence.
+For what each agent sees and returns and how the controller checks it, read [the agents guide](../../docs/agents.md). For fresh inputs, frozen-sample device-weight controls, or a failed worker, follow the execution rules in the shared method. A resource classification requires an explicit resource failure; directory names are not evidence.
