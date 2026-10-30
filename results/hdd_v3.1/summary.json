@@ -1,0 +1,434 @@
+{
+  "session": "hdd_v3.1/session",
+  "domain": "hdd",
+  "status": "trial_budget_complete",
+  "wall_clock_hours": 24.558888888888887,
+  "policy": {
+    "acceptance": "cv_paired",
+    "accept_test": null,
+    "accept_probability": null,
+    "accept_require_net_hits": null,
+    "operating_point": null,
+    "max_trials": 13,
+    "cv_folds": 5
+  },
+  "trials": [
+    {
+      "trial": "trial_001",
+      "status": "complete",
+      "parent": null,
+      "reason": "baseline",
+      "accepted": true,
+      "rule": "baseline",
+      "probability_better": null,
+      "cv_delta_f1": null,
+      "selection_f1": 0.2380038387715931,
+      "cv_f1": 0.25475893969044655,
+      "cv_TP": 716,
+      "cv_FP": 2555,
+      "cv_FN": 1634
+    },
+    {
+      "trial": "trial_002",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "First propose one controlled parameter change as requested. Baseline uses max_depth=4; error_atlas shows credible but moderate univariate separations on SMART e",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.149,
+      "cv_delta_f1": -0.00495782592751895,
+      "selection_f1": 0.24114356743318832,
+      "cv_f1": 0.2498011137629276,
+      "cv_TP": 628,
+      "cv_FP": 2050,
+      "cv_FN": 1722
+    },
+    {
+      "trial": "trial_003",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: SMART 197 当前待处理扇区数的近期突增与持续高位，能否区分故障前设备与健康设备，尤其是减少高分区的误报和低于阈值的漏报？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.813,
+      "cv_delta_f1": 0.005103670711908703,
+      "selection_f1": 0.25100671140939596,
+      "cv_f1": 0.25986261040235525,
+      "cv_TP": 662,
+      "cv_FP": 2083,
+      "cv_FN": 1688
+    },
+    {
+      "trial": "trial_004",
+      "status": "complete",
+      "parent": "trial_001",
+      "reason": "Feature-only contrast: smart_187_raw（无法纠正错误数）的非零持续高位与近期突增，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并同时改善高分区真故障(TP)与误报(FP)的排序？",
+      "accepted": true,
+      "rule": "cv_paired",
+      "probability_better": 1.0,
+      "cv_delta_f1": 0.024831902978817932,
+      "selection_f1": 0.25654116145500955,
+      "cv_f1": 0.2795908426692645,
+      "cv_TP": 861,
+      "cv_FP": 2948,
+      "cv_FN": 1489
+    },
+    {
+      "trial": "trial_005",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "当前 best trial_004 的 TRAIN 交叉验证漏报仍达 1489，其中 1416 个故障单元因分数低于阈值而漏报，说明主要矛盾在低分故障模式未被父模型捕捉。scope.parallel.allowed=true，允许在单阶段父模型上增加独立的全保留训练行浅层设备均衡分支，并通过逐行 max 融合补充父模型",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.0,
+      "cv_delta_f1": 0.0,
+      "selection_f1": 0.25654116145500955,
+      "cv_f1": 0.2795908426692645,
+      "cv_TP": 861,
+      "cv_FP": 2948,
+      "cv_FN": 1489
+    },
+    {
+      "trial": "trial_006",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 5 raw 重分配扇区数的持续高位、近期突增以及归一化值下降，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.855,
+      "cv_delta_f1": 0.005088037942774959,
+      "selection_f1": 0.25407608695652173,
+      "cv_f1": 0.28467888061203944,
+      "cv_TP": 707,
+      "cv_FP": 1910,
+      "cv_FN": 1643
+    },
+    {
+      "trial": "trial_007",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 196 raw 重分配事件数及其近期突增/持续非零，能否区分当前低于阈值的漏报故障设备(FN)与健康设备(TN)，并帮助召回这些低分故障？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.786,
+      "cv_delta_f1": 0.003141605148572313,
+      "selection_f1": 0.25772418990203466,
+      "cv_f1": 0.2827324478178368,
+      "cv_TP": 745,
+      "cv_FP": 2175,
+      "cv_FN": 1605
+    },
+    {
+      "trial": "trial_008",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "当前 best trial_004 使用 sample 权重，在事件级样本上训练会使观测密集的健康设备主导梯度；其 CV 中 FP=2948、FN=1489，设备级 F1 仍受高假阳性限制。scope.allowed_changes 包含 base_weight，且尚未做过设备权重单因素对照。本次只将 base_wei",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.007,
+      "cv_delta_f1": -0.012693095702193402,
+      "selection_f1": 0.2615723732549596,
+      "cv_f1": 0.2668977469670711,
+      "cv_TP": 693,
+      "cv_FP": 2150,
+      "cv_FN": 1657
+    },
+    {
+      "trial": "trial_009",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: smart_188_raw 命令超时计数的持续高位与近期突增，能否区分 best trial_004 的漏报故障设备(FN)与健康设备(TN)，并帮助召回低分故障？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.54,
+      "cv_delta_f1": 0.0004630138416029661,
+      "selection_f1": 0.25515660809778457,
+      "cv_f1": 0.28005385651086745,
+      "cv_TP": 728,
+      "cv_FP": 2121,
+      "cv_FN": 1622
+    },
+    {
+      "trial": "trial_010",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Feature-only contrast: SMART 7 raw 寻道错误率的持续高位与近期突增，能否在 best trial_004 的 TRAIN 交叉验证漏报设备中区分低分故障(FN)与健康(TN)，补充机械定位退化信号？",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.275,
+      "cv_delta_f1": -0.0019840050624268524,
+      "selection_f1": 0.26403641881638845,
+      "cv_f1": 0.27760683760683763,
+      "cv_TP": 812,
+      "cv_FP": 2688,
+      "cv_FN": 1538
+    },
+    {
+      "trial": "trial_011",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Controller fallback after invalid analysis response",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.039,
+      "cv_delta_f1": -0.006589601754533048,
+      "selection_f1": 0.25381263616557737,
+      "cv_f1": 0.27300124091473144,
+      "cv_TP": 770,
+      "cv_FP": 2521,
+      "cv_FN": 1580
+    },
+    {
+      "trial": "trial_012",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "Controller fallback after invalid analysis response",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.183,
+      "cv_delta_f1": -0.004306581747660632,
+      "selection_f1": 0.26520681265206814,
+      "cv_f1": 0.27528426092160385,
+      "cv_TP": 690,
+      "cv_FP": 1973,
+      "cv_FN": 1660
+    },
+    {
+      "trial": "trial_013",
+      "status": "complete",
+      "parent": "trial_004",
+      "reason": "特征预算已耗尽，不能继续请求新特征。best trial_004 在 TRAIN CV 中 FP=2948、FN=1489，高于阈值的低分故障占 1416/1489，高分区误报多。当前 min_child_weight=50 可能阻止模型学习小样本、低基数的故障模式，降低该参数允许更细的叶节点划分，在保持设备分组 CV",
+      "accepted": false,
+      "rule": "cv_paired",
+      "probability_better": 0.016,
+      "cv_delta_f1": -0.006925307864510677,
+      "selection_f1": 0.2538517975055026,
+      "cv_f1": 0.2726655348047538,
+      "cv_TP": 803,
+      "cv_FP": 2737,
+      "cv_FN": 1547
+    }
+  ],
+  "completed": 13,
+  "accepted": [
+    "trial_004"
+  ],
+  "baseline": "trial_001",
+  "best": "trial_004",
+  "agent": {
+    "calls": 50,
+    "calls_by_role": {
+      "code": 13,
+      "feature": 10,
+      "analysis": 27
+    },
+    "total_tokens": 989281,
+    "prompt_tokens": 848859,
+    "completion_tokens": 140422
+  },
+  "autonomy": {
+    "event_counts": {
+      "limits_changed": 1,
+      "scheduler_step_complete": 47,
+      "agent_call": 50,
+      "training_started": 13,
+      "cross_validation_started": 14,
+      "experiment_complete": 13,
+      "hypotheses_recorded": 1,
+      "decision_accepted": 16,
+      "diagnostic_complete": 4,
+      "response_repair": 13,
+      "feature_repair": 3,
+      "feature_prescreen": 6,
+      "controller_fallback": 2
+    },
+    "manual_interventions": 1,
+    "agent_decisions": 16,
+    "controller_fallbacks": 2,
+    "response_repairs": 13,
+    "agent_decision_share": 0.875,
+    "note": "manual_interventions counts recorded limit changes only; session setup and restarts outside the loop are not logged as events."
+  },
+  "automation": {
+    "automatic_steps": 67,
+    "manual_steps": 1,
+    "steps_by_kind": {
+      "training": 13,
+      "cross-validation": 14,
+      "acceptance decision": 13,
+      "failure-mechanism hypotheses": 1,
+      "analysis decision": 16,
+      "diagnostic": 4,
+      "feature prescreen": 6
+    },
+    "step_coverage": 0.9852941176470589,
+    "trials_completed": 13,
+    "trials_without_intervention": 13,
+    "trial_coverage": 1.0,
+    "full_pipeline_automated": false,
+    "definition": "Manual = budget changes (limits_changed) only. Step coverage = automatic steps / (automatic + manual). A trial counts as automatic when no manual event falls between the previous trial completing and it completing. Full pipeline = the search finished (stopped or trial budget complete) with no manual event. Commands a person runs outside the loop (session setup, data preparation, TEST replay) are not counted."
+  },
+  "target": null,
+  "evaluations": {
+    "historical_test/test": {
+      "path": "historical_test/devices_test.csv.gz",
+      "eligible_devices": 292103,
+      "fault_devices": 804,
+      "alarmed_devices": 1562,
+      "TP": 348,
+      "FP": 1214,
+      "FN": 456,
+      "TN": 290085,
+      "precision": 0.22279129321382843,
+      "recall": 0.43283582089552236,
+      "f1": 0.294167371090448,
+      "accuracy": 0.9942828385877585,
+      "specificity": 0.9958324608048774,
+      "balanced_accuracy": 0.7143341408501999,
+      "review_list": {
+        "0.25%": {
+          "fraction": 0.0025,
+          "review_budget": 730,
+          "review_devices": 730,
+          "review_cutoff": 0.978036105632782,
+          "alarmed_devices": 1562,
+          "fault_devices": 804,
+          "alarm_hits": 348,
+          "review_faults": 76,
+          "review_precision": 0.10410958904109589,
+          "recall_alarm": 0.43283582089552236,
+          "recall_alarm_and_review": 0.527363184079602
+        },
+        "0.50%": {
+          "fraction": 0.005,
+          "review_budget": 1461,
+          "review_devices": 1461,
+          "review_cutoff": 0.9669305682182312,
+          "alarmed_devices": 1562,
+          "fault_devices": 804,
+          "alarm_hits": 348,
+          "review_faults": 122,
+          "review_precision": 0.08350444900752908,
+          "recall_alarm": 0.43283582089552236,
+          "recall_alarm_and_review": 0.5845771144278606
+        },
+        "1.00%": {
+          "fraction": 0.01,
+          "review_budget": 2921,
+          "review_devices": 2921,
+          "review_cutoff": 0.940160870552063,
+          "alarmed_devices": 1562,
+          "fault_devices": 804,
+          "alarm_hits": 348,
+          "review_faults": 193,
+          "review_precision": 0.06607326258130777,
+          "recall_alarm": 0.43283582089552236,
+          "recall_alarm_and_review": 0.6728855721393034
+        },
+        "2.00%": {
+          "fraction": 0.02,
+          "review_budget": 5842,
+          "review_devices": 5842,
+          "review_cutoff": 0.8576831817626953,
+          "alarmed_devices": 1562,
+          "fault_devices": 804,
+          "alarm_hits": 348,
+          "review_faults": 271,
+          "review_precision": 0.046388223211229034,
+          "recall_alarm": 0.43283582089552236,
+          "recall_alarm_and_review": 0.7699004975124378
+        }
+      }
+    }
+  },
+  "models": {
+    "trial_001": {
+      "trial": "trial_001",
+      "operating_point": {
+        "source": "selection_window",
+        "step": 550,
+        "threshold": 0.9869956374168396
+      },
+      "model_file": "model.ubj",
+      "model_file_bytes": 895073,
+      "complexity": {
+        "trees": 550,
+        "nodes": 15616,
+        "leaves": 8083,
+        "split_nodes": 7533,
+        "parameters": 15616,
+        "parameter_definition": "split thresholds + leaf values (feature choices and tree shape not counted)",
+        "max_depth": 4,
+        "input_features": 186
+      },
+      "model_only_latency": {
+        "batch_1": {
+          "median_ms": 0.16722800501156598,
+          "per_row_us": 167.22800501156598
+        },
+        "batch_1000": {
+          "median_ms": 5.412052501924336,
+          "per_row_us": 5.412052501924336
+        },
+        "batch_10000": {
+          "median_ms": 51.296546997036785,
+          "per_row_us": 5.1296546997036785
+        }
+      },
+      "recorded_training_timings_seconds": {
+        "data_verification": 2.832161944359541,
+        "feature_and_matrix_seconds": 99.9653192423284,
+        "boost_updates_seconds": 4.610819436609745,
+        "validation_prediction_seconds": 3806.8910719640553,
+        "total_seconds": 3928.4915320798755
+      }
+    },
+    "trial_004": {
+      "trial": "trial_004",
+      "operating_point": {
+        "source": "selection_window",
+        "step": 550,
+        "threshold": 0.987483024597168
+      },
+      "model_file": "model.ubj",
+      "model_file_bytes": 895889,
+      "complexity": {
+        "trees": 550,
+        "nodes": 15640,
+        "leaves": 8095,
+        "split_nodes": 7545,
+        "parameters": 15640,
+        "parameter_definition": "split thresholds + leaf values (feature choices and tree shape not counted)",
+        "max_depth": 4,
+        "input_features": 190
+      },
+      "model_only_latency": {
+        "batch_1": {
+          "median_ms": 0.15672699373681098,
+          "per_row_us": 156.72699373681098
+        },
+        "batch_1000": {
+          "median_ms": 5.560838006203994,
+          "per_row_us": 5.560838006203994
+        },
+        "batch_10000": {
+          "median_ms": 52.255385991884395,
+          "per_row_us": 5.2255385991884395
+        }
+      },
+      "recorded_training_timings_seconds": {
+        "data_verification": 4.408865373581648,
+        "feature_and_matrix_seconds": 101.77445696294308,
+        "boost_updates_seconds": 5.513619959354401,
+        "validation_prediction_seconds": 3865.9702086411417,
+        "total_seconds": 3992.421673603356
+      }
+    }
+  },
+  "environment": {
+    "python": "3.12.3",
+    "machine": "x86_64",
+    "processor": "x86_64",
+    "cpus": 1
+  }
+}

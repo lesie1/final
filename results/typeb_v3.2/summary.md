@@ -49,7 +49,7 @@ Review list = the highest-scoring devices that did not alarm (tools/review_list.
 
 | model | operating point | trees | nodes | parameters | max depth | features | file | 1 row | 10k rows |
 |---|---|---|---|---|---|---|---|---|---|
-| trial_001 | cv_oof step 250, thr 0.9396 | 250 | 5718 | 5,718 | 4 | 135 | 534 KiB | 0.122 ms | 24.3 ms |
+| trial_001 | cv_oof step 250, thr 0.9396 | 250 | 5718 | 5,718 | 4 | 135 | 534 KiB | 0.111 ms | 23.6 ms |
 
 Parameters = split thresholds + leaf values of the deployed (step-truncated) model.
 Latency is model-only scoring on this machine (1 CPUs, Python 3.12.3); feature construction and the full validation pass are in `recorded_training_timings_seconds`.

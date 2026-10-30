@@ -126,8 +126,9 @@ def evaluations(session):
     """Saved confirmation / TEST device tables next to the session (results layout)."""
     out = {}
     for kind in ('confirmation', 'historical_test'):
-        for path in sorted((session.parent/kind).rglob('devices*.csv')):
-            label = path.relative_to(session.parent).with_suffix('').as_posix().replace('/devices_', '/').replace('/devices', '')
+        for path in sorted((session.parent/kind).rglob('devices*.csv*')):
+            name = path.relative_to(session.parent).as_posix().removesuffix('.gz').removesuffix('.csv')
+            label = name.replace('/devices_', '/').replace('/devices', '')
             from review_list import budgets
             out[label] = dict(path=path.relative_to(session.parent).as_posix(), **device_metrics(path),
                               review_list=budgets(path))
@@ -187,7 +188,8 @@ def latency(model, features, repeats=30):
 def deployed(session, config, trial):
     from operating_point import choose, load
     folder = session/'trials'/trial/'attempt_01'
-    op = choose(folder, config.get('operating_point', 'selection_window'))
+    # Sessions from before operating points existed (v3.1) deployed the selection-window step and threshold.
+    op = choose(folder, config.get('operating_point') or 'selection_window')
     model = load(folder, op, 1)
     size = (folder/op['model']).stat().st_size
     timings = read(folder/'result.json').get('timings', {})

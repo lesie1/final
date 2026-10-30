@@ -484,16 +484,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.12394500663504004,
-          "per_row_us": 123.94500663504004
+          "median_ms": 0.10779350122902542,
+          "per_row_us": 107.79350122902542
         },
         "batch_1000": {
-          "median_ms": 2.602075503091328,
-          "per_row_us": 2.602075503091328
+          "median_ms": 2.460761505062692,
+          "per_row_us": 2.460761505062692
         },
         "batch_10000": {
-          "median_ms": 24.355724002816714,
-          "per_row_us": 2.4355724002816714
+          "median_ms": 24.510991002898663,
+          "per_row_us": 2.4510991002898663
         }
       },
       "recorded_training_timings_seconds": {
