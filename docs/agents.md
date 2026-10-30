@@ -15,17 +15,20 @@
 ```mermaid
 flowchart TD
     subgraph PREP["准备阶段（训练前）"]
-        D["官方数据<br/>预处理特征 + 原始日志 + 故障工单"] --> MAP["特征 Agent ① 数据适配<br/>读表头，生成字段映射<br/>（也可以人工提供 --mapping）"]
-        MAP --> NORM["规范化与时间划分<br/>agent.py init / prepare"]
+        D["官方数据<br/>预处理特征 + 原始日志 + 故障工单"] --> DPREP["👤 整理输入目录<br/>剔除不完整文件、生成随访表"]
+        DPREP --> MAP["特征 Agent ① 数据适配<br/>读表头，生成字段映射<br/>（也可以人工提供 --mapping）"]
+        MAP --> MAPCHK{"👤 核对映射<br/>故障定义和随访规则"}
+        MAPCHK --> NORM["规范化与时间划分<br/>agent.py init / prepare"]
         NORM --> PROP["特征 Agent ② 训练前特征建议<br/>根据领域知识提出需要补充的特征"]
-        PROP --> REV{"人工审查<br/>采纳 / 拒绝 / 暂缓"}
-        REV -->|采纳| IMPL["人工实现<br/>例：raw_cache.py 解析原始日志"]
+        PROP --> REV{"👤 审查建议<br/>采纳 / 拒绝 / 暂缓"}
+        REV -->|采纳| IMPL["👤 实现被采纳的特征<br/>例：raw_cache.py 解析原始日志"]
         REV -->|拒绝或暂缓| CACHE
         IMPL --> CACHE["模型输入特征缓存"]
+        CACHE --> CFG["👤 设定搜索配置<br/>实验组数 / 调用次数 / token / screen_margin"]
     end
 
-    subgraph LOOP["Agent 闭环搜索"]
-        CACHE --> BASE["基线训练 + 设备分组 CV"]
+    subgraph LOOP["Agent 闭环搜索（全自动，没有人工步骤）"]
+        CFG --> BASE["基线训练 + 设备分组 CV"]
         BASE --> HYP["特征 Agent ③ 故障机理假设<br/>只看字段含义，不看标签和结果"]
         HYP --> ANA["分析 Agent<br/>读取实验历史和诊断证据<br/>选择下一步动作"]
         ANA -->|diagnose| DIAG["控制器计算误报 / 漏报诊断<br/>（不调用 LLM）"]
@@ -43,8 +46,35 @@ flowchart TD
         KEEP --> ANA
     end
 
-    ANA -->|stop 或预算用完| FIN["冻结 → 确认窗口评估 → 汇总报告<br/>confirm_search.py / tools/session_report.py"]
+    subgraph AFTER["搜索结束后"]
+        FIN["冻结 → 确认窗口评估 → 汇总报告<br/>confirm_search.py / tools/session_report.py"] --> TAUTH{"👤 授权 TEST 评估<br/>模型和阈值已冻结"}
+        TAUTH --> RVW["👤 复查名单<br/>未报警但分数最高的设备<br/>tools/review_list.py"]
+    end
+
+    ANA -->|stop 或预算用完| FIN
+
+    classDef human fill:#fde68a,stroke:#b45309,color:#111
+    class DPREP,MAPCHK,REV,IMPL,CFG,TAUTH,RVW human
 ```
+
+黄色、带 👤 的节点需要人参与，其余由 Agent 或控制器自动完成。**中间的闭环搜索没有任何人工步骤。**
+
+## 人工参与环节一览
+
+框架的设计原则是：**调优闭环全自动；闭环之外，凡是涉及数据定义、安全、资源和最终判断的环节，由人负责。**
+
+| # | 环节 | 什么时候 | 人做什么 | 为什么需要人 | 是否计入自动化覆盖率 |
+|---|---|---|---|---|---|
+| 1 | 整理输入数据 | 建立会话前 | 整理输入目录、生成随访表（[复现指南 §2.1](reproduce.md#21-内存-typea本次结果所用数据)） | 数据的获取、权限和来源确认 | 不计入（闭环之外） |
+| 2 | 核对字段映射 | 建立会话时 | 确认故障定义和随访规则是否正确（映射可由特征 Agent 生成） | 标签定义决定整个评价口径，错了所有结果都不可信 | 不计入 |
+| 3 | 审查特征建议 | 训练前 | 对特征 Agent 的每条建议填写采纳 / 拒绝 / 暂缓和理由（[§3.3](reproduce.md#33-训练前的特征建议agent-提出人采纳和实现)） | Agent 的依据可能不可靠；实现成本需要权衡 | 不计入（训练前） |
+| 4 | 实现被采纳的特征 | 训练前 | 编写原始日志解析代码，例如 `raw_cache.py`、TypeB 的 `raw_typeb.py` | 出于安全和防泄漏考虑，目前不允许 Agent 读取任意文件或编写任意代码 | 不计入（训练前） |
+| 5 | 设定搜索配置 | 建立会话时 | 设置实验组数、调用次数、token 上限和 `screen_margin`（[复现指南](reproduce.md#运行前设置实验组数和预算)） | 时间和费用由人决定 | 建会话时写进配置：**不计入**；会话建立后用 `agent.py limits` 修改：**计入**（`limits_changed`） |
+| 6 | 启动和恢复运行 | 运行中 | 启动搜索；遇到资源问题时恢复运行 | 计算资源由人管理 | 不计入，但要如实记录（例如硬盘实验中途的两次资源恢复） |
+| 7 | 授权 TEST 评估 | 搜索结束后 | 模型和阈值冻结之后，决定是否在 TEST 上评估 | 防止用测试集选择模型 | 不计入 |
+| 8 | 复查名单 | 评估或部署时 | 判断没有报警、但分数最高的设备（名单大小按复查能力设定） | 提高召回；最终是否更换硬件需要运维经验 | 不计入（运行时的人工复查，不属于调优过程） |
+
+闭环内部（假设生成、分析决策、写训练代码、训练、交叉验证、诊断、特征生成与预筛、采纳判断）**全部自动完成**。自动化覆盖率只统计闭环内的步骤和第 5 项中"会话建立后修改预算"这一种人工干预，定义见 [results/README.md](../results/README.md)。
 
 ## 分析 Agent：决定下一步做什么
 
