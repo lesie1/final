@@ -10,7 +10,7 @@
 |---|---|---|
 | 内存 TypeA（SmartMem） | ✅ 完成 | 13 组全自动搜索，无人工干预。采纳 trial_008；历史 TEST 设备级 F1 由基线 13.16% 提高到 **20.22%**（TP 20→27，FP 183→139）。详见 [results/typea_v3.2](results/typea_v3.2/README.md) |
 | 内存 TypeB | ✅ 完成 | 135 特征（含原始日志特征），`screen_margin=1.0`，13 组全部经过 CV，最终保留基线。确认窗口 F1 **54.55%**，历史 TEST F1 0（TP=0、FP=2、FN=12）。测试期多数故障在训练数据中缺乏可学习的前兆，详见 [results/typeb_v3.2 的原因分析](results/typeb_v3.2/README.md) |
-| 硬盘（Backblaze） | ✅ 完成 | v3.1 封存运行库，13 组搜索，采用 trial_004。最终 TEST 设备级 F1 **29.42%**（TP=348、FP=1214、FN=456），Precision **22.28%**、Recall **43.28%**。详见 [完整报告与 session/events](experiments/2026-10-29-hdd-final/report.md) |
+| 硬盘（Backblaze） | ✅ 完成 | v3.1 封存运行库，13 组搜索，采用 trial_004。最终 TEST 设备级 F1 **29.42%**（TP=348、FP=1214、FN=456），Precision **22.28%**、Recall **43.28%**。被采纳的 4 个特征全部由特征 Agent 生成，没有人工编写的特征代码。详见 [results/hdd_v3.1](results/hdd_v3.1/README.md) |
 
 历史 TEST 时间段在项目早期被查看过，因此以上测试成绩属于回顾性评估，不是全新的独立盲测。确认窗口的结果（搜索阶段没有用过的日期）一并保存在结果目录中。Accuracy、模型参数量、自动化覆盖率等全部指标的对比见 [results/README.md](results/README.md)。
 

@@ -851,16 +851,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.12660249922191724,
-          "per_row_us": 126.60249922191724
+          "median_ms": 0.11757700121961534,
+          "per_row_us": 117.57700121961534
         },
         "batch_1000": {
-          "median_ms": 2.6137109962292016,
-          "per_row_us": 2.6137109962292016
+          "median_ms": 2.557130006607622,
+          "per_row_us": 2.557130006607622
         },
         "batch_10000": {
-          "median_ms": 24.810695002088323,
-          "per_row_us": 2.4810695002088323
+          "median_ms": 23.722753016045317,
+          "per_row_us": 2.3722753016045317
         }
       },
       "recorded_training_timings_seconds": {
@@ -892,16 +892,16 @@
       },
       "model_only_latency": {
         "batch_1": {
-          "median_ms": 0.12574200809467584,
-          "per_row_us": 125.74200809467584
+          "median_ms": 0.11388800339773297,
+          "per_row_us": 113.88800339773297
         },
         "batch_1000": {
-          "median_ms": 2.730864995101001,
-          "per_row_us": 2.730864995101001
+          "median_ms": 2.598592487629503,
+          "per_row_us": 2.598592487629503
         },
         "batch_10000": {
-          "median_ms": 24.58701399154961,
-          "per_row_us": 2.458701399154961
+          "median_ms": 24.91161198122427,
+          "per_row_us": 2.491161198122427
         }
       },
       "recorded_training_timings_seconds": {
