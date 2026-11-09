@@ -201,7 +201,7 @@ python tools/session_report.py --session /ws/typea/search --json summary.json --
 - 换成完全不同的 LLM：实现一个带 `call(role, payload, folder, max_tokens=None) -> dict` 方法的类，传给 `Loop(session, provider)`。见[接口参考 §3](interfaces.md#3-llm-接入接口)；
 - 正式运行前先检查连接：`python agent.py doctor --session <会话> --api-check`。三个角色各调用一次，会计入调用预算。
 
-每次调用都会把同一份 [Skill](../skills/device-failure-experiment-loop/SKILL.md) 共享方法和角色提示词（`prompts/`）作为 system prompt 注入。
+每次调用都会把同一份[共享实验方法](../skills/device-failure-experiment-loop/references/experiment-method.md)和角色提示词（`prompts/`）作为 system prompt 注入。
 
 ## 5. 输出在哪里
 
