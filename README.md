@@ -26,7 +26,7 @@
 ├── settings.py            # 默认配置与校验
 ├── providers.py           # LLM 接口（DeepSeek / OpenAI 兼容）
 ├── prompts/               # 三个角色的提示词
-├── skills/                # 标准化 Skill 与共享实验方法（每次调用都会注入）
+├── skills/                # 共享实验方法（三个 Agent 每次调用都会注入）
 ├── data_ingest.py, history_store.py, sample_builder.py, training_selector.py   # 数据接入与训练样本
 ├── feature_programs.py, feature_worker.py, feature_contract.py                # Agent 生成特征的检查与执行
 ├── xgb_runner.py, prediction.py, evaluation.py                                # 训练、预测、设备级评分
@@ -72,7 +72,7 @@ python tools/session_report.py --session <会话> --md summary.md
 - [三个 Agent 的作用与整体流程图](docs/agents.md)：含**人工参与环节一览**（哪些步骤需要人、是否计入自动化覆盖率）
 - [框架与模块说明](docs/architecture.md)
 - [采纳规则与部署工作点](docs/acceptance_rule.md)：新模型凭什么取代最优模型、部署时用哪一轮和什么阈值，以及为什么这样设计
-- [Agent Skill](skills/device-failure-experiment-loop/SKILL.md) 与[共享实验方法](skills/device-failure-experiment-loop/references/experiment-method.md)
+- [共享实验方法](skills/device-failure-experiment-loop/references/experiment-method.md)：三个 Agent 每次调用都会注入的实验约定
 
 v3.1 及更早的实验快照可在 git 提交 `4c27cf1` 中查看；v3 交接说明、v3.1 修复说明和 v3.1 验证报告可在提交 `9262e8f` 的 `docs/history/` 中查看。
 
